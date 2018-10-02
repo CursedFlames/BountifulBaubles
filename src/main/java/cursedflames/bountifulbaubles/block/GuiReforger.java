@@ -19,7 +19,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class GuiReforger extends GuiContainer {
 	public static final int WIDTH = 176;
-	public static final int HEIGHT = 152;
+	public static final int HEIGHT = 162;
 
 	private static final ResourceLocation background = new ResourceLocation(BountifulBaubles.MODID,
 			"textures/gui/reforger.png");
@@ -41,7 +41,7 @@ public class GuiReforger extends GuiContainer {
 	@Override
 	public void initGui() {
 		super.initGui();
-		GuiBetterButton button = new GuiBetterButton(0, guiLeft+6, guiTop+41, 70, 12,
+		GuiBetterButton button = new GuiBetterButton(0, guiLeft+10, guiTop+26, 85, 16,
 				BountifulBaubles.proxy.translate(tranStr+"reforge"));
 		button.buttonPressSound = false;
 		buttonList.add(button);
@@ -86,7 +86,7 @@ public class GuiReforger extends GuiContainer {
 				fontRenderer.drawSplitString(
 						BountifulBaubles.proxy.translate(BountifulBaubles.MODID+".modifier."
 								+tag.getString("baubleModifier")+".info"),
-						0, 3+fontRenderer.FONT_HEIGHT, 0xFFFFFF, 30);
+						0, 1+fontRenderer.FONT_HEIGHT, 0xFFFFFF, 30);
 			}
 		}
 		GlStateManager.popMatrix();

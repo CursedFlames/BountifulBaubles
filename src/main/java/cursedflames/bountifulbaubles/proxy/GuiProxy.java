@@ -23,7 +23,7 @@ public class GuiProxy implements IGuiHandler {
 		BlockPos pos = new BlockPos(x, y, z);
 		TileEntity te = world.getTileEntity(pos);
 		if (te instanceof TileReforger) {
-			return new ContainerReforger(player.inventory, (TileReforger) te);
+			return new ContainerReforger(player.inventory, player, (TileReforger) te);
 		}
 		return null;
 	}
@@ -39,7 +39,7 @@ public class GuiProxy implements IGuiHandler {
 		if (te instanceof TileReforger) {
 			TileReforger containerTileEntity = (TileReforger) te;
 			return new GuiReforger(containerTileEntity,
-					new ContainerReforger(player.inventory, containerTileEntity));
+					new ContainerReforger(player.inventory, player, containerTileEntity));
 		}
 		return null;
 	}
