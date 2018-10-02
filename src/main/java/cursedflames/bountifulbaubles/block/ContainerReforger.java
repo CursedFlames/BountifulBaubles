@@ -2,6 +2,7 @@ package cursedflames.bountifulbaubles.block;
 
 import cursedflames.lib.block.GenericContainer;
 import cursedflames.lib.block.GenericTileEntity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -40,5 +41,11 @@ public class ContainerReforger extends GenericContainer {
 			int y = 58+70;
 			this.addSlotToContainer(new Slot(playerInventory, row, x, y));
 		}
+	}
+
+	// TODO compiler required override here too
+	@Override
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		return te.canInteractWith(playerIn);
 	}
 }

@@ -80,4 +80,15 @@ public class BlockReforger extends GenericTileBlock {
 			BlockPos pos) {
 		return NULL_AABB;
 	}
+
+	// TODO why does compiler think the super method is abstract?
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		try {
+			return tileEntity.newInstance();
+		} catch (InstantiationException|IllegalAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
