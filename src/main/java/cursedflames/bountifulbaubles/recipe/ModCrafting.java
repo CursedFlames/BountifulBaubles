@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
@@ -161,6 +162,47 @@ public class ModCrafting {
 					'c', ModItems.crownGold,
 					'a', ModItems.sinPendantEmpty)
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "amuletSinPride")));
+		}
+		
+		temp.setString("Potion", "minecraft:mundane");
+		ItemStack mundanePotion = new ItemStack(Items.POTIONITEM);
+		mundanePotion.setTagCompound(temp.copy());
+		
+		BrewingRecipeRegistry.addRecipe(
+				mundanePotion, 
+				new ItemStack(Items.QUARTZ), 
+				new ItemStack(ModItems.potionRecall));
+		
+		BrewingRecipeRegistry.addRecipe(
+				new ItemStack(ModItems.potionRecall), 
+				new ItemStack(Items.ENDER_PEARL), 
+				new ItemStack(ModItems.potionWormhole));
+		
+		boolean ingotEnderium = OreDictionary.doesOreNameExist("ingotEnderium");
+		
+		if (ingotEnderium) {
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "wormholeMirror"),
+					ModItems.wormholeMirror, new String[] {
+					"iei",
+					"pmp",
+					"ipi"},
+					'e', Items.ENDER_EYE,
+					'm', ModItems.magicMirror,
+					'p', ModItems.potionWormhole,
+					'i', "ingotEnderium")
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "wormholeMirror")));
+		} else {
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "wormholeMirror"),
+					ModItems.wormholeMirror, new String[] {
+					" e ",
+					"pmp",
+					" p "},
+					'e', Items.ENDER_EYE,
+					'm', ModItems.magicMirror,
+					'p', ModItems.potionWormhole)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "wormholeMirror")));
 		}
 	}
 }

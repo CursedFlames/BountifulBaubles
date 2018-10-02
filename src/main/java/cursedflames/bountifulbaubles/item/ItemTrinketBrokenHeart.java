@@ -9,7 +9,9 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -59,6 +61,13 @@ public class ItemTrinketBrokenHeart extends AGenericItemBauble {
 			event.setCanceled(true);
 		}
 		event.setAmount((float) (Math.max(event.getAmount()-maxHealthDamage, 0)));
+
+//		player.world.playSound(null, player.posX, player.posY, player.posZ,
+//				SoundEvents.ENTITY_PLAYER_HURT, SoundCategory.PLAYERS, 1.0F,
+//				(player.world.rand.nextFloat()-player.world.rand.nextFloat())*0.15F+0.75F);
+		player.world.playSound(null, player.posX, player.posY, player.posZ,
+				SoundEvents.ENTITY_IRONGOLEM_HURT, SoundCategory.PLAYERS, 0.7F,
+				(player.world.rand.nextFloat()-player.world.rand.nextFloat())*0.1F+0.8F);
 	}
 
 	@SubscribeEvent
