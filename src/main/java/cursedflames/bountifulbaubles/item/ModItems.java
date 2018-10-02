@@ -15,7 +15,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.oredict.OreDictionary;
 import vazkii.quark.api.ICustomEnchantColor;
@@ -83,7 +82,6 @@ public class ModItems {
 		BountifulBaubles.registryHelper
 				.addItem(shieldObsidian = new ItemShieldObsidian("shieldObsidian"));
 
-		@Optional.Interface(iface = "vazkii.quark.api.ICustomEnchantColor", modid = "quark")
 		class ItemTrinketMagicLenses extends ItemTrinketPotionCharm implements ICustomEnchantColor {
 			public ItemTrinketMagicLenses() {
 				super("trinketMagicLenses", Arrays.asList("minecraft:blindness"));
@@ -155,7 +153,7 @@ public class ModItems {
 		BountifulBaubles.registryHelper.addItem(
 				trinketMixedDragonScale = new ItemTrinketPotionCharm("trinketMixedDragonScale",
 						Arrays.asList("minecraft:poison", "minecraft:wither")));
-//		@Optional.Interface(iface = "vazkii.quark.api.ICustomEnchantColor", modid = "quark")
+
 		class ItemTrinketAnkh extends
 				ItemTrinketPotionCharm /* implements ICustomEnchantColor */ {
 			public ItemTrinketAnkh() {

@@ -13,12 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.quark.api.ICustomEnchantColor;
 
-@Optional.Interface(iface = "vazkii.quark.api.ICustomEnchantColor", modid = "quark")
 public class ItemModifierBook extends GenericItem implements ICustomEnchantColor {
 
 	public static final int XP_LVL_COST = 2;
