@@ -135,6 +135,7 @@ public class ModItems {
 						if (player instanceof EntityPlayer) {
 							player.isInWeb = false;
 						}
+						super.onWornTick(stack, player);
 					}
 				});
 
