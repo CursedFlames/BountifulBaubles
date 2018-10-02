@@ -85,32 +85,4 @@ public class ContainerReforger extends GenericContainer {
 	public boolean canInteractWith(EntityPlayer playerIn) {
 		return te.canInteractWith(playerIn);
 	}
-
-//	// because shift clicking into armor slots causes bad things to happen
-//	@Override
-//	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-//		ItemStack itemstack = null;
-//		Slot slot = this.inventorySlots.get(index);
-//
-//		if (slot!=null&&slot.getHasStack()) {
-//			ItemStack itemstack1 = slot.getStack();
-//			itemstack = itemstack1.copy();
-//
-//			if (index==0) {
-//				if (!this.mergeItemStack(itemstack1, 1, this.inventorySlots.size()-12, true)) {
-//					return null;
-//				}
-//			} else if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
-//				return null;
-//			}
-//
-//			if (itemstack1.isEmpty()) {
-//				slot.putStack(ItemStack.EMPTY);
-//			} else {
-//				slot.onSlotChanged();
-//			}
-//		}
-//
-//		return itemstack;
-//	}
 }
