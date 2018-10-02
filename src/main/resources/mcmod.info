@@ -8,11 +8,11 @@
   "url": "",
   "updateUrl": "",
   "authorList": ["CursedFlames"],
-  "credits": "Thanks to MineCrak and the other people in the CC discord for providing feedback and ideas.",
+  "credits": "Thanks to MineCrak, Setadokalo, and the other people in the CC discord for providing feedback and ideas.",
   "logoFile": "",
   "screenshots": [],
   "useDependencyInformation": true,
-  "requiredMods": ["cursedlib@[0.0.4,)"],
+  "requiredMods": ["cursedlib@[0.0.5,)"],
   "dependencies": ["cursedlib"]
 }
 ]
