@@ -1,0 +1,170 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"2": "bountifulbaubles:blocks/reforger/anvil_base",
+		"0": "bountifulbaubles:blocks/reforger/workbench",
+		"1": "bountifulbaubles:blocks/reforger/lava_bucket",
+		"top": "bountifulbaubles:blocks/reforger/anvil_top",
+		"lava": "bountifulbaubles:blocks/reforger/lava",
+		"particle": "bountifulbaubles:blocks/reforger/anvil_top"
+	},
+	"elements": [
+		{
+			"name": "Anvil base",
+			"from": [2.1, 0, 7.1],
+			"to": [9.9, 2.6, 14.9],
+			"rotation": {"angle": 45, "axis": "y", "origin": [6, 1.3, 11]},
+			"faces": {
+				"down":  { "uv": [ 2,  2, 14, 14 ], "texture": "#2", "rotation": 180, "cullface": "down" },
+				"up":	{ "uv": [ 2,  2, 14, 14 ], "texture": "#2", "rotation": 180 },
+				"north": { "uv": [ 2, 12, 14, 16 ], "texture": "#2" },
+				"south": { "uv": [ 2, 12, 14, 16 ], "texture": "#2" },
+				"west":  { "uv": [ 0,  2,  4, 14 ], "texture": "#2", "rotation":  90 },
+				"east":  { "uv": [ 4,  2,  0, 14 ], "texture": "#2", "rotation": 270 }
+			}
+		},
+		{
+			"name": "Lower narrow portion",
+			"from": [3.4, 2.6, 7.75],
+			"to": [8.6, 3.25, 14.25],
+			"rotation": {"angle": 45, "axis": "y", "origin": [6, 2.925, 11]},
+			"faces": {
+				"up":	{ "uv": [ 4,  3, 12, 13 ], "texture": "#2", "rotation": 180 },
+				"north": { "uv": [ 4, 11, 12, 12 ], "texture": "#2" },
+				"south": { "uv": [ 4, 11, 12, 12 ], "texture": "#2" },
+				"west":  { "uv": [ 4,  3,  5, 13 ], "texture": "#2", "rotation":  90 },
+				"east":  { "uv": [ 5,  3,  4, 13 ], "texture": "#2", "rotation": 270 }
+			}
+		},
+		{
+			"name": "Wider section beneath top portion",
+			"from": [4.7, 3.25, 8.4],
+			"to": [7.3, 6.5, 13.6],
+			"rotation": {"angle": 45, "axis": "y", "origin": [6, 4.875, 11]},
+			"faces": {
+				"north": { "uv": [  6,  6, 10, 11 ], "texture": "#2" },
+				"south": { "uv": [  6,  6, 10, 11 ], "texture": "#2" },
+				"west":  { "uv": [  5,  4, 10, 12 ], "texture": "#2", "rotation":  90 },
+				"east":  { "uv": [ 10,  4,  5, 12 ], "texture": "#2", "rotation": 270 }
+			}
+		},
+		{
+			"name": "Anvil top",
+			"from": [2.75, 6.5, 5.8],
+			"to": [9.25, 10.4, 16.2],
+			"rotation": {"angle": 45, "axis": "y", "origin": [6, 8.45, 11]},
+			"faces": {
+				"down":  { "uv": [  3, 0, 13, 16 ], "texture": "#2", "rotation": 180 },
+				"up":	{ "uv": [  3, 0, 13, 16 ], "texture": "#top",   "rotation": 180 },
+				"north": { "uv": [  3, 0, 13,  6 ], "texture": "#2" },
+				"south": { "uv": [  3, 0, 13,  6 ], "texture": "#2" },
+				"west":  { "uv": [ 10, 0, 16, 16 ], "texture": "#2", "rotation":  90 },
+				"east":  { "uv": [ 16, 0, 10, 16 ], "texture": "#2", "rotation": 270 }
+			}
+		},
+		{
+			"name": "bottom",
+			"from": [1, 0, 0.7],
+			"to": [6, 4, 5.7],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [3.5, 0.5, 3.2]},
+			"faces": {
+				"north": {"uv": [0, 1, 5, 5], "texture": "#1"},
+				"east": {"uv": [0, 1, 5, 5], "texture": "#1"},
+				"south": {"uv": [0, 1, 5, 5], "texture": "#1"},
+				"west": {"uv": [0, 1, 5, 5], "texture": "#1"},
+				"up": {"uv": [4, 5, 14, 15], "texture": "#lava"},
+				"down": {"uv": [0, 5, 5, 10], "texture": "#1", "cullface": "down"}
+			}
+		},
+		{
+			"name": "rim north",
+			"from": [1, 4, 0.7],
+			"to": [6, 5, 1.7],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [3.5, 4.5, 3.2]},
+			"faces": {
+				"north": {"uv": [0, 0, 5, 1], "texture": "#1"},
+				"east": {"uv": [4, 0, 5, 1], "texture": "#1"},
+				"south": {"uv": [5, 10, 10, 11], "texture": "#1"},
+				"west": {"uv": [0, 0, 1, 1], "texture": "#1"},
+				"up": {"uv": [5, 5, 10, 6], "texture": "#1"}
+			}
+		},
+		{
+			"name": "rim south",
+			"from": [1, 4, 4.7],
+			"to": [6, 5, 5.7],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [3.5, 4.5, 3.2]},
+			"faces": {
+				"north": {"uv": [5, 14, 10, 15], "texture": "#1", "rotation": 180},
+				"east": {"uv": [0, 0, 1, 1], "texture": "#1"},
+				"south": {"uv": [0, 0, 5, 1], "texture": "#1"},
+				"west": {"uv": [4, 0, 5, 1], "texture": "#1"},
+				"up": {"uv": [5, 9, 10, 10], "texture": "#1"}
+			}
+		},
+		{
+			"name": "rim west",
+			"from": [1, 4, 1.7],
+			"to": [2, 5, 4.7],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [3.5, 4.5, 3.2]},
+			"faces": {
+				"east": {"uv": [5, 11, 6, 14], "texture": "#1", "rotation": 90},
+				"west": {"uv": [1, 0, 4, 1], "texture": "#1"},
+				"up": {"uv": [5, 6, 6, 9], "texture": "#1"}
+			}
+		},
+		{
+			"name": "rim east",
+			"from": [5, 4, 1.7],
+			"to": [6, 5, 4.7],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [3.5, 4.5, 3.2]},
+			"faces": {
+				"east": {"uv": [1, 0, 4, 1], "texture": "#1"},
+				"west": {"uv": [9, 11, 10, 14], "texture": "#1", "rotation": 270},
+				"up": {"uv": [9, 6, 10, 9], "texture": "#1"}
+			}
+		},
+		{
+			"name": "workbench",
+			"from": [9, 0, 1],
+			"to": [16, 7, 8],
+			"faces": {
+				"north": {"uv": [8, 8, 16, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"south": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#0"},
+				"down": {"uv": [0, 8, 8, 16], "texture": "#0", "cullface": "down"}
+			}
+		}
+	],
+	"display": {
+		"fixed": {
+			"rotation": [0, 90, 0],
+			"translation": [0, 0, 0],
+			"scale": [0.5, 0.5, 0.5]
+		}
+	},
+	"groups": [
+		{
+			"name": "anvil",
+			"isOpen": true,
+			"shade": true,
+			"display": {
+				"visibility": true,
+				"autouv": true
+			},
+			"children": [0, 1, 2, 3]
+		},
+		{
+			"name": "lava bucket",
+			"isOpen": true,
+			"shade": true,
+			"display": {
+				"visibility": true,
+				"autouv": true
+			},
+			"children": [4, 5, 6, 7, 8]
+		}, 9]
+}

@@ -1,0 +1,23 @@
+{
+"result": {
+		"item": "bountifulbaubles:trinketblackdragonscale"
+	},
+	"pattern": [
+		"n",
+		"e",
+		"b"
+	],
+	"type": "forge:ore_shaped",
+	"key": {
+		"n": {
+			"item": "minecraft:nether_star"
+		},
+		"e": {
+			"type": "forge:ore_dict",
+			"ore": "scaleDragonEnder"
+		},
+		"b": {
+			"item": "bountifulbaubles:brokenblackdragonscale"
+		}
+	}
+}

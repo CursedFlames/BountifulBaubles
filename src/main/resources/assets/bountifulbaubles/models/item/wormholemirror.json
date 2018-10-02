@@ -1,0 +1,14 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "bountifulbaubles:items/wormhole_mirror"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "blocking": 1
+            },
+            "model": "bountifulbaubles:item/wormholemirror_using"
+        }
+    ]
+}

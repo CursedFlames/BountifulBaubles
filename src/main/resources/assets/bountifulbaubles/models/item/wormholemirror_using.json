@@ -1,0 +1,15 @@
+{
+	"parent": "bountifulbaubles:item/wormholemirror",
+	"display": {
+		"firstperson_righthand": {
+			"rotation": [ 0, 180, -5 ],
+			"translation": [ -15, 5, -11 ],
+			"scale": [ 1.25, 1.25, 1.25 ]
+		},
+		"firstperson_lefthand": {
+			"rotation": [ 0, 180, -5 ],
+			"translation": [ 5, 5, -11 ],
+			"scale": [ 1.25, 1.25, 1.25 ]
+		}
+	}
+}

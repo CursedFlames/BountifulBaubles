@@ -1,0 +1,6 @@
+{
+	"parent": "bountifulbaubles:item/ringflywheel",
+	"textures": {
+		"layer0": "bountifulbaubles:items/ring_flywheel/frametime_1"
+	}
+}

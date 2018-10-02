@@ -1,0 +1,76 @@
+{
+"result": {
+		"item": "bountifulbaubles:trinketobsidianskull"
+	},
+	"pattern": [
+		"odo",
+		"psp",
+		"odo"
+	],
+	"type": "forge:ore_shaped",
+	"key": {
+		"s": [
+			{
+				"item": "minecraft:skull",
+				"data": 0
+			}, 
+			{
+				"item": "minecraft:skull",
+				"data": 1
+			}
+		],
+		"p": [
+			{
+				"type": "minecraft:item_nbt",
+				"item": "minecraft:potion",
+				"nbt": {
+					"Potion": "minecraft:fire_resistance"
+				}
+			}, 
+			{
+				"type": "minecraft:item_nbt",
+				"item": "minecraft:potion",
+				"data": 0,
+				"nbt": {
+					"Potion": "minecraft:long_fire_resistance"
+				}
+			},
+			{
+				"type": "minecraft:item_nbt",
+				"item": "minecraft:splash_potion",
+				"nbt": {
+					"Potion": "minecraft:fire_resistance"
+				}
+			}, 
+			{
+				"type": "minecraft:item_nbt",
+				"item": "minecraft:splash_potion",
+				"data": 0,
+				"nbt": {
+					"Potion": "minecraft:long_fire_resistance"
+				}
+			},
+			{
+				"type": "minecraft:item_nbt",
+				"item": "minecraft:lingering_potion",
+				"nbt": {
+					"Potion": "minecraft:fire_resistance"
+				}
+			}, 
+			{
+				"type": "minecraft:item_nbt",
+				"item": "minecraft:lingering_potion",
+				"data": 0,
+				"nbt": {
+					"Potion": "minecraft:long_fire_resistance"
+				}
+			}
+		],
+		"o": {
+			"item": "minecraft:obsidian"
+		},
+		"d": {
+			"item": "minecraft:blaze_powder"
+		}
+	}
+}

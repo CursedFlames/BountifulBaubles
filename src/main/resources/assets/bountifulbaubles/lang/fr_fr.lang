@@ -1,0 +1,16 @@
+﻿
+#bountifulbaubles.effect.sinful=Sinful
+item.bountifulbaubles.amuletSinEmpty.name=Pendentif de péché (Vide)
+item.bountifulbaubles.amuletSinGluttony.name=Pendentif de gourmandise
+item.bountifulbaubles.amuletSinPride.name=Pendentif d'orgueil
+item.bountifulbaubles.amuletSinWrath.name=Pendentif de colère
+item.bountifulbaubles.amuletSinGreed.name=Pendentif d'avarice
+item.bountifulbaubles.amuletSinEnvy.name=Pendentif d'envie
+item.bountifulbaubles.amuletSinSloth.name=Pendentif de paresse
+item.bountifulbaubles.amuletSinLust.name=Pendentif de luxure
+#tile.bountifulbaubles.reforger.name=Reforging Station
+bountifulbaubles.gui.reforger.reforge=Reforger
+bountifulbaubles.gui.reforger.xpcost=Coût:
+bountifulbaubles.gui.reforger.levels=(%s niveaux)
+bountifulbaubles.gui.reforger.levels.override.0=(%s niveau)
+bountifulbaubles.gui.reforger.levels.override.1=(%s niveau)

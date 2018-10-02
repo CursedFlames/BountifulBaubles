@@ -1,0 +1,18 @@
+[
+{
+  "modid": "bountifulbaubles",
+  "name": "Bountiful Baubles",
+  "description": "Adds a variety of baubles and other items inspired by Terraria and other games.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["CursedFlames"],
+  "credits": "Thanks to MineCrak and the other people in the CC discord for providing feedback and ideas.",
+  "logoFile": "",
+  "screenshots": [],
+  "useDependencyInformation": true,
+  "requiredMods": ["cursedlib@[0.0.4,)"],
+  "dependencies": ["cursedlib"]
+}
+]

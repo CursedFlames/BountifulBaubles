@@ -1,0 +1,14 @@
+{
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "bountifulbaubles:items/magic_mirror"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "blocking": 1
+            },
+            "model": "bountifulbaubles:item/magicmirror_using"
+        }
+    ]
+}
