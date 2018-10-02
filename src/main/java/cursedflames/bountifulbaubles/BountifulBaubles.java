@@ -21,7 +21,6 @@ import cursedflames.bountifulbaubles.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.recipe.ModCrafting;
 import cursedflames.lib.RegistryHelper;
 import cursedflames.lib.config.Config;
-import cursedflames.lib.util.UsernameCache;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -92,8 +91,6 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(ItemShieldCobalt.class);
 		MinecraftForge.EVENT_BUS.register(ItemAmuletSinGluttony.class);
 		MinecraftForge.EVENT_BUS.register(ItemTrinketBrokenHeart.class);
-
-		UsernameCache.setEnabled();
 
 		CapabilityWormholePins.registerCapability();
 		MinecraftForge.EVENT_BUS.register(CapabilityWormholePins.class);

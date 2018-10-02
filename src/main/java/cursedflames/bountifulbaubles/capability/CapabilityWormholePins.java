@@ -63,7 +63,6 @@ public class CapabilityWormholePins {
 		public List<IWormholeTarget> getPinList();
 	}
 
-	// TODO
 	public static class Storage implements IStorage<IWormholePins> {
 		@Override
 		public NBTBase writeNBT(Capability<IWormholePins> capability, IWormholePins instance,

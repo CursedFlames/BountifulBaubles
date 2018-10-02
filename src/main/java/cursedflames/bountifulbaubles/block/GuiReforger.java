@@ -72,7 +72,6 @@ public class GuiReforger extends GuiContainer {
 			buttonList.get(0).enabled = xp>xpCost||inCreative;
 			int levelCost = 1+(xpCost>xp ? XpUtil.getLevelForExperience(xpCost)
 					: (player.experienceLevel-XpUtil.getLevelForExperience(xp-xpCost)));
-			// TODO localize this string
 			String xpCostStr = BountifulBaubles.proxy.translate(tranStr+"xpcost");
 			String levelsStr;
 			if (BountifulBaubles.proxy.hasTranslationKey(tranStr+"levels.override."+levelCost)) {

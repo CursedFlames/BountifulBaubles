@@ -145,49 +145,4 @@ public class BaubleAttributeModifierHandler {
 							mod.operation));
 		}
 	}
-
-//	private class ContainerListener implements IContainerListener {
-//		private EntityPlayer player;
-//		private EnumBaubleModifier[] mods = new EnumBaubleModifier[7];
-//
-//		@Override
-//		public void sendAllContents(Container containerToSend, NonNullList<ItemStack> itemsList) {
-//		}
-//
-//		@Override
-//		public void sendSlotContents(Container container, int ind, ItemStack stack) {
-//			// TODO what are the indexes? bauble inv is extended vanilla inv
-//			BountifulBaubles.logger.info(""+ind+" "+stack.getItem().getUnlocalizedName());
-//			Slot slot = container.getSlot(ind);
-////			if (ind<7&&player!=null&&!player.isDead) {
-////				EnumBaubleModifier old = mods[ind];
-////				EnumBaubleModifier cur = EnumBaubleModifier
-////						.get(stack.getTagCompound().getString("baubleModifier"));
-////				mods[ind] = cur;
-////				if (old!=cur) {
-////					if (old!=null&&old!=EnumBaubleModifier.NONE) {
-////						removeModifier(player, old, ind);
-////					}
-////					if (cur!=null&&cur!=EnumBaubleModifier.NONE) {
-////						addModifier(player, cur, ind);
-////					}
-////				}
-////			}
-//		}
-//
-//		@Override
-//		public void sendWindowProperty(Container containerIn, int varToUpdate, int newValue) {
-//		}
-//
-//		@Override
-//		public void sendAllWindowProperties(Container containerIn, IInventory inventory) {
-//		}
-//	}
-//
-//	@SubscribeEvent
-//	public static void onContainerOpen(PlayerContainerEvent.Open event) {
-////		if (event.getContainer() instanceof ContainerPlayerExpanded) {
-////
-////		}
-//	}
 }
