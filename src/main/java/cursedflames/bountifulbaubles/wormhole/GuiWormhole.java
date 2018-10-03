@@ -9,7 +9,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.nbt.NBTTagCompound;
 
-//TODO add/disable players as they join/leave?
 //TODO arrow buttons
 public class GuiWormhole extends GuiContainer {
 	private static final int WIDTH = 192;

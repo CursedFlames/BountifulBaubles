@@ -115,6 +115,7 @@ item.bountifulbaubles.ringFlywheelAdvanced.tooltip.1=§aSurely nothing bad could
 item.bountifulbaubles.magicMirror.name=Magic Mirror
 item.bountifulbaubles.magicMirror.tooltip.0=§9Teleports you to your spawn point.
 item.bountifulbaubles.magicMirror.tooltip.1=§aIt may bend space at will, but it can't make ugly things beautiful, unfortunately for you.
+item.bountifulbaubles.magicMirror.wrongdim=You sense that you are too far from home to return.
 item.bountifulbaubles.potionRecall.name=Recall Potion
 item.bountifulbaubles.potionRecall.tooltip.0=§9Teleports you to your spawn point.
 item.bountifulbaubles.potionRecall.tooltip.1=§aAaaaaaand ZING!

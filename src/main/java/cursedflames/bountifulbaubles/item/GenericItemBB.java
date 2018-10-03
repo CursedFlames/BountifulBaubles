@@ -14,8 +14,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class GenericItemBB extends GenericItem {
-	// TODO find way to do creativeonly nicely with syncing
-	// make sure to set requiresWorldRestart and requiresMCRestart
 //	public Property creativeOnly;
 
 	public GenericItemBB(String name, CreativeTabs tab) {
@@ -24,16 +22,18 @@ public class GenericItemBB extends GenericItem {
 
 	public GenericItemBB(String name, CreativeTabs tab, boolean configCreativeOnly) {
 		super(BountifulBaubles.MODID, name, tab);
-		if (configCreativeOnly) {
-//			BountifulBaubles.config.addPropBoolean(getRegistryName()+".creativeOnly", "Items",
+//		if (configCreativeOnly) {
+//			Property unsynced = BountifulBaubles.config.addPropBoolean(
+//					getRegistryName()+".creativeOnly", "Items",
 //					"Whether or not "+getRegistryName()
 //							+" is creative only. If enabled, recipes and loot tables for this item will not be added, and the item will have a creative only tooltip added.",
 //					false, EnumPropSide.SYNCED);
+//			unsynced.setRequiresMcRestart(true);
 //			creativeOnly = BountifulBaubles.config
 //					.getSyncedProperty(getRegistryName()+".creativeOnly");
-		} else {
+//		} else {
 //			creativeOnly = null;
-		}
+//		}
 	}
 
 	@SideOnly(Side.CLIENT)

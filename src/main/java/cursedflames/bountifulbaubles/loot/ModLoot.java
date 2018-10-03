@@ -76,64 +76,66 @@ public class ModLoot {
 				event.getTable().addPool(table);
 			}
 		}
-		String eventName = event.getName().toString();
-		if (eventName.equals("minecraft:chests/simple_dungeon")) {
-			// do stuff with evt.getTable()
-			List<LootEntry> entries = new ArrayList<>();
-			Item[] itemsWeight10 = { ModItems.balloon, ModItems.shieldCobalt, ModItems.magicMirror,
-					ModItems.trinketLuckyHorseshoe, ModItems.trinketBrokenHeart,
-					ModItems.trinketMagicLenses };
-			for (Item item : itemsWeight10) {
-				entries.add(new LootEntryItem(item, 10, 0, new LootFunction[0],
-						new LootCondition[0], item.getRegistryName().toString()));
-			}
-			entries.add(new LootEntryItem(ModItems.brokenBlackDragonScale, 3, 0,
-					new LootFunction[0], new LootCondition[0],
-					ModItems.brokenBlackDragonScale.getRegistryName().toString()));
-			entries.add(new LootEntryItem(ModItems.sinPendantEmpty, 3, 0, new LootFunction[0],
-					new LootCondition[0],
-					ModItems.brokenBlackDragonScale.getRegistryName().toString()));
+		if (ModConfig.dungeonLootEnabled.getBoolean(true)) {
+			String eventName = event.getName().toString();
+			if (eventName.equals("minecraft:chests/simple_dungeon")) {
+				// do stuff with evt.getTable()
+				List<LootEntry> entries = new ArrayList<>();
+				Item[] itemsWeight10 = { ModItems.balloon, ModItems.shieldCobalt,
+						ModItems.magicMirror, ModItems.trinketLuckyHorseshoe,
+						ModItems.trinketBrokenHeart, ModItems.trinketMagicLenses };
+				for (Item item : itemsWeight10) {
+					entries.add(new LootEntryItem(item, 10, 0, new LootFunction[0],
+							new LootCondition[0], item.getRegistryName().toString()));
+				}
+				entries.add(new LootEntryItem(ModItems.brokenBlackDragonScale, 3, 0,
+						new LootFunction[0], new LootCondition[0],
+						ModItems.brokenBlackDragonScale.getRegistryName().toString()));
+				entries.add(new LootEntryItem(ModItems.sinPendantEmpty, 3, 0, new LootFunction[0],
+						new LootCondition[0],
+						ModItems.brokenBlackDragonScale.getRegistryName().toString()));
 
-			LootPool pool = new LootPool(entries.toArray(new LootEntry[0]),
-					new LootCondition[] { new RandomChance(0.35F) }, new RandomValueRange(1),
-					new RandomValueRange(0), BountifulBaubles.MODID+"_dungeon");
-			event.getTable().addPool(pool);
-			List<LootEntry> entries2 = new ArrayList<>();
-			entries2.add(new LootEntryItem(ModItems.potionRecall, 50, 0, new LootFunction[0],
-					new LootCondition[0], BountifulBaubles.MODID+":potionrecall"));
-			entries2.add(new LootEntryItem(ModItems.potionWormhole, 25, 0, new LootFunction[0],
-					new LootCondition[0], BountifulBaubles.MODID+":potionwormhole"));
-			entries2.add(new LootEntryEmpty(25, 0, new LootCondition[0], "empty"));
-			LootPool pool2 = new LootPool(entries2.toArray(new LootEntry[0]),
-					new LootCondition[] { new RandomChance(0.75F) }, new RandomValueRange(1, 6),
-					new RandomValueRange(0), BountifulBaubles.MODID+"_dungeon_potions");
-			event.getTable().addPool(pool2);
-		} else if (eventName.equals("minecraft:chests/nether_bridge")) {
-			List<LootEntry> entries = new ArrayList<>();
-			Item[] itemsWeight10 = { ModItems.brokenBlackDragonScale, ModItems.magicMirror,
-					ModItems.trinketObsidianSkull, ModItems.trinketBrokenHeart,
-					ModItems.sinPendantEmpty };
-			for (Item item : itemsWeight10) {
-				entries.add(new LootEntryItem(item, 10, 0, new LootFunction[0],
-						new LootCondition[0], item.getRegistryName().toString()));
+				LootPool pool = new LootPool(entries.toArray(new LootEntry[0]),
+						new LootCondition[] { new RandomChance(0.35F) }, new RandomValueRange(1),
+						new RandomValueRange(0), BountifulBaubles.MODID+"_dungeon");
+				event.getTable().addPool(pool);
+				List<LootEntry> entries2 = new ArrayList<>();
+				entries2.add(new LootEntryItem(ModItems.potionRecall, 50, 0, new LootFunction[0],
+						new LootCondition[0], BountifulBaubles.MODID+":potionrecall"));
+				entries2.add(new LootEntryItem(ModItems.potionWormhole, 25, 0, new LootFunction[0],
+						new LootCondition[0], BountifulBaubles.MODID+":potionwormhole"));
+				entries2.add(new LootEntryEmpty(25, 0, new LootCondition[0], "empty"));
+				LootPool pool2 = new LootPool(entries2.toArray(new LootEntry[0]),
+						new LootCondition[] { new RandomChance(0.75F) }, new RandomValueRange(1, 6),
+						new RandomValueRange(0), BountifulBaubles.MODID+"_dungeon_potions");
+				event.getTable().addPool(pool2);
+			} else if (eventName.equals("minecraft:chests/nether_bridge")) {
+				List<LootEntry> entries = new ArrayList<>();
+				Item[] itemsWeight10 = { ModItems.brokenBlackDragonScale, ModItems.magicMirror,
+						ModItems.trinketObsidianSkull, ModItems.trinketBrokenHeart,
+						ModItems.sinPendantEmpty };
+				for (Item item : itemsWeight10) {
+					entries.add(new LootEntryItem(item, 10, 0, new LootFunction[0],
+							new LootCondition[0], item.getRegistryName().toString()));
+				}
+				LootPool pool = new LootPool(entries.toArray(new LootEntry[0]),
+						new LootCondition[] { new RandomChance(0.2F) }, new RandomValueRange(1),
+						new RandomValueRange(0), BountifulBaubles.MODID+"_nether_bridge");
+				event.getTable().addPool(pool);
+				List<LootEntry> entries2 = new ArrayList<>();
+				entries2.add(new LootEntryItem(ModItems.potionRecall, 5, 0, new LootFunction[0],
+						new LootCondition[0], BountifulBaubles.MODID+":potionrecall"));
+				entries2.add(new LootEntryItem(ModItems.potionWormhole, 25, 0, new LootFunction[0],
+						new LootCondition[0], BountifulBaubles.MODID+":potionwormhole"));
+				entries2.add(new LootEntryItem(ModItems.goldRing, 25, 0, new LootFunction[0],
+						new LootCondition[0], BountifulBaubles.MODID+":goldring"));
+				entries2.add(new LootEntryItem(ModItems.ironRing, 25, 0, new LootFunction[0],
+						new LootCondition[0], BountifulBaubles.MODID+":ironring"));
+				LootPool pool2 = new LootPool(entries2.toArray(new LootEntry[0]),
+						new LootCondition[] { new RandomChance(0.1F) }, new RandomValueRange(1),
+						new RandomValueRange(0), BountifulBaubles.MODID+"_nether_bridge_2");
+				event.getTable().addPool(pool2);
 			}
-			LootPool pool = new LootPool(entries.toArray(new LootEntry[0]),
-					new LootCondition[] { new RandomChance(0.2F) }, new RandomValueRange(1),
-					new RandomValueRange(0), BountifulBaubles.MODID+"_nether_bridge");
-			event.getTable().addPool(pool);
-			List<LootEntry> entries2 = new ArrayList<>();
-			entries2.add(new LootEntryItem(ModItems.potionRecall, 5, 0, new LootFunction[0],
-					new LootCondition[0], BountifulBaubles.MODID+":potionrecall"));
-			entries2.add(new LootEntryItem(ModItems.potionWormhole, 25, 0, new LootFunction[0],
-					new LootCondition[0], BountifulBaubles.MODID+":potionwormhole"));
-			entries2.add(new LootEntryItem(ModItems.goldRing, 25, 0, new LootFunction[0],
-					new LootCondition[0], BountifulBaubles.MODID+":goldring"));
-			entries2.add(new LootEntryItem(ModItems.ironRing, 25, 0, new LootFunction[0],
-					new LootCondition[0], BountifulBaubles.MODID+":ironring"));
-			LootPool pool2 = new LootPool(entries2.toArray(new LootEntry[0]),
-					new LootCondition[] { new RandomChance(0.1F) }, new RandomValueRange(1),
-					new RandomValueRange(0), BountifulBaubles.MODID+"_nether_bridge_2");
-			event.getTable().addPool(pool2);
 		}
 	}
 

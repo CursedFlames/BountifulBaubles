@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,6 +22,13 @@ public class ItemPotionRecall extends GenericItemBB {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player,
 			EnumHand hand) {
+		int dim = player.getSpawnDimension();
+		if (world.provider.getDimension()!=dim
+				&&!ItemMagicMirror.interdimensional.getBoolean(false)) {
+			player.sendStatusMessage(new TextComponentTranslation(
+					ModItems.magicMirror.getUnlocalizedName()+".wrongdim"), true);
+			return new ActionResult<ItemStack>(EnumActionResult.FAIL, player.getHeldItem(hand));
+		}
 		player.setActiveHand(hand);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 	}

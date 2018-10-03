@@ -39,14 +39,6 @@ public class ModCrafting {
 		boolean runeLust = OreDictionary.doesOreNameExist("runeLustB");
 		boolean gaiaSpirit = OreDictionary.doesOreNameExist("eternalLifeEssence");
 
-		// TODO why don't oredict gold and iron work?
-		Object ingotGold = // OreDictionary.doesOreNameExist("ingotGold") ?
-							// "ingotGold" :
-				Items.GOLD_INGOT;
-		Object ingotIron = // OreDictionary.doesOreNameExist("ingotIron") ?
-							// "ingotIron" :
-				Items.IRON_INGOT;
-
 		// @formatter:off
 		r.register(new ShapedOreRecipe(
 				new ResourceLocation(BountifulBaubles.MODID, "ringgold"), 

@@ -51,7 +51,7 @@ public class ItemAmuletSinGluttony extends ItemAmuletSin {
 			if (BaublesApi.isBaubleEquipped(player, ModItems.sinPendantGluttony)!=-1) {
 				ItemStack stack = event.getItem();
 				EnumAction action = stack.getItem().getItemUseAction(stack);
-				if (action==EnumAction.EAT||action==EnumAction.DRINK) {
+				if (action==EnumAction.EAT) {
 					addEffect(player, 1, 10*20, true);
 				}
 			}

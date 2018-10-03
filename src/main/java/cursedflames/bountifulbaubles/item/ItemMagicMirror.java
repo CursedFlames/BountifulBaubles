@@ -3,6 +3,7 @@ package cursedflames.bountifulbaubles.item;
 import javax.annotation.Nullable;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.lib.config.Config.EnumPropSide;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -14,8 +15,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.quark.api.ICustomEnchantColor;
@@ -25,6 +28,7 @@ import vazkii.quark.api.ICustomEnchantColor;
 //make mirror face have enchantment glow
 //TODO figure out how to remove teleport interpolation
 public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColor {
+	static Property interdimensional;
 
 	public ItemMagicMirror(String name) {
 		super(name, BountifulBaubles.TAB);
@@ -37,11 +41,25 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 						? 1.0F : 0.0F;
 			}
 		});
+
+		if (interdimensional==null) {
+			BountifulBaubles.config.addPropBoolean(getRegistryName()+".interdimensional", "Items",
+					"Can magic/wormhole mirrors and recall potions recall interdimensionally?",
+					false, EnumPropSide.SYNCED);
+			interdimensional = BountifulBaubles.config
+					.getSyncedProperty(getRegistryName()+".interdimensional");
+		}
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player,
 			EnumHand hand) {
+		int dim = player.getSpawnDimension();
+		if (world.provider.getDimension()!=dim&&!interdimensional.getBoolean(false)) {
+			player.sendStatusMessage(new TextComponentTranslation(
+					ModItems.magicMirror.getUnlocalizedName()+".wrongdim"), true);
+			return new ActionResult<ItemStack>(EnumActionResult.FAIL, player.getHeldItem(hand));
+		}
 		player.setActiveHand(hand);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 	}
@@ -90,6 +108,8 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 		int dim = player.getSpawnDimension();
 		World world1 = world;
 		if (world.provider.getDimension()!=dim) {
+			if (!interdimensional.getBoolean(false))
+				return;
 			world1 = DimensionManager.getWorld(dim);
 		}
 		if (world1!=null) {

@@ -39,7 +39,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-//TODO add creativeOnly config for shields
 @SuppressWarnings("deprecation")
 public class ItemShieldCobalt extends ItemShield implements IBauble, IItemAttributeModifier {
 	public static final UUID KNOCKBACK_RESISTANCE_UUID = UUID
@@ -47,6 +46,7 @@ public class ItemShieldCobalt extends ItemShield implements IBauble, IItemAttrib
 	public static final UUID KNOCKBACK_RESISTANCE_BAUBLE_UUID = UUID
 			.fromString("9016ba1d-70dd-46c4-b0b4-fc4ea39886c1");
 	private static final Map<IAttribute, AttributeModifier> modMap = new HashMap<>();
+
 	static {
 		modMap.put(SharedMonsterAttributes.KNOCKBACK_RESISTANCE,
 				new AttributeModifier(KNOCKBACK_RESISTANCE_BAUBLE_UUID,

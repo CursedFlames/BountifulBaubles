@@ -4,7 +4,11 @@ import cursedflames.bountifulbaubles.BountifulBaubles;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class ItemWormholeMirror extends ItemMagicMirror {
@@ -36,12 +40,25 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 		}
 		boolean sneaking = player.isSneaking();
 		if (!world.isRemote&&count==15&&!sneaking) {
-			teleportPlayerToSpawn(world, player);
+			int dim = player.getSpawnDimension();
+			if (world.provider.getDimension()!=dim&&!interdimensional.getBoolean(false)) {
+				player.sendStatusMessage(new TextComponentTranslation(
+						ModItems.magicMirror.getUnlocalizedName()+".wrongdim"), true);
+			} else {
+				teleportPlayerToSpawn(world, player);
+			}
 		}
 		if (!world.isRemote&&count==16&&sneaking) {
 			player.openGui(BountifulBaubles.instance, ItemPotionWormhole.GUI_ID, world,
 					(int) player.posX, (int) player.posY, (int) player.posZ);
 		}
+	}
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player,
+			EnumHand hand) {
+		player.setActiveHand(hand);
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 	}
 
 	@Override

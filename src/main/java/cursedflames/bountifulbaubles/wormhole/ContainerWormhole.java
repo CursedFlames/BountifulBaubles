@@ -43,9 +43,9 @@ public class ContainerWormhole extends Container {
 //		pinned.add(new DebugTarget("debug-disabled"));
 		Map<Integer, IWormholeTarget> pinnedFound = new HashMap<>();
 
-		for (int i = 0; i<6; i++) {
-			targets.add(new DebugTarget("debug"+i));
-		}
+//		for (int i = 0; i<6; i++) {
+//			targets.add(new DebugTarget("debug"+i));
+//		}
 
 		List<EntityPlayer> players = new ArrayList<>(player.world.playerEntities);
 		// can't teleport to yourself
