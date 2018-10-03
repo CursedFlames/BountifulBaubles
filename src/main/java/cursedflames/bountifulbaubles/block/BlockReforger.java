@@ -3,8 +3,11 @@ package cursedflames.bountifulbaubles.block;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.lib.block.GenericTileBlock;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,11 +23,13 @@ import net.minecraftforge.items.CapabilityItemHandler;
 //TODO block rotation
 public class BlockReforger extends GenericTileBlock {
 	public static final int GUI_ID = 1;
+	public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
 	public BlockReforger() {
 		super(BountifulBaubles.MODID, "reforger", TileReforger.class, BountifulBaubles.TAB,
 				Material.IRON, 3.0f, 100.0f);
 		setLightLevel(13f/16f).setLightOpacity(0);
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 
 	@Override
@@ -90,5 +95,30 @@ public class BlockReforger extends GenericTileBlock {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state,
+			EntityLivingBase entity, ItemStack stack) {
+		super.onBlockPlacedBy(world, pos, state, entity, stack);
+		world.setBlockState(pos,
+				state.withProperty(FACING, EnumFacing.getFacingFromVector(
+						(float) (entity.posX-pos.getX()), 0F, (float) (entity.posZ-pos.getZ()))),
+				2);
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getIndex();
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING);
 	}
 }

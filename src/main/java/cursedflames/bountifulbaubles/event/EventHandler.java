@@ -167,4 +167,15 @@ public class EventHandler {
 				((IItemHeldListener) off.getItem()).onHeldTick(off, player, EnumHand.OFF_HAND);
 		}
 	}
+
+	// this doesn't work?
+//	@SubscribeEvent(priority = EventPriority.LOWEST)
+//	public static void onItemConstruct(AttachCapabilitiesEvent<ItemStack> event) {
+//		if (!(event.getObject().hasCapability(BaublesCapabilities.CAPABILITY_BAUBLES, null)))
+//			return;
+//		BountifulBaubles.logger.info("item construct");
+//		ItemStack stack = event.getObject();
+//		if (!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier"))
+//			EnumBaubleModifier.generateModifier(stack);
+//	}
 }
