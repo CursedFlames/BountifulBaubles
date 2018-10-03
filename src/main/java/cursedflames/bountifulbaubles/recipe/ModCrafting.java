@@ -2,6 +2,7 @@ package cursedflames.bountifulbaubles.recipe;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.ModConfig;
+import cursedflames.bountifulbaubles.block.ModBlocks;
 import cursedflames.bountifulbaubles.item.ModItems;
 import cursedflames.lib.recipe.CLIngredient;
 import net.minecraft.init.Blocks;
@@ -16,6 +17,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModCrafting {
@@ -37,35 +39,52 @@ public class ModCrafting {
 		boolean runeLust = OreDictionary.doesOreNameExist("runeLustB");
 		boolean gaiaSpirit = OreDictionary.doesOreNameExist("eternalLifeEssence");
 
+		// TODO why don't oredict gold and iron work?
+		Object ingotGold = // OreDictionary.doesOreNameExist("ingotGold") ?
+							// "ingotGold" :
+				Items.GOLD_INGOT;
+		Object ingotIron = // OreDictionary.doesOreNameExist("ingotIron") ?
+							// "ingotIron" :
+				Items.IRON_INGOT;
+
 		// @formatter:off
-		//TODO why aren't gold and iron ingots working?
-//		r.register(new ShapedOreRecipe(
-//				new ResourceLocation(BountifulBaubles.MODID, "ringgold"), 
-//				ModItems.goldRing, new String[] {
-//				" g ",
-//				"g g",
-//				" g " },
-//				'g', "ingotGold"));
-//		r.register(new ShapedOreRecipe(
-//				new ResourceLocation(BountifulBaubles.MODID, "ringiron"), 
-//				ModItems.goldRing, new String[] {
-//				" i ",
-//				"i i",
-//				" i " },
-//				'i', "ingotIron"));
+		r.register(new ShapedOreRecipe(
+				new ResourceLocation(BountifulBaubles.MODID, "ringgold"), 
+				ModItems.goldRing, new String[] {
+				" g ",
+				"g g",
+				" g " },
+				'g', "ingotGold")
+				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "ringgold")));
+		r.register(new ShapedOreRecipe(
+				new ResourceLocation(BountifulBaubles.MODID, "ringiron"), 
+				ModItems.ironRing, new String[] {
+				" i ",
+				"i i",
+				" i " },
+				'i', "ingotIron")
+				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "ringiron")));
 		
-//		r.register(new ShapedOreRecipe(
-//				new ResourceLocation(BountifulBaubles.MODID, "trinketankhcharm"), 
-//				ModItems.trinketAnkhCharm, new String[] {
-//				"glg",
-//				"fsa",
-//				"gvg" },
-//				's', ModItems.trinketMixedDragonScale,
-//				'f', ModItems.ringFreeAction,
-//				'a', ModItems.trinketApple,
-//				'v', ModItems.trinketVitamins,
-//				'l', ModItems.trinketMagicLenses,
-//				'g', "ingotGold"));
+		r.register(new ShapedOreRecipe(
+				new ResourceLocation(BountifulBaubles.MODID, "trinketankhcharm"), 
+				ModItems.trinketAnkhCharm, new String[] {
+				"glg",
+				"fsa",
+				"gvg" },
+				's', ModItems.trinketMixedDragonScale,
+				'f', ModItems.ringFreeAction,
+				'a', ModItems.trinketApple,
+				'v', ModItems.trinketVitamins,
+				'l', ModItems.trinketMagicLenses,
+				'g', "ingotGold")
+				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "trinketankhcharm")));
+		
+		r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "reforger"), 
+				ModBlocks.reforger, 
+				Item.getItemFromBlock(Blocks.CRAFTING_TABLE),
+				Item.getItemFromBlock(Blocks.ANVIL),
+				Items.LAVA_BUCKET)
+				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "reforger")));
 		
 		NBTTagCompound temp = new NBTTagCompound();
 		temp.setString("Potion", "minecraft:fire_resistance");
