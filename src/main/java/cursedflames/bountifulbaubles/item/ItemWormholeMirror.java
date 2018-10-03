@@ -43,4 +43,9 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 					(int) player.posX, (int) player.posY, (int) player.posZ);
 		}
 	}
+
+	@Override
+	public int getEnchantEffectColor(ItemStack arg0) {
+		return 0x433a6b;
+	}
 }

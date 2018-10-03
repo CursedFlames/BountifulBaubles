@@ -18,12 +18,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.quark.api.ICustomEnchantColor;
 
 //TODO item model improvements
 //make it not double-sided
 //make mirror face have enchantment glow
 //TODO figure out how to remove teleport interpolation
-public class ItemMagicMirror extends GenericItemBB {
+public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColor {
 
 	public ItemMagicMirror(String name) {
 		super(name, BountifulBaubles.TAB);
@@ -113,5 +114,15 @@ public class ItemMagicMirror extends GenericItemBB {
 				player.lastTickPosZ = player.posZ;
 			}
 		}
+	}
+
+	@Override
+	public boolean hasEffect(ItemStack stack) {
+		return true;
+	}
+
+	@Override
+	public int getEnchantEffectColor(ItemStack arg0) {
+		return 0x3f5e5d;
 	}
 }
