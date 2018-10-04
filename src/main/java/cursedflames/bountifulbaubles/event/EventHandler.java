@@ -8,6 +8,7 @@ import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import cursedflames.bountifulbaubles.baubleeffect.IFireResistance;
 import cursedflames.bountifulbaubles.baubleeffect.IJumpBoost;
+import cursedflames.bountifulbaubles.item.ItemAmuletCross;
 import cursedflames.bountifulbaubles.item.ItemShieldObsidian;
 import cursedflames.bountifulbaubles.item.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,6 +53,11 @@ public class EventHandler {
 	public static void onDamage(LivingAttackEvent event) {
 		if (event.getEntityLiving() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+			if (BaublesApi.isBaubleEquipped(player, ModItems.amuletCross)!=-1) {
+				player.maxHurtResistantTime = ItemAmuletCross.RESIST_TIME;
+			} else if (player.maxHurtResistantTime==ItemAmuletCross.RESIST_TIME) {
+				player.maxHurtResistantTime = 20;
+			}
 			if (event.getSource().isFireDamage()) {
 				float damageMulti = 1F;
 				float damageMultiLava = 1F;

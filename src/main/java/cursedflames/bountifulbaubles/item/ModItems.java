@@ -58,6 +58,7 @@ public class ModItems {
 	public static Item sinPendantSloth = null;
 	public static Item sinPendantLust = null;
 	public static Item trinketBrokenHeart = null;
+	public static Item amuletCross = null;
 
 	@ObjectHolder("quark:enderdragon_scale")
 	public static final Item quarkDragonScale = null;
@@ -210,6 +211,8 @@ public class ModItems {
 		BountifulBaubles.registryHelper.addItem(sinPendantPride = new ItemAmuletSinPride());
 
 		BountifulBaubles.registryHelper.addItem(trinketBrokenHeart = new ItemTrinketBrokenHeart());
+
+		BountifulBaubles.registryHelper.addItem(amuletCross = new ItemAmuletCross());
 
 		AnvilRecipes.add(ringOverclocking, trinketShulkerHeart, 10, new ItemStack(ringFreeAction));
 		AnvilRecipes.add(trinketBezoar, trinketBlackDragonScale, 10,

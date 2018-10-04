@@ -39,7 +39,7 @@ public class ClientProxy implements ISideProxy {
 				b, rT, gT, bT, maxAge, velX, velY, velZ));
 	}
 
-	private static final ModelCrownGold modelCrownGold = new ModelCrownGold(1.0f);
+	private static final ModelCrownGold modelCrownGold = new ModelCrownGold();
 
 	@Override
 	public ModelCrownGold getModelCrownGold() {

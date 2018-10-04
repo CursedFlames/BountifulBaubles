@@ -20,7 +20,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-//TODO block rotation
 public class BlockReforger extends GenericTileBlock {
 	public static final int GUI_ID = 1;
 	public static final PropertyDirection FACING = PropertyDirection.create("facing");
