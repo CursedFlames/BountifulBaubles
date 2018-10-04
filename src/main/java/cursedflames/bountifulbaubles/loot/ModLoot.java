@@ -83,7 +83,8 @@ public class ModLoot {
 				List<LootEntry> entries = new ArrayList<>();
 				Item[] itemsWeight10 = { ModItems.balloon, ModItems.shieldCobalt,
 						ModItems.magicMirror, ModItems.trinketLuckyHorseshoe,
-						ModItems.trinketBrokenHeart, ModItems.trinketMagicLenses };
+						ModItems.trinketBrokenHeart, ModItems.trinketMagicLenses,
+						ModItems.amuletCross };
 				for (Item item : itemsWeight10) {
 					entries.add(new LootEntryItem(item, 10, 0, new LootFunction[0],
 							new LootCondition[0], item.getRegistryName().toString()));
