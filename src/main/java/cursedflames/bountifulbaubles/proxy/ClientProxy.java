@@ -1,8 +1,10 @@
 package cursedflames.bountifulbaubles.proxy;
 
 import cursedflames.bountifulbaubles.client.model.ModelCrownGold;
+import cursedflames.bountifulbaubles.client.model.ModelSunglasses;
 import cursedflames.bountifulbaubles.client.particle.ParticleGradient;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 
@@ -40,9 +42,17 @@ public class ClientProxy implements ISideProxy {
 	}
 
 	private static final ModelCrownGold modelCrownGold = new ModelCrownGold();
+	private static final ModelSunglasses modelSunglasses1 = new ModelSunglasses();
+	private static final ModelSunglasses modelSunglasses2 = new ModelSunglasses();
 
 	@Override
-	public ModelCrownGold getModelCrownGold() {
-		return modelCrownGold;
+	public ModelBiped getArmorModel(String modelName) {
+		if (modelName.equals("crownGold"))
+			return modelCrownGold;
+		else if (modelName.equals("sunglasses1"))
+			return modelSunglasses1;
+		else if (modelName.equals("sunglasses2"))
+			return modelSunglasses2;
+		return null;
 	}
 }

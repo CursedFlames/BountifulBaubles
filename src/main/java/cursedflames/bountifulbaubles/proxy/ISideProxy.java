@@ -1,6 +1,6 @@
 package cursedflames.bountifulbaubles.proxy;
 
-import cursedflames.bountifulbaubles.client.model.ModelCrownGold;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.world.World;
 
 public interface ISideProxy {
@@ -28,7 +28,7 @@ public interface ISideProxy {
 	public default void displayGuiWormhole() {
 	}
 
-	public default ModelCrownGold getModelCrownGold() {
+	public default ModelBiped getArmorModel(String modelName) {
 		return null;
 	}
 }

@@ -17,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.oredict.OreDictionary;
-import vazkii.quark.api.ICustomEnchantColor;
 
 public class ModItems {
 	public static Item modifierBook = null;
@@ -82,29 +81,11 @@ public class ModItems {
 				.addItem(trinketObsidianSkull = new ItemTrinketObsidianSkull());
 		BountifulBaubles.registryHelper
 				.addItem(shieldObsidian = new ItemShieldObsidian("shieldObsidian"));
-
-		class ItemTrinketMagicLenses extends ItemTrinketPotionCharm implements ICustomEnchantColor {
-			public ItemTrinketMagicLenses() {
-				super("trinketMagicLenses", Arrays.asList("minecraft:blindness"));
-			}
-
-			@Override
-			public BaubleType getBaubleType(ItemStack arg0) {
-				return BaubleType.HEAD;
-			}
-
-			@Override
-			public boolean hasEffect(ItemStack stack) {
-				// don't glow if it's the super bright vanilla glow
-				return BountifulBaubles.isQuarkLoaded;
-			}
-
-			@Override
-			public int getEnchantEffectColor(ItemStack arg0) {
-				return 0x555555;
-			}
-		}
-		BountifulBaubles.registryHelper.addItem(trinketMagicLenses = new ItemTrinketMagicLenses());
+		ArmorMaterial sunglassesMat = EnumHelper.addArmorMaterial("sunglasses",
+				BountifulBaubles.MODID+":sunglasses", 25, new int[] { 0, 0, 0, 0 }, 0,
+				SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F);
+		BountifulBaubles.registryHelper
+				.addItem(trinketMagicLenses = new ItemSunglasses(sunglassesMat));
 
 		// TODO check TC potion id
 		BountifulBaubles.registryHelper
@@ -207,7 +188,7 @@ public class ModItems {
 				SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F);
 		crownGoldMat.setRepairItem(new ItemStack(Items.GOLD_INGOT));
 		BountifulBaubles.registryHelper.addItem(crownGold = new ItemArmorBB("crownGold",
-				crownGoldMat, EntityEquipmentSlot.HEAD, BountifulBaubles.TAB));
+				"crownGold", crownGoldMat, EntityEquipmentSlot.HEAD, BountifulBaubles.TAB));
 		BountifulBaubles.registryHelper.addItem(sinPendantPride = new ItemAmuletSinPride());
 
 		BountifulBaubles.registryHelper.addItem(trinketBrokenHeart = new ItemTrinketBrokenHeart());
