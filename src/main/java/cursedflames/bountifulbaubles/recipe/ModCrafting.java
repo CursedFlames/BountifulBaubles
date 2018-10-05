@@ -29,6 +29,7 @@ public class ModCrafting {
 		IForgeRegistry<IRecipe> r = event.getRegistry();
 		boolean copperIngot = OreDictionary.doesOreNameExist("ingotCopper");
 		boolean steelIngot = OreDictionary.doesOreNameExist("ingotSteel");
+		boolean ingotEnderium = OreDictionary.doesOreNameExist("ingotEnderium");
 		boolean runeFire = OreDictionary.doesOreNameExist("runeFireB");
 		boolean runeGluttony = OreDictionary.doesOreNameExist("runeGluttonyB");
 		boolean runePride = OreDictionary.doesOreNameExist("runePrideB");
@@ -144,6 +145,17 @@ public class ModCrafting {
 				'r', "ringIron")
 				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "ringflywheel")));
 		r.register(new ShapedOreRecipe(
+				new ResourceLocation(BountifulBaubles.MODID, "ringflywheeladvanced"), 
+				ModItems.ringFlywheelAdvanced, new String[] {
+				" s ", 
+				"iri",
+				" e " }, 
+				'i', ingotEnderium ? "ingotEnderium" : Items.ENDER_PEARL, 
+				'e', Items.ENDER_EYE,
+				's', "scaleDragonEnder",
+				'r', ModItems.ringFlywheel)
+				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "ringflywheeladvanced")));
+		r.register(new ShapedOreRecipe(
 				new ResourceLocation(BountifulBaubles.MODID, "amuletSinGluttony"),
 				ModItems.sinPendantGluttony, new String[] {
 				"c",
@@ -188,8 +200,6 @@ public class ModCrafting {
 				new ItemStack(ModItems.potionRecall), 
 				new ItemStack(Items.ENDER_PEARL), 
 				new ItemStack(ModItems.potionWormhole));
-		
-		boolean ingotEnderium = OreDictionary.doesOreNameExist("ingotEnderium");
 		
 		if (ingotEnderium) {
 			r.register(new ShapedOreRecipe(
