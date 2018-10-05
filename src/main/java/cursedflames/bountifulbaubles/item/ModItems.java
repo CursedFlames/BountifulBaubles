@@ -182,6 +182,7 @@ public class ModItems {
 		BountifulBaubles.registryHelper.addItem(
 				sinPendantEmpty = new GenericItemBB("amuletSinEmpty", BountifulBaubles.TAB));
 		BountifulBaubles.registryHelper.addItem(sinPendantGluttony = new ItemAmuletSinGluttony());
+		// TODO phantom ink doesn't work on gold crown?
 		// gold, but with durability between iron and diamond
 		ArmorMaterial crownGoldMat = EnumHelper.addArmorMaterial("crownGold",
 				BountifulBaubles.MODID+":crownGold", 25, new int[] { 0, 0, 0, 2 }, 25,
