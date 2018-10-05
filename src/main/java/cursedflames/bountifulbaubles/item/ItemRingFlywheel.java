@@ -123,20 +123,20 @@ public class ItemRingFlywheel extends AGenericItemBauble {
 		return false;
 	}
 
-	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot,
-			boolean isSelected) {
-		chargeItems(stack, entityIn);
-	}
+//	@Override
+//	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot,
+//			boolean isSelected) {
+//		chargeItems(stack, entityIn);
+//	}
 
 	@Override
 	public void onWornTick(ItemStack stack, EntityLivingBase player) {
 		chargeItems(stack, player);
-		BountifulBaubles.logger.info(rfCapacity.getInt());
-		IEnergyStorage e = stack.getCapability(ENERGY_STORAGE_CAPABILITY, null);
-		if (e!=null) {
-			BountifulBaubles.logger.info(e.getMaxEnergyStored());
-		}
+//		BountifulBaubles.logger.info(rfCapacity.getInt());
+//		IEnergyStorage e = stack.getCapability(ENERGY_STORAGE_CAPABILITY, null);
+//		if (e!=null) {
+//			BountifulBaubles.logger.info(e.getMaxEnergyStored());
+//		}
 	}
 
 	private void chargeItems(ItemStack stack, Entity entity) {
