@@ -1,5 +1,7 @@
 package cursedflames.bountifulbaubles;
 
+import cursedflames.bountifulbaubles.entity.ModEntities;
+import net.minecraft.entity.Entity;
 import org.apache.logging.log4j.Logger;
 
 import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
@@ -94,6 +96,8 @@ public class BountifulBaubles {
 
 		CapabilityWormholePins.registerCapability();
 		MinecraftForge.EVENT_BUS.register(CapabilityWormholePins.class);
+
+		ModEntities.registerEntities();
 	}
 
 	@SubscribeEvent
