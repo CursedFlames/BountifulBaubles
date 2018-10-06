@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -52,6 +53,8 @@ public class EntityBee extends EntityTerrariaThrowable {
 				motionX = -motionX;
 			else if (result.sideHit == EnumFacing.NORTH || result.sideHit == EnumFacing.SOUTH)
 				motionZ = -motionZ;
+		} else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
+			result.entityHit.attackEntityFrom(DamageSource.MAGIC, 0.5f);
 		}
 	}
 	@Override

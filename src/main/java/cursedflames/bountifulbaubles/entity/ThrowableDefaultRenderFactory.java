@@ -9,9 +9,9 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-public class EntityCustomRenderFactory<T extends EntityTerrariaThrowable> implements IRenderFactory<T> {
+public class ThrowableDefaultRenderFactory<T extends EntityTerrariaThrowable> implements IRenderFactory<T> {
 	private final Item item;
-	public EntityCustomRenderFactory(Item itemI) {
+	public ThrowableDefaultRenderFactory(Item itemI) {
 		this.item = itemI;
 	}
 	@Override
