@@ -14,6 +14,8 @@ import net.minecraft.world.World;
 
 public abstract class ItemTerrariaThrowable extends GenericItemBB {
 	public final int cooldownTicks;
+	protected float velocity = 0.6f;
+	protected float inaccuracy = 0.0f;
 	public ItemTerrariaThrowable(String name, CreativeTabs tab, int useSpeed) {
 		super(name, tab);
 		cooldownTicks = useSpeed;
@@ -30,7 +32,7 @@ public abstract class ItemTerrariaThrowable extends GenericItemBB {
 		{
 			// Construct a new entity, make it fire from the player, and add it to the world
 			EntityTerrariaThrowable entityThrow = getThrownEntity(worldIn, playerIn);
-			entityThrow.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 0.6F, 0.0F);
+			entityThrow.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, velocity, inaccuracy);
 			worldIn.spawnEntity(entityThrow);
 		}
 

@@ -13,10 +13,10 @@ public class EntityCustomRenderFactory<T extends EntityTerrariaThrowable> implem
 	private final Item item;
 	public EntityCustomRenderFactory(Item itemI) {
 		this.item = itemI;
-		BountifulBaubles.logger.error(item.toString());
 	}
 	@Override
 	public Render<T> createRenderFor(RenderManager manager) {
+		BountifulBaubles.logger.error(item);
 		return new RenderSnowball<>(manager, item, Minecraft.getMinecraft().getRenderItem());
 	}
 }

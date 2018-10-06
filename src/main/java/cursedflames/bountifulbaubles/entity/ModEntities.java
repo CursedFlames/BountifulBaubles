@@ -10,16 +10,17 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class ModEntities {
 	public static Entity beenade;
-	public static <T extends EntityTerrariaThrowable> void registerWithRenderer(String name, Class<T> c, Item i) {
+	public static <T extends EntityTerrariaThrowable> void registerWithRenderer(String name, Class<T> c, Item i, int id) {
 		EntityRegistry.registerModEntity(new ResourceLocation(BountifulBaubles.MODID, name),
-				c, name, 0, BountifulBaubles.instance, 128,
+				c, name, id, BountifulBaubles.instance, 128,
 				10, true);
 		RenderingRegistry.registerEntityRenderingHandler(c, new EntityCustomRenderFactory<T>(i));
 	}
 	public static void registerEntities() {
 		BountifulBaubles.logger.info("Registering Entities!");
-//		registerWithRenderer("grenade", EntityGrenade.class, ModItems.grenade);
-		EntityRegistry.registerModEntity(new ResourceLocation("bountifulbaubles:grenade"), EntityGrenade.class, "grenade", 0, BountifulBaubles.instance, 128, 10, true);
-		RenderingRegistry.registerEntityRenderingHandler(EntityGrenade.class, new EntityCustomRenderFactory<EntityGrenade>(ModItems.grenade));
+		int id = 0;
+		registerWithRenderer("grenade", EntityGrenade.class, ModItems.grenade, id++);
+		registerWithRenderer("beenade", EntityBeenade.class, ModItems.beenade, id++);
+		registerWithRenderer("bee", EntityBee.class, ModItems.beenade, id++);
 	}
 }
