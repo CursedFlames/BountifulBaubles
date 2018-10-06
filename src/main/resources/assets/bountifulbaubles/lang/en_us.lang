@@ -147,6 +147,7 @@ item.bountifulbaubles.trinketBrokenHeart.tooltip.1=§9Sleep to regenerate heart 
 item.bountifulbaubles.trinketBrokenHeart.tooltip.1=§aHow did this happen?
 item.bountifulbaubles.amuletCross.name=Cross Necklace
 item.bountifulbaubles.amuletCross.tooltip.0=§9Increases length of invincibility when damaged.
+item.bountifulbaubles.grenade.name=Grenade
 tile.bountifulbaubles.reforger.name=Reforging Station
 bountifulbaubles.gui.reforger.reforge=Reforge
 bountifulbaubles.gui.reforger.xpcost=XP Cost:
