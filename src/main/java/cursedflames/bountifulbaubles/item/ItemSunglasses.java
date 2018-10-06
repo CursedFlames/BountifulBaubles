@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.botania.api.item.IPhantomInkable;
 
 //TODO sunglasses are backwards on armor stands?
 public class ItemSunglasses extends ItemArmorBB
@@ -80,6 +81,9 @@ public class ItemSunglasses extends ItemArmorBB
 	public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack stack,
 			EntityEquipmentSlot armorSlot, ModelBiped defaultModel) {
 		if (!stack.isEmpty()&&stack.getItem() instanceof ItemArmorBB) {
+			if (stack.getItem() instanceof IPhantomInkable
+					&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
+				return new ModelBiped();
 			ModelBiped model = BountifulBaubles.proxy.getArmorModel(modelName+"1");
 			model.isSneak = defaultModel.isSneak;
 			model.isRiding = defaultModel.isRiding;
@@ -101,6 +105,9 @@ public class ItemSunglasses extends ItemArmorBB
 	public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType type,
 			float partialTicks) {
 		if (type!=RenderType.HEAD)
+			return;
+		if (stack.getItem() instanceof IPhantomInkable
+				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
 			return;
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(getRenderTexture());
