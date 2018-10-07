@@ -5,6 +5,7 @@ import java.util.Arrays;
 import baubles.api.BaubleType;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.item.armor.ItemArmorBB;
+import cursedflames.bountifulbaubles.item.throwable.ItemBeenade;
 import cursedflames.bountifulbaubles.item.throwable.ItemGrenade;
 import cursedflames.bountifulbaubles.recipe.AnvilRecipes;
 import net.minecraft.entity.EntityLivingBase;
@@ -59,7 +60,10 @@ public class ModItems {
 	public static Item sinPendantLust = null;
 	public static Item trinketBrokenHeart = null;
 	public static Item amuletCross = null;
+	// NOTE: These need to be initialized on construction because entities are loaded first, and the entities for these
+	// reference the item for their rendering
 	public static Item grenade = new ItemGrenade("grenade");
+	public static Item beenade = new ItemBeenade("beenade");
 
 	@ObjectHolder("quark:enderdragon_scale")
 	public static final Item quarkDragonScale = null;
@@ -197,7 +201,9 @@ public class ModItems {
 		BountifulBaubles.registryHelper.addItem(trinketBrokenHeart = new ItemTrinketBrokenHeart());
 
 		BountifulBaubles.registryHelper.addItem(amuletCross = new ItemAmuletCross());
+		// Adding throwable items
 		BountifulBaubles.registryHelper.addItem(grenade);
+		BountifulBaubles.registryHelper.addItem(beenade);
 		AnvilRecipes.add(ringOverclocking, trinketShulkerHeart, 10, new ItemStack(ringFreeAction));
 		AnvilRecipes.add(trinketBezoar, trinketBlackDragonScale, 10,
 				new ItemStack(trinketMixedDragonScale));

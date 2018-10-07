@@ -18,6 +18,7 @@ import net.minecraft.world.WorldServer;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.ParametersAreNullableByDefault;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,6 +49,7 @@ public abstract class EntityTerrariaThrowable extends Entity implements IProject
 	}
 
 	public EntityTerrariaThrowable(World worldIn, EntityLivingBase throwerIn, float bounciness) {
+
 		this(worldIn, throwerIn.posX, throwerIn.posY + (double)throwerIn.getEyeHeight() - 0.10000000149011612D, throwerIn.posZ);
 		this.thrower = throwerIn;
 		this.bounciness = bounciness;
