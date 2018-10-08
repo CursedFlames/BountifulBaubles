@@ -123,7 +123,6 @@ public class ItemSunglasses extends ItemArmorBB
 		GlStateManager.rotate(-90F, 0F, 1F, 0F);
 		model.bipedHead.render(1.0F);
 
-		GlStateManager.disableBlend();
 		GlStateManager.popMatrix();
 	}
 }

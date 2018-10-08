@@ -3,6 +3,9 @@ package cursedflames.bountifulbaubles.proxy;
 import cursedflames.bountifulbaubles.block.ContainerReforger;
 import cursedflames.bountifulbaubles.block.GuiReforger;
 import cursedflames.bountifulbaubles.block.TileReforger;
+import cursedflames.bountifulbaubles.client.gui.GuiPhantomPrism;
+import cursedflames.bountifulbaubles.container.ContainerPhantomPrism;
+import cursedflames.bountifulbaubles.item.ItemPhantomPrism;
 import cursedflames.bountifulbaubles.item.ItemPotionWormhole;
 import cursedflames.bountifulbaubles.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.wormhole.GuiWormhole;
@@ -19,6 +22,8 @@ public class GuiProxy implements IGuiHandler {
 			int z) {
 		if (id==ItemPotionWormhole.GUI_ID) {
 			return new ContainerWormhole(player);
+		} else if (id==ItemPhantomPrism.GUI_ID) {
+			return new ContainerPhantomPrism(player);
 		}
 		BlockPos pos = new BlockPos(x, y, z);
 		TileEntity te = world.getTileEntity(pos);
@@ -33,6 +38,8 @@ public class GuiProxy implements IGuiHandler {
 			int z) {
 		if (id==ItemPotionWormhole.GUI_ID) {
 			return new GuiWormhole(new ContainerWormhole(player));
+		} else if (id==ItemPhantomPrism.GUI_ID) {
+			return new GuiPhantomPrism(new ContainerPhantomPrism(player));
 		}
 		BlockPos pos = new BlockPos(x, y, z);
 		TileEntity te = world.getTileEntity(pos);

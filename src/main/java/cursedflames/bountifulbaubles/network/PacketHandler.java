@@ -13,7 +13,9 @@ public class PacketHandler {
 		REFORGE(0),
 		WORMHOLE(1),
 		WORMHOLE_UPDATE_GUI(2),
-		WORMHOLE_PIN(3);
+		WORMHOLE_PIN(3),
+		PRISM_UPDATE_GUI(4),
+		PRISM_TOGGLE_VISIBLE(5);
 
 		public final int id;
 

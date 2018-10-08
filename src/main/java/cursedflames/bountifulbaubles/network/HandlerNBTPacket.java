@@ -28,6 +28,10 @@ public class HandlerNBTPacket implements IMessageHandler<NBTPacket, IMessage> {
 			HandlerWormholeClient.handleWormholeUpdateGui(message, ctx);
 		} else if (id==HandlerIds.WORMHOLE_PIN.id) {
 			HandlerWormhole.handlePin(message, ctx);
+		} else if (id==HandlerIds.PRISM_UPDATE_GUI.id) {
+			HandlerPrismClient.updateContainer(message, ctx);
+		} else if (id==HandlerIds.PRISM_TOGGLE_VISIBLE.id) {
+			HandlerPrism.toggleVisible(message, ctx);
 		}
 	}
 }

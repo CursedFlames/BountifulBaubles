@@ -1,6 +1,6 @@
 package cursedflames.bountifulbaubles.wormhole;
 
-import cursedflames.bountifulbaubles.client.gui.GuiPinButton;
+import cursedflames.bountifulbaubles.client.gui.GuiToggleButton;
 import cursedflames.bountifulbaubles.network.PacketHandler;
 import cursedflames.lib.gui.GuiBetterButton;
 import cursedflames.lib.network.NBTPacket;
@@ -37,8 +37,8 @@ public class GuiWormhole extends GuiContainer {
 			buttonList.add(new GuiBetterButton(id++, guiLeft+102, guiTop+j, 80, 20, ""));
 		}
 		for (int i = 0, j = 3; i<8; i++, j += 24) {
-			buttonList.add(new GuiPinButton(id++, guiLeft+90, guiTop+j));
-			buttonList.add(new GuiPinButton(id++, guiLeft+182, guiTop+j));
+			buttonList.add(new GuiToggleButton(id++, guiLeft+90, guiTop+j));
+			buttonList.add(new GuiToggleButton(id++, guiLeft+182, guiTop+j));
 		}
 		// TODO page change buttons
 		pageChange(page);
@@ -91,8 +91,8 @@ public class GuiWormhole extends GuiContainer {
 					button.displayString = target.getName();
 				}
 				button.enabled = target.isEnabled();
-				if (pinButton instanceof GuiPinButton)
-					((GuiPinButton) pinButton).pinned = listIndex<container.pinCount;
+				if (pinButton instanceof GuiToggleButton)
+					((GuiToggleButton) pinButton).pinned = listIndex<container.pinCount;
 			} else {
 				button.visible = false;
 				pinButton.visible = false;

@@ -95,6 +95,8 @@ public class ModLoot {
 				entries.add(new LootEntryItem(ModItems.sinPendantEmpty, 3, 0, new LootFunction[0],
 						new LootCondition[0],
 						ModItems.brokenBlackDragonScale.getRegistryName().toString()));
+				entries.add(new LootEntryItem(ModItems.phantomPrism, 1, 0, new LootFunction[0],
+						new LootCondition[0], ModItems.phantomPrism.getRegistryName().toString()));
 
 				LootPool pool = new LootPool(entries.toArray(new LootEntry[0]),
 						new LootCondition[] { new RandomChance(0.35F) }, new RandomValueRange(1),
@@ -119,6 +121,8 @@ public class ModLoot {
 					entries.add(new LootEntryItem(item, 10, 0, new LootFunction[0],
 							new LootCondition[0], item.getRegistryName().toString()));
 				}
+				entries.add(new LootEntryItem(ModItems.phantomPrism, 1, 0, new LootFunction[0],
+						new LootCondition[0], ModItems.phantomPrism.getRegistryName().toString()));
 				LootPool pool = new LootPool(entries.toArray(new LootEntry[0]),
 						new LootCondition[] { new RandomChance(0.2F) }, new RandomValueRange(1),
 						new RandomValueRange(0), BountifulBaubles.MODID+"_nether_bridge");

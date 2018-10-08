@@ -1,7 +1,5 @@
 package cursedflames.bountifulbaubles;
 
-import cursedflames.bountifulbaubles.entity.ModEntities;
-import net.minecraft.entity.Entity;
 import org.apache.logging.log4j.Logger;
 
 import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
@@ -9,6 +7,7 @@ import cursedflames.bountifulbaubles.block.ModBlocks;
 import cursedflames.bountifulbaubles.block.TESRReforger;
 import cursedflames.bountifulbaubles.block.TileReforger;
 import cursedflames.bountifulbaubles.capability.CapabilityWormholePins;
+import cursedflames.bountifulbaubles.entity.ModEntities;
 import cursedflames.bountifulbaubles.event.EventHandler;
 import cursedflames.bountifulbaubles.item.ItemAmuletSinGluttony;
 import cursedflames.bountifulbaubles.item.ItemShieldCobalt;
@@ -61,6 +60,8 @@ public class BountifulBaubles {
 	@SidedProxy(clientSide = "cursedflames.bountifulbaubles.proxy.ClientProxy", serverSide = "cursedflames.bountifulbaubles.proxy.ServerProxy")
 	public static ISideProxy proxy;
 
+	public static final String ARMOR_TEXTURE_PATH = "textures/models/armor/";
+
 //	static final Comparator<ItemStack> tabSorter;
 	public static final CreativeTabs TAB = new CreativeTabs("bountifulbaubles") {
 		@SideOnly(Side.CLIENT)
@@ -76,6 +77,7 @@ public class BountifulBaubles {
 	};
 
 	public static boolean isQuarkLoaded = false;
+	public static boolean isBotaniaLoaded = false;
 
 	@Mod.EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
@@ -135,5 +137,6 @@ public class BountifulBaubles {
 		config.postInit(event);
 		logger.info(Config.modConfigs.get(MODID)==null);
 		isQuarkLoaded = Loader.isModLoaded("quark");
+		isBotaniaLoaded = Loader.isModLoaded("botania");
 	}
 }

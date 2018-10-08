@@ -225,5 +225,19 @@ public class ModCrafting {
 					'p', ModItems.potionWormhole)
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "wormholeMirror")));
 		}
+		
+		if (!BountifulBaubles.isBotaniaLoaded) {
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "phantomPrism"),
+					ModItems.phantomPrism, new String[] {
+					" e ",
+					"gdg",
+					"gog"},
+					'e', Items.ENDER_EYE,
+					'd', Items.DIAMOND,
+					'o', "obsidian",
+					'g', "blockGlass")
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "phantomPrism")));
+		}
 	}
 }

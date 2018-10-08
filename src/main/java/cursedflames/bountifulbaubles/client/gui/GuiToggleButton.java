@@ -7,20 +7,41 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiPinButton extends GuiBetterButton {
+public class GuiToggleButton extends GuiBetterButton {
 	public boolean pinned = false;
 
-	private ResourceLocation off = new ResourceLocation(BountifulBaubles.MODID,
-			"textures/gui/button/pin_off.png");
-	private ResourceLocation offToOn = new ResourceLocation(BountifulBaubles.MODID,
-			"textures/gui/button/pin_offtoon.png");
-	private ResourceLocation on = new ResourceLocation(BountifulBaubles.MODID,
-			"textures/gui/button/pin_on.png");
-	private ResourceLocation onToOff = new ResourceLocation(BountifulBaubles.MODID,
-			"textures/gui/button/pin_ontooff.png");
+	public ResourceLocation off;
+	public ResourceLocation offToOn;
+	public ResourceLocation on;
+	public ResourceLocation onToOff;
 
-	public GuiPinButton(int buttonId, int x, int y) {
+	public GuiToggleButton(int buttonId, int x, int y) {
+		this(buttonId, x, y, "pin");
+	}
+
+	public GuiToggleButton(int buttonId, int x, int y, String type) {
+		this(buttonId, x, y, type, false);
+	}
+
+	public GuiToggleButton(int buttonId, int x, int y, String type, boolean enabled) {
 		super(buttonId, x, y, 16, 16, "");
+		pinned = enabled;
+		if (type.equals("pin")) {
+			off = new ResourceLocation(BountifulBaubles.MODID, "textures/gui/button/pin_off.png");
+			offToOn = new ResourceLocation(BountifulBaubles.MODID,
+					"textures/gui/button/pin_offtoon.png");
+			on = new ResourceLocation(BountifulBaubles.MODID, "textures/gui/button/pin_on.png");
+			onToOff = new ResourceLocation(BountifulBaubles.MODID,
+					"textures/gui/button/pin_ontooff.png");
+		} else if (type.equals("visible")) {
+			off = new ResourceLocation(BountifulBaubles.MODID,
+					"textures/gui/button/visible_off.png");
+			offToOn = new ResourceLocation(BountifulBaubles.MODID,
+					"textures/gui/button/visible_off_hover.png");
+			on = new ResourceLocation(BountifulBaubles.MODID, "textures/gui/button/visible_on.png");
+			onToOff = new ResourceLocation(BountifulBaubles.MODID,
+					"textures/gui/button/visible_on_hover.png");
+		}
 	}
 
 	@Override
