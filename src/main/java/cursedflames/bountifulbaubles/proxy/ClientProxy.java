@@ -1,6 +1,5 @@
 package cursedflames.bountifulbaubles.proxy;
 
-import cursedflames.bountifulbaubles.client.model.ModelAmuletCross;
 import cursedflames.bountifulbaubles.client.model.ModelCrownGold;
 import cursedflames.bountifulbaubles.client.model.ModelSunglasses;
 import cursedflames.bountifulbaubles.client.particle.ParticleGradient;
@@ -45,7 +44,6 @@ public class ClientProxy implements ISideProxy {
 	private static final ModelCrownGold modelCrownGold = new ModelCrownGold();
 	private static final ModelSunglasses modelSunglasses1 = new ModelSunglasses();
 	private static final ModelSunglasses modelSunglasses2 = new ModelSunglasses();
-	private static final ModelAmuletCross modelBaubleBody = new ModelAmuletCross();
 
 	@Override
 	public ModelBiped getArmorModel(String modelName) {
@@ -55,8 +53,6 @@ public class ClientProxy implements ISideProxy {
 			return modelSunglasses1;
 		else if (modelName.equals("sunglasses2"))
 			return modelSunglasses2;
-		else if (modelName.equals("baubleBody"))
-			return modelBaubleBody;
 		return null;
 	}
 }

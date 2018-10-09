@@ -8,5 +8,4 @@ build
 .autocomplete-classpath
 .project
 *.launch
-assets
 atom-use-libs
