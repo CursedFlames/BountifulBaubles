@@ -10,9 +10,11 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootEntry;
 import net.minecraft.world.storage.loot.LootEntryEmpty;
 import net.minecraft.world.storage.loot.LootEntryItem;
+import net.minecraft.world.storage.loot.LootEntryTable;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraft.world.storage.loot.RandomValueRange;
@@ -97,7 +99,9 @@ public class ModLoot {
 						ModItems.brokenBlackDragonScale.getRegistryName().toString()));
 				entries.add(new LootEntryItem(ModItems.phantomPrism, 1, 0, new LootFunction[0],
 						new LootCondition[0], ModItems.phantomPrism.getRegistryName().toString()));
-
+				entries.add(new LootEntryTable(
+						new ResourceLocation(BountifulBaubles.MODID, "flare_gun"), 10, 0,
+						new LootCondition[0], ModItems.flareGun.getRegistryName().toString()));
 				LootPool pool = new LootPool(entries.toArray(new LootEntry[0]),
 						new LootCondition[] { new RandomChance(0.35F) }, new RandomValueRange(1),
 						new RandomValueRange(0), BountifulBaubles.MODID+"_dungeon");

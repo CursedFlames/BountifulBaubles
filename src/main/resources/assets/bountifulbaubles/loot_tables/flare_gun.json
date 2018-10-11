@@ -1,0 +1,40 @@
+{
+	"pools": [
+		{
+			"conditions": [],
+			"rolls": 1,
+			"bonus_rolls": 0,
+			"entries": [{
+				"conditions": [],
+				"type": "item",
+				"name": "bountifulbaubles:flaregun",
+				"functions": [],
+				"weight": 1,
+				"quality": 0
+			}],
+			"name": "pool_flare_gun"
+		},
+		{
+			"conditions": [],
+			"rolls": 1,
+			"bonus_rolls": 0,
+			"entries": [{
+				"conditions": [],
+				"type": "item",
+				"name": "bountifulbaubles:flare_red",
+				"functions": [
+					{
+						"function": "set_count",
+						"count": {
+							"min": 25,
+							"max": 48
+						}
+					}
+				],
+				"weight": 1,
+				"quality": 0
+			}],
+			"name": "pool_flares"
+		}
+	]
+}
