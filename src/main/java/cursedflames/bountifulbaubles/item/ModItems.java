@@ -61,6 +61,8 @@ public class ModItems {
 	public static Item trinketBrokenHeart = null;
 	public static Item amuletCross = null;
 	public static Item phantomPrism = null;
+	public static Item umbrella = null;
+	public static Item flareGun = null;
 	// NOTE: These need to be initialized on construction because entities are
 	// loaded first, and the entities for these
 	// reference the item for their rendering
@@ -205,6 +207,10 @@ public class ModItems {
 		BountifulBaubles.registryHelper.addItem(amuletCross = new ItemAmuletCross());
 
 		BountifulBaubles.registryHelper.addItem(phantomPrism = new ItemPhantomPrism());
+
+		BountifulBaubles.registryHelper.addItem(umbrella = new ItemUmbrella());
+
+		BountifulBaubles.registryHelper.addItem(flareGun = new ItemFlareGun());
 
 		// Adding throwable items
 		BountifulBaubles.registryHelper.addItem(grenade);

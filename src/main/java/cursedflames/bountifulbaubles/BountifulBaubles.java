@@ -85,6 +85,7 @@ public class BountifulBaubles {
 		config = new Config(MODID, "1", logger);
 		config.preInit(event);
 		ModConfig.initConfig();
+		// TODO make some of these non-static and move registration to constructor
 		MinecraftForge.EVENT_BUS.register(EventHandler.class);
 		MinecraftForge.EVENT_BUS.register(AnvilRecipes.class);
 		MinecraftForge.EVENT_BUS.register(ModCrafting.class);
