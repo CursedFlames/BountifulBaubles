@@ -62,6 +62,8 @@ public class ModItems {
 	public static Item trinketBrokenHeart = null;
 	public static Item amuletCross = null;
 	public static Item phantomPrism = null;
+	public static Item disintegrationTablet = null;
+	public static Item spectralSilt = null;
 	public static Item umbrella = null;
 	public static Item flareGun = null;
 	public static Item flareWhite = null;
@@ -221,6 +223,10 @@ public class ModItems {
 		BountifulBaubles.registryHelper.addItem(amuletCross = new ItemAmuletCross());
 
 		BountifulBaubles.registryHelper.addItem(phantomPrism = new ItemPhantomPrism());
+
+		BountifulBaubles.registryHelper
+				.addItem(disintegrationTablet = new ItemDisintegrationTablet());
+		BountifulBaubles.registryHelper.addItem(spectralSilt = new ItemSpectralSilt());
 
 		BountifulBaubles.registryHelper.addItem(umbrella = new ItemUmbrella());
 

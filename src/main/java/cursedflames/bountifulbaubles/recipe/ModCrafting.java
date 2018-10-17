@@ -23,13 +23,13 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModCrafting {
 	@SubscribeEvent
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-		if (!ModConfig.recipesEnabled.getBoolean(true)) {
-			return;
-		}
+		// @formatter:off
 		IForgeRegistry<IRecipe> r = event.getRegistry();
+
 		boolean copperIngot = OreDictionary.doesOreNameExist("ingotCopper");
 		boolean steelIngot = OreDictionary.doesOreNameExist("ingotSteel");
 		boolean ingotEnderium = OreDictionary.doesOreNameExist("ingotEnderium");
+		boolean ingotCobalt = OreDictionary.doesOreNameExist("ingotCobalt");
 		boolean runeFire = OreDictionary.doesOreNameExist("runeFireB");
 		boolean runeGluttony = OreDictionary.doesOreNameExist("runeGluttonyB");
 		boolean runePride = OreDictionary.doesOreNameExist("runePrideB");
@@ -39,8 +39,8 @@ public class ModCrafting {
 		boolean runeSloth = OreDictionary.doesOreNameExist("runeSlothB");
 		boolean runeLust = OreDictionary.doesOreNameExist("runeLustB");
 		boolean gaiaSpirit = OreDictionary.doesOreNameExist("eternalLifeEssence");
-
-		// @formatter:off
+		
+		if (ModConfig.recipesEnabled.getBoolean(true)) {
 		r.register(new ShapedOreRecipe(
 				new ResourceLocation(BountifulBaubles.MODID, "ringgold"), 
 				ModItems.goldRing, new String[] {
@@ -238,6 +238,166 @@ public class ModCrafting {
 					'o', "obsidian",
 					'g', "blockGlass")
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "phantomPrism")));
+		}
+		}
+		
+		if (ModConfig.spectralSiltRecipesEnabled.getBoolean(true)) {
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_balloon"),
+					ModItems.balloon, new String[] {
+					"sws",
+					"wsw",
+					"sws"},
+					's', ModItems.spectralSilt,
+					'w', "blockWool")
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_balloon")));
+			if (ingotCobalt) {
+				r.register(new ShapedOreRecipe(
+						new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt"),
+						ModItems.shieldCobalt, new String[] {
+						"sis",
+						"iSi",
+						"sis"},
+						's', ModItems.spectralSilt,
+						'S', Items.SHIELD,
+						'i', "ingotIron")
+						.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt")));
+			} else {
+				r.register(new ShapedOreRecipe(
+						new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt"),
+						ModItems.shieldCobalt, new String[] {
+						"sss",
+						"sSs",
+						"sss"},
+						's', ModItems.spectralSilt,
+						'S', Items.SHIELD)
+						.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt")));
+			}
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_magicMirror"),
+					ModItems.magicMirror, new String[] {
+					"sgs",
+					"gdg",
+					"sgs"},
+					's', ModItems.spectralSilt,
+					'd', Items.DIAMOND,
+					'g', "blockGlass")
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_magicMirror")));
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_luckyHorseshoe"),
+					ModItems.trinketLuckyHorseshoe, new String[] {
+					"gsg",
+					"gsg",
+					"sgs"},
+					's', ModItems.spectralSilt,
+					'g', "ingotGold")
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_luckyHorseshoe")));
+			//TODO broken heart
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_magicLenses"),
+					ModItems.trinketMagicLenses, new String[] {
+					"s s",
+					"gSg",
+					"s s"},
+					's', ModItems.spectralSilt,
+					'g', "blockGlass",
+					'S', Items.STICK)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_magicLenses")));
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_amuletCross"),
+					ModItems.amuletCross, new String[] {
+					"sgs",
+					"ggg",
+					"sgs"},
+					's', ModItems.spectralSilt,
+					'g', "ingotGold")
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_amuletCross")));
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_sinPendantEmpty"),
+					ModItems.sinPendantEmpty, new String[] {
+					"sSs",
+					"sis",
+					"sss"},
+					's', ModItems.spectralSilt,
+					'i', "ingotIron",
+					'S', Items.STRING)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_sinPendantEmpty")));
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_flareGun"),
+					ModItems.flareGun, new String[] {
+					"sss",
+					"iii",
+					"iss"},
+					's', ModItems.spectralSilt,
+					'i', "ingotIron")
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_flareGun")));
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_brokenBlackDragonScale"),
+					ModItems.brokenBlackDragonScale, new String[] {
+					"sss",
+					"sSs",
+					"sss"},
+					's', ModItems.spectralSilt,
+					'S', "scaleDragonEnder")
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_brokenBlackDragonScale")));
+		}
+		
+		if (ModConfig.spectralSiltEnabled.getBoolean(true)) {
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_disintegrationTablet"),
+					ModItems.disintegrationTablet, new String[] {
+					"qbq",
+					"bSb",
+					"qbq"},
+					'S', "stone",
+					'b', Items.BLAZE_POWDER,
+					'q', Items.QUARTZ)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_disintegrationTablet")));
+			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_balloon"),
+					ModItems.spectralSilt,
+					ModItems.balloon,
+					ModItems.disintegrationTablet)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_balloon")));
+			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_shieldCobalt"),
+					ModItems.spectralSilt,
+					ModItems.shieldCobalt,
+					ModItems.disintegrationTablet)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_shieldCobalt")));
+			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_magicMirror"),
+					ModItems.spectralSilt,
+					ModItems.magicMirror,
+					ModItems.disintegrationTablet)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_magicMirror")));
+			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_luckyHorseshoe"),
+					ModItems.spectralSilt,
+					ModItems.trinketLuckyHorseshoe,
+					ModItems.disintegrationTablet)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_luckyHorseshoe")));
+			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_magicLenses"),
+					ModItems.spectralSilt,
+					ModItems.trinketMagicLenses,
+					ModItems.disintegrationTablet)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_magicLenses")));
+			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_amuletCross"),
+					ModItems.spectralSilt,
+					ModItems.amuletCross,
+					ModItems.disintegrationTablet)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_amuletCross")));
+			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_sinPendantEmpty"),
+					ModItems.spectralSilt,
+					ModItems.sinPendantEmpty,
+					ModItems.disintegrationTablet)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_sinPendantEmpty")));
+			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_flareGun"),
+					ModItems.spectralSilt,
+					ModItems.flareGun,
+					ModItems.disintegrationTablet)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_flareGun")));
+			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_brokenBlackDragonScale"),
+					ModItems.spectralSilt,
+					ModItems.brokenBlackDragonScale,
+					ModItems.disintegrationTablet)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_brokenBlackDragonScale")));
 		}
 	}
 }
