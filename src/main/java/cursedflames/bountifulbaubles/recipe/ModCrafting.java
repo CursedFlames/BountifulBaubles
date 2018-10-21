@@ -30,7 +30,15 @@ public class ModCrafting {
 		boolean steelIngot = OreDictionary.doesOreNameExist("ingotSteel");
 		boolean ingotEnderium = OreDictionary.doesOreNameExist("ingotEnderium");
 		boolean ingotCobalt = OreDictionary.doesOreNameExist("ingotCobalt");
+		boolean runeMana = OreDictionary.doesOreNameExist("runeManaB");
 		boolean runeFire = OreDictionary.doesOreNameExist("runeFireB");
+		boolean runeWater = OreDictionary.doesOreNameExist("runeWaterB");
+		boolean runeAir = OreDictionary.doesOreNameExist("runeAirB");
+		boolean runeEarth = OreDictionary.doesOreNameExist("runeEarthB");
+		boolean runeSummer = OreDictionary.doesOreNameExist("runeSummerB");
+		boolean runeAutumn = OreDictionary.doesOreNameExist("runeAutumnB");
+		boolean runeWinter = OreDictionary.doesOreNameExist("runeWinterB");
+		boolean runeSpring = OreDictionary.doesOreNameExist("runeSpringB");
 		boolean runeGluttony = OreDictionary.doesOreNameExist("runeGluttonyB");
 		boolean runePride = OreDictionary.doesOreNameExist("runePrideB");
 		boolean runeWrath = OreDictionary.doesOreNameExist("runeWrathB");
@@ -58,19 +66,38 @@ public class ModCrafting {
 				'i', "ingotIron")
 				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "ringiron")));
 		
-		r.register(new ShapedOreRecipe(
-				new ResourceLocation(BountifulBaubles.MODID, "trinketankhcharm"), 
-				ModItems.trinketAnkhCharm, new String[] {
-				"glg",
-				"fsa",
-				"gvg" },
-				's', ModItems.trinketMixedDragonScale,
-				'f', ModItems.ringFreeAction,
-				'a', ModItems.trinketApple,
-				'v', ModItems.trinketVitamins,
-				'l', ModItems.trinketMagicLenses,
-				'g', "ingotGold")
-				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "trinketankhcharm")));
+		if (runeSummer && runeAutumn && runeWinter && runeSpring) {
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "trinketankhcharm"), 
+					ModItems.trinketAnkhCharm, new String[] {
+					"SlA",
+					"fsa",
+					"PvW" },
+					's', ModItems.trinketMixedDragonScale,
+					'f', ModItems.ringFreeAction,
+					'a', ModItems.trinketApple,
+					'v', ModItems.trinketVitamins,
+					'l', ModItems.trinketMagicLenses,
+					'S', "runeSummerB",
+					'A', "runeAutumnB",
+					'W', "runeWinterB",
+					'P', "runeSpringB")
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "trinketankhcharm")));
+		} else {
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "trinketankhcharm"), 
+					ModItems.trinketAnkhCharm, new String[] {
+					"glg",
+					"fsa",
+					"gvg" },
+					's', ModItems.trinketMixedDragonScale,
+					'f', ModItems.ringFreeAction,
+					'a', ModItems.trinketApple,
+					'v', ModItems.trinketVitamins,
+					'l', ModItems.trinketMagicLenses,
+					'g', "ingotGold")
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "trinketankhcharm")));
+		}
 		
 		r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "reforger"), 
 				ModBlocks.reforger, 
@@ -242,36 +269,76 @@ public class ModCrafting {
 		}
 		
 		if (ModConfig.spectralSiltRecipesEnabled.getBoolean(true)) {
-			r.register(new ShapedOreRecipe(
-					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_balloon"),
-					ModItems.balloon, new String[] {
-					"sws",
-					"wsw",
-					"sws"},
-					's', ModItems.spectralSilt,
-					'w', "blockWool")
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_balloon")));
-			if (ingotCobalt) {
+			if (runeAir) {
 				r.register(new ShapedOreRecipe(
-						new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt"),
-						ModItems.shieldCobalt, new String[] {
-						"sis",
-						"iSi",
-						"sis"},
+						new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_balloon"),
+						ModItems.balloon, new String[] {
+						"sws",
+						"wRw",
+						"sws"},
 						's', ModItems.spectralSilt,
-						'S', Items.SHIELD,
-						'i', "ingotIron")
-						.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt")));
+						'w', "blockWool",
+						'R', "runeAirB")
+						.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_balloon")));
 			} else {
 				r.register(new ShapedOreRecipe(
-						new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt"),
-						ModItems.shieldCobalt, new String[] {
-						"sss",
-						"sSs",
-						"sss"},
+						new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_balloon"),
+						ModItems.balloon, new String[] {
+						"sws",
+						"wsw",
+						"sws"},
 						's', ModItems.spectralSilt,
-						'S', Items.SHIELD)
-						.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt")));
+						'w', "blockWool")
+						.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_balloon")));
+			}
+			if (ingotCobalt) {
+				if (runeEarth) {
+					r.register(new ShapedOreRecipe(
+							new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt"),
+							ModItems.shieldCobalt, new String[] {
+							"sis",
+							"iSi",
+							"sRs"},
+							's', ModItems.spectralSilt,
+							'S', Items.SHIELD,
+							'i', "ingotCobalt",
+							'R', "runeEarthB")
+							.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt")));
+				} else {
+					r.register(new ShapedOreRecipe(
+							new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt"),
+							ModItems.shieldCobalt, new String[] {
+							"sis",
+							"iSi",
+							"sis"},
+							's', ModItems.spectralSilt,
+							'S', Items.SHIELD,
+							'i', "ingotCobalt")
+							.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt")));
+				}
+			} else {
+				if (runeEarth) {
+					r.register(new ShapedOreRecipe(
+							new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt"),
+							ModItems.shieldCobalt, new String[] {
+							"sss",
+							"sSs",
+							"sRs"},
+							's', ModItems.spectralSilt,
+							'S', Items.SHIELD,
+							'R', "runeEarthB")
+							.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt")));
+				} else {
+					r.register(new ShapedOreRecipe(
+							new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt"),
+							ModItems.shieldCobalt, new String[] {
+							"sss",
+							"sSs",
+							"sss"},
+							's', ModItems.spectralSilt,
+							'S', Items.SHIELD)
+							.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_shieldCobalt")));
+				}
 			}
 			r.register(new ShapedOreRecipe(
 					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_magicMirror"),
@@ -283,15 +350,29 @@ public class ModCrafting {
 					'd', Items.DIAMOND,
 					'g', "blockGlass")
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_magicMirror")));
-			r.register(new ShapedOreRecipe(
-					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_luckyHorseshoe"),
-					ModItems.trinketLuckyHorseshoe, new String[] {
-					"gsg",
-					"gsg",
-					"sgs"},
-					's', ModItems.spectralSilt,
-					'g', "ingotGold")
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_luckyHorseshoe")));
+			if (runeEarth && runeAir) {
+				r.register(new ShapedOreRecipe(
+						new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_luckyHorseshoe"),
+						ModItems.trinketLuckyHorseshoe, new String[] {
+						"gsg",
+						"EsA",
+						"sgs"},
+						's', ModItems.spectralSilt,
+						'g', "ingotGold",
+						'E', "runeEarthB",
+						'A', "runeAirB")
+						.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_luckyHorseshoe")));
+			} else {
+				r.register(new ShapedOreRecipe(
+						new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_luckyHorseshoe"),
+						ModItems.trinketLuckyHorseshoe, new String[] {
+						"gsg",
+						"gsg",
+						"sgs"},
+						's', ModItems.spectralSilt,
+						'g', "ingotGold")
+						.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_luckyHorseshoe")));
+			}
 			//TODO broken heart
 			r.register(new ShapedOreRecipe(
 					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_magicLenses"),
@@ -347,9 +428,9 @@ public class ModCrafting {
 					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_disintegrationTablet"),
 					ModItems.disintegrationTablet, new String[] {
 					"qbq",
-					"bSb",
+					"brb",
 					"qbq"},
-					'S', "stone",
+					'r', Items.REDSTONE,
 					'b', Items.BLAZE_POWDER,
 					'q', Items.QUARTZ)
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_disintegrationTablet")));

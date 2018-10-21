@@ -66,18 +66,18 @@ public class ModItems {
 	public static Item spectralSilt = null;
 	public static Item umbrella = null;
 	public static Item flareGun = null;
-	public static Item flareWhite = null;
-	public static Item flareOrange = null;
-	public static Item flareMagenta = null;
-	public static Item flareLightBlue = null;
-	public static Item flareYellow = null;
-	public static Item flareLime = null;
-	public static Item flarePink = null;
-	public static Item flareCyan = null;
-	public static Item flarePurple = null;
-	public static Item flareBlue = null;
-	public static Item flareBrown = null;
-	public static Item flareGreen = null;
+//	public static Item flareWhite = null;
+//	public static Item flareOrange = null;
+//	public static Item flareMagenta = null;
+//	public static Item flareLightBlue = null;
+//	public static Item flareYellow = null;
+//	public static Item flareLime = null;
+//	public static Item flarePink = null;
+//	public static Item flareCyan = null;
+//	public static Item flarePurple = null;
+//	public static Item flareBlue = null;
+//	public static Item flareBrown = null;
+//	public static Item flareGreen = null;
 	public static Item flareRed = null;
 	// NOTE: These need to be initialized on construction because entities are
 	// loaded first, and the entities for these
@@ -232,22 +232,21 @@ public class ModItems {
 
 		BountifulBaubles.registryHelper.addItem(flareGun = new ItemFlareGun());
 
-		BountifulBaubles.registryHelper.addItem(flareWhite = new ItemFlare(EnumDyeColor.WHITE));
-		BountifulBaubles.registryHelper.addItem(flareOrange = new ItemFlare(EnumDyeColor.ORANGE));
-		BountifulBaubles.registryHelper.addItem(flareMagenta = new ItemFlare(EnumDyeColor.MAGENTA));
-		BountifulBaubles.registryHelper
-				.addItem(flareLightBlue = new ItemFlare(EnumDyeColor.LIGHT_BLUE));
-		BountifulBaubles.registryHelper.addItem(flareYellow = new ItemFlare(EnumDyeColor.YELLOW));
-		BountifulBaubles.registryHelper.addItem(flareLime = new ItemFlare(EnumDyeColor.LIME));
-		BountifulBaubles.registryHelper.addItem(flarePink = new ItemFlare(EnumDyeColor.PINK));
-		BountifulBaubles.registryHelper.addItem(flareCyan = new ItemFlare(EnumDyeColor.CYAN));
-		BountifulBaubles.registryHelper.addItem(flarePurple = new ItemFlare(EnumDyeColor.PURPLE));
-		BountifulBaubles.registryHelper.addItem(flareBlue = new ItemFlare(EnumDyeColor.BLUE));
-		BountifulBaubles.registryHelper.addItem(flareBrown = new ItemFlare(EnumDyeColor.BROWN));
-		BountifulBaubles.registryHelper.addItem(flareGreen = new ItemFlare(EnumDyeColor.GREEN));
+//		BountifulBaubles.registryHelper.addItem(flareWhite = new ItemFlare(EnumDyeColor.WHITE));
+//		BountifulBaubles.registryHelper.addItem(flareOrange = new ItemFlare(EnumDyeColor.ORANGE));
+//		BountifulBaubles.registryHelper.addItem(flareMagenta = new ItemFlare(EnumDyeColor.MAGENTA));
+//		BountifulBaubles.registryHelper
+//				.addItem(flareLightBlue = new ItemFlare(EnumDyeColor.LIGHT_BLUE));
+//		BountifulBaubles.registryHelper.addItem(flareYellow = new ItemFlare(EnumDyeColor.YELLOW));
+//		BountifulBaubles.registryHelper.addItem(flareLime = new ItemFlare(EnumDyeColor.LIME));
+//		BountifulBaubles.registryHelper.addItem(flarePink = new ItemFlare(EnumDyeColor.PINK));
+//		BountifulBaubles.registryHelper.addItem(flareCyan = new ItemFlare(EnumDyeColor.CYAN));
+//		BountifulBaubles.registryHelper.addItem(flarePurple = new ItemFlare(EnumDyeColor.PURPLE));
+//		BountifulBaubles.registryHelper.addItem(flareBlue = new ItemFlare(EnumDyeColor.BLUE));
+//		BountifulBaubles.registryHelper.addItem(flareBrown = new ItemFlare(EnumDyeColor.BROWN));
+//		BountifulBaubles.registryHelper.addItem(flareGreen = new ItemFlare(EnumDyeColor.GREEN));
 		BountifulBaubles.registryHelper.addItem(flareRed = new ItemFlare(EnumDyeColor.RED));
 		// NOTE: These need to be initialized on
-
 		// Adding throwable items
 		BountifulBaubles.registryHelper.addItem(grenade);
 		BountifulBaubles.registryHelper.addItem(beenade);
