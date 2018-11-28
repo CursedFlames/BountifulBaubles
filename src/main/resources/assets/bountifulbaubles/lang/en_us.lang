@@ -67,6 +67,7 @@ item.bountifulbaubles.trinketBalloon.name=Balloon
 item.bountifulbaubles.trinketBalloon.tooltip.0=§9Increases jump height and negates some fall damage.
 item.bountifulbaubles.charmHermesWings.name=Hermes' Wings
 item.bountifulbaubles.charmHermesWings.tooltip.0=§9Gives +20% speed
+item.bountifulbaubles.charmHermesWings.tooltip.1=§dDeprecated, will probably be removed at some point maybe
 item.bountifulbaubles.shieldCobalt.name=Cobalt Shield
 item.bountifulbaubles.shieldCobalt.tooltip.0=§9Grants immunity to knockback when held or equipped in bauble slot.
 item.bountifulbaubles.shieldCobalt.tooltip.1=Also functions as a regular shield.

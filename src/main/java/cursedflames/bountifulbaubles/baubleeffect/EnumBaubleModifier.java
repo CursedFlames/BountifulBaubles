@@ -2,9 +2,11 @@ package cursedflames.bountifulbaubles.baubleeffect;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Set;
 
 import baubles.api.cap.BaublesCapabilities;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -39,6 +41,14 @@ public enum EnumBaubleModifier {
 	public final double amount;
 	public final int operation;
 	public final int weight;
+	public static final Set<IAttribute> attributes = new HashSet<>();
+
+	static {
+		for (EnumBaubleModifier mod : EnumBaubleModifier.values()) {
+			if (mod.attribute!=null)
+				attributes.add(mod.attribute);
+		}
+	}
 
 	EnumBaubleModifier(String name, IAttribute attribute, double amount, int operation,
 			int weight) {

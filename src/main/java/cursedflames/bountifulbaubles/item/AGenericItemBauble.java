@@ -1,7 +1,6 @@
 package cursedflames.bountifulbaubles.item;
 
 import baubles.api.IBauble;
-import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -45,11 +44,11 @@ public abstract class AGenericItemBauble extends GenericItemBB implements IBaubl
 
 	@Override
 	public void onEquipped(ItemStack stack, EntityLivingBase player) {
-		BaubleAttributeModifierHandler.baubleModified(stack, player, true);
+//		BaubleAttributeModifierHandler.baubleModified(stack, player, true);
 	}
 
 	@Override
 	public void onUnequipped(ItemStack stack, EntityLivingBase player) {
-		BaubleAttributeModifierHandler.baubleModified(stack, player, false);
+//		BaubleAttributeModifierHandler.baubleModified(stack, player, false);
 	}
 }

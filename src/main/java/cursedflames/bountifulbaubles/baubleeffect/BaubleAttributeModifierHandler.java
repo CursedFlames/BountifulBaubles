@@ -34,7 +34,7 @@ public class BaubleAttributeModifierHandler {
 	public static void baubleModified(ItemStack stack, EntityLivingBase entity, boolean equip) {
 		if (stack.isEmpty()||!(entity instanceof EntityPlayer))
 			return;
-		BountifulBaubles.logger.info("bauble modified");
+//		BountifulBaubles.logger.info("bauble "+(equip ? "added" : "removed"));
 		IItemAttributeModifier item = null;
 		EntityPlayer player = (EntityPlayer) entity;
 		Map<IAttribute, AttributeModifier> itemMods = null;
@@ -43,7 +43,7 @@ public class BaubleAttributeModifierHandler {
 			EnumBaubleModifier.generateModifier(stack);
 		EnumBaubleModifier mod = EnumBaubleModifier
 				.get(stack.getTagCompound().getString("baubleModifier"));
-		BountifulBaubles.logger.info(mod);
+//		BountifulBaubles.logger.info(mod);
 		boolean modifier = stack.getItem() instanceof IItemAttributeModifier;
 		if (modifier) {
 			item = (IItemAttributeModifier) stack.getItem();
@@ -135,6 +135,20 @@ public class BaubleAttributeModifierHandler {
 
 	public static void removeModifier(EntityPlayer player, EnumBaubleModifier mod, int slot) {
 		player.getEntityAttribute(mod.attribute).removeModifier(UUIDs.get(slot));
+	}
+
+	public static void removeAllSlotModifiers(EntityPlayer player, int slot) {
+		for (IAttribute attribute : EnumBaubleModifier.attributes) {
+			player.getEntityAttribute(attribute).removeModifier(UUIDs.get(slot));
+		}
+	}
+
+	public static void removeAllModifiers(EntityPlayer player) {
+		for (int slot = 0; slot<7; slot++) {
+			for (IAttribute attribute : EnumBaubleModifier.attributes) {
+				player.getEntityAttribute(attribute).removeModifier(UUIDs.get(slot));
+			}
+		}
 	}
 
 	public static void addModifier(EntityPlayer player, EnumBaubleModifier mod, int slot) {
