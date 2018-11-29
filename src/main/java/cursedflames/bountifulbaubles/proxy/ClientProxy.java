@@ -3,10 +3,18 @@ package cursedflames.bountifulbaubles.proxy;
 import cursedflames.bountifulbaubles.client.model.ModelCrownGold;
 import cursedflames.bountifulbaubles.client.model.ModelSunglasses;
 import cursedflames.bountifulbaubles.client.particle.ParticleGradient;
+import cursedflames.bountifulbaubles.client.render.RenderFlare;
+import cursedflames.bountifulbaubles.entity.EntityFlare;
+import cursedflames.bountifulbaubles.entity.ThrowableAdvancedRenderFactory;
+import cursedflames.bountifulbaubles.entity.ThrowableDefaultRenderFactory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy implements ISideProxy {
 	@Override
@@ -54,5 +62,23 @@ public class ClientProxy implements ISideProxy {
 		else if (modelName.equals("sunglasses2"))
 			return modelSunglasses2;
 		return null;
+	}
+
+	@Override
+	public <T extends Entity> void registerWithRenderer(String name, Class<T> c, Item i, int id) {
+		RenderingRegistry.registerEntityRenderingHandler(c,
+				new ThrowableDefaultRenderFactory<T>(i));
+	}
+
+	@Override
+	public <T extends Entity> void registerWithRenderer(String name, Class<T> c,
+			ResourceLocation texture, int id) {
+		RenderingRegistry.registerEntityRenderingHandler(c,
+				new ThrowableAdvancedRenderFactory<T>(texture));
+	}
+
+	@Override
+	public void registerEntityRenderingHandlers() {
+		RenderingRegistry.registerEntityRenderingHandler(EntityFlare.class, RenderFlare::new);
 	}
 }

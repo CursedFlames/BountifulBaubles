@@ -1,12 +1,10 @@
 package cursedflames.bountifulbaubles.entity;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.bountifulbaubles.client.render.RenderFlare;
 import cursedflames.bountifulbaubles.item.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class ModEntities {
@@ -20,15 +18,13 @@ public class ModEntities {
 	public static <T extends Entity> void registerWithRenderer(String name, Class<T> c, Item i,
 			int id) {
 		register(name, c, id);
-		RenderingRegistry.registerEntityRenderingHandler(c,
-				new ThrowableDefaultRenderFactory<T>(i));
+		BountifulBaubles.proxy.registerWithRenderer(name, c, i, id);
 	}
 
 	public static <T extends Entity> void registerWithRenderer(String name, Class<T> c,
 			ResourceLocation texture, int id) {
 		register(name, c, id);
-		RenderingRegistry.registerEntityRenderingHandler(c,
-				new ThrowableAdvancedRenderFactory<T>(texture));
+		BountifulBaubles.proxy.registerWithRenderer(name, c, texture, id);
 	}
 
 	public static void registerEntities() {
@@ -41,6 +37,6 @@ public class ModEntities {
 		register("flare", EntityFlare.class, id++);
 //		EntityRegistry.registerModEntity(new ResourceLocation(BountifulBaubles.MODID, "flare"),
 //				EntityFlare.class, "flare", id++, BountifulBaubles.instance, 128, 3, true);
-		RenderingRegistry.registerEntityRenderingHandler(EntityFlare.class, RenderFlare::new);
+		BountifulBaubles.proxy.registerEntityRenderingHandlers();
 	}
 }
