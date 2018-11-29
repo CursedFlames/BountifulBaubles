@@ -39,7 +39,8 @@ public class BaubleAttributeModifierHandler {
 		EntityPlayer player = (EntityPlayer) entity;
 		Map<IAttribute, AttributeModifier> itemMods = null;
 		IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
-		if (!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier"))
+		if (!stack.hasTagCompound()
+				||!stack.getTagCompound().hasKey("baubleModifier")&&!player.world.isRemote)
 			EnumBaubleModifier.generateModifier(stack);
 		EnumBaubleModifier mod = EnumBaubleModifier
 				.get(stack.getTagCompound().getString("baubleModifier"));
@@ -105,7 +106,8 @@ public class BaubleAttributeModifierHandler {
 	public static void onPlayerCraft(PlayerEvent.ItemCraftedEvent event) {
 		ItemStack stack = event.crafting;
 		if (stack!=null&&!stack.isEmpty()
-				&&stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null)) {
+				&&stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null)
+				&&!event.player.world.isRemote) {
 			EnumBaubleModifier.generateModifier(stack);
 		}
 	}
