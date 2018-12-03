@@ -3,17 +3,16 @@ package cursedflames.bountifulbaubles.entity;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.lib.Util;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -24,16 +23,17 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntityFlare extends Entity implements IProjectile {
+public class EntityFlare extends EntityArrow {
 	protected boolean inGround;
 	protected BlockPos tilePos;
 	protected Block inTile;
 	protected double tileX;
 	protected double tileY;
 	protected double tileZ;
+	protected int xTile;
+	protected int yTile;
+	protected int zTile;
 	protected int ticksInGround = 0;
-	/** The entity that threw this projectile */
-	protected EntityLivingBase thrower;
 //	protected String throwerName;
 
 	public EntityFlare(World world) {
@@ -48,7 +48,7 @@ public class EntityFlare extends Entity implements IProjectile {
 	public EntityFlare(World world, EntityLivingBase thrower) {
 		this(world, thrower.posX, thrower.posY+(double) thrower.getEyeHeight()-0.10000000149011612D,
 				thrower.posZ);
-		this.thrower = thrower;
+		this.shootingEntity = thrower;
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class EntityFlare extends Entity implements IProjectile {
 	 */
 	public void shoot(EntityLivingBase entityThrower, float rotationPitchIn, float rotationYawIn,
 			float pitchOffset, float velocity, float inaccuracy) {
-		this.thrower = entityThrower;
+		this.shootingEntity = entityThrower;
 		float f = -MathHelper.sin(rotationYawIn*0.017453292F)
 				*MathHelper.cos(rotationPitchIn*0.017453292F);
 		float f1 = -MathHelper.sin((rotationPitchIn+pitchOffset)*0.017453292F);
@@ -97,10 +97,11 @@ public class EntityFlare extends Entity implements IProjectile {
 
 	@Override
 	protected void entityInit() {
+		super.entityInit();
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound) {
+	public void readEntityFromNBT(NBTTagCompound compound) {
 //		BountifulBaubles.logger.info("reading from nbt "+compound.toString());
 		this.inGround = compound.getBoolean("inGround");
 		if (compound.hasKey("tilePos")) {
@@ -112,12 +113,12 @@ public class EntityFlare extends Entity implements IProjectile {
 		}
 		if (compound.hasUniqueId("thrower")) {
 			UUID thrower = compound.getUniqueId("thrower");
-			this.thrower = this.world.getPlayerEntityByUUID(thrower);
+			this.shootingEntity = this.world.getPlayerEntityByUUID(thrower);
 		}
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound) {
+	public void writeEntityToNBT(NBTTagCompound compound) {
 		compound.setBoolean("inGround", this.inGround);
 		if (this.tilePos!=null) {
 			NBTTagCompound pos = Util.blockPosToNBT(this.tilePos);
@@ -125,8 +126,8 @@ public class EntityFlare extends Entity implements IProjectile {
 		}
 		ResourceLocation resourcelocation = Block.REGISTRY.getNameForObject(this.inTile);
 		compound.setString("inTile", resourcelocation==null ? "" : resourcelocation.toString());
-		if (this.thrower!=null) {
-			compound.setUniqueId("thrower", this.thrower.getUniqueID());
+		if (this.shootingEntity!=null) {
+			compound.setUniqueId("thrower", this.shootingEntity.getUniqueID());
 		}
 	}
 
@@ -165,7 +166,17 @@ public class EntityFlare extends Entity implements IProjectile {
 	@Override
 	public void onUpdate() {
 		// Copied from EntityThrowable
-		super.onUpdate();
+		super.onEntityUpdate();
+
+		if (this.prevRotationPitch==0.0F&&this.prevRotationYaw==0.0F) {
+			float f = MathHelper.sqrt(this.motionX*this.motionX+this.motionZ*this.motionZ);
+			this.rotationYaw = (float) (MathHelper.atan2(this.motionX, this.motionZ)
+					*(180D/Math.PI));
+			this.rotationPitch = (float) (MathHelper.atan2(this.motionY, (double) f)
+					*(180D/Math.PI));
+			this.prevRotationYaw = this.rotationYaw;
+			this.prevRotationPitch = this.rotationPitch;
+		}
 
 		// not sure what this is for
 //		if (this.throwableShake>0) {
@@ -185,7 +196,7 @@ public class EntityFlare extends Entity implements IProjectile {
 //			BountifulBaubles.logger.info("entity tick");
 //		}
 
-		if (this.inGround) {
+		if (this.inGround&&tilePos!=null) {
 			if (this.world.getBlockState(tilePos).getBlock()==this.inTile) {
 				++this.ticksInGround;
 //
@@ -193,11 +204,11 @@ public class EntityFlare extends Entity implements IProjectile {
 //					this.setDead();
 //				}
 
-				if (this.posX!=this.tileX||this.posY!=this.tileY||this.posZ!=this.tileZ) {
-					this.posX = this.tileX;
-					this.posY = this.tileY;
-					this.posZ = this.tileZ;
-				}
+//				if (this.posX!=this.tileX||this.posY!=this.tileY||this.posZ!=this.tileZ) {
+//					this.posX = this.tileX;
+//					this.posY = this.tileY;
+//					this.posZ = this.tileZ;
+//				}
 
 				return;
 			}
@@ -233,7 +244,7 @@ public class EntityFlare extends Entity implements IProjectile {
 
 		for (Entity entity1 : list) {
 			if (entity1.canBeCollidedWith()) {
-				if (entity1!=this.thrower||this.ticksExisted>=5) {
+				if (entity1!=this.shootingEntity||this.ticksExisted>=5) {
 					AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox()
 							.grow(0.30000001192092896D);
 					RayTraceResult raytraceresult1 = axisalignedbb.calculateIntercept(vec3d,
@@ -261,7 +272,7 @@ public class EntityFlare extends Entity implements IProjectile {
 				this.setPortal(raytraceresult.getBlockPos());
 			} else if (!net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this,
 					raytraceresult)) {
-				this.onImpact(raytraceresult);
+				this.onHit(raytraceresult);
 			}
 		}
 
@@ -271,25 +282,25 @@ public class EntityFlare extends Entity implements IProjectile {
 		float f = MathHelper.sqrt(this.motionX*this.motionX+this.motionZ*this.motionZ);
 		this.rotationYaw = (float) (MathHelper.atan2(this.motionX, this.motionZ)*(180D/Math.PI));
 		this.rotationPitch = (float) (MathHelper.atan2(this.motionY, (double) f)*(180D/Math.PI));
-		while ((this.rotationPitch = this.prevRotationPitch)<-180.0F) {
-			this.prevRotationPitch -= 360.0F;
-		}
+//		while ((this.rotationPitch = this.prevRotationPitch)<-180.0F) {
+//			this.prevRotationPitch -= 360.0F;
+//		}
+//
+//		while (this.rotationPitch-this.prevRotationPitch>=180.0F) {
+//			this.prevRotationPitch += 360.0F;
+//		}
+//
+//		while (this.rotationYaw-this.prevRotationYaw<-180.0F) {
+//			this.prevRotationYaw -= 360.0F;
+//		}
+//
+//		while (this.rotationYaw-this.prevRotationYaw>=180.0F) {
+//			this.prevRotationYaw += 360.0F;
+//		}
 
-		while (this.rotationPitch-this.prevRotationPitch>=180.0F) {
-			this.prevRotationPitch += 360.0F;
-		}
-
-		while (this.rotationYaw-this.prevRotationYaw<-180.0F) {
-			this.prevRotationYaw -= 360.0F;
-		}
-
-		while (this.rotationYaw-this.prevRotationYaw>=180.0F) {
-			this.prevRotationYaw += 360.0F;
-		}
-
-		this.rotationPitch = this.prevRotationPitch
-				+(this.rotationPitch-this.prevRotationPitch)*0.2F;
-		this.rotationYaw = this.prevRotationYaw+(this.rotationYaw-this.prevRotationYaw)*0.2F;
+//		this.rotationPitch = this.prevRotationPitch
+//				+(this.rotationPitch-this.prevRotationPitch)*0.2F;
+//		this.rotationYaw = this.prevRotationYaw+(this.rotationYaw-this.prevRotationYaw)*0.2F;
 		double velMultiplier = 0.995;
 		float gravity = this.getGravityVelocity();
 
@@ -318,27 +329,125 @@ public class EntityFlare extends Entity implements IProjectile {
 		}
 	}
 
-	@ParametersAreNonnullByDefault
-	protected void onImpact(RayTraceResult result) {
-		// TODO make endermen teleport away?
-		if (result.typeOfHit==RayTraceResult.Type.ENTITY&&result.entityHit!=thrower
-				&&!(result.entityHit instanceof EntityPlayerSP)) {
-//			BountifulBaubles.logger.info(thrower+"     "+result.entityHit);
-			// TODO stick to entity
-		}
-		if (result.typeOfHit==RayTraceResult.Type.BLOCK) {
-			IBlockState state = world.getBlockState(result.getBlockPos());
-			if (!state.getMaterial().blocksMovement())
-				return;
-			BountifulBaubles.logger.info("collided with block");
-			BountifulBaubles.logger.info(state.getBlock().getUnlocalizedName());
-			BountifulBaubles.logger.info(result.getBlockPos().toString());
+	@Override
+	protected void onHit(RayTraceResult raytraceResultIn) {
+		Entity entity = raytraceResultIn.entityHit;
+
+		if (entity!=null) {
+//            float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+//            int i = MathHelper.ceil((double)f * this.damage);
+//
+//            if (this.getIsCritical())
+//            {
+//                i += this.rand.nextInt(i / 2 + 2);
+//            }
+//
+//            DamageSource damagesource;
+//
+//            if (this.shootingEntity == null)
+//            {
+//                damagesource = DamageSource.causeArrowDamage(this, this);
+//            }
+//            else
+//            {
+//                damagesource = DamageSource.causeArrowDamage(this, this.shootingEntity);
+//            }
+//
+//            if (this.isBurning() && !(entity instanceof EntityEnderman))
+//            {
+//                entity.setFire(5);
+//            }
+//
+//            if (entity.attackEntityFrom(damagesource, (float)i))
+//            {
+			if (entity instanceof EntityLivingBase) {
+				EntityLivingBase entitylivingbase = (EntityLivingBase) entity;
+
+				if (!this.world.isRemote) {
+					entitylivingbase
+							.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity()+1);
+				}
+//
+//                    if (this.knockbackStrength > 0)
+//                    {
+//                        float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+//
+//                        if (f1 > 0.0F)
+//                        {
+//                            entitylivingbase.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1);
+//                        }
+//                    }
+//
+//                    if (this.shootingEntity instanceof EntityLivingBase)
+//                    {
+//                        EnchantmentHelper.applyThornEnchantments(entitylivingbase, this.shootingEntity);
+//                        EnchantmentHelper.applyArthropodEnchantments((EntityLivingBase)this.shootingEntity, entitylivingbase);
+//                    }
+//
+//                    this.arrowHit(entitylivingbase);
+//
+//                    if (this.shootingEntity != null && entitylivingbase != this.shootingEntity && entitylivingbase instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP)
+//                    {
+//                        ((EntityPlayerMP)this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
+//                    }
+			}
+//
+//                this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+//
+//                if (!(entity instanceof EntityEnderman))
+//                {
+//                    this.setDead();
+//                }
+//            }
+//            else
+//            {
+//                this.motionX *= -0.10000000149011612D;
+//                this.motionY *= -0.10000000149011612D;
+//                this.motionZ *= -0.10000000149011612D;
+//                this.rotationYaw += 180.0F;
+//                this.prevRotationYaw += 180.0F;
+//                this.ticksInAir = 0;
+//
+//                if (!this.world.isRemote && this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ < 0.0010000000474974513D)
+//                {
+////                    if (this.pickupStatus == EntityArrow.PickupStatus.ALLOWED)
+////                    {
+////                        this.entityDropItem(this.getArrowStack(), 0.1F);
+////                    }
+//
+//                    this.setDead();
+//                }
+//            }
+		} else {
+			BlockPos blockpos = raytraceResultIn.getBlockPos();
+			this.tilePos = blockpos;
+//			this.xTile = blockpos.getX();
+//			this.yTile = blockpos.getY();
+//			this.zTile = blockpos.getZ();
+			IBlockState iblockstate = this.world.getBlockState(blockpos);
+			this.inTile = iblockstate.getBlock();
+//            this.inData = this.inTile.getMetaFromState(iblockstate);
+			this.motionX = (double) ((float) (raytraceResultIn.hitVec.x-this.posX));
+			this.motionY = (double) ((float) (raytraceResultIn.hitVec.y-this.posY));
+			this.motionZ = (double) ((float) (raytraceResultIn.hitVec.z-this.posZ));
+			float f2 = MathHelper.sqrt(
+					this.motionX*this.motionX+this.motionY*this.motionY+this.motionZ*this.motionZ);
+			this.posX -= this.motionX/(double) f2*0.05000000074505806D;
+			this.posY -= this.motionY/(double) f2*0.05000000074505806D;
+			this.posZ -= this.motionZ/(double) f2*0.05000000074505806D;
+//            this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
 			this.inGround = true;
-			this.inTile = state.getBlock();
-			this.tilePos = result.getBlockPos();
-			this.tileX = posX+motionX;
-			this.tileY = posY+motionY;
-			this.tileZ = posZ+motionZ;
+//            this.arrowShake = 7;
+//            this.setIsCritical(false);
+
+			if (iblockstate.getMaterial()!=Material.AIR) {
+				this.inTile.onEntityCollidedWithBlock(this.world, blockpos, iblockstate, this);
+			}
 		}
+	}
+
+	@Override
+	protected ItemStack getArrowStack() {
+		return ItemStack.EMPTY;
 	}
 }
