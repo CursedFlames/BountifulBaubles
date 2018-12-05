@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.lib.Util;
+import elucent.albedo.lighting.ILightProvider;
+import elucent.albedo.lighting.Light;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -22,8 +24,15 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityFlare extends EntityArrow {
+//TODO backup lighting method if Albedo not available?
+//TODO use custom particles instead
+//TODO allow arbitrary R,G,B instead of specific color items?
+@Optional.Interface(modid = "Albedo", iface = "elucent.albedo.lighting.ILightProvider")
+public class EntityFlare extends EntityArrow implements ILightProvider {
 	protected boolean inGround;
 	protected BlockPos tilePos;
 	protected Block inTile;
@@ -176,6 +185,16 @@ public class EntityFlare extends EntityArrow {
 					*(180D/Math.PI));
 			this.prevRotationYaw = this.rotationYaw;
 			this.prevRotationPitch = this.rotationPitch;
+		}
+
+		int particleRate = this.inGround ? 6 : 2;
+
+		if (this.world.isRemote&&(this.world.getTotalWorldTime()%particleRate)==1) {
+			Vec3d vel = new Vec3d(0, 0, -1).rotatePitch((float) (this.rotationPitch*(Math.PI/180D)))
+					.rotateYaw((float) (this.rotationYaw*(Math.PI/180D)));
+			this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX+vel.x*0.3,
+					this.posY+vel.y*0.3, this.posZ+vel.z*0.3, vel.x*0.055, vel.y*0.055,
+					vel.z*0.055);
 		}
 
 		// not sure what this is for
@@ -449,5 +468,11 @@ public class EntityFlare extends EntityArrow {
 	@Override
 	protected ItemStack getArrowStack() {
 		return ItemStack.EMPTY;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public Light provideLight() {
+		return Light.builder().pos(this).color(0.7F, 0.21F, 0.21F).radius(20).build();
 	}
 }
