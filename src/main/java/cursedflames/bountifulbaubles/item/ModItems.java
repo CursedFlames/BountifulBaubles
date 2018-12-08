@@ -4,15 +4,12 @@ import java.util.Arrays;
 
 import baubles.api.BaubleType;
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.bountifulbaubles.item.armor.ItemArmorBB;
 import cursedflames.bountifulbaubles.item.throwable.ItemBeenade;
 import cursedflames.bountifulbaubles.item.throwable.ItemGrenade;
 import cursedflames.bountifulbaubles.recipe.AnvilRecipes;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
@@ -100,7 +97,7 @@ public class ModItems {
 
 		// TODO add item rarities?
 		BountifulBaubles.registryHelper.addItem(balloon = new ItemTrinketBalloon());
-		BountifulBaubles.registryHelper.addItem(charmHermesWings = new ItemCharmHermesWings());
+//		BountifulBaubles.registryHelper.addItem(charmHermesWings = new ItemCharmHermesWings());
 		BountifulBaubles.registryHelper
 				.addItem(shieldCobalt = new ItemShieldCobalt("shieldCobalt"));
 		BountifulBaubles.registryHelper
@@ -205,18 +202,19 @@ public class ModItems {
 						return BaubleType.TRINKET;
 					}
 				});
-		BountifulBaubles.registryHelper.addItem(
-				sinPendantEmpty = new GenericItemBB("amuletSinEmpty", BountifulBaubles.TAB));
+		BountifulBaubles.registryHelper
+				.addItem(sinPendantEmpty = new ItemAmuletSin("amuletSinEmpty", "amulet_sin_empty"));
 		BountifulBaubles.registryHelper.addItem(sinPendantGluttony = new ItemAmuletSinGluttony());
 		// TODO phantom ink doesn't work on gold crown?
 		// gold, but with durability between iron and diamond
-		ArmorMaterial crownGoldMat = EnumHelper.addArmorMaterial("crownGold",
-				BountifulBaubles.MODID+":crownGold", 25, new int[] { 0, 0, 0, 2 }, 25,
-				SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F);
-		crownGoldMat.setRepairItem(new ItemStack(Items.GOLD_INGOT));
-		BountifulBaubles.registryHelper.addItem(crownGold = new ItemArmorBB("crownGold",
-				"crownGold", crownGoldMat, EntityEquipmentSlot.HEAD, BountifulBaubles.TAB));
+//		ArmorMaterial crownGoldMat = EnumHelper.addArmorMaterial("crownGold",
+//				BountifulBaubles.MODID+":crownGold", 25, new int[] { 0, 0, 0, 2 }, 25,
+//				SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F);
+//		crownGoldMat.setRepairItem(new ItemStack(Items.GOLD_INGOT));
+//		BountifulBaubles.registryHelper.addItem(crownGold = new ItemArmorBB("crownGold",
+//				"crownGold", crownGoldMat, EntityEquipmentSlot.HEAD, BountifulBaubles.TAB));
 		BountifulBaubles.registryHelper.addItem(sinPendantPride = new ItemAmuletSinPride());
+		BountifulBaubles.registryHelper.addItem(sinPendantWrath = new ItemAmuletSinWrath());
 
 		BountifulBaubles.registryHelper.addItem(trinketBrokenHeart = new ItemTrinketBrokenHeart());
 

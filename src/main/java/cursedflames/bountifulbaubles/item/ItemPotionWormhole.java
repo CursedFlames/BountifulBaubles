@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -29,11 +30,16 @@ public class ItemPotionWormhole extends GenericItemBB {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player,
 			EnumHand hand) {
-		if (world.playerEntities.size()>-1) {
-			player.setActiveHand(hand);
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+		if (world.playerEntities.size()<2) {
+			player.sendStatusMessage(new TextComponentTranslation(
+					ModItems.potionWormhole.getUnlocalizedName()+".nootherplayers"), true);
+			return new ActionResult<ItemStack>(EnumActionResult.FAIL, player.getHeldItem(hand));
 		}
-		return super.onItemRightClick(world, player, hand);
+//		if (world.playerEntities.size()>-1) {
+		player.setActiveHand(hand);
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+//		}
+//		return super.onItemRightClick(world, player, hand);
 	}
 
 	@Override

@@ -3,13 +3,14 @@ package cursedflames.bountifulbaubles.item;
 import baubles.api.BaublesApi;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ItemAmuletSinGluttony extends ItemAmuletSin {
 	public ItemAmuletSinGluttony() {
-		super("amuletSinGluttony");
+		super("amuletSinGluttony", "amulet_sin_gluttony");
 	}
 
 	@SubscribeEvent
@@ -52,7 +53,13 @@ public class ItemAmuletSinGluttony extends ItemAmuletSin {
 				ItemStack stack = event.getItem();
 				EnumAction action = stack.getItem().getItemUseAction(stack);
 				if (action==EnumAction.EAT) {
-					addEffect(player, 1, 10*20, true);
+					float level = 0;
+					if (stack.getItem() instanceof ItemFood) {
+						ItemFood item = (ItemFood) stack.getItem();
+						level = item.getHealAmount(stack)/4;
+						level += item.getSaturationModifier(stack)/6;
+					}
+					addEffect(player, (int) Math.floor(level), 10*20, true);
 				}
 			}
 		}

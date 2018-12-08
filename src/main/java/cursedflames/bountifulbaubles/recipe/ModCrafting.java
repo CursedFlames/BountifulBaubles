@@ -200,7 +200,7 @@ public class ModCrafting {
 					"a",
 					"c"},
 					'r', "runePrideB",
-					'c', ModItems.crownGold,
+					'c', /*ModItems.crownGold*/Items.DIAMOND,
 					'a', ModItems.sinPendantEmpty)
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "amuletSinPride")));
 		} else {
@@ -209,9 +209,32 @@ public class ModCrafting {
 					ModItems.sinPendantPride, new String[] {
 					"a",
 					"c" },
-					'c', ModItems.crownGold,
+					'c', /*ModItems.crownGold*/Items.DIAMOND,
 					'a', ModItems.sinPendantEmpty)
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "amuletSinPride")));
+		}
+		if (runeWrath) {
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "amuletSinWrath"),
+					ModItems.sinPendantWrath, new String[] {
+					"r",
+					"a",
+					"h"},
+					'r', "runeWrathB",
+					'h', Items.SKULL,
+					'a', ModItems.sinPendantEmpty)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "amuletSinWrath")));
+		} else {
+			r.register(new ShapedOreRecipe(
+					new ResourceLocation(BountifulBaubles.MODID, "amuletSinWrath"),
+					ModItems.sinPendantWrath, new String[] {
+					" b ",
+					"bab",
+					" h " },
+					'h', Items.SKULL,
+					'b', Items.BONE,
+					'a', ModItems.sinPendantEmpty)
+					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "amuletSinWrath")));
 		}
 		
 		temp.setString("Potion", "minecraft:mundane");
@@ -266,6 +289,16 @@ public class ModCrafting {
 					'g', "blockGlass")
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "phantomPrism")));
 		}
+		r.register(new ShapedOreRecipe(
+				new ResourceLocation(BountifulBaubles.MODID, "flare_red"),
+				ModItems.flareRed, new String[] {
+				"i",
+				"g",
+				"G"},
+				'i', "ingotIron",
+				'g', Items.GUNPOWDER,
+				'G', Items.GLOWSTONE_DUST)
+				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "flare_red")));
 		}
 		
 		if (ModConfig.spectralSiltRecipesEnabled.getBoolean(true)) {
@@ -343,12 +376,13 @@ public class ModCrafting {
 			r.register(new ShapedOreRecipe(
 					new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_magicMirror"),
 					ModItems.magicMirror, new String[] {
-					"sgs",
+					"sps",
 					"gdg",
-					"sgs"},
+					"sps"},
 					's', ModItems.spectralSilt,
 					'd', Items.DIAMOND,
-					'g', "blockGlass")
+					'g', "blockGlass",
+					'p', ModItems.potionRecall)
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_magicMirror")));
 			if (runeEarth && runeAir) {
 				r.register(new ShapedOreRecipe(

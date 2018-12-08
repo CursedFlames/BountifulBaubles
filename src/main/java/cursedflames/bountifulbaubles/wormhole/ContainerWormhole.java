@@ -49,7 +49,7 @@ public class ContainerWormhole extends Container {
 
 		List<EntityPlayer> players = new ArrayList<>(player.world.playerEntities);
 		// can't teleport to yourself
-//		players.remove(player);
+		players.remove(player);
 
 		for (EntityPlayer entity : players) {
 			targets.add(new PlayerTarget(entity));

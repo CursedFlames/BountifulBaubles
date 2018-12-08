@@ -10,6 +10,7 @@ import cursedflames.bountifulbaubles.capability.CapabilityWormholePins;
 import cursedflames.bountifulbaubles.entity.ModEntities;
 import cursedflames.bountifulbaubles.event.EventHandler;
 import cursedflames.bountifulbaubles.item.ItemAmuletSinGluttony;
+import cursedflames.bountifulbaubles.item.ItemAmuletSinWrath;
 import cursedflames.bountifulbaubles.item.ItemShieldCobalt;
 import cursedflames.bountifulbaubles.item.ItemTrinketBrokenHeart;
 import cursedflames.bountifulbaubles.item.ModItems;
@@ -81,6 +82,9 @@ public class BountifulBaubles {
 
 	@Mod.EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
+		isBotaniaLoaded = Loader.isModLoaded("botania");
+		isQuarkLoaded = Loader.isModLoaded("quark");
+
 		logger = event.getModLog();
 		config = new Config(MODID, "1", logger);
 		config.preInit(event);
@@ -96,6 +100,7 @@ public class BountifulBaubles {
 
 		MinecraftForge.EVENT_BUS.register(ItemShieldCobalt.class);
 		MinecraftForge.EVENT_BUS.register(ItemAmuletSinGluttony.class);
+		MinecraftForge.EVENT_BUS.register(ItemAmuletSinWrath.class);
 		MinecraftForge.EVENT_BUS.register(ItemTrinketBrokenHeart.class);
 
 		CapabilityWormholePins.registerCapability();
@@ -138,7 +143,7 @@ public class BountifulBaubles {
 	public static void postInit(FMLPostInitializationEvent event) {
 		config.postInit(event);
 		logger.info(Config.modConfigs.get(MODID)==null);
-		isQuarkLoaded = Loader.isModLoaded("quark");
-		isBotaniaLoaded = Loader.isModLoaded("botania");
+//		isQuarkLoaded = Loader.isModLoaded("quark");
+//		isBotaniaLoaded = Loader.isModLoaded("botania");
 	}
 }

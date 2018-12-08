@@ -49,8 +49,15 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 			}
 		}
 		if (!world.isRemote&&count==16&&sneaking) {
-			player.openGui(BountifulBaubles.instance, ItemPotionWormhole.GUI_ID, world,
-					(int) player.posX, (int) player.posY, (int) player.posZ);
+			if (world.playerEntities.size()<2) {
+				player.sendStatusMessage(
+						new TextComponentTranslation(
+								ModItems.potionWormhole.getUnlocalizedName()+".nootherplayers"),
+						true);
+			} else {
+				player.openGui(BountifulBaubles.instance, ItemPotionWormhole.GUI_ID, world,
+						(int) player.posX, (int) player.posY, (int) player.posZ);
+			}
 		}
 	}
 

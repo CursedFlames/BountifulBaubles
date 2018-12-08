@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 
 public class ItemAmuletSinPride extends ItemAmuletSin {
 	public ItemAmuletSinPride() {
-		super("amuletSinPride");
+		super("amuletSinPride", "amulet_sin_pride");
 	}
 
 	@Override

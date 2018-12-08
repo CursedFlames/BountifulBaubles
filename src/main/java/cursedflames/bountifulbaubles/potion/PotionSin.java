@@ -21,10 +21,11 @@ public class PotionSin extends Potion {
 		super(false, 0x101317);
 		setRegistryName(BountifulBaubles.MODID, "sinful");
 		setPotionName(BountifulBaubles.MODID+".effect.sinful");
-		registerPotionAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE, UUID_DAMAGE, 3, 2);
+		registerPotionAttributeModifier(SharedMonsterAttributes.ATTACK_DAMAGE, UUID_DAMAGE, 0.25D,
+				1);
 		registerPotionAttributeModifier(SharedMonsterAttributes.ARMOR, UUID_ARMOR, 3, 0);
 		registerPotionAttributeModifier(SharedMonsterAttributes.ARMOR_TOUGHNESS,
-				UUID_ARMOR_TOUGHNESS, 1.5, 0);
+				UUID_ARMOR_TOUGHNESS, 1, 0);
 	}
 
 //	@Override
