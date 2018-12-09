@@ -4,6 +4,7 @@ import baubles.api.BaubleType;
 import baubles.api.render.IRenderBauble;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.potion.ModPotions;
+import cursedflames.bountifulbaubles.util.ItemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,8 +14,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.botania.api.item.IPhantomInkable;
 
-public class ItemAmuletSin extends AGenericItemBauble implements IRenderBauble {
+public class ItemAmuletSin extends AGenericItemBauble implements IRenderBauble, IPhantomInkable {
 	public ItemAmuletSin(String name, String textureName) {
 		super(name, BountifulBaubles.TAB);
 		texture = new ResourceLocation(BountifulBaubles.MODID,
@@ -35,9 +37,22 @@ public class ItemAmuletSin extends AGenericItemBauble implements IRenderBauble {
 	}
 
 	@Override
+	public boolean hasPhantomInk(ItemStack stack) {
+		return ItemUtil.hasPhantomInk(stack);
+	}
+
+	@Override
+	public void setPhantomInk(ItemStack stack, boolean ink) {
+		ItemUtil.setPhantomInk(stack, ink);
+	}
+
+	@Override
 	public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType type,
 			float partialTicks) {
 		if (type!=RenderType.BODY)
+			return;
+		if (stack.getItem() instanceof IPhantomInkable
+				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
 			return;
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 

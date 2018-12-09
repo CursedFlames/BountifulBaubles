@@ -60,6 +60,7 @@ public class ItemFlareGun extends GenericItemBB {
 
 		player.getCooldownTracker().setCooldown(this, cooldown);
 		if (!world.isRemote) {
+//			BountifulBaubles.logger.info("spawning flare");
 			// Construct a new entity, make it fire from the player, and add it
 			// to the world
 			EntityFlare flare = new EntityFlare(world, player);

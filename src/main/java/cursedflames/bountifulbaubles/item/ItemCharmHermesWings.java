@@ -12,8 +12,6 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-//TODO: negate speed boost FOV change
-//TODO make it speed boost over time while running, like terraria?
 public class ItemCharmHermesWings extends AGenericItemBauble implements IItemAttributeModifier {
 	public ItemCharmHermesWings() {
 		super("charmHermesWings", BountifulBaubles.TAB);

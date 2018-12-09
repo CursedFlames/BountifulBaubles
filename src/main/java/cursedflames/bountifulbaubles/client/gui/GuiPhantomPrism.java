@@ -58,6 +58,7 @@ public class GuiPhantomPrism extends GuiContainer {
 			container.guiDirty = false;
 			updateButtons();
 		}
+		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 
 	protected void updateButtons() {

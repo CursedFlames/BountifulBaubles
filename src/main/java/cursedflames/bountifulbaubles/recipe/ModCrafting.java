@@ -291,7 +291,7 @@ public class ModCrafting {
 		}
 		r.register(new ShapedOreRecipe(
 				new ResourceLocation(BountifulBaubles.MODID, "flare_red"),
-				ModItems.flareRed, new String[] {
+				new ItemStack(ModItems.flareRed, 8), new String[] {
 				"i",
 				"g",
 				"G"},

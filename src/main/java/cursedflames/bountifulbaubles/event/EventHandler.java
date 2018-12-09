@@ -162,9 +162,6 @@ public class EventHandler {
 		}
 	}
 
-//	private static long prevTick = 0;
-//	private static Map<EntityPlayer, ItemStack[]> prevBaubles = new HashMap<>();
-
 	@SubscribeEvent
 	public static void playerTick(TickEvent.PlayerTickEvent event) {
 		if (event.phase==TickEvent.Phase.END) {
@@ -178,39 +175,12 @@ public class EventHandler {
 
 			if (player.world.getTotalWorldTime()%10==0) {
 				IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
-//				boolean resetAll = Math
-//						.abs(player.world.getTotalWorldTime()-EventHandler.prevTick)>20;
-//				EventHandler.prevTick = player.world.getTotalWorldTime();
-//				if (resetAll) {
-//					BountifulBaubles.logger.info("reset");
-//				}
-//				ItemStack[] prev = prevBaubles.get(player);
-
-//				if (prev==null) {
-//					prev = new ItemStack[7];
-//					prevBaubles.put(player, prev);
-//				}
 				BaubleAttributeModifierHandler.removeAllModifiers(player);
 				for (int i = 0; i<7; i++) {
 					ItemStack bauble = baubles.getStackInSlot(i);
-//					ItemStack prevBauble = prev[i];
-//					if (bauble!=null&&!bauble.isEmpty()) {
-//						BountifulBaubles.logger.info(prevBauble);
-//						BountifulBaubles.logger.info(bauble);
-//						BountifulBaubles.logger.info(prevBauble==bauble);
-//					}
-					// TODO can't use == to compare instances of the same
-					// itemstack across ticks?
-//					if (bauble==prevBauble&&!resetAll) {
-//						continue;
-//					}
-//					if (prevBauble!=null) {
-//						BaubleAttributeModifierHandler.baubleModified(prevBauble, player, false);
-//					}
 					if (bauble!=null) {
 						BaubleAttributeModifierHandler.baubleModified(bauble, player, true);
 					}
-//					prev[i] = bauble;
 				}
 			}
 		}

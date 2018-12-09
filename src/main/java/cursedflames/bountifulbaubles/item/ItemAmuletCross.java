@@ -3,6 +3,7 @@ package cursedflames.bountifulbaubles.item;
 import baubles.api.BaubleType;
 import baubles.api.render.IRenderBauble;
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.util.ItemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
@@ -12,8 +13,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.botania.api.item.IPhantomInkable;
 
-public class ItemAmuletCross extends AGenericItemBauble implements IRenderBauble {
+public class ItemAmuletCross extends AGenericItemBauble implements IRenderBauble, IPhantomInkable {
 	public static final int RESIST_TIME = 36;
 	public static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,
 			BountifulBaubles.ARMOR_TEXTURE_PATH+"amulet_cross.png");
@@ -46,6 +48,9 @@ public class ItemAmuletCross extends AGenericItemBauble implements IRenderBauble
 			float partialTicks) {
 		if (type!=RenderType.BODY)
 			return;
+		if (stack.getItem() instanceof IPhantomInkable
+				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
+			return;
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
 		Helper.rotateIfSneaking(player);
@@ -57,5 +62,15 @@ public class ItemAmuletCross extends AGenericItemBauble implements IRenderBauble
 			model = new ModelBiped();
 
 		model.bipedBody.render(1);
+	}
+
+	@Override
+	public boolean hasPhantomInk(ItemStack stack) {
+		return ItemUtil.hasPhantomInk(stack);
+	}
+
+	@Override
+	public void setPhantomInk(ItemStack stack, boolean ink) {
+		ItemUtil.setPhantomInk(stack, ink);
 	}
 }

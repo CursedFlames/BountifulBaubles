@@ -1,4 +1,5 @@
 ﻿
+bountifulbaubles.misc.hasPhantomInk=§bTinged with Phantom Ink
 item.bountifulbaubles.modifierBook.none.name=Modifier: None
 bountifulbaubles.modifier.none.name=None
 bountifulbaubles.modifier.none.info=§9No modifier
@@ -82,9 +83,8 @@ item.bountifulbaubles.shieldObsidian.tooltip.2=Can be repaired in an anvil with 
 item.bountifulbaubles.trinketMagicLenses.name=Sunglasses
 item.bountifulbaubles.trinketMagicLenses.tooltip.0=§9Grants immunity to blindness.
 item.bountifulbaubles.trinketMagicLenses.tooltip.1=§aCool guys don't look at explosions.
-item.bountifulbaubles.trinketApple.name=Magic Apple
+item.bountifulbaubles.trinketApple.name=Forbidden Fruit
 item.bountifulbaubles.trinketApple.tooltip.0=§9Grants immunity to food poisoning, unnatural hunger, and nausea.
-item.bountifulbaubles.trinketApple.tooltip.1=§aIt keeps the doctor away.
 item.bountifulbaubles.trinketVitamins.name=Vitamins
 item.bountifulbaubles.trinketVitamins.tooltip.0=§9Grants immunity to weakness and mining fatigue.
 item.bountifulbaubles.ringOverclocking.name=Ring of Overclocking

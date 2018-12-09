@@ -11,9 +11,13 @@ import com.google.common.collect.Multimap;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import baubles.api.render.IRenderBauble;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -38,9 +42,11 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.botania.api.item.IPhantomInkable;
 
 @SuppressWarnings("deprecation")
-public class ItemShieldCobalt extends ItemShield implements IBauble, IItemAttributeModifier {
+public class ItemShieldCobalt extends ItemShield
+		implements IBauble, IRenderBauble, IItemAttributeModifier {
 	public static final UUID KNOCKBACK_RESISTANCE_UUID = UUID
 			.fromString("418ed1da-15ae-4c7b-ac5e-4807ca52ffe3");
 	public static final UUID KNOCKBACK_RESISTANCE_BAUBLE_UUID = UUID
@@ -177,8 +183,14 @@ public class ItemShieldCobalt extends ItemShield implements IBauble, IItemAttrib
 		if (GuiScreen.isShiftKeyDown()) {
 			tooltip.add(I18n.translateToLocal(getUnlocalizedName()+".tooltip.1"));
 			tooltip.add(I18n.translateToLocal(getUnlocalizedName()+".tooltip.2"));
+			if (stack.getItem() instanceof IPhantomInkable
+					&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack)) {
+				tooltip.add(BountifulBaubles.proxy
+						.translate(BountifulBaubles.MODID+".misc.hasPhantomInk"));
+			}
 		} else
 			tooltip.add(I18n.translateToLocal(BountifulBaubles.MODID+".moreinfo"));
+
 	}
 
 	@Override
@@ -211,5 +223,19 @@ public class ItemShieldCobalt extends ItemShield implements IBauble, IItemAttrib
 	@Override
 	public Map<IAttribute, AttributeModifier> getModifiers(ItemStack stack, EntityPlayer player) {
 		return modMap;
+	}
+
+	@Override
+	public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType type,
+			float partialTicks) {
+		if (type==RenderType.BODY) {
+			Helper.rotateIfSneaking(player);
+			boolean armor = !player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty();
+			GlStateManager.scale(0.6, 0.6, 0.6);
+			GlStateManager.rotate(180, 0, 0, 1);
+			GlStateManager.translate(0.5, -0.25, armor ? 0.75 : 0.7);
+			Minecraft.getMinecraft().getRenderItem().renderItem(stack,
+					ItemCameraTransforms.TransformType.NONE);
+		}
 	}
 }

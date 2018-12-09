@@ -1,6 +1,9 @@
 package cursedflames.bountifulbaubles.item;
 
 import java.util.Arrays;
+import java.util.List;
+
+import javax.annotation.Nullable;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
@@ -11,6 +14,7 @@ import cursedflames.bountifulbaubles.item.armor.ItemArmorBB;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -24,7 +28,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.botania.api.item.IPhantomInkable;
 
-//TODO sunglasses are backwards on armor stands?
 public class ItemSunglasses extends ItemArmorBB
 		implements IBauble/* , ICustomEnchantColor */, ISpecialArmor, IRenderBauble {
 	private static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,
@@ -124,5 +127,17 @@ public class ItemSunglasses extends ItemArmorBB
 		model.bipedHead.render(1.0F);
 
 		GlStateManager.popMatrix();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
+			ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		if (stack.getItem() instanceof IPhantomInkable
+				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack)) {
+			tooltip.add(
+					BountifulBaubles.proxy.translate(BountifulBaubles.MODID+".misc.hasPhantomInk"));
+		}
 	}
 }

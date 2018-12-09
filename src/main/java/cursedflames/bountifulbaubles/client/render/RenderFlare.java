@@ -44,7 +44,7 @@ public class RenderFlare extends Render<EntityFlare> {
 			float partialTicks) {
 		GlStateManager.pushMatrix();
 		GlStateManager.disableCull();
-		// TODO why does yaw have to be negative?
+
 		float yaw = -this.getRenderYaw(entity.prevRotationYaw, entity.rotationYaw, partialTicks);
 		float pitch = entity.prevRotationPitch
 				+(entity.rotationPitch-entity.prevRotationPitch)*partialTicks;
