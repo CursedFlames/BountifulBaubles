@@ -6,5 +6,6 @@ public class ItemDisintegrationTablet extends GenericItemBB {
 	public ItemDisintegrationTablet() {
 		super("disintegrationTablet", BountifulBaubles.TAB);
 		setContainerItem(this);
+		setMaxStackSize(1);
 	}
 }

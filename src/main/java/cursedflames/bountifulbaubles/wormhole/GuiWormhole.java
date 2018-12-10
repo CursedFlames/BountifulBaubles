@@ -6,10 +6,10 @@ import cursedflames.lib.gui.GuiBetterButton;
 import cursedflames.lib.network.NBTPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class GuiWormhole extends GuiContainer {
+public class GuiWormhole extends GuiScreen {
 	private static final int WIDTH = 192;
 	private static final int HEIGHT = 192;
 	private int guiLeft;
@@ -20,7 +20,7 @@ public class GuiWormhole extends GuiContainer {
 	private ContainerWormhole container;
 
 	public GuiWormhole(ContainerWormhole container) {
-		super(container);
+		super();
 		this.container = container;
 
 	}
@@ -113,9 +113,5 @@ public class GuiWormhole extends GuiContainer {
 	@Override
 	public boolean doesGuiPauseGame() {
 		return false;
-	}
-
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 	}
 }

@@ -55,9 +55,11 @@ public class ContainerPhantomPrism extends Container {
 			int x = 8;
 			int y = 8+(3-row)*18;
 			EntityEquipmentSlot armorSlot = armorSlots[row];
-			this.addSlotToContainer(new GenericSlot(playerInventory, 36+row, x, y,
+			Slot slot = new GenericSlot(playerInventory, 36+row, x, y,
 					(ItemStack stack) -> !stack.isEmpty()
-							&&stack.getItem().isValidArmor(stack, armorSlot, player)));
+							&&stack.getItem().isValidArmor(stack, armorSlot, player),
+					1);
+			this.addSlotToContainer(slot);
 		}
 
 		// Offhand

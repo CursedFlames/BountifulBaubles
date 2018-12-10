@@ -13,6 +13,7 @@ public class ItemPhantomPrism extends GenericItemBB {
 
 	public ItemPhantomPrism() {
 		super("phantomPrism", BountifulBaubles.TAB);
+		setMaxStackSize(1);
 	}
 
 	@Override

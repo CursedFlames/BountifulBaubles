@@ -18,6 +18,7 @@ public abstract class ItemTerrariaThrowable extends GenericItemBB {
 	protected float inaccuracy = 0.0f;
 	public ItemTerrariaThrowable(String name, CreativeTabs tab, int useSpeed) {
 		super(name, tab);
+		setMaxStackSize(16);
 		cooldownTicks = useSpeed;
 	}
 	public abstract EntityTerrariaThrowable getThrownEntity(World world, EntityPlayer player);

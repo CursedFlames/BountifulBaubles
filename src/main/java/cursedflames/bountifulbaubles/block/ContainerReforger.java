@@ -1,6 +1,7 @@
 package cursedflames.bountifulbaubles.block;
 
 import baubles.api.BaublesApi;
+import baubles.api.cap.BaublesCapabilities;
 import cursedflames.lib.block.GenericContainer;
 import cursedflames.lib.block.GenericTileEntity;
 import cursedflames.lib.inventory.GenericSlot;
@@ -14,6 +15,18 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerReforger extends GenericContainer {
+	static class SlotReforger extends SlotItemHandler {
+		public SlotReforger(IItemHandler inventoryIn, int index, int xPosition, int yPosition) {
+			super(inventoryIn, index, xPosition, yPosition);
+		}
+
+		@Override
+		public boolean isItemValid(ItemStack stack) {
+			return stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null)
+					&&super.isItemValid(stack);
+		}
+	}
+
 	EntityPlayer player;
 
 	public ContainerReforger(IInventory playerInventory, EntityPlayer player,
@@ -32,7 +45,7 @@ public class ContainerReforger extends GenericContainer {
 		int x = 44;
 		int y = 44;
 
-		addSlotToContainer(new SlotItemHandler(itemHandler, 0, x, y));
+		addSlotToContainer(new SlotReforger(itemHandler, 0, x, y));
 	}
 
 	@Override
@@ -76,7 +89,8 @@ public class ContainerReforger extends GenericContainer {
 			EntityEquipmentSlot armorSlot = armorSlots[row];
 			this.addSlotToContainer(new GenericSlot(playerInventory, 36+row, x, y,
 					(ItemStack stack) -> !stack.isEmpty()
-							&&stack.getItem().isValidArmor(stack, armorSlot, player)));
+							&&stack.getItem().isValidArmor(stack, armorSlot, player),
+					1));
 		}
 	}
 

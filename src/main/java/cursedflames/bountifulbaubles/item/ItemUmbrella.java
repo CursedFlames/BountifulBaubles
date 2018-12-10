@@ -13,6 +13,7 @@ public class ItemUmbrella extends GenericItemBB {
 	public ItemUmbrella() {
 		super("umbrella", BountifulBaubles.TAB);
 		MinecraftForge.EVENT_BUS.register(this);
+		setMaxStackSize(1);
 	}
 
 	@SubscribeEvent
