@@ -10,6 +10,8 @@ public class ModConfig {
 	public static Property dungeonLootEnabled;
 	public static Property spectralSiltEnabled;
 	public static Property spectralSiltRecipesEnabled;
+	public static Property baubleModifiersEnabled;
+	public static Property randomBaubleModifiersEnabled;
 
 	public static void initConfig() {
 		recipesEnabled = BountifulBaubles.config.addPropBoolean("defaultRecipesEnabled", "General",
@@ -28,10 +30,21 @@ public class ModConfig {
 				true, EnumPropSide.SERVER);
 		spectralSiltEnabled = BountifulBaubles.config.addPropBoolean("spectralSiltEnabled",
 				"General", "Whether dungeon item recycling is enabled.", true, EnumPropSide.SERVER);
-		spectralSiltRecipesEnabled = BountifulBaubles.config.addPropBoolean("spectralSiltEnabled",
-				"General",
+		spectralSiltRecipesEnabled = BountifulBaubles.config.addPropBoolean(
+				"spectralSiltRecipesEnabled", "General",
 				"Whether the mod's default spectral silt crafting recipes are enabled. Disable this if you want to add your own.",
 				true, EnumPropSide.SERVER);
+		Property baubleModifiersEnabledLocal = BountifulBaubles.config.addPropBoolean(
+				"baubleModifiersEnabled", "General",
+				"Whether bauble modifiers are enabled. If disabled, they will not display, and will have no effect."
+						+"\nThe reforger will also be disabled, and new baubles will not have random modifiers."
+						+"\n(Disabling this overrides randomBaubleModifiersEnabled)",
+				true, EnumPropSide.SYNCED);
+		randomBaubleModifiersEnabled = BountifulBaubles.config.addPropBoolean(
+				"randomBaubleModifiersEnabled", "General",
+				"Whether randomly assigned bauble modifiers are enabled. If disabled, all new baubles will be created with no modifier.",
+				true, EnumPropSide.SERVER);
+
 		recipesEnabled.setRequiresMcRestart(true);
 		anvilRecipesEnabledLocal.setRequiresMcRestart(true);
 		mobLootEnabled.setRequiresMcRestart(true);
@@ -40,5 +53,7 @@ public class ModConfig {
 		spectralSiltRecipesEnabled.setRequiresMcRestart(true);
 		anvilRecipesEnabled = BountifulBaubles.config
 				.getSyncedProperty("defaultAnvilRecipesEnabled");
+		baubleModifiersEnabled = BountifulBaubles.config
+				.getSyncedProperty("baubleModifiersEnabled");
 	}
 }

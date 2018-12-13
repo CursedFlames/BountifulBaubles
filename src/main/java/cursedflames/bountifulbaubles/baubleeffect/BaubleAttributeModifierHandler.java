@@ -9,6 +9,7 @@ import baubles.api.BaublesApi;
 import baubles.api.cap.BaublesCapabilities;
 import baubles.api.cap.IBaublesItemHandler;
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.ModConfig;
 import cursedflames.bountifulbaubles.item.IItemAttributeModifier;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -39,9 +40,14 @@ public class BaubleAttributeModifierHandler {
 		EntityPlayer player = (EntityPlayer) entity;
 		Map<IAttribute, AttributeModifier> itemMods = null;
 		IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
-		if (!stack.hasTagCompound()
-				||!stack.getTagCompound().hasKey("baubleModifier")&&!player.world.isRemote)
-			EnumBaubleModifier.generateModifier(stack);
+		if ((!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier"))
+				&&!player.world.isRemote) {
+			if (ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
+					&&ModConfig.baubleModifiersEnabled.getBoolean(true))
+				EnumBaubleModifier.generateModifier(stack);
+		}
+		if ((!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier")))
+			return;
 		EnumBaubleModifier mod = EnumBaubleModifier
 				.get(stack.getTagCompound().getString("baubleModifier"));
 //		BountifulBaubles.logger.info(mod);
@@ -107,7 +113,9 @@ public class BaubleAttributeModifierHandler {
 		ItemStack stack = event.crafting;
 		if (stack!=null&&!stack.isEmpty()
 				&&stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null)
-				&&!event.player.world.isRemote) {
+				&&!event.player.world.isRemote
+				&&ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
+				&&ModConfig.baubleModifiersEnabled.getBoolean(true)) {
 			EnumBaubleModifier.generateModifier(stack);
 		}
 	}
@@ -117,7 +125,8 @@ public class BaubleAttributeModifierHandler {
 	public static void onItemTooltip(ItemTooltipEvent event) {
 		// TODO use capabilities for modifiers instead
 		if (event.getEntity()==null||event.getEntity().world==null
-				||!event.getEntity().world.isRemote)
+				||!event.getEntity().world.isRemote
+				||!ModConfig.baubleModifiersEnabled.getBoolean(true))
 			return;
 		ItemStack stack = event.getItemStack();
 		if (!stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))

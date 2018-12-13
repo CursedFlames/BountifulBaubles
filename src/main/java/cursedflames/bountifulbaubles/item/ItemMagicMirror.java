@@ -33,7 +33,7 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 	public ItemMagicMirror(String name) {
 		super(name, BountifulBaubles.TAB);
 		setMaxStackSize(1);
-		this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter() {
+		this.addPropertyOverride(new ResourceLocation("using"), new IItemPropertyGetter() {
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn,
 					@Nullable EntityLivingBase entityIn) {
@@ -65,7 +65,7 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 	}
 
 	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.BLOCK;
+		return EnumAction.NONE;
 	}
 
 	@Override
@@ -129,6 +129,9 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 				}
 				player.setPositionAndUpdate(spawnPoint.getX(), spawnPoint.getY(),
 						spawnPoint.getZ());
+				if (player.fallDistance>0.0F) {
+					player.fallDistance = 0.0F;
+				}
 				player.lastTickPosX = player.posX;
 				player.lastTickPosY = player.posY;
 				player.lastTickPosZ = player.posZ;

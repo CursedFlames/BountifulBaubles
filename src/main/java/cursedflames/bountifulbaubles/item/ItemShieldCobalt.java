@@ -159,10 +159,9 @@ public class ItemShieldCobalt extends ItemShield
 		}
 	}
 
-	// TODO remove I18n use
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		return I18n.translateToLocal(getUnlocalizedName()+".name");
+		return BountifulBaubles.proxy.translate(getUnlocalizedName()+".name");
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
+import cursedflames.bountifulbaubles.ModConfig;
 import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
 import cursedflames.bountifulbaubles.baubleeffect.IFireResistance;
 import cursedflames.bountifulbaubles.baubleeffect.IJumpBoost;
@@ -178,7 +179,7 @@ public class EventHandler {
 				BaubleAttributeModifierHandler.removeAllModifiers(player);
 				for (int i = 0; i<7; i++) {
 					ItemStack bauble = baubles.getStackInSlot(i);
-					if (bauble!=null) {
+					if (bauble!=null&&ModConfig.baubleModifiersEnabled.getBoolean(true)) {
 						BaubleAttributeModifierHandler.baubleModified(bauble, player, true);
 					}
 				}
