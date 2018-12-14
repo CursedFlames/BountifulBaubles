@@ -192,6 +192,15 @@ public class ModCrafting {
 				'a', ModItems.sinPendantEmpty,
 				'g', new ItemStack(Items.GOLDEN_APPLE, 1, 0))
 				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "amuletSinGluttony")));
+		r.register(new ShapedOreRecipe(
+				new ResourceLocation(BountifulBaubles.MODID, "crownGold"),
+				ModItems.crownGold, new String[] {
+				" g ",
+				"iii",
+				"i i" },
+				'i', "ingotGold",
+				'g', OreDictionary.doesOreNameExist("gemRuby") ? "gemRuby" : "gemDiamond")
+				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "crownGold")));
 		if (runePride) {
 			r.register(new ShapedOreRecipe(
 					new ResourceLocation(BountifulBaubles.MODID, "amuletSinPride"),
@@ -200,7 +209,7 @@ public class ModCrafting {
 					"a",
 					"c"},
 					'r', "runePrideB",
-					'c', /*ModItems.crownGold*/Items.DIAMOND,
+					'c', ModItems.crownGold,
 					'a', ModItems.sinPendantEmpty)
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "amuletSinPride")));
 		} else {
@@ -209,7 +218,7 @@ public class ModCrafting {
 					ModItems.sinPendantPride, new String[] {
 					"a",
 					"c" },
-					'c', /*ModItems.crownGold*/Items.DIAMOND,
+					'c', ModItems.crownGold,
 					'a', ModItems.sinPendantEmpty)
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "amuletSinPride")));
 		}
