@@ -79,11 +79,13 @@ public class BountifulBaubles {
 
 	public static boolean isQuarkLoaded = false;
 	public static boolean isBotaniaLoaded = false;
+	public static boolean isAlbedoLoaded = false;
 
 	@Mod.EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
 		isBotaniaLoaded = Loader.isModLoaded("botania");
 		isQuarkLoaded = Loader.isModLoaded("quark");
+		isAlbedoLoaded = Loader.isModLoaded("albedo");
 
 		logger = event.getModLog();
 		config = new Config(MODID, "1", logger);

@@ -1,13 +1,20 @@
 package cursedflames.bountifulbaubles.item;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.entity.EntityFlare;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 //TODO allow mobs to use?
 public class ItemFlareGun extends GenericItemBB {
@@ -70,5 +77,15 @@ public class ItemFlareGun extends GenericItemBB {
 			// TODO play sound
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
+			ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		if (!BountifulBaubles.isAlbedoLoaded) {
+			tooltip.add(BountifulBaubles.proxy.translate(getUnlocalizedName()+".tooltip.noalbedo"));
+		}
 	}
 }

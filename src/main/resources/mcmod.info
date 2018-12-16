@@ -13,6 +13,6 @@
   "screenshots": [],
   "useDependencyInformation": true,
   "requiredMods": ["cursedlib@[0.0.5,)", "baubles@[1.5.1,)"],
-  "dependencies": ["cursedlib", "baubles"]
+  "dependencies": ["cursedlib", "baubles", "albedo"]
 }
 ]

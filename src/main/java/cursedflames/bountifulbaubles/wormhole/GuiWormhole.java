@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.wormhole;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.client.gui.GuiToggleButton;
 import cursedflames.bountifulbaubles.network.PacketHandler;
 import cursedflames.lib.gui.GuiBetterButton;
@@ -11,13 +12,17 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class GuiWormhole extends GuiScreen {
 	private static final int WIDTH = 192;
-	private static final int HEIGHT = 192;
+	private static final int HEIGHT = 220;
 	private int guiLeft;
 	private int guiTop;
 //	private List<EntityPlayer> players;
 	private int page = 0;
 
 	private ContainerWormhole container;
+
+	public ContainerWormhole getContainer() {
+		return container;
+	}
 
 	public GuiWormhole(ContainerWormhole container) {
 		super();
@@ -32,13 +37,19 @@ public class GuiWormhole extends GuiScreen {
 		this.guiTop = (this.height-HEIGHT)/2;
 		int id = 0;
 		for (int i = 0, j = 2; i<8; i++, j += 24) {
-			buttonList.add(new GuiBetterButton(id++, guiLeft+10, guiTop+j, 80, 20, ""));
-			buttonList.add(new GuiBetterButton(id++, guiLeft+102, guiTop+j, 80, 20, ""));
+			buttonList.add(new GuiBetterButton(id++, guiLeft, guiTop+j, 80, 20, ""));
+			buttonList.add(new GuiBetterButton(id++, guiLeft+WIDTH/2, guiTop+j, 80, 20, ""));
 		}
 		for (int i = 0, j = 3; i<8; i++, j += 24) {
-			buttonList.add(new GuiToggleButton(id++, guiLeft+90, guiTop+j));
-			buttonList.add(new GuiToggleButton(id++, guiLeft+182, guiTop+j));
+			buttonList.add(new GuiToggleButton(id++, guiLeft+80, guiTop+j));
+			buttonList.add(new GuiToggleButton(id++, guiLeft+WIDTH/2+80, guiTop+j));
 		}
+		String prev = BountifulBaubles.proxy
+				.translate(BountifulBaubles.MODID+".gui.misc.prev_page");
+		String next = BountifulBaubles.proxy
+				.translate(BountifulBaubles.MODID+".gui.misc.next_page");
+		buttonList.add(new GuiBetterButton(id++, guiLeft, guiTop+8+24*8, 80, 20, prev));
+		buttonList.add(new GuiBetterButton(id++, guiLeft+WIDTH-80, guiTop+8+24*8, 80, 20, next));
 		// TODO page change buttons
 		pageChange(page);
 	}
@@ -98,6 +109,11 @@ public class GuiWormhole extends GuiScreen {
 				button.displayString = "";
 			}
 		}
+		GuiButton prev = buttonList.get(32);
+		GuiButton next = buttonList.get(33);
+		boolean pageButtons = container.targets.size()>16;
+		prev.visible = pageButtons;
+		next.visible = pageButtons;
 	}
 
 	private void wormholeToPlayer(int index) {

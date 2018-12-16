@@ -5,6 +5,7 @@ import java.util.UUID;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.lib.config.Config.EnumPropSide;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
+import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -20,9 +22,20 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ItemTrinketBrokenHeart extends AGenericItemBauble {
 	public static final UUID MODIFIER_UUID = UUID
 			.fromString("554f3929-4193-4ae5-a4da-4b528a89ca32");
+	static Property regenHearts;
 
 	public ItemTrinketBrokenHeart() {
 		super("trinketBrokenHeart", BountifulBaubles.TAB);
+
+		if (regenHearts==null) {
+			BountifulBaubles.config.addPropBoolean(getRegistryName()+".regenheartcontainers",
+					"Items",
+					"Whether sleeping regenerates heart containers. "
+							+"If disabled, any broken heart max health decrease will be permanent (until the player dies)",
+					true, EnumPropSide.SYNCED);
+			regenHearts = BountifulBaubles.config
+					.getSyncedProperty(getRegistryName()+".regenheartcontainers");
+		}
 	}
 
 	@Override
@@ -72,8 +85,10 @@ public class ItemTrinketBrokenHeart extends AGenericItemBauble {
 
 	@SubscribeEvent
 	public static void onPlayerWake(PlayerWakeUpEvent event) {
-		if (!event.shouldSetSpawn())
+		if (!regenHearts.getBoolean(true))
 			return;
+//		if (!event.shouldSetSpawn())
+//			return;
 		EntityPlayer player = event.getEntityPlayer();
 		IAttributeInstance maxHealth = player
 				.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);

@@ -43,7 +43,7 @@ public class ContainerWormhole extends Container {
 //		pinned.add(new DebugTarget("debug-disabled"));
 		Map<Integer, IWormholeTarget> pinnedFound = new HashMap<>();
 
-//		for (int i = 0; i<6; i++) {
+//		for (int i = 0; i<2; i++) {
 //			targets.add(new DebugTarget("debug"+i));
 //		}
 
@@ -96,7 +96,9 @@ public class ContainerWormhole extends Container {
 
 	@Override
 	public void detectAndSendChanges() {
+//		BountifulBaubles.logger.info("detect and send chang");
 		super.detectAndSendChanges();
+//		BountifulBaubles.logger.info(dirty);
 		if (player.world.isRemote||!dirty)
 			return;
 		NBTTagCompound changes = new NBTTagCompound();
