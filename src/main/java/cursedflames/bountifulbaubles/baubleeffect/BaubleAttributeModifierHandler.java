@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BaubleAttributeModifierHandler {
+	/** 32 UUIDs in case some mod adds an excessive number of bauble slots */
 	public static final List<UUID> UUIDs = Arrays.asList(
 			UUID.fromString("2a111cc4-2bbe-44b3-829a-743d0dbe3cdd"),
 			UUID.fromString("3fee9d69-c684-4899-ba19-471028b6dada"),
@@ -30,7 +31,32 @@ public class BaubleAttributeModifierHandler {
 			UUID.fromString("1cfce6d0-ea70-4c59-be25-8edae075bebb"),
 			UUID.fromString("052eece9-5e65-4955-a279-33f22a16ecdb"),
 			UUID.fromString("829d9a80-a0fc-4b17-90b3-71ec7cc91d47"),
-			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660c9d"));
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660c9d"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660c9e"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660c9f"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660ca0"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660ca1"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660ca2"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660ca3"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660ca4"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660ca5"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660ca6"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660ca7"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660ca8"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660ca9"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660caa"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cab"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cac"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cad"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cae"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660caf"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb0"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb1"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb2"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb3"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb4"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb5"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb6"));
 
 	public static void baubleModified(ItemStack stack, EntityLivingBase entity, boolean equip) {
 		if (stack.isEmpty()||!(entity instanceof EntityPlayer))
@@ -155,7 +181,8 @@ public class BaubleAttributeModifierHandler {
 	}
 
 	public static void removeAllModifiers(EntityPlayer player) {
-		for (int slot = 0; slot<7; slot++) {
+		IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
+		for (int slot = 0; slot<baubles.getSlots(); slot++) {
 			for (IAttribute attribute : EnumBaubleModifier.attributes) {
 				player.getEntityAttribute(attribute).removeModifier(UUIDs.get(slot));
 			}
