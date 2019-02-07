@@ -95,8 +95,8 @@ public class ModItems {
 
 		BountifulBaubles.registryHelper
 				.addItem(ironRing = new GenericItemBB("ringIron", BountifulBaubles.TAB));
-		BountifulBaubles.registryHelper
-				.addItem(goldRing = new GenericItemBB("ringGold", BountifulBaubles.TAB));
+//		BountifulBaubles.registryHelper
+//				.addItem(goldRing = new GenericItemBB("ringGold", BountifulBaubles.TAB));
 
 		// TODO add item rarities?
 		BountifulBaubles.registryHelper.addItem(balloon = new ItemTrinketBalloon());
@@ -229,7 +229,7 @@ public class ModItems {
 				.addItem(disintegrationTablet = new ItemDisintegrationTablet());
 		BountifulBaubles.registryHelper.addItem(spectralSilt = new ItemSpectralSilt());
 
-		BountifulBaubles.registryHelper.addItem(umbrella = new ItemUmbrella());
+//		BountifulBaubles.registryHelper.addItem(umbrella = new ItemUmbrella());
 
 		BountifulBaubles.registryHelper.addItem(flareGun = new ItemFlareGun());
 
@@ -249,8 +249,8 @@ public class ModItems {
 		BountifulBaubles.registryHelper.addItem(flareRed = new ItemFlare(EnumDyeColor.RED));
 		// NOTE: These need to be initialized on
 		// Adding throwable items
-		BountifulBaubles.registryHelper.addItem(grenade);
-		BountifulBaubles.registryHelper.addItem(beenade);
+//		BountifulBaubles.registryHelper.addItem(grenade);
+//		BountifulBaubles.registryHelper.addItem(beenade);
 		AnvilRecipes.add(ringOverclocking, trinketShulkerHeart, 10, new ItemStack(ringFreeAction));
 		AnvilRecipes.add(trinketBezoar, trinketBlackDragonScale, 10,
 				new ItemStack(trinketMixedDragonScale));
