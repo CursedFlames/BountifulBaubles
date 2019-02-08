@@ -14,7 +14,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.config.Property;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -43,19 +43,19 @@ public class ItemTrinketBrokenHeart extends AGenericItemBauble {
 		return BaubleType.TRINKET;
 	}
 
-	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public static void onDamage(LivingHurtEvent event) {
+	@SubscribeEvent(priority = EventPriority.LOW)
+	public static void onDamage(LivingDamageEvent event) {
 		if (!(event.getEntity() instanceof EntityPlayer))
 			return;
 		EntityPlayer player = (EntityPlayer) event.getEntity();
 //		BountifulBaubles.logger.info("playerhit");
 		if (BaublesApi.isBaubleEquipped(player, ModItems.trinketBrokenHeart)==-1)
 			return;
-		float healthAfterDamage = player.getHealth()-event.getAmount();
+		float healthAfterDamage = (player.getHealth())-event.getAmount();
 //		BountifulBaubles.logger.info("health after damage "+healthAfterDamage);
-		if (healthAfterDamage>=0.5)
+		if (healthAfterDamage>=1)
 			return;
-		double maxHealthDamage = 1F-healthAfterDamage;
+		double maxHealthDamage = 1D-healthAfterDamage;
 //		BountifulBaubles.logger.info("damage to maxHealth "+maxHealthDamage);
 		if (player.getMaxHealth()<=maxHealthDamage)
 			return;
