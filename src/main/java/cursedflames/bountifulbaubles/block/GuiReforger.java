@@ -80,8 +80,9 @@ public class GuiReforger extends GuiContainer {
 			} else {
 				levelsStr = BountifulBaubles.proxy.translateWithArgs(tranStr+"levels", levelCost);
 			}
-			fontRenderer.drawString((xp>xpCost||inCreative ? "§a" : "§c")+xpCostStr+" "
-					+String.valueOf(xpCost)+(inCreative ? "" : (" "+levelsStr)), 0, 0, 0xFFFFFF);
+			fontRenderer.drawString(
+					xpCostStr+" "+String.valueOf(xpCost)+(inCreative ? "" : (" "+levelsStr)), 0, 0,
+					(xp>xpCost||inCreative ? 0x55FF55 : 0xFF5555));
 			if (tag.hasKey("baubleModifier")) {
 				fontRenderer.drawSplitString(
 						BountifulBaubles.proxy.translate(BountifulBaubles.MODID+".modifier."
