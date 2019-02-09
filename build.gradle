@@ -19,7 +19,7 @@ reobf {
 }
 
 
-version = "1.12.2-0.0.1"
+version = "1.12.2-0.0.2"
 group = "cursedflames.bountifulbaubles" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Bountiful Baubles"
 
