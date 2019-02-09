@@ -259,7 +259,7 @@ public class ModItems {
 	public static void registerOreDictionaryEntries() {
 		OreDictionary.registerOre("scaleDragonEnder", enderDragonScale);
 		OreDictionary.registerOre("ringIron", ironRing);
-		OreDictionary.registerOre("ringGold", goldRing);
+//		OreDictionary.registerOre("ringGold", goldRing);
 	}
 
 	public static void registerOtherModOreDictionaryEntries() {
