@@ -21,32 +21,39 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModCrafting {
+	private static boolean doesOreExist(String oreName) {
+		// we should be able to just use OreDictionary.doesOreNameExist
+		// but for some reason, sometimes ore names can be registered without
+		// any actual items being registered, when mods do things wrong.
+		return OreDictionary.getOres(oreName, false).size()!=0;
+	}
+
 	@SubscribeEvent
 	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 		// @formatter:off
 		IForgeRegistry<IRecipe> r = event.getRegistry();
 
-		boolean copperIngot = OreDictionary.doesOreNameExist("ingotCopper");
-		boolean steelIngot = OreDictionary.doesOreNameExist("ingotSteel");
-		boolean ingotEnderium = OreDictionary.doesOreNameExist("ingotEnderium");
-		boolean ingotCobalt = OreDictionary.doesOreNameExist("ingotCobalt");
-		boolean runeMana = OreDictionary.doesOreNameExist("runeManaB");
-		boolean runeFire = OreDictionary.doesOreNameExist("runeFireB");
-		boolean runeWater = OreDictionary.doesOreNameExist("runeWaterB");
-		boolean runeAir = OreDictionary.doesOreNameExist("runeAirB");
-		boolean runeEarth = OreDictionary.doesOreNameExist("runeEarthB");
-		boolean runeSummer = OreDictionary.doesOreNameExist("runeSummerB");
-		boolean runeAutumn = OreDictionary.doesOreNameExist("runeAutumnB");
-		boolean runeWinter = OreDictionary.doesOreNameExist("runeWinterB");
-		boolean runeSpring = OreDictionary.doesOreNameExist("runeSpringB");
-		boolean runeGluttony = OreDictionary.doesOreNameExist("runeGluttonyB");
-		boolean runePride = OreDictionary.doesOreNameExist("runePrideB");
-		boolean runeWrath = OreDictionary.doesOreNameExist("runeWrathB");
-		boolean runeGreed = OreDictionary.doesOreNameExist("runeGreedB");
-		boolean runeEnvy = OreDictionary.doesOreNameExist("runeEnvyB");
-		boolean runeSloth = OreDictionary.doesOreNameExist("runeSlothB");
-		boolean runeLust = OreDictionary.doesOreNameExist("runeLustB");
-		boolean gaiaSpirit = OreDictionary.doesOreNameExist("eternalLifeEssence");
+		boolean copperIngot = doesOreExist("ingotCopper");
+		boolean steelIngot = doesOreExist("ingotSteel");
+		boolean ingotEnderium = doesOreExist("ingotEnderium");
+		boolean ingotCobalt = doesOreExist("ingotCobalt");
+		boolean runeMana = doesOreExist("runeManaB");
+		boolean runeFire = doesOreExist("runeFireB");
+		boolean runeWater = doesOreExist("runeWaterB");
+		boolean runeAir = doesOreExist("runeAirB");
+		boolean runeEarth = doesOreExist("runeEarthB");
+		boolean runeSummer = doesOreExist("runeSummerB");
+		boolean runeAutumn = doesOreExist("runeAutumnB");
+		boolean runeWinter = doesOreExist("runeWinterB");
+		boolean runeSpring = doesOreExist("runeSpringB");
+		boolean runeGluttony = doesOreExist("runeGluttonyB");
+		boolean runePride = doesOreExist("runePrideB");
+		boolean runeWrath = doesOreExist("runeWrathB");
+		boolean runeGreed = doesOreExist("runeGreedB");
+		boolean runeEnvy = doesOreExist("runeEnvyB");
+		boolean runeSloth = doesOreExist("runeSlothB");
+		boolean runeLust = doesOreExist("runeLustB");
+		boolean gaiaSpirit = doesOreExist("eternalLifeEssence");
 		
 		if (ModConfig.recipesEnabled.getBoolean(true)) {
 		r.register(new ShapedOreRecipe(
