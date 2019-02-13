@@ -28,7 +28,7 @@ public class ModEntities {
 	}
 
 	public static void registerEntities() {
-		BountifulBaubles.logger.info("Registering Entities!");
+//		BountifulBaubles.logger.info("Registering Entities!");
 		int id = 0;
 		registerWithRenderer("grenade", EntityGrenade.class, ModItems.grenade, id++);
 		registerWithRenderer("beenade", EntityBeenade.class, ModItems.beenade, id++);

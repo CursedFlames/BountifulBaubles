@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import baubles.api.cap.BaublesCapabilities;
-import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.ModConfig;
 import cursedflames.bountifulbaubles.baubleeffect.EnumBaubleModifier;
 import cursedflames.bountifulbaubles.item.ItemModifierBook;
@@ -42,7 +41,7 @@ public class AnvilRecipes {
 		if (!ModConfig.anvilRecipesEnabled.getBoolean(true)) {
 			return;
 		}
-		BountifulBaubles.logger.info("anvilupdate");
+//		BountifulBaubles.logger.info("anvilupdate");
 		Pair<Integer, ItemStack> recipe = getRecipe(event.getLeft().getItem(),
 				event.getRight().getItem());
 		if (recipe!=null) {
@@ -85,8 +84,8 @@ public class AnvilRecipes {
 			} else {
 				result = getResultModifierBook(event.getLeft(), event.getRight());
 			}
-			BountifulBaubles.logger
-					.info("setting result to "+result.getItem().getUnlocalizedName());
+//			BountifulBaubles.logger
+//					.info("setting result to "+result.getItem().getUnlocalizedName());
 			event.setOutput(result);
 			event.setCost(ItemModifierBook.XP_LVL_COST);
 			event.setMaterialCost(1);

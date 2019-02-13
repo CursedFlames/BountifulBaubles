@@ -87,10 +87,10 @@ public class ItemRingFlywheel extends AGenericItemBauble {
 		IEnergyStorage e = stack.getCapability(ENERGY_STORAGE_CAPABILITY, null);
 		if (tag==null)
 			tag = new NBTTagCompound();
-		System.out.println(tag.toString());
+//		System.out.println(tag.toString());
 		if (e!=null)
 			tag.setInteger("energyAmount", e.getEnergyStored());
-		System.out.println(tag.toString());
+//		System.out.println(tag.toString());
 		return tag;
 	}
 

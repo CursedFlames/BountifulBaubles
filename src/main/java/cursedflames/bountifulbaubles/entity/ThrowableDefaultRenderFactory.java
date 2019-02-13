@@ -1,6 +1,5 @@
 package cursedflames.bountifulbaubles.entity;
 
-import cursedflames.bountifulbaubles.BountifulBaubles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -18,7 +17,7 @@ public class ThrowableDefaultRenderFactory<T extends Entity> implements IRenderF
 
 	@Override
 	public Render<T> createRenderFor(RenderManager manager) {
-		BountifulBaubles.logger.error(item);
+//		BountifulBaubles.logger.error(item);
 		return new RenderSnowball<>(manager, item, Minecraft.getMinecraft().getRenderItem());
 	}
 }

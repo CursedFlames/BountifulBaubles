@@ -144,7 +144,7 @@ public class BountifulBaubles {
 	@Mod.EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
 		config.postInit(event);
-		logger.info(Config.modConfigs.get(MODID)==null);
+//		logger.info(Config.modConfigs.get(MODID)==null);
 //		isQuarkLoaded = Loader.isModLoaded("quark");
 //		isBotaniaLoaded = Loader.isModLoaded("botania");
 	}

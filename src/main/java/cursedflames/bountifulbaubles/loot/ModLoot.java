@@ -115,7 +115,7 @@ public class ModLoot {
 			String eventName = event.getName().toString();
 			if (eventName.equals("minecraft:chests/simple_dungeon")) {
 				double baseRate = dungeon_baseRate.getDouble(0.35D);
-				BountifulBaubles.logger.info("baseRate: "+baseRate);
+//				BountifulBaubles.logger.info("baseRate: "+baseRate);
 				if (baseRate>0) {
 					List<LootEntry> entries = new ArrayList<>();
 					Item[] itemsWeight10 = { ModItems.balloon, ModItems.shieldCobalt,
@@ -145,7 +145,7 @@ public class ModLoot {
 					event.getTable().addPool(pool);
 				}
 				double potionRate = dungeon_potionRate.getDouble(0.75D);
-				BountifulBaubles.logger.info("potionRate: "+potionRate);
+//				BountifulBaubles.logger.info("potionRate: "+potionRate);
 				if (potionRate>0) {
 					List<LootEntry> entries2 = new ArrayList<>();
 					entries2.add(
@@ -165,7 +165,7 @@ public class ModLoot {
 				}
 			} else if (eventName.equals("minecraft:chests/nether_bridge")) {
 				double baseRate = nether_baseRate.getDouble(0.2D);
-				BountifulBaubles.logger.info("n_baseRate: "+baseRate);
+//				BountifulBaubles.logger.info("n_baseRate: "+baseRate);
 				if (baseRate>0) {
 					List<LootEntry> entries = new ArrayList<>();
 					Item[] itemsWeight10 = { ModItems.brokenBlackDragonScale, ModItems.magicMirror,
@@ -186,13 +186,13 @@ public class ModLoot {
 				}
 
 				double miscRate = nether_potionRate.getDouble(0.1D);
-				BountifulBaubles.logger.info("n_miscRate: "+miscRate);
+//				BountifulBaubles.logger.info("n_miscRate: "+miscRate);
 				if (miscRate>0) {
 					List<LootEntry> entries2 = new ArrayList<>();
 					entries2.add(new LootEntryItem(ModItems.potionRecall, 5, 0, new LootFunction[0],
 							new LootCondition[0], BountifulBaubles.MODID+":potionrecall"));
 					if (wormholeEnabled.getBoolean(true)) {
-						BountifulBaubles.logger.info("wormhole enabled");
+//						BountifulBaubles.logger.info("wormhole enabled");
 						entries2.add(new LootEntryItem(ModItems.potionWormhole, 25, 0,
 								new LootFunction[0], new LootCondition[0],
 								BountifulBaubles.MODID+":potionwormhole"));

@@ -6,7 +6,6 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import cursedflames.bountifulbaubles.BountifulBaubles;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
@@ -77,7 +76,7 @@ public abstract class EntityTerrariaThrowable extends Entity implements IProject
 		// TODO don't explode on endermen?
 		if (result.typeOfHit==RayTraceResult.Type.ENTITY&&result.entityHit!=thrower
 				&&!(result.entityHit instanceof EntityPlayerSP)) {
-			BountifulBaubles.logger.info(thrower+"     "+result.entityHit);
+//			BountifulBaubles.logger.info(thrower+"     "+result.entityHit);
 			die();
 		}
 		if (result.typeOfHit==RayTraceResult.Type.BLOCK) {

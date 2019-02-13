@@ -3,7 +3,6 @@ package cursedflames.bountifulbaubles.entity;
 import java.util.List;
 import java.util.UUID;
 
-import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.lib.Util;
 import elucent.albedo.lighting.ILightProvider;
 import elucent.albedo.lighting.Light;
@@ -81,7 +80,7 @@ public class EntityFlare extends EntityArrow implements ILightProvider {
 		this.rotationPitch = (float) (MathHelper.atan2(y, f1)*(180D/Math.PI));
 		this.prevRotationYaw = this.rotationYaw;
 		this.prevRotationPitch = this.rotationPitch;
-		BountifulBaubles.logger.info("flare shot");
+//		BountifulBaubles.logger.info("flare shot");
 	}
 
 	/**
@@ -344,7 +343,7 @@ public class EntityFlare extends EntityArrow implements ILightProvider {
 		this.setPosition(this.posX, this.posY, this.posZ);
 
 		if (this.inGround) {
-			BountifulBaubles.logger.info(this.posX+" "+this.posY+" "+this.posZ);
+//			BountifulBaubles.logger.info(this.posX+" "+this.posY+" "+this.posZ);
 		}
 	}
 

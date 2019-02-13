@@ -3,7 +3,6 @@ package cursedflames.bountifulbaubles.container;
 import javax.annotation.Nullable;
 
 import baubles.api.BaublesApi;
-import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.network.PacketHandler;
 import cursedflames.lib.inventory.GenericSlot;
 import cursedflames.lib.network.NBTPacket;
@@ -126,7 +125,7 @@ public class ContainerPhantomPrism extends Container {
 	}
 
 	public void readChanges(NBTTagCompound tag) {
-		BountifulBaubles.logger.info(tag);
+//		BountifulBaubles.logger.info(tag);
 		for (int i = 0; i<11; i++) {
 			String key = String.valueOf(i);
 			if (!(tag.hasKey(key)))
