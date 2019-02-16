@@ -23,7 +23,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BaubleAttributeModifierHandler {
-	/** 32 UUIDs in case some mod adds an excessive number of bauble slots */
+	/*
+	 * 50 UUIDs in case some mod adds an excessive number of bauble slots
+	 * 
+	 * I'm looking at you, Bring Me The Rings
+	 * 
+	 * yes, I know I'm a terrible person for doing this... but you can't stop me
+	 */
 	public static final List<UUID> UUIDs = Arrays.asList(
 			UUID.fromString("2a111cc4-2bbe-44b3-829a-743d0dbe3cdd"),
 			UUID.fromString("3fee9d69-c684-4899-ba19-471028b6dada"),
@@ -56,7 +62,25 @@ public class BaubleAttributeModifierHandler {
 			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb3"),
 			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb4"),
 			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb5"),
-			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb6"));
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb6"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb7"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb8"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cb9"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cba"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cbb"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cbc"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cbd"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cbe"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cbf"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc0"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc1"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc2"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc3"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc4"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc5"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc6"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc7"),
+			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc8"));
 
 	public static void baubleModified(ItemStack stack, EntityLivingBase entity, boolean equip) {
 		if (stack.isEmpty()||!(entity instanceof EntityPlayer))
