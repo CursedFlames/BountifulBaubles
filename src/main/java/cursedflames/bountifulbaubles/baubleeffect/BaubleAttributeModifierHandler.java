@@ -189,7 +189,15 @@ public class BaubleAttributeModifierHandler {
 				String modName = BountifulBaubles.proxy
 						.translate(BountifulBaubles.MODID+".modifier."+mod+".name");
 				String name = event.getToolTip().get(0);
-				event.getToolTip().set(0, modName+" "+name);
+				String colorCode = "";
+				while (name.length()>1&&name.charAt(0)=='\u00A7') {
+					colorCode += name.substring(0, 2);
+					name = name.substring(2);
+				}
+//				if (colorCode.length() == 0) {
+//					colorCode = "\u00A70";
+//				}
+				event.getToolTip().set(0, colorCode+modName+" "+name);
 			}
 		}
 	}
