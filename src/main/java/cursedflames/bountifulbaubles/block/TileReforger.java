@@ -1,6 +1,9 @@
 package cursedflames.bountifulbaubles.block;
 
+import java.util.Random;
+
 import baubles.api.cap.BaublesCapabilities;
+import cursedflames.bountifulbaubles.ModConfig;
 import cursedflames.bountifulbaubles.baubleeffect.EnumBaubleModifier;
 import cursedflames.lib.block.GenericTileEntity;
 import cursedflames.lib.util.XpUtil;
@@ -28,7 +31,7 @@ public class TileReforger extends GenericTileEntity {
 			if (!tag.hasKey("baubleModifier"))
 				EnumBaubleModifier.generateModifier(stack);
 			if (!tag.hasKey("reforgeCost")) {
-				tag.setInteger("reforgeCost", world.rand.nextInt(241)+80);
+				tag.setInteger("reforgeCost", getReforgeCost(world.rand));
 			}
 		}
 	};
@@ -85,11 +88,22 @@ public class TileReforger extends GenericTileEntity {
 			if (!creative)
 				XpUtil.addPlayerXP(player, -xpCost);
 			EnumBaubleModifier.generateModifier(stack);
-			tag.setInteger("reforgeCost", world.rand.nextInt(241)+80);
+			tag.setInteger("reforgeCost", getReforgeCost(world.rand));
 			float vol = (float) (Math.random()*0.3+0.9);
 			float pitch = (float) (Math.random()*0.3+0.85);
 			world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, vol,
 					pitch);
 		}
+	}
+
+	private int getReforgeCost(Random rand) {
+		int min = ModConfig.reforgeCostMin.getInt(80);
+		int max = ModConfig.reforgeCostMax.getInt(320);
+		if (min>max) {
+			int min_ = min;
+			min = max;
+			max = min_;
+		}
+		return world.rand.nextInt(max-min+1)+min;
 	}
 }

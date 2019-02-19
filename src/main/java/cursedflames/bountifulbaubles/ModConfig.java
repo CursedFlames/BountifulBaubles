@@ -17,6 +17,9 @@ public class ModConfig {
 	public static Property baubleModifiersEnabled;
 	public static Property randomBaubleModifiersEnabled;
 
+	public static Property reforgeCostMin;
+	public static Property reforgeCostMax;
+
 	public static void initConfig() {
 		recipesEnabled = BountifulBaubles.config.addPropBoolean("defaultRecipesEnabled",
 				CAT_GENERAL,
@@ -51,6 +54,14 @@ public class ModConfig {
 				"randomBaubleModifiersEnabled", CAT_GENERAL,
 				"Whether randomly assigned bauble modifiers are enabled. If disabled, all new baubles will be created with no modifier.",
 				true, EnumPropSide.SERVER);
+
+		reforgeCostMin = BountifulBaubles.config.addPropInt("reforgeCostMin", CAT_GENERAL,
+				"Minimum XP point cost to reforge an item in the reforger", 80, EnumPropSide.SERVER,
+				1, Integer.MAX_VALUE/100);
+
+		reforgeCostMax = BountifulBaubles.config.addPropInt("reforgeCostMax", CAT_GENERAL,
+				"Maximum XP point cost to reforge an item in the reforger", 320,
+				EnumPropSide.SERVER, 2, Integer.MAX_VALUE/100);
 
 		recipesEnabled.setRequiresMcRestart(true);
 		anvilRecipesEnabledLocal.setRequiresMcRestart(true);
