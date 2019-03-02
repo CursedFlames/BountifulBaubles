@@ -115,8 +115,8 @@ public class ModItems {
 
 		// TODO check TC potion id
 		BountifulBaubles.registryHelper
-				.addItem(trinketApple = new ItemTrinketPotionCharm("trinketApple", Arrays.asList(
-						"minecraft:nausea", "minecraft:hunger", "thaumcraft:unnatural_hunger")));
+				.addItem(trinketApple = new ItemTrinketPotionCharm("trinketApple",
+						Arrays.asList("minecraft:nausea", "minecraft:hunger")));
 
 		BountifulBaubles.registryHelper
 				.addItem(trinketVitamins = new ItemTrinketPotionCharm("trinketVitamins",
@@ -170,7 +170,7 @@ public class ModItems {
 						Arrays.asList("minecraft:blindness", "minecraft:nausea", "minecraft:hunger",
 								"minecraft:mining_fatigue", "minecraft:weakness",
 								"minecraft:slowness", "minecraft:levitation", "minecraft:poison",
-								"minecraft:wither", "thaumcraft:unnatural_hunger"));
+								"minecraft:wither"));
 			}
 
 //			@Override

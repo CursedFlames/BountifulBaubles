@@ -14,7 +14,7 @@ public class ItemShieldAnkh extends ItemShieldObsidian implements IItemHeldListe
 	public static final List<String> potions = Arrays.asList("minecraft:blindness",
 			"minecraft:nausea", "minecraft:hunger", "minecraft:mining_fatigue",
 			"minecraft:weakness", "minecraft:slowness", "minecraft:levitation", "minecraft:poison",
-			"minecraft:wither", "thaumcraft:unnatural_hunger");
+			"minecraft:wither");
 
 	public ItemShieldAnkh(String name) {
 		super(name);
