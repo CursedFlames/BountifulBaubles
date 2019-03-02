@@ -127,8 +127,8 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 				if (world!=world1) {
 					player.changeDimension(dim);
 				}
-				player.setPositionAndUpdate(spawnPoint.getX(), spawnPoint.getY(),
-						spawnPoint.getZ());
+				player.setPositionAndUpdate(spawnPoint.getX()+0.5, spawnPoint.getY(),
+						spawnPoint.getZ()+0.5);
 				if (player.fallDistance>0.0F) {
 					player.fallDistance = 0.0F;
 				}
