@@ -253,20 +253,6 @@ public class ModCrafting {
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "amuletSinWrath")));
 		}
 		
-		temp.setString("Potion", "minecraft:mundane");
-		ItemStack mundanePotion = new ItemStack(Items.POTIONITEM);
-		mundanePotion.setTagCompound(temp.copy());
-		
-		BrewingRecipeRegistry.addRecipe(
-				mundanePotion, 
-				new ItemStack(Items.QUARTZ), 
-				new ItemStack(ModItems.potionRecall));
-		
-		BrewingRecipeRegistry.addRecipe(
-				new ItemStack(ModItems.potionRecall), 
-				new ItemStack(Items.ENDER_PEARL), 
-				new ItemStack(ModItems.potionWormhole));
-		
 		if (ingotEnderium) {
 			r.register(new ShapedOreRecipe(
 					new ResourceLocation(BountifulBaubles.MODID, "wormholeMirror"),
@@ -315,6 +301,23 @@ public class ModCrafting {
 				'g', Items.GUNPOWDER,
 				'G', Items.GLOWSTONE_DUST)
 				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "flare_red")));
+		}
+		
+		if (ModConfig.brewingRecipesEnabled.getBoolean(true)) {
+			NBTTagCompound temp = new NBTTagCompound();
+			temp.setString("Potion", "minecraft:mundane");
+			ItemStack mundanePotion = new ItemStack(Items.POTIONITEM);
+			mundanePotion.setTagCompound(temp.copy());
+			
+			BrewingRecipeRegistry.addRecipe(
+					mundanePotion,
+					new ItemStack(Items.QUARTZ),
+					new ItemStack(ModItems.potionRecall));
+			
+			BrewingRecipeRegistry.addRecipe(
+					new ItemStack(ModItems.potionRecall),
+					new ItemStack(Items.ENDER_PEARL),
+					new ItemStack(ModItems.potionWormhole));
 		}
 		
 		if (ModConfig.spectralSiltRecipesEnabled.getBoolean(true)) {

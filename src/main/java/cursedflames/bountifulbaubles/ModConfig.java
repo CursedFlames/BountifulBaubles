@@ -10,6 +10,7 @@ public class ModConfig {
 
 	public static Property recipesEnabled;
 	public static Property anvilRecipesEnabled;
+	public static Property brewingRecipesEnabled;
 	public static Property mobLootEnabled;
 	public static Property dungeonLootEnabled;
 	public static Property spectralSiltEnabled;
@@ -24,6 +25,10 @@ public class ModConfig {
 		recipesEnabled = BountifulBaubles.config.addPropBoolean("defaultRecipesEnabled",
 				CAT_GENERAL,
 				"Whether the mod's default crafting recipes are enabled. Disable this if you want to add your own. (Disabling this overrides individual recipe configs)",
+				true, EnumPropSide.SERVER);
+		brewingRecipesEnabled = BountifulBaubles.config.addPropBoolean(
+				"defaultBrewingRecipesEnabled", CAT_GENERAL,
+				"Whether the mod's default brewing recipes are enabled. Disable this if you want to add your own. (Disabling this overrides individual recipe configs)",
 				true, EnumPropSide.SERVER);
 		Property anvilRecipesEnabledLocal = BountifulBaubles.config.addPropBoolean(
 				"defaultAnvilRecipesEnabled", CAT_GENERAL,
@@ -64,6 +69,7 @@ public class ModConfig {
 				EnumPropSide.SERVER, 2, Integer.MAX_VALUE/100);
 
 		recipesEnabled.setRequiresMcRestart(true);
+		brewingRecipesEnabled.setRequiresMcRestart(true);
 		anvilRecipesEnabledLocal.setRequiresMcRestart(true);
 		mobLootEnabled.setRequiresMcRestart(true);
 		dungeonLootEnabled.setRequiresMcRestart(true);
