@@ -4,6 +4,7 @@ import java.util.Random;
 
 import baubles.api.cap.BaublesCapabilities;
 import cursedflames.bountifulbaubles.ModConfig;
+import cursedflames.bountifulbaubles.baubleeffect.BaubleModifier;
 import cursedflames.bountifulbaubles.baubleeffect.EnumBaubleModifier;
 import cursedflames.lib.block.GenericTileEntity;
 import cursedflames.lib.util.XpUtil;
@@ -29,7 +30,7 @@ public class TileReforger extends GenericTileEntity {
 			}
 			NBTTagCompound tag = stack.getTagCompound();
 			if (!tag.hasKey("baubleModifier"))
-				EnumBaubleModifier.generateModifier(stack);
+				BaubleModifier.generateModifier(stack);
 			if (!tag.hasKey("reforgeCost")) {
 				tag.setInteger("reforgeCost", getReforgeCost(world.rand));
 			}
@@ -87,7 +88,7 @@ public class TileReforger extends GenericTileEntity {
 		if ((xp>=xpCost||creative)&&xpCost!=-1) {
 			if (!creative)
 				XpUtil.addPlayerXP(player, -xpCost);
-			EnumBaubleModifier.generateModifier(stack);
+			BaubleModifier.generateModifier(stack);
 			tag.setInteger("reforgeCost", getReforgeCost(world.rand));
 			float vol = (float) (Math.random()*0.3+0.9);
 			float pitch = (float) (Math.random()*0.3+0.85);
