@@ -114,7 +114,7 @@ public class BaubleAttributeModifierHandler {
 						player.getEntityAttribute(a).applyModifier(itemMods.get(a));
 				}
 			}
-			if (mod != null) {
+			if (mod != null && !mod.getRegistryName().equals(ModifierRegistry.INVALID_MODIFIER)) {
 				// player.getEntityAttribute(mod.attribute).applyModifier(new
 				// AttributeModifier());
 				int i = 0;
@@ -149,7 +149,7 @@ public class BaubleAttributeModifierHandler {
 					}
 				}
 			}
-			if (mod != null) {
+			if (mod != null && !mod.getRegistryName().equals(ModifierRegistry.INVALID_MODIFIER)) {
 				for (int i = 0; i<baubles.getSlots(); i++) {
 					if (baubles.getStackInSlot(i).isEmpty()) {
 						removeModifier(player, mod, i);
