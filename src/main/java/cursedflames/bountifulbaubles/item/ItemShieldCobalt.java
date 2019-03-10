@@ -13,7 +13,7 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import baubles.api.render.IRenderBauble;
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
+import cursedflames.bountifulbaubles.baubleeffect.BaubleModifierHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -211,12 +211,12 @@ public class ItemShieldCobalt extends ItemShield
 
 	@Override
 	public void onEquipped(ItemStack stack, EntityLivingBase player) {
-		BaubleAttributeModifierHandler.baubleModified(stack, player, true);
+		BaubleModifierHandler.baubleModified(stack, player, true);
 	}
 
 	@Override
 	public void onUnequipped(ItemStack stack, EntityLivingBase player) {
-		BaubleAttributeModifierHandler.baubleModified(stack, player, false);
+		BaubleModifierHandler.baubleModified(stack, player, false);
 	}
 
 	@Override

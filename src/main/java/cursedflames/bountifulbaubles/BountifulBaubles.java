@@ -2,7 +2,7 @@ package cursedflames.bountifulbaubles;
 
 import org.apache.logging.log4j.Logger;
 
-import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
+import cursedflames.bountifulbaubles.baubleeffect.BaubleModifierHandler;
 import cursedflames.bountifulbaubles.block.ModBlocks;
 import cursedflames.bountifulbaubles.block.TESRReforger;
 import cursedflames.bountifulbaubles.block.TileReforger;
@@ -97,7 +97,7 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(AnvilRecipes.class);
 		MinecraftForge.EVENT_BUS.register(ModCrafting.class);
 		MinecraftForge.EVENT_BUS.register(ModPotions.class);
-		MinecraftForge.EVENT_BUS.register(BaubleAttributeModifierHandler.class);
+		MinecraftForge.EVENT_BUS.register(BaubleModifierHandler.class);
 		MinecraftForge.EVENT_BUS.register(ModLoot.class);
 
 		MinecraftForge.EVENT_BUS.register(ItemShieldCobalt.class);

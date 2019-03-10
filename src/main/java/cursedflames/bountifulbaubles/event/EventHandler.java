@@ -7,7 +7,7 @@ import java.util.UUID;
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import cursedflames.bountifulbaubles.ModConfig;
-import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
+import cursedflames.bountifulbaubles.baubleeffect.BaubleModifierHandler;
 import cursedflames.bountifulbaubles.baubleeffect.IFireResistance;
 import cursedflames.bountifulbaubles.baubleeffect.IJumpBoost;
 import cursedflames.bountifulbaubles.item.ItemAmuletCross;
@@ -176,11 +176,11 @@ public class EventHandler {
 
 			if (player.world.getTotalWorldTime()%10==0) {
 				IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
-				BaubleAttributeModifierHandler.removeAllModifiers(player);
+				BaubleModifierHandler.removeAllModifiers(player);
 				for (int i = 0; i<7; i++) {
 					ItemStack bauble = baubles.getStackInSlot(i);
 					if (bauble!=null&&ModConfig.baubleModifiersEnabled.getBoolean(true)) {
-						BaubleAttributeModifierHandler.baubleModified(bauble, player, true);
+						BaubleModifierHandler.baubleModified(bauble, player, true);
 					}
 				}
 			}

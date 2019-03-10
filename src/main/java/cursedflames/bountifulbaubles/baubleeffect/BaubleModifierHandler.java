@@ -3,19 +3,24 @@ package cursedflames.bountifulbaubles.baubleeffect;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
+
+import javax.annotation.Nullable;
 
 import baubles.api.BaublesApi;
 import baubles.api.cap.BaublesCapabilities;
 import baubles.api.cap.IBaublesItemHandler;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.ModConfig;
+import cursedflames.bountifulbaubles.api.modifier.IBaubleModifier;
 import cursedflames.bountifulbaubles.item.IItemAttributeModifier;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -23,7 +28,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BaubleAttributeModifierHandler {
+public class BaubleModifierHandler {
 	/*
 	 * 50 UUIDs in case some mod adds an excessive number of bauble slots
 	 * 
@@ -83,6 +88,29 @@ public class BaubleAttributeModifierHandler {
 			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc7"),
 			UUID.fromString("86c0b8cf-648b-4d98-8207-9d44bb660cc8"));
 
+	public static IBaubleModifier getModifier(ItemStack stack) {
+		return getModifier(stack, null, false);
+	}
+
+	public static IBaubleModifier getModifier(ItemStack stack, EntityPlayer player,
+			boolean generate) {
+		if (generate&&(!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier"))
+				&&player!=null&&!player.world.isRemote) {
+			if (ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
+					&&ModConfig.baubleModifiersEnabled.getBoolean(true))
+				return generateModifier(stack);
+		}
+		if ((!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier")))
+			return null;
+		IBaubleModifier mod = ModifierRegistry.getModifier(
+				new ResourceLocation(stack.getTagCompound().getString("baubleModifier")));
+		if (mod==null) { // for backwards compatibility
+			mod = ModifierRegistry.getModifier(new ResourceLocation(BountifulBaubles.MODID,
+					stack.getTagCompound().getString("baubleModifier")));
+		}
+		return mod;
+	}
+
 	public static void baubleModified(ItemStack stack, EntityLivingBase entity, boolean equip) {
 		if (stack.isEmpty()||!(entity instanceof EntityPlayer))
 			return;
@@ -91,16 +119,8 @@ public class BaubleAttributeModifierHandler {
 		EntityPlayer player = (EntityPlayer) entity;
 		Map<IAttribute, AttributeModifier> itemMods = null;
 		IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
-		if ((!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier"))
-				&&!player.world.isRemote) {
-			if (ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
-					&&ModConfig.baubleModifiersEnabled.getBoolean(true))
-				BaubleModifier.generateModifier(stack);
-		}
-		if ((!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier")))
-			return;
-		BaubleModifier mod = ModifierRegistry
-				.getModifier(new ResourceLocation(stack.getTagCompound().getString("baubleModifier")));
+		IBaubleModifier mod = getModifier(stack, player, true);
+
 //		BountifulBaubles.logger.info(mod);
 		boolean modifier = stack.getItem() instanceof IItemAttributeModifier;
 		if (modifier) {
@@ -114,7 +134,7 @@ public class BaubleAttributeModifierHandler {
 						player.getEntityAttribute(a).applyModifier(itemMods.get(a));
 				}
 			}
-			if (mod != null && !mod.getRegistryName().equals(ModifierRegistry.INVALID_MODIFIER)) {
+			if (mod!=null&&!mod.getRegistryName().equals(ModifierRegistry.NONE_MODIFIER)) {
 				// player.getEntityAttribute(mod.attribute).applyModifier(new
 				// AttributeModifier());
 				int i = 0;
@@ -125,7 +145,8 @@ public class BaubleAttributeModifierHandler {
 					if (stack1==stack)
 						break;
 				}
-				addModifier(player, mod, i);
+				if (i<baubles.getSlots())
+					mod.applyModifier(player, stack, i);
 			}
 		} else {
 			if (modifier) {
@@ -149,10 +170,10 @@ public class BaubleAttributeModifierHandler {
 					}
 				}
 			}
-			if (mod != null && !mod.getRegistryName().equals(ModifierRegistry.INVALID_MODIFIER)) {
+			if (mod!=null&&!mod.getRegistryName().equals(ModifierRegistry.NONE_MODIFIER)) {
 				for (int i = 0; i<baubles.getSlots(); i++) {
 					if (baubles.getStackInSlot(i).isEmpty()) {
-						removeModifier(player, mod, i);
+						mod.removeModifier(player, stack, i);
 					}
 				}
 			}
@@ -167,7 +188,7 @@ public class BaubleAttributeModifierHandler {
 				&&!event.player.world.isRemote
 				&&ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
 				&&ModConfig.baubleModifiersEnabled.getBoolean(true)) {
-			BaubleModifier.generateModifier(stack);
+			generateModifier(stack);
 		}
 	}
 
@@ -182,56 +203,108 @@ public class BaubleAttributeModifierHandler {
 		ItemStack stack = event.getItemStack();
 		if (!stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))
 			return;
-		if (stack.hasTagCompound()&&stack.getTagCompound().hasKey("baubleModifier")) {
-			String mod = stack.getTagCompound().getString("baubleModifier");
-			ResourceLocation loc = new ResourceLocation(mod);
-			if (!mod.equals(ModifierRegistry.INVALID_MODIFIER.toString())) {
-				event.getToolTip().add(BountifulBaubles.proxy
-						.translate(loc.getResourceDomain() + "." + loc.getResourcePath() +".info"));
-				String modName = BountifulBaubles.proxy
-						.translate(loc.getResourceDomain() + "." + loc.getResourcePath() +".name");
-				String name = event.getToolTip().get(0);
-				String colorCode = "";
-				while (name.length()>1&&name.charAt(0)=='\u00A7') {
-					colorCode += name.substring(0, 2);
-					name = name.substring(2);
-				}
-//				if (colorCode.length() == 0) {
-//					colorCode = "\u00A70";
-//				}
-				event.getToolTip().set(0, colorCode+modName+" "+name);
+		IBaubleModifier mod = getModifier(stack);
+		if (mod==null)
+			return;
+		ResourceLocation loc = mod.getRegistryName();
+		if (!loc.equals(ModifierRegistry.NONE_MODIFIER)) {
+			event.getToolTip().add(BountifulBaubles.proxy
+					.translate(loc.getResourceDomain()+"."+loc.getResourcePath()+".info"));
+			String modName = BountifulBaubles.proxy
+					.translate(loc.getResourceDomain()+"."+loc.getResourcePath()+".name");
+			String name = event.getToolTip().get(0);
+			String colorCode = "";
+			while (name.length()>1&&name.charAt(0)=='\u00A7') {
+				colorCode += name.substring(0, 2);
+				name = name.substring(2);
 			}
+//			if (colorCode.length() == 0) {
+//				colorCode = "\u00A70";
+//			}
+			event.getToolTip().set(0, colorCode+modName+" "+name);
 		}
 	}
 
-	public static void removeModifier(EntityPlayer player, BaubleModifier mod, int slot) {
-		player.getEntityAttribute(mod.attribute).removeModifier(UUIDs.get(slot));
-	}
+//	public static void removeModifier(EntityPlayer player, BaubleModifier mod, int slot) {
+//		player.getEntityAttribute(mod.attribute).removeModifier(UUIDs.get(slot));
+//	}
 
+	@Deprecated
 	public static void removeAllSlotModifiers(EntityPlayer player, int slot) {
-		for (BaubleModifier mod : ModifierRegistry.BAUBLE_MODIFIERS) {
-			player.getEntityAttribute(mod.attribute).removeModifier(UUIDs.get(slot));
+		for (IBaubleModifier mod : ModifierRegistry.BAUBLE_MODIFIERS) {
+			if (mod instanceof BaubleModifierAttributeModifier)
+				player.getEntityAttribute(((BaubleModifierAttributeModifier) mod).attribute)
+						.removeModifier(UUIDs.get(slot));
 		}
 	}
 
+	@Deprecated
 	public static void removeAllModifiers(EntityPlayer player) {
 		IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
 		for (int slot = 0; slot<baubles.getSlots(); slot++) {
-			for (BaubleModifier mod : ModifierRegistry.BAUBLE_MODIFIERS) {
-				if (mod.attribute == null){
+			for (IBaubleModifier mod : ModifierRegistry.BAUBLE_MODIFIERS) {
+				if (!(mod instanceof BaubleModifierAttributeModifier)
+						||((BaubleModifierAttributeModifier) mod).attribute==null) {
 					continue;
 				}
-				player.getEntityAttribute(mod.attribute).removeModifier(UUIDs.get(slot));
+				player.getEntityAttribute(((BaubleModifierAttributeModifier) mod).attribute)
+						.removeModifier(UUIDs.get(slot));
 			}
 		}
 	}
 
-	public static void addModifier(EntityPlayer player, BaubleModifier mod, int slot) {
-		if (player.getEntityAttribute(mod.attribute).getModifier(UUIDs.get(slot))==null) {
-			player.getEntityAttribute(mod.attribute)
-					.applyModifier(new AttributeModifier(UUIDs.get(slot),
-							"Bauble slot "+String.valueOf(slot)+" modifier", mod.amount,
-							mod.operation));
+//	public static void addModifier(EntityPlayer player, BaubleModifier mod, int slot) {
+//		if (player.getEntityAttribute(mod.attribute).getModifier(UUIDs.get(slot))==null) {
+//			player.getEntityAttribute(mod.attribute)
+//					.applyModifier(new AttributeModifier(UUIDs.get(slot),
+//							"Bauble slot "+String.valueOf(slot)+" modifier", mod.amount,
+//							mod.operation));
+//		}
+//	}
+
+	private static final Random RANDOM = new Random();
+
+	public static void addModifierTo(IBaubleModifier mod, ItemStack stack) {
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
 		}
+		NBTTagCompound tag = stack.getTagCompound();
+		tag.setString("baubleModifier", mod.getRegistryName().toString());
+	}
+
+	private static int getTotalWeight() {
+		int total = 0;
+		for (IBaubleModifier mod : ModifierRegistry.BAUBLE_MODIFIERS) {
+			total += Math.max(0, mod.getWeight());
+		}
+		return total;
+	}
+
+	@Nullable
+	public static IBaubleModifier getWeightedRandom() {
+		int rand = RANDOM.nextInt(getTotalWeight());
+		int currentWeight = 0;
+		for (IBaubleModifier mod : ModifierRegistry.BAUBLE_MODIFIERS) {
+			currentWeight += Math.max(0, mod.getWeight());
+			if (rand<currentWeight)
+				return mod;
+		}
+		// this should be unreachable
+		return null;
+	}
+
+	/**
+	 * applies a random modifier to a stack and returns the modifier
+	 * 
+	 * @param stack
+	 */
+	public static IBaubleModifier generateModifier(ItemStack stack) {
+		if (!stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))
+			return null;
+		IBaubleModifier toAdd = getWeightedRandom();
+		if (toAdd!=null) {
+			addModifierTo(toAdd, stack);
+		}
+		return toAdd;
 	}
 }
