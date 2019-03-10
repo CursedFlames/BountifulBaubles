@@ -487,51 +487,29 @@ public class ModCrafting {
 					'b', Items.BLAZE_POWDER,
 					'q', Items.QUARTZ)
 					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "spectralSilt_disintegrationTablet")));
-			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_balloon"),
-					ModItems.spectralSilt,
-					ModItems.balloon,
-					ModItems.disintegrationTablet)
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_balloon")));
-			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_shieldCobalt"),
-					ModItems.spectralSilt,
-					ModItems.shieldCobalt,
-					ModItems.disintegrationTablet)
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_shieldCobalt")));
-			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_magicMirror"),
-					ModItems.spectralSilt,
-					ModItems.magicMirror,
-					ModItems.disintegrationTablet)
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_magicMirror")));
-			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_luckyHorseshoe"),
-					ModItems.spectralSilt,
-					ModItems.trinketLuckyHorseshoe,
-					ModItems.disintegrationTablet)
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_luckyHorseshoe")));
-			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_magicLenses"),
-					ModItems.spectralSilt,
-					ModItems.trinketMagicLenses,
-					ModItems.disintegrationTablet)
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_magicLenses")));
-			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_amuletCross"),
-					ModItems.spectralSilt,
-					ModItems.amuletCross,
-					ModItems.disintegrationTablet)
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_amuletCross")));
-			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_sinPendantEmpty"),
-					ModItems.spectralSilt,
-					ModItems.sinPendantEmpty,
-					ModItems.disintegrationTablet)
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_sinPendantEmpty")));
-			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_flareGun"),
-					ModItems.spectralSilt,
-					ModItems.flareGun,
-					ModItems.disintegrationTablet)
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_flareGun")));
-			r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_brokenBlackDragonScale"),
-					ModItems.spectralSilt,
-					ModItems.brokenBlackDragonScale,
-					ModItems.disintegrationTablet)
-					.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_brokenBlackDragonScale")));
+			addDisintegrationRecipe(r, ModItems.trinketBrokenHeart);
+			addDisintegrationRecipe(r, ModItems.balloon);
+			addDisintegrationRecipe(r, ModItems.shieldCobalt);
+			addDisintegrationRecipe(r, ModItems.shieldObsidian);
+			addDisintegrationRecipe(r, ModItems.magicMirror);
+			addDisintegrationRecipe(r, ModItems.wormholeMirror);
+			addDisintegrationRecipe(r, ModItems.trinketLuckyHorseshoe);
+			addDisintegrationRecipe(r, ModItems.trinketMagicLenses);
+			addDisintegrationRecipe(r, ModItems.amuletCross);
+			addDisintegrationRecipe(r, ModItems.sinPendantEmpty);
+			addDisintegrationRecipe(r, ModItems.flareGun);
+			addDisintegrationRecipe(r, ModItems.brokenBlackDragonScale);
 		}
+	}
+	
+	private static void addDisintegrationRecipe(IForgeRegistry<IRecipe> r, Item item) {
+		addDisintegrationRecipe(r, item, 1);
+	}
+	private static void addDisintegrationRecipe(IForgeRegistry<IRecipe> r, Item item, int amt) {
+		r.register(new ShapelessOreRecipe(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_"+item.getUnlocalizedName()),
+				new ItemStack(ModItems.spectralSilt, amt),
+				item,
+				ModItems.disintegrationTablet)
+				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "disintegrate_"+item.getUnlocalizedName())));
 	}
 }
