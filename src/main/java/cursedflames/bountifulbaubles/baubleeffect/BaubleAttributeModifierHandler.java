@@ -210,6 +210,9 @@ public class BaubleAttributeModifierHandler {
 
 	public static void removeAllSlotModifiers(EntityPlayer player, int slot) {
 		for (BaubleModifier mod : ModifierRegistry.BAUBLE_MODIFIERS) {
+			if (mod.attribute == null){
+				continue;
+			}
 			player.getEntityAttribute(mod.attribute).removeModifier(UUIDs.get(slot));
 		}
 	}
