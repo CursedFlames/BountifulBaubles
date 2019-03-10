@@ -16,6 +16,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -94,12 +95,12 @@ public class BaubleAttributeModifierHandler {
 				&&!player.world.isRemote) {
 			if (ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
 					&&ModConfig.baubleModifiersEnabled.getBoolean(true))
-				EnumBaubleModifier.generateModifier(stack);
+				BaubleModifier.generateModifier(stack);
 		}
 		if ((!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier")))
 			return;
-		EnumBaubleModifier mod = EnumBaubleModifier
-				.get(stack.getTagCompound().getString("baubleModifier"));
+		BaubleModifier mod = ModifierRegistry
+				.getModifier(new ResourceLocation(stack.getTagCompound().getString("baubleModifier")));
 //		BountifulBaubles.logger.info(mod);
 		boolean modifier = stack.getItem() instanceof IItemAttributeModifier;
 		if (modifier) {
@@ -113,7 +114,7 @@ public class BaubleAttributeModifierHandler {
 						player.getEntityAttribute(a).applyModifier(itemMods.get(a));
 				}
 			}
-			if (mod!=null&&mod!=EnumBaubleModifier.NONE) {
+			if (mod != null && !mod.getRegistryName().equals(ModifierRegistry.INVALID_MODIFIER)) {
 				// player.getEntityAttribute(mod.attribute).applyModifier(new
 				// AttributeModifier());
 				int i = 0;
@@ -148,7 +149,7 @@ public class BaubleAttributeModifierHandler {
 					}
 				}
 			}
-			if (mod!=null&&mod!=EnumBaubleModifier.NONE) {
+			if (mod != null && !mod.getRegistryName().equals(ModifierRegistry.INVALID_MODIFIER)) {
 				for (int i = 0; i<baubles.getSlots(); i++) {
 					if (baubles.getStackInSlot(i).isEmpty()) {
 						removeModifier(player, mod, i);
@@ -166,7 +167,7 @@ public class BaubleAttributeModifierHandler {
 				&&!event.player.world.isRemote
 				&&ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
 				&&ModConfig.baubleModifiersEnabled.getBoolean(true)) {
-			EnumBaubleModifier.generateModifier(stack);
+			BaubleModifier.generateModifier(stack);
 		}
 	}
 
@@ -183,11 +184,12 @@ public class BaubleAttributeModifierHandler {
 			return;
 		if (stack.hasTagCompound()&&stack.getTagCompound().hasKey("baubleModifier")) {
 			String mod = stack.getTagCompound().getString("baubleModifier");
-			if (!mod.equals("none")) {
+			ResourceLocation loc = new ResourceLocation(mod);
+			if (!mod.equals(ModifierRegistry.INVALID_MODIFIER.toString())) {
 				event.getToolTip().add(BountifulBaubles.proxy
-						.translate(BountifulBaubles.MODID+".modifier."+mod+".info"));
+						.translate(loc.getResourceDomain() + "." + loc.getResourcePath() +".info"));
 				String modName = BountifulBaubles.proxy
-						.translate(BountifulBaubles.MODID+".modifier."+mod+".name");
+						.translate(loc.getResourceDomain() + "." + loc.getResourcePath() +".name");
 				String name = event.getToolTip().get(0);
 				String colorCode = "";
 				while (name.length()>1&&name.charAt(0)=='\u00A7') {
@@ -202,26 +204,29 @@ public class BaubleAttributeModifierHandler {
 		}
 	}
 
-	public static void removeModifier(EntityPlayer player, EnumBaubleModifier mod, int slot) {
+	public static void removeModifier(EntityPlayer player, BaubleModifier mod, int slot) {
 		player.getEntityAttribute(mod.attribute).removeModifier(UUIDs.get(slot));
 	}
 
 	public static void removeAllSlotModifiers(EntityPlayer player, int slot) {
-		for (IAttribute attribute : EnumBaubleModifier.attributes) {
-			player.getEntityAttribute(attribute).removeModifier(UUIDs.get(slot));
+		for (BaubleModifier mod : ModifierRegistry.BAUBLE_MODIFIERS) {
+			player.getEntityAttribute(mod.attribute).removeModifier(UUIDs.get(slot));
 		}
 	}
 
 	public static void removeAllModifiers(EntityPlayer player) {
 		IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
 		for (int slot = 0; slot<baubles.getSlots(); slot++) {
-			for (IAttribute attribute : EnumBaubleModifier.attributes) {
-				player.getEntityAttribute(attribute).removeModifier(UUIDs.get(slot));
+			for (BaubleModifier mod : ModifierRegistry.BAUBLE_MODIFIERS) {
+				if (mod.attribute == null){
+					continue;
+				}
+				player.getEntityAttribute(mod.attribute).removeModifier(UUIDs.get(slot));
 			}
 		}
 	}
 
-	public static void addModifier(EntityPlayer player, EnumBaubleModifier mod, int slot) {
+	public static void addModifier(EntityPlayer player, BaubleModifier mod, int slot) {
 		if (player.getEntityAttribute(mod.attribute).getModifier(UUIDs.get(slot))==null) {
 			player.getEntityAttribute(mod.attribute)
 					.applyModifier(new AttributeModifier(UUIDs.get(slot),
