@@ -5,13 +5,16 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.bountifulbaubles.baubleeffect.EnumBaubleModifier;
+import cursedflames.bountifulbaubles.api.modifier.IBaubleModifier;
+import cursedflames.bountifulbaubles.baubleeffect.BaubleModifierHandler;
+import cursedflames.bountifulbaubles.baubleeffect.ModifierRegistry;
 import cursedflames.lib.item.GenericItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,9 +32,9 @@ public class ItemModifierBook extends GenericItem implements ICustomEnchantColor
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> stacks) {
 		if (isInCreativeTab(tab)) {
-			for (EnumBaubleModifier mod : EnumBaubleModifier.values()) {
+			for (IBaubleModifier mod : ModifierRegistry.BAUBLE_MODIFIERS.getValues()) {
 				NBTTagCompound tag = new NBTTagCompound();
-				tag.setString("baubleModifier", mod.name);
+				tag.setString("baubleModifier", mod.getRegistryName().toString());
 				ItemStack stack = new ItemStack(this);
 				stack.setTagCompound(tag);
 				stacks.add(stack);
@@ -41,20 +44,24 @@ public class ItemModifierBook extends GenericItem implements ICustomEnchantColor
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		return BountifulBaubles.proxy.translate(getUnlocalizedName()+"."
-				+(stack.hasTagCompound()&&stack.getTagCompound().hasKey("baubleModifier")
-						? stack.getTagCompound().getString("baubleModifier")
-						: EnumBaubleModifier.NONE.name)
-				+".name");
+		IBaubleModifier mod = BaubleModifierHandler.getModifier(stack);
+		if (mod==null)
+			return super.getItemStackDisplayName(stack);
+
+		ResourceLocation reg = mod.getRegistryName();
+		return String.format(super.getItemStackDisplayName(stack), BountifulBaubles.proxy
+				.translate(reg.getResourceDomain()+"."+reg.getResourcePath()+".name"));
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
 			ITooltipFlag flagIn) {
-		if (stack.hasTagCompound()&&stack.getTagCompound().hasKey("baubleModifier")) {
-			tooltip.add(BountifulBaubles.proxy.translate(BountifulBaubles.MODID+".modifier."
-					+stack.getTagCompound().getString("baubleModifier")+".info"));
+		IBaubleModifier mod = BaubleModifierHandler.getModifier(stack);
+		if (mod!=null) {
+			ResourceLocation reg = mod.getRegistryName();
+			tooltip.add(BountifulBaubles.proxy
+					.translate(reg.getResourceDomain()+"."+reg.getResourcePath()+".info"));
 		}
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		tooltip.add(BountifulBaubles.proxy.translate(BountifulBaubles.MODID+".creativeonly"));

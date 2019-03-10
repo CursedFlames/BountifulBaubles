@@ -7,7 +7,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import baubles.api.cap.BaublesCapabilities;
 import cursedflames.bountifulbaubles.ModConfig;
-import cursedflames.bountifulbaubles.baubleeffect.EnumBaubleModifier;
+import cursedflames.bountifulbaubles.baubleeffect.ModifierRegistry;
 import cursedflames.bountifulbaubles.item.ItemModifierBook;
 import cursedflames.bountifulbaubles.item.ItemShieldCobalt;
 import cursedflames.bountifulbaubles.item.ModItems;
@@ -101,7 +101,7 @@ public class AnvilRecipes {
 		tag.setString("baubleModifier",
 				book.hasTagCompound()&&book.getTagCompound().hasKey("baubleModifier")
 						? book.getTagCompound().getString("baubleModifier")
-						: EnumBaubleModifier.NONE.name);
+						: ModifierRegistry.NONE_MODIFIER.toString());
 		return result;
 	}
 }
