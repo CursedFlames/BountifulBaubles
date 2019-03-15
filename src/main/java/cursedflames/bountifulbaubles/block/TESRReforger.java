@@ -1,11 +1,13 @@
 package cursedflames.bountifulbaubles.block;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -46,7 +48,11 @@ public class TESRReforger extends TileEntitySpecialRenderer<TileReforger> {
 		// MathHelper.sin(((float)itemIn.getAge() + p_177077_8_) / 10.0F +
 		// itemIn.hoverStart) * 0.1F + 0.1F
 		float vert = (float) (Math.sin(tick/10.0F)*0.07F);
-		GlStateManager.translate((12.5/16.0), .7+vert, (4.5/16.0));
+		IBlockState state = Minecraft.getMinecraft().world.getBlockState(te.getPos());
+		EnumFacing dir = state.getValue(BlockReforger.FACING);
+		GlStateManager.translate(0.5F, 0, 0.5F);
+		GlStateManager.rotate(-dir.getHorizontalAngle(), 0, 1F, 0);
+		GlStateManager.translate((-4.5/16.0), .7+vert, (3.5/16.0));
 		GlStateManager.scale(.3f, .3f, .3f);
 		// (((float)itemIn.getAge() + p_177077_8_) / 20.0F + itemIn.hoverStart)
 		// * (180F / (float)Math.PI)
