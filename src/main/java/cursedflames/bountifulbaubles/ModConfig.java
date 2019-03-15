@@ -15,8 +15,11 @@ public class ModConfig {
 	public static Property dungeonLootEnabled;
 	public static Property spectralSiltEnabled;
 	public static Property spectralSiltRecipesEnabled;
+
 	public static Property baubleModifiersEnabled;
 	public static Property randomBaubleModifiersEnabled;
+	public static Property generateNoModifierChance;
+	public static Property reforgeNoModifierChance;
 
 	public static Property reforgeCostMin;
 	public static Property reforgeCostMax;
@@ -49,6 +52,7 @@ public class ModConfig {
 				"spectralSiltRecipesEnabled", CAT_GENERAL,
 				"Whether the mod's default spectral silt crafting recipes are enabled. Disable this if you want to add your own.",
 				true, EnumPropSide.SERVER);
+
 		Property baubleModifiersEnabledLocal = BountifulBaubles.config.addPropBoolean(
 				"baubleModifiersEnabled", CAT_GENERAL,
 				"Whether bauble modifiers are enabled. If disabled, they will not display, and will have no effect."
@@ -59,6 +63,13 @@ public class ModConfig {
 				"randomBaubleModifiersEnabled", CAT_GENERAL,
 				"Whether randomly assigned bauble modifiers are enabled. If disabled, all new baubles will be created with no modifier.",
 				true, EnumPropSide.SERVER);
+
+		generateNoModifierChance = BountifulBaubles.config.addPropDouble("generateNoModifierChance",
+				CAT_GENERAL, "Chance of a bauble generating with no modifier", 0.15D,
+				EnumPropSide.SERVER, 0D, 1D);
+		reforgeNoModifierChance = BountifulBaubles.config.addPropDouble("reforgeNoModifierChance",
+				CAT_GENERAL, "Chance of a bauble getting no modifier when reforged", 0.075D,
+				EnumPropSide.SERVER, 0D, 1D);
 
 		reforgeCostMin = BountifulBaubles.config.addPropInt("reforgeCostMin", CAT_GENERAL,
 				"Minimum XP point cost to reforge an item in the reforger", 80, EnumPropSide.SERVER,

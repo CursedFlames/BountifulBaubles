@@ -98,7 +98,7 @@ public class BaubleModifierHandler {
 				&&player!=null&&!player.world.isRemote) {
 			if (ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
 					&&ModConfig.baubleModifiersEnabled.getBoolean(true))
-				return generateModifier(stack);
+				return generateModifier(stack, false);
 		}
 		if ((!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier")))
 			return null;
@@ -188,7 +188,7 @@ public class BaubleModifierHandler {
 				&&!event.player.world.isRemote
 				&&ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
 				&&ModConfig.baubleModifiersEnabled.getBoolean(true)) {
-			generateModifier(stack);
+			generateModifier(stack, false);
 		}
 	}
 
@@ -298,10 +298,14 @@ public class BaubleModifierHandler {
 	 * 
 	 * @param stack
 	 */
-	public static IBaubleModifier generateModifier(ItemStack stack) {
+	public static IBaubleModifier generateModifier(ItemStack stack, boolean isReforge) {
 		if (!stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))
 			return null;
 		IBaubleModifier toAdd = getWeightedRandom();
+		if (RANDOM.nextDouble()<(isReforge ? ModConfig.reforgeNoModifierChance.getDouble()
+				: ModConfig.generateNoModifierChance.getDouble())) {
+			toAdd = ModifierRegistry.getModifier(ModifierRegistry.NONE_MODIFIER);
+		}
 		if (toAdd!=null) {
 			addModifierTo(toAdd, stack);
 		}

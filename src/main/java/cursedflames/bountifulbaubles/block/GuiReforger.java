@@ -84,9 +84,10 @@ public class GuiReforger extends GuiContainer {
 					xpCostStr+" "+String.valueOf(xpCost)+(inCreative ? "" : (" "+levelsStr)), 0, 0,
 					(xp>xpCost||inCreative ? 0x55FF55 : 0xFF5555));
 			if (tag.hasKey("baubleModifier")) {
+				ResourceLocation mod = new ResourceLocation(tag.getString("baubleModifier"));
 				fontRenderer.drawSplitString(
-						BountifulBaubles.proxy.translate(BountifulBaubles.MODID+".modifier."
-								+tag.getString("baubleModifier")+".info"),
+						BountifulBaubles.proxy.translate(
+								mod.getResourceDomain()+"."+mod.getResourcePath()+".info"),
 						0, 1+fontRenderer.FONT_HEIGHT, 0xFFFFFF, 30);
 			}
 		}
