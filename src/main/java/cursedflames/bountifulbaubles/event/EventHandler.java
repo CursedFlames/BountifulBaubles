@@ -32,7 +32,7 @@ public class EventHandler {
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
 			IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
 			Set<String> found = new HashSet<>();
-			for (int i = 0; i<7; i++) {
+			for (int i = 0; i<baubles.getSlots(); i++) {
 				ItemStack stack = baubles.getStackInSlot(i);
 				if (stack.getItem() instanceof IJumpBoost
 						&&!found.contains(stack.getItem().getUnlocalizedName())) {
@@ -66,9 +66,9 @@ public class EventHandler {
 				float maxDamageNegate = 0F;
 				IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
 				Set<UUID> found = new HashSet<>();
-				for (int i = 0; i<9; i++) {
-					ItemStack stack = i<7 ? baubles.getStackInSlot(i)
-							: (i==7 ? player.getHeldItemMainhand() : player.getHeldItemOffhand());
+				for (int i = -2; i<baubles.getSlots(); i++) {
+					ItemStack stack = i>=0 ? baubles.getStackInSlot(i)
+							: (i==-2 ? player.getHeldItemMainhand() : player.getHeldItemOffhand());
 					if (stack.getItem() instanceof IFireResistance
 							&&!found.contains(((IFireResistance) stack.getItem()).getFireResistID())
 							&&(i<7||stack.getItem() instanceof ItemShieldObsidian)) {
@@ -80,12 +80,12 @@ public class EventHandler {
 					}
 				}
 
-				// CF has some intrinsic fire resistance
-				if (player.getUniqueID()
-						.equals(UUID.fromString("7e55ae7a-203b-4a78-9f14-43a3cdf3e124"))) {
-					damageMulti *= 0.5F;
-					damageMultiLava *= 0.5F;
-				}
+//				// CF has some intrinsic fire resistance
+//				if (player.getUniqueID()
+//						.equals(UUID.fromString("7e55ae7a-203b-4a78-9f14-43a3cdf3e124"))) {
+//					damageMulti *= 0.5F;
+//					damageMultiLava *= 0.5F;
+//				}
 				if (event.getAmount()<=maxDamageNegate&&event.isCancelable())
 					event.setCanceled(true);
 				if (event.getSource().equals(DamageSource.LAVA)) {
@@ -114,9 +114,9 @@ public class EventHandler {
 				float maxDamageNegate = 0F;
 				IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
 				Set<UUID> found = new HashSet<>();
-				for (int i = 0; i<9; i++) {
-					ItemStack stack = i<7 ? baubles.getStackInSlot(i)
-							: (i==7 ? player.getHeldItemMainhand() : player.getHeldItemOffhand());
+				for (int i = -2; i<baubles.getSlots(); i++) {
+					ItemStack stack = i>=0 ? baubles.getStackInSlot(i)
+							: (i==-2 ? player.getHeldItemMainhand() : player.getHeldItemOffhand());
 					if (stack.getItem() instanceof IFireResistance
 							&&!found.contains(((IFireResistance) stack.getItem()).getFireResistID())
 							&&(i<7||stack.getItem() instanceof ItemShieldObsidian)) {
@@ -128,12 +128,12 @@ public class EventHandler {
 					}
 				}
 
-				// CF has some intrinsic fire resistance
-				if (player.getUniqueID()
-						.equals(UUID.fromString("7e55ae7a-203b-4a78-9f14-43a3cdf3e124"))) {
-					damageMulti *= 0.5F;
-					damageMultiLava *= 0.5F;
-				}
+//				// CF has some intrinsic fire resistance
+//				if (player.getUniqueID()
+//						.equals(UUID.fromString("7e55ae7a-203b-4a78-9f14-43a3cdf3e124"))) {
+//					damageMulti *= 0.5F;
+//					damageMultiLava *= 0.5F;
+//				}
 				if (event.getAmount()<=maxDamageNegate&&event.isCancelable())
 					event.setCanceled(true);
 				if (event.getSource().equals(DamageSource.LAVA)) {
@@ -177,7 +177,7 @@ public class EventHandler {
 			if (player.world.getTotalWorldTime()%10==0) {
 				IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
 				BaubleAttributeModifierHandler.removeAllModifiers(player);
-				for (int i = 0; i<7; i++) {
+				for (int i = 0; i<baubles.getSlots(); i++) {
 					ItemStack bauble = baubles.getStackInSlot(i);
 					if (bauble!=null&&ModConfig.baubleModifiersEnabled.getBoolean(true)) {
 						BaubleAttributeModifierHandler.baubleModified(bauble, player, true);
