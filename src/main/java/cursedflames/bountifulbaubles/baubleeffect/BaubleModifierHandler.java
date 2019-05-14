@@ -94,7 +94,8 @@ public class BaubleModifierHandler {
 
 	public static IBaubleModifier getModifier(ItemStack stack, EntityPlayer player,
 			boolean generate) {
-		if (generate&&(!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier"))
+		if (generate&&stack.getMaxStackSize()==1
+				&&(!stack.hasTagCompound()||!stack.getTagCompound().hasKey("baubleModifier"))
 				&&player!=null&&!player.world.isRemote) {
 			if (ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
 					&&ModConfig.baubleModifiersEnabled.getBoolean(true))
@@ -183,7 +184,7 @@ public class BaubleModifierHandler {
 	@SubscribeEvent
 	public static void onPlayerCraft(PlayerEvent.ItemCraftedEvent event) {
 		ItemStack stack = event.crafting;
-		if (stack!=null&&!stack.isEmpty()
+		if (stack!=null&&!stack.isEmpty()&&stack.getMaxStackSize()==1
 				&&stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null)
 				&&!event.player.world.isRemote
 				&&ModConfig.randomBaubleModifiersEnabled.getBoolean(true)
@@ -299,6 +300,8 @@ public class BaubleModifierHandler {
 	 * @param stack
 	 */
 	public static IBaubleModifier generateModifier(ItemStack stack, boolean isReforge) {
+		if (stack.getMaxStackSize()>1)
+			return null;
 		if (!stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))
 			return null;
 		IBaubleModifier toAdd = getWeightedRandom();
