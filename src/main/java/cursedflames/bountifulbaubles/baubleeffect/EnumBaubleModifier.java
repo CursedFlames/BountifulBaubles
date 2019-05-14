@@ -89,6 +89,8 @@ public enum EnumBaubleModifier {
 	public static void generateModifier(ItemStack stack) {
 		if (!stack.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))
 			return;
+		if (stack.getMaxStackSize()>1)
+			return;
 		getWeightedRandom().addTo(stack);
 	}
 
