@@ -4,6 +4,7 @@
 bin
 build
 /libs/*
+/assets/*
 .classpath
 .autocomplete-classpath
 .project

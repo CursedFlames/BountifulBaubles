@@ -3,7 +3,9 @@ package cursedflames.bountifulbaubles.entity;
 import java.util.List;
 import java.util.UUID;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.lib.Util;
+import elucent.albedo.event.GatherLightsEvent;
 import elucent.albedo.lighting.ILightProvider;
 import elucent.albedo.lighting.Light;
 import net.minecraft.block.Block;
@@ -30,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 //TODO backup lighting method if Albedo not available?
 //TODO use custom particles instead
 //TODO allow arbitrary R,G,B instead of specific color items?
-@Optional.Interface(modid = "Albedo", iface = "elucent.albedo.lighting.ILightProvider")
+@Optional.Interface(modid = "albedo", iface = "elucent.albedo.lighting.ILightProvider")
 public class EntityFlare extends EntityArrow implements ILightProvider {
 	protected boolean inGround;
 	protected BlockPos tilePos;
@@ -473,5 +475,14 @@ public class EntityFlare extends EntityArrow implements ILightProvider {
 	@SideOnly(Side.CLIENT)
 	public Light provideLight() {
 		return Light.builder().pos(this).color(0.7F, 0.21F, 0.21F).radius(20).build();
+	}
+
+	@Override
+	public void gatherLights(GatherLightsEvent event, Entity context) {
+//		Light light = Light.builder().pos(this).color(0.7F, 0.21F, 0.21F).radius(20).build();
+////		BountifulBaubles.logger.info(light);
+//		Light light = new Light((float)this.posX, (float)this.posY, (float)this.posZ, 0.7F, 0.21F, 0.21F, 1F, 20F);
+//		BountifulBaubles.logger.info(light);
+//		event.add(light);
 	}
 }

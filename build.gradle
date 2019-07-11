@@ -5,21 +5,26 @@ buildscript {
 		maven {
             url = "http://repo.spongepowered.org/maven"
         }
+        maven {
+	      	url = "https://plugins.gradle.org/m2/"
+	    }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
 		classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
+		classpath "com.wynprice.cursemaven:CurseMaven:1.1.0"
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'java'
+apply plugin: "com.wynprice.cursemaven"
 
 reobf {
 	
 }
 
 
-version = "1.12.2-0.0.6"
+version = "1.12.2-0.0.7"
 group = "cursedflames.bountifulbaubles" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Bountiful Baubles"
 
@@ -29,7 +34,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.4.2703"
+    version = "1.12.2-14.23.5.2838"
     if (file("../run").exists()) {
 		runDir = "../run/assets"
 	} else {
@@ -79,6 +84,7 @@ dependencies {
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
 	compile "baubles:Baubles:1.12:1.5.2"
+	deobfCompile curse.resolve("albedo", "2714505")
 	
 	// compile against the JEI API but do not include it at runtime
 	deobfProvided "mezz.jei:jei_1.12.2:4.12.1.217:api"
