@@ -88,7 +88,7 @@ public class BountifulBaubles {
 		isAlbedoLoaded = Loader.isModLoaded("albedo");
 
 		logger = event.getModLog();
-		config = new Config(MODID, "1", logger);
+		config = new Config("1", logger);
 		config.preInit(event);
 		ModConfig.initConfig();
 		// TODO make some of these non-static and move registration to

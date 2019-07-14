@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.network;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.network.PacketHandler.HandlerIds;
 import cursedflames.bountifulbaubles.util.Config;
 import cursedflames.bountifulbaubles.util.NBTPacket;
@@ -22,8 +23,7 @@ public class HandlerNBTPacket implements IMessageHandler<NBTPacket, IMessage> {
 		NBTTagCompound tag = message.getTag();
 		int id = tag.getByte("id");
 		if (id==HandlerIds.SYNC_SERVER_DATA.id) {
-			String modId = tag.getString("modId");
-			Config conf = Config.modConfigs.get(modId);
+			Config conf = BountifulBaubles.config;
 //			System.out.println(Config.modConfigs.keySet().size());
 //			System.out.println(Config.modConfigs.keySet().toArray()[0]);
 //			System.out.println(conf==null);

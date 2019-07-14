@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.network.PacketHandler;
 import cursedflames.bountifulbaubles.network.PacketHandler.HandlerIds;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -28,9 +29,9 @@ import net.minecraftforge.fml.relauncher.Side;
  *
  */
 public class Config {
-	public static Map<String, Config> modConfigs = new HashMap<>();
+//	public static Map<String, Config> modConfigs = new HashMap<>();
+	public static Config config;
 
-	final String modId;
 	final String version;
 	Configuration configuration;
 	Logger logger;
@@ -86,11 +87,10 @@ public class Config {
 		return copy;
 	}
 
-	public Config(String modId, String version, Logger logger) {
-		this.modId = modId;
+	public Config(String version, Logger logger) {
 		this.version = version;
 		this.logger = logger;
-		modConfigs.put(modId, this);
+		config = this;
 //		logger.info(modConfigs.keySet().size());
 //		logger.info(modConfigs.get(modId)==null);
 //		logger.info(this==null);
@@ -99,7 +99,7 @@ public class Config {
 
 	public void preInit(FMLPreInitializationEvent e) {
 		File directory = e.getModConfigurationDirectory();
-		File configFile = new File(directory.getPath(), modId+".cfg");
+		File configFile = new File(directory.getPath(), BountifulBaubles.MODID+".cfg");
 		configuration = new Configuration(configFile, version);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -195,7 +195,6 @@ public class Config {
 			NBTTagCompound tag = getSyncTag();
 			NBTTagCompound tag1 = new NBTTagCompound();
 			tag1.setTag("values", tag);
-			tag1.setString("modId", modId);
 			PacketHandler.INSTANCE.sendTo(new NBTPacket(tag1, HandlerIds.SYNC_SERVER_DATA.id),
 					(EntityPlayerMP) event.player);
 		}
