@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.block;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.lib.block.GenericBlock;
+import cursedflames.bountifulbaubles.util.GenericBlock;
 
 public class ModBlocks {
 	public static GenericBlock reforger = null;

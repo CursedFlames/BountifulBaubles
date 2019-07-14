@@ -8,8 +8,8 @@ import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.lib.capability.CLEnergyStorage;
-import cursedflames.lib.config.Config.EnumPropSide;
+import cursedflames.bountifulbaubles.util.CLEnergyStorage;
+import cursedflames.bountifulbaubles.util.Config.EnumPropSide;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -75,7 +75,7 @@ public class ItemRingFlywheel extends AGenericItemBauble {
 		if (e!=null) {
 			int energy = e.getEnergyStored();
 			int max = e.getMaxEnergyStored();
-			String color = energy==0 ? "§4" : energy<max/4 ? "§c" : energy<max/2 ? "§e" : "§a";
+			String color = energy==0 ? "ï¿½4" : energy<max/4 ? "ï¿½c" : energy<max/2 ? "ï¿½e" : "ï¿½a";
 			tooltip.add(color+String.valueOf(energy)+"/"+String.valueOf(max)+"RF");
 		}
 	}

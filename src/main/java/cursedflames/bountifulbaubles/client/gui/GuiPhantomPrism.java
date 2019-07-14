@@ -3,7 +3,7 @@ package cursedflames.bountifulbaubles.client.gui;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.container.ContainerPhantomPrism;
 import cursedflames.bountifulbaubles.network.PacketHandler;
-import cursedflames.lib.network.NBTPacket;
+import cursedflames.bountifulbaubles.util.NBTPacket;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;

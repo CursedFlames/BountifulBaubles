@@ -1,7 +1,6 @@
-package cursedflames.bountifulbaubles.network;
+package cursedflames.bountifulbaubles.util;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.bountifulbaubles.util.NBTPacket;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -10,12 +9,7 @@ public class PacketHandler {
 	private static int id = 0;
 
 	public static enum HandlerIds {
-		REFORGE(0),
-		WORMHOLE(1),
-		WORMHOLE_UPDATE_GUI(2),
-		WORMHOLE_PIN(3),
-		PRISM_UPDATE_GUI(4),
-		PRISM_TOGGLE_VISIBLE(5);
+		SYNC_SERVER_DATA(0);
 
 		public final int id;
 

@@ -1,8 +1,8 @@
 package cursedflames.bountifulbaubles.network;
 
+import cursedflames.bountifulbaubles.util.NBTPacket;
 import cursedflames.bountifulbaubles.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.wormhole.GuiWormhole;
-import cursedflames.lib.network.NBTPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.nbt.NBTTagCompound;

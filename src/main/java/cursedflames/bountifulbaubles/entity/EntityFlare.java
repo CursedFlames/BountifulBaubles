@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.lib.Util;
+import cursedflames.bountifulbaubles.util.Util;
 import elucent.albedo.event.GatherLightsEvent;
 import elucent.albedo.lighting.ILightProvider;
 import elucent.albedo.lighting.Light;

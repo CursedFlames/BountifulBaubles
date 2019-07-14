@@ -1,6 +1,6 @@
 package cursedflames.bountifulbaubles.client.model;
 
-import cursedflames.lib.client.ModelCustomUVBox;
+import cursedflames.bountifulbaubles.util.client.ModelCustomUVBox;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

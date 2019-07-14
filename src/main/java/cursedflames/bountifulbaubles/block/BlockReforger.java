@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.block;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.lib.block.GenericTileBlock;
+import cursedflames.bountifulbaubles.util.GenericTileBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;

@@ -4,7 +4,6 @@ import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.ModConfig;
 import cursedflames.bountifulbaubles.block.ModBlocks;
 import cursedflames.bountifulbaubles.item.ModItems;
-import cursedflames.lib.recipe.CLIngredient;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

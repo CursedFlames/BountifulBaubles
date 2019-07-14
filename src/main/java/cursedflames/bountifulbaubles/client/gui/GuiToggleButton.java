@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.client.gui;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.lib.gui.GuiBetterButton;
+import cursedflames.bountifulbaubles.util.GuiBetterButton;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;

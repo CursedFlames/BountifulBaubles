@@ -8,7 +8,7 @@ import java.util.Map;
 import cursedflames.bountifulbaubles.capability.CapabilityWormholePins;
 import cursedflames.bountifulbaubles.capability.CapabilityWormholePins.IWormholePins;
 import cursedflames.bountifulbaubles.network.PacketHandler;
-import cursedflames.lib.network.NBTPacket;
+import cursedflames.bountifulbaubles.util.NBTPacket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;

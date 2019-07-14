@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.network;
 
 import cursedflames.bountifulbaubles.container.ContainerPhantomPrism;
-import cursedflames.lib.network.NBTPacket;
+import cursedflames.bountifulbaubles.util.NBTPacket;
 import net.minecraft.inventory.Container;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
