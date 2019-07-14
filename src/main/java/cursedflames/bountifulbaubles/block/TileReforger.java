@@ -5,7 +5,6 @@ import java.util.Random;
 import baubles.api.cap.BaublesCapabilities;
 import cursedflames.bountifulbaubles.ModConfig;
 import cursedflames.bountifulbaubles.baubleeffect.EnumBaubleModifier;
-import cursedflames.bountifulbaubles.util.GenericTileEntity;
 import cursedflames.bountifulbaubles.util.XpUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

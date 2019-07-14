@@ -14,6 +14,7 @@ import baubles.api.IBauble;
 import baubles.api.render.IRenderBauble;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
+import cursedflames.bountifulbaubles.item.base.IItemAttributeModifier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;

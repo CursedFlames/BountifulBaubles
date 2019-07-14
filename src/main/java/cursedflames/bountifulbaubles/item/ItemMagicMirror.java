@@ -3,6 +3,7 @@ package cursedflames.bountifulbaubles.item;
 import javax.annotation.Nullable;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.item.base.GenericItemBB;
 import cursedflames.bountifulbaubles.util.Config.EnumPropSide;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,4 +1,4 @@
-package cursedflames.bountifulbaubles.util;
+package cursedflames.bountifulbaubles.block;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

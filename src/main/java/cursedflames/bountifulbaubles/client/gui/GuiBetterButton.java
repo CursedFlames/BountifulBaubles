@@ -1,4 +1,4 @@
-package cursedflames.bountifulbaubles.util;
+package cursedflames.bountifulbaubles.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;

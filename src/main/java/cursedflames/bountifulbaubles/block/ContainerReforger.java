@@ -2,9 +2,7 @@ package cursedflames.bountifulbaubles.block;
 
 import baubles.api.BaublesApi;
 import baubles.api.cap.BaublesCapabilities;
-import cursedflames.bountifulbaubles.util.GenericContainer;
 import cursedflames.bountifulbaubles.util.GenericSlot;
-import cursedflames.bountifulbaubles.util.GenericTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.IInventory;

@@ -1,9 +1,9 @@
 package cursedflames.bountifulbaubles.block;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.client.gui.GuiBetterButton;
+import cursedflames.bountifulbaubles.network.NBTPacket;
 import cursedflames.bountifulbaubles.network.PacketHandler;
-import cursedflames.bountifulbaubles.util.GuiBetterButton;
-import cursedflames.bountifulbaubles.util.NBTPacket;
 import cursedflames.bountifulbaubles.util.Util;
 import cursedflames.bountifulbaubles.util.XpUtil;
 import net.minecraft.client.Minecraft;

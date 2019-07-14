@@ -1,4 +1,4 @@
-package cursedflames.bountifulbaubles.util;
+package cursedflames.bountifulbaubles.capability;
 
 import net.minecraftforge.energy.EnergyStorage;
 

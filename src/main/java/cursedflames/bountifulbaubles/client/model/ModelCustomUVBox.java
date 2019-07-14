@@ -1,4 +1,4 @@
-package cursedflames.bountifulbaubles.util.client;
+package cursedflames.bountifulbaubles.client.model;
 
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;

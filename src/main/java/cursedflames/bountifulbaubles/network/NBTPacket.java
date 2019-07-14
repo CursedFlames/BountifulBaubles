@@ -1,4 +1,4 @@
-package cursedflames.bountifulbaubles.util;
+package cursedflames.bountifulbaubles.network;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;

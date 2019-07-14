@@ -10,7 +10,7 @@ import baubles.api.cap.BaublesCapabilities;
 import baubles.api.cap.IBaublesItemHandler;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.ModConfig;
-import cursedflames.bountifulbaubles.item.IItemAttributeModifier;
+import cursedflames.bountifulbaubles.item.base.IItemAttributeModifier;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;

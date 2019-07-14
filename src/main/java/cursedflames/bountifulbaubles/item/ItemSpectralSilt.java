@@ -3,6 +3,7 @@ package cursedflames.bountifulbaubles.item;
 import java.awt.Color;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.item.base.GenericItemBB;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;

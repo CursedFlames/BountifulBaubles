@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.EnumBaubleModifier;
-import cursedflames.bountifulbaubles.util.GenericItem;
+import cursedflames.bountifulbaubles.item.base.GenericItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;

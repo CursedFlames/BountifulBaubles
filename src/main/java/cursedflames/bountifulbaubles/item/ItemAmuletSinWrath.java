@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import baubles.api.BaublesApi;
+import cursedflames.bountifulbaubles.item.base.IItemAttributeModifier;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;

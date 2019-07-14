@@ -1,7 +1,6 @@
 package cursedflames.bountifulbaubles.network;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.bountifulbaubles.util.NBTPacket;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;

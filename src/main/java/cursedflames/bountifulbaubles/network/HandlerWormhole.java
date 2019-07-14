@@ -3,7 +3,6 @@ package cursedflames.bountifulbaubles.network;
 import cursedflames.bountifulbaubles.capability.CapabilityWormholePins;
 import cursedflames.bountifulbaubles.item.ItemPotionWormhole;
 import cursedflames.bountifulbaubles.item.ItemWormholeMirror;
-import cursedflames.bountifulbaubles.util.NBTPacket;
 import cursedflames.bountifulbaubles.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.wormhole.IWormholeTarget;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,4 +1,4 @@
-package cursedflames.bountifulbaubles.item;
+package cursedflames.bountifulbaubles.item.base;
 
 import java.util.List;
 

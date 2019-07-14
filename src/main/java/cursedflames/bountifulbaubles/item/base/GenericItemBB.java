@@ -1,11 +1,10 @@
-package cursedflames.bountifulbaubles.item;
+package cursedflames.bountifulbaubles.item.base;
 
 import java.util.List;
 
 import javax.annotation.Nullable;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.bountifulbaubles.util.GenericItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
