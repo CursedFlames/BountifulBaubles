@@ -25,7 +25,7 @@ public class ModCrafting {
 		// we should be able to just use OreDictionary.doesOreNameExist
 		// but for some reason, sometimes ore names can be registered without
 		// any actual items being registered, when mods do things wrong.
-		return OreDictionary.getOres(oreName, false).isEmpty();
+		return !OreDictionary.getOres(oreName, false).isEmpty();
 	}
 
 	@SubscribeEvent
