@@ -6,7 +6,8 @@ import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
 
-import cursedflames.bountifulbaubles.util.PacketHandler.HandlerIds;
+import cursedflames.bountifulbaubles.network.PacketHandler;
+import cursedflames.bountifulbaubles.network.PacketHandler.HandlerIds;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;

@@ -10,6 +10,7 @@ public class PacketHandler {
 	private static int id = 0;
 
 	public static enum HandlerIds {
+		SYNC_SERVER_DATA(6),
 		REFORGE(0),
 		WORMHOLE(1),
 		WORMHOLE_UPDATE_GUI(2),
