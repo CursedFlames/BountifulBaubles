@@ -5,6 +5,7 @@ import java.util.UUID;
 import baubles.api.BaubleType;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.IFireResistance;
+import cursedflames.bountifulbaubles.item.base.AGenericItemBauble;
 import net.minecraft.item.ItemStack;
 
 public class ItemTrinketObsidianSkull extends AGenericItemBauble implements IFireResistance {

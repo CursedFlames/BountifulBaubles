@@ -6,7 +6,7 @@ import java.util.List;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.ModConfig;
 import cursedflames.bountifulbaubles.item.ModItems;
-import cursedflames.lib.config.Config.EnumPropSide;
+import cursedflames.bountifulbaubles.util.Config.EnumPropSide;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;

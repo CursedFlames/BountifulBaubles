@@ -3,9 +3,9 @@ package cursedflames.bountifulbaubles.container;
 import javax.annotation.Nullable;
 
 import baubles.api.BaublesApi;
+import cursedflames.bountifulbaubles.network.NBTPacket;
 import cursedflames.bountifulbaubles.network.PacketHandler;
-import cursedflames.lib.inventory.GenericSlot;
-import cursedflames.lib.network.NBTPacket;
+import cursedflames.bountifulbaubles.util.GenericSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;

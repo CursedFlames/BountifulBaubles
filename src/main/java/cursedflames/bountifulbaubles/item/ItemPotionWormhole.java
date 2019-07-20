@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.item.base.GenericItemBB;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;

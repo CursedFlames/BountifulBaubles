@@ -5,6 +5,8 @@ import java.util.Arrays;
 import baubles.api.BaubleType;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.item.armor.ItemArmorBB;
+import cursedflames.bountifulbaubles.item.base.AGenericItemBauble;
+import cursedflames.bountifulbaubles.item.base.GenericItemBB;
 import cursedflames.bountifulbaubles.item.throwable.ItemBeenade;
 import cursedflames.bountifulbaubles.item.throwable.ItemGrenade;
 import cursedflames.bountifulbaubles.recipe.AnvilRecipes;

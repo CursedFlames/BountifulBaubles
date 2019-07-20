@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.EnumBaubleModifier;
-import cursedflames.lib.item.GenericItem;
+import cursedflames.bountifulbaubles.item.base.GenericItemBB;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -17,12 +17,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.quark.api.ICustomEnchantColor;
 
-public class ItemModifierBook extends GenericItem implements ICustomEnchantColor {
+public class ItemModifierBook extends GenericItemBB implements ICustomEnchantColor {
 
 	public static final int XP_LVL_COST = 2;
 
 	public ItemModifierBook() {
-		super(BountifulBaubles.MODID, "modifierBook", BountifulBaubles.TAB);
+		super("modifierBook", BountifulBaubles.TAB, false);
 		BountifulBaubles.registryHelper.addItemModel(this);
 	}
 

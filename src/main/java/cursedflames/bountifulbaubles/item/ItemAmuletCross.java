@@ -3,6 +3,7 @@ package cursedflames.bountifulbaubles.item;
 import baubles.api.BaubleType;
 import baubles.api.render.IRenderBauble;
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.item.base.AGenericItemBauble;
 import cursedflames.bountifulbaubles.util.ItemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;

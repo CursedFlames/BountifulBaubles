@@ -1,7 +1,8 @@
 package cursedflames.bountifulbaubles.network;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.network.PacketHandler.HandlerIds;
-import cursedflames.lib.network.NBTPacket;
+import cursedflames.bountifulbaubles.util.Config;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -20,7 +21,17 @@ public class HandlerNBTPacket implements IMessageHandler<NBTPacket, IMessage> {
 	private void handleMessage(NBTPacket message, MessageContext ctx) {
 		NBTTagCompound tag = message.getTag();
 		int id = tag.getByte("id");
-		if (id==HandlerIds.REFORGE.id) {
+		if (id==HandlerIds.SYNC_SERVER_DATA.id) {
+			Config conf = BountifulBaubles.config;
+//			System.out.println(Config.modConfigs.keySet().size());
+//			System.out.println(Config.modConfigs.keySet().toArray()[0]);
+//			System.out.println(conf==null);
+			if (conf!=null&&tag.hasKey("values")) {
+				NBTTagCompound tag1 = tag.getCompoundTag("values");
+//				System.out.println(tag1.toString());
+				conf.loadSyncTag(tag1);
+			}
+		} else if (id==HandlerIds.REFORGE.id) {
 			HandlerReforge.handleMessage(message, ctx);
 		} else if (id==HandlerIds.WORMHOLE.id) {
 			HandlerWormhole.handleWormhole(message, ctx);

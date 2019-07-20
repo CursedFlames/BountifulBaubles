@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles;
 
 import cursedflames.bountifulbaubles.loot.ModLoot;
-import cursedflames.lib.config.Config.EnumPropSide;
+import cursedflames.bountifulbaubles.util.Config.EnumPropSide;
 import net.minecraftforge.common.config.Property;
 
 public class ModConfig {

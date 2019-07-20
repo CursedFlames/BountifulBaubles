@@ -1,10 +1,10 @@
 package cursedflames.bountifulbaubles.wormhole;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.client.gui.GuiBetterButton;
 import cursedflames.bountifulbaubles.client.gui.GuiToggleButton;
+import cursedflames.bountifulbaubles.network.NBTPacket;
 import cursedflames.bountifulbaubles.network.PacketHandler;
-import cursedflames.lib.gui.GuiBetterButton;
-import cursedflames.lib.network.NBTPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

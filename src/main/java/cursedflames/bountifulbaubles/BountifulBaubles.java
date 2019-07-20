@@ -21,8 +21,8 @@ import cursedflames.bountifulbaubles.proxy.GuiProxy;
 import cursedflames.bountifulbaubles.proxy.ISideProxy;
 import cursedflames.bountifulbaubles.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.recipe.ModCrafting;
-import cursedflames.lib.RegistryHelper;
-import cursedflames.lib.config.Config;
+import cursedflames.bountifulbaubles.util.Config;
+import cursedflames.bountifulbaubles.util.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -88,7 +88,7 @@ public class BountifulBaubles {
 		isAlbedoLoaded = Loader.isModLoaded("albedo");
 
 		logger = event.getModLog();
-		config = new Config(MODID, "1", logger);
+		config = new Config("1", logger);
 		config.preInit(event);
 		ModConfig.initConfig();
 		// TODO make some of these non-static and move registration to

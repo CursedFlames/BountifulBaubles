@@ -5,7 +5,6 @@ import cursedflames.bountifulbaubles.item.ItemPotionWormhole;
 import cursedflames.bountifulbaubles.item.ItemWormholeMirror;
 import cursedflames.bountifulbaubles.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.wormhole.IWormholeTarget;
-import cursedflames.lib.network.NBTPacket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;

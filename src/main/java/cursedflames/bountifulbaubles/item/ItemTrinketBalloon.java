@@ -3,6 +3,7 @@ package cursedflames.bountifulbaubles.item;
 import baubles.api.BaubleType;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.IJumpBoost;
+import cursedflames.bountifulbaubles.item.base.AGenericItemBauble;
 import net.minecraft.item.ItemStack;
 
 //TODO add item model like terraria's balloon?

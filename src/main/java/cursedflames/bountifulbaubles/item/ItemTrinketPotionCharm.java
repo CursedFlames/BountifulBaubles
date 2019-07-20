@@ -5,6 +5,7 @@ import java.util.List;
 import baubles.api.BaubleType;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.PotionNegation;
+import cursedflames.bountifulbaubles.item.base.AGenericItemBauble;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 

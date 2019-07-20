@@ -1,8 +1,7 @@
 package cursedflames.bountifulbaubles.network;
 
 import cursedflames.bountifulbaubles.block.TileReforger;
-import cursedflames.lib.Util;
-import cursedflames.lib.network.NBTPacket;
+import cursedflames.bountifulbaubles.util.Util;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.item.throwable;
 
 import cursedflames.bountifulbaubles.entity.EntityTerrariaThrowable;
-import cursedflames.bountifulbaubles.item.GenericItemBB;
+import cursedflames.bountifulbaubles.item.base.GenericItemBB;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
