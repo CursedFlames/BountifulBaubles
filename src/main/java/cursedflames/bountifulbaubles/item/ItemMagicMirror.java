@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.item.base.GenericItemBB;
 import cursedflames.bountifulbaubles.util.Config.EnumPropSide;
+import cursedflames.bountifulbaubles.wormhole.TeleporterRecall;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -114,28 +115,31 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 			world1 = DimensionManager.getWorld(dim);
 		}
 		if (world1!=null) {
-			BlockPos spawnPoint = player.getBedLocation(dim);
-			if (spawnPoint!=null) {
-				// sets spawn point to safe loc near bed, or resets if
-				// the bed isn't there
-				spawnPoint = EntityPlayer.getBedSpawnLocation(world1, spawnPoint, false);
-			}
-			if (spawnPoint==null) {
-				// TODO add check if player is outside of spawn chunk
-				spawnPoint = world1.provider.getRandomizedSpawnPoint();
-			}
-			if (spawnPoint!=null) {
-				if (world!=world1) {
-					player.changeDimension(dim);
+			if (world!=world1) {
+				// TODO changing dimension this way plays the portal sound
+				// fine for now but if we ever want to change it...
+				player.changeDimension(dim, new TeleporterRecall());
+			} else {
+				BlockPos spawnPoint = player.getBedLocation(dim);
+				if (spawnPoint!=null) {
+					// sets spawn point to safe loc near bed, or resets if
+					// the bed isn't there
+					spawnPoint = EntityPlayer.getBedSpawnLocation(world1, spawnPoint, false);
 				}
-				player.setPositionAndUpdate(spawnPoint.getX()+0.5, spawnPoint.getY(),
-						spawnPoint.getZ()+0.5);
-				if (player.fallDistance>0.0F) {
-					player.fallDistance = 0.0F;
+				if (spawnPoint==null) {
+					// TODO add check if player is outside of spawn chunk
+					spawnPoint = world1.provider.getRandomizedSpawnPoint();
 				}
-				player.lastTickPosX = player.posX;
-				player.lastTickPosY = player.posY;
-				player.lastTickPosZ = player.posZ;
+				if (spawnPoint!=null) {
+					player.setPositionAndUpdate(spawnPoint.getX()+0.5, spawnPoint.getY(),
+							spawnPoint.getZ()+0.5);
+					if (player.fallDistance>0.0F) {
+						player.fallDistance = 0.0F;
+					}
+					player.lastTickPosX = player.posX;
+					player.lastTickPosY = player.posY;
+					player.lastTickPosZ = player.posZ;
+				}
 			}
 		}
 	}
