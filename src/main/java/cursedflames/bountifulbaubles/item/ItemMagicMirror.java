@@ -8,6 +8,7 @@ import cursedflames.bountifulbaubles.util.Config.EnumPropSide;
 import cursedflames.bountifulbaubles.wormhole.TeleporterRecall;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
@@ -15,6 +16,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -139,6 +141,8 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 					player.lastTickPosX = player.posX;
 					player.lastTickPosY = player.posY;
 					player.lastTickPosZ = player.posZ;
+					player.world.playSound(null, player.posX, player.posY, player.posZ,
+							SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
 				}
 			}
 		}

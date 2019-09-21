@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.SoundCategory;
 
 public class PlayerTarget implements IWormholeTarget {
 	public UUID id;
@@ -42,6 +44,9 @@ public class PlayerTarget implements IWormholeTarget {
 		for (EntityPlayer other : players) {
 			if (other.getUniqueID().equals(id)) {
 				player.setPositionAndUpdate(other.posX, other.posY, other.posZ);
+				// TODO maybe use a different sound for wormhole mirror?
+				player.world.playSound(null, player.posX, player.posY, player.posZ,
+						SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
 				return true;
 			}
 		}
