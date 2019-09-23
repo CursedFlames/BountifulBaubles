@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.world.World;
 
 public class PlayerTarget implements IWormholeTarget {
 	public UUID id;
@@ -37,20 +38,25 @@ public class PlayerTarget implements IWormholeTarget {
 	public String getName() {
 		return name.length()>0 ? name : id.toString();
 	}
-
-	@Override
-	public boolean teleportPlayerTo(EntityPlayer player) {
-		List<EntityPlayer> players = player.world.playerEntities;
+	
+	public EntityPlayer getPlayer(World world) {
+		List<EntityPlayer> players = world.playerEntities;
 		for (EntityPlayer other : players) {
 			if (other.getUniqueID().equals(id)) {
-				player.setPositionAndUpdate(other.posX, other.posY, other.posZ);
-				// TODO maybe use a different sound for wormhole mirror?
-				player.world.playSound(null, player.posX, player.posY, player.posZ,
-						SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
-				return true;
+				return other;
 			}
 		}
-		return false;
+		return null;
+	}
+
+	// I don't think this is used anywhere anymore but whatever
+	@Override
+	public boolean teleportPlayerTo(EntityPlayer player) {
+		EntityPlayer other = getPlayer(player.world);
+		if (other == null) return false;
+		
+		WormholeUtil.doTeleport(player, other);
+		return true;
 	}
 
 	@Override

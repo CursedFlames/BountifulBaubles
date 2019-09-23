@@ -23,6 +23,7 @@ import cursedflames.bountifulbaubles.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.recipe.ModCrafting;
 import cursedflames.bountifulbaubles.util.Config;
 import cursedflames.bountifulbaubles.util.RegistryHelper;
+import cursedflames.bountifulbaubles.wormhole.CommandWormhole;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -37,6 +38,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -147,5 +149,11 @@ public class BountifulBaubles {
 //		logger.info(Config.modConfigs.get(MODID)==null);
 //		isQuarkLoaded = Loader.isModLoaded("quark");
 //		isBotaniaLoaded = Loader.isModLoaded("botania");
+	}
+	
+	@Mod.EventHandler
+	public static void serverStart(FMLServerStartingEvent event) {
+		// TODO does using `new` screw things up?
+		event.registerServerCommand(new CommandWormhole());
 	}
 }

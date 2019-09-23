@@ -1,10 +1,14 @@
-package cursedflames.bountifulbaubles.network;
+package cursedflames.bountifulbaubles.network.wormhole;
 
 import cursedflames.bountifulbaubles.capability.CapabilityWormholePins;
 import cursedflames.bountifulbaubles.item.ItemPotionWormhole;
 import cursedflames.bountifulbaubles.item.ItemWormholeMirror;
+import cursedflames.bountifulbaubles.network.NBTPacket;
 import cursedflames.bountifulbaubles.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.wormhole.IWormholeTarget;
+import cursedflames.bountifulbaubles.wormhole.PlayerTarget;
+import cursedflames.bountifulbaubles.wormhole.TeleportRequest;
+import cursedflames.bountifulbaubles.wormhole.WormholeUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
@@ -22,29 +26,15 @@ public class HandlerWormhole {
 		IWormholeTarget target = CapabilityWormholePins.targetFromNBT(tag.getCompoundTag("target"));
 		if (target==null)
 			return;
+		if (target instanceof PlayerTarget) {
+			EntityPlayer playerTarget = ((PlayerTarget) target).getPlayer(player.world);
+			if (playerTarget == null) return;
+			TeleportRequest.makeReq(player.world, player, playerTarget);
+			return;
+		}
 		if (!target.teleportPlayerTo(player))
 			return;
-		ItemStack main = player.getHeldItem(EnumHand.MAIN_HAND);
-		ItemStack off = player.getHeldItem(EnumHand.OFF_HAND);
-		if (!(main.getItem() instanceof ItemWormholeMirror)
-				&&!(off.getItem() instanceof ItemWormholeMirror)) {
-			ItemStack potion = null;
-			if (main.getItem() instanceof ItemPotionWormhole) {
-				potion = main;
-			} else if (off.getItem() instanceof ItemPotionWormhole) {
-				potion = off;
-			} else
-				return;
-			if (!player.isCreative()) {
-				potion.shrink(1);
-				if (potion.isEmpty()) {
-					player.setHeldItem(potion==main ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND,
-							new ItemStack(Items.GLASS_BOTTLE));
-				} else {
-					player.inventory.addItemStackToInventory(new ItemStack(Items.GLASS_BOTTLE));
-				}
-			}
-		}
+		WormholeUtil.consumeItem(player);
 	}
 
 	public static void handlePin(NBTPacket message, MessageContext ctx) {

@@ -2,6 +2,9 @@ package cursedflames.bountifulbaubles.network;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.network.PacketHandler.HandlerIds;
+import cursedflames.bountifulbaubles.network.wormhole.HandlerWormhole;
+import cursedflames.bountifulbaubles.network.wormhole.HandlerWormholeClient;
+import cursedflames.bountifulbaubles.network.wormhole.HandlerWormholeRequest;
 import cursedflames.bountifulbaubles.util.Config;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -43,6 +46,8 @@ public class HandlerNBTPacket implements IMessageHandler<NBTPacket, IMessage> {
 			HandlerPrismClient.updateContainer(message, ctx);
 		} else if (id==HandlerIds.PRISM_TOGGLE_VISIBLE.id) {
 			HandlerPrism.toggleVisible(message, ctx);
+		} else if (id==HandlerIds.WORMHOLE_REQUEST.id) {
+			HandlerWormholeRequest.handleWormholeRequest(message, ctx);
 		}
 	}
 }

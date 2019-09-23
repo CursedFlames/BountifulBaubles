@@ -1,5 +1,6 @@
-package cursedflames.bountifulbaubles.network;
+package cursedflames.bountifulbaubles.network.wormhole;
 
+import cursedflames.bountifulbaubles.network.NBTPacket;
 import cursedflames.bountifulbaubles.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.wormhole.GuiWormhole;
 import net.minecraft.client.Minecraft;
