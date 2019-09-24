@@ -29,6 +29,8 @@ public class HandlerWormhole {
 		if (target instanceof PlayerTarget) {
 			EntityPlayer playerTarget = ((PlayerTarget) target).getPlayer(player.world);
 			if (playerTarget == null) return;
+			// TODO force player to keep item held, but only consume it after request is accepted
+			WormholeUtil.consumeItem(player);
 			TeleportRequest.makeReq(player.world, player, playerTarget);
 			return;
 		}

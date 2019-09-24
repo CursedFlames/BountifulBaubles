@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.network.NBTPacket;
 import cursedflames.bountifulbaubles.network.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraftforge.common.UsernameCache;
 
 public class TeleportRequest {
+	// TODO cancel request when player switches item away from wormhole items
+	// TODO show message when requests are rejected or timed out
 	public static enum Status {
 		PENDING, ACCEPT, REJECT, TIMEOUT
 	}
@@ -89,7 +87,8 @@ public class TeleportRequest {
 						}
 						if (player != null) {
 							WormholeUtil.doTeleport(player, target);
-							WormholeUtil.consumeItem(player);
+							// item is currently consumed when request is made, instead
+//							WormholeUtil.consumeItem(player);
 						}
 					}
 					requests.remove(i);

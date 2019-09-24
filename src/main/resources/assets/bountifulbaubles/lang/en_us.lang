@@ -210,3 +210,4 @@ bountifulbaubles.gui.reforger.levels=(%s levels)
 bountifulbaubles.gui.reforger.levels.override.1=(%s level)
 bountifulbaubles.gui.misc.prev_page=Previous Page
 bountifulbaubles.gui.misc.next_page=Next Page
+bountifulbaubles.commands.wormhole.usage=/wormhole <acc|deny> [player] - note that specifying player names is currently buggy.
