@@ -25,6 +25,14 @@ public class CommandWormhole extends CommandBase {
 		return 0;
 	}
 	
+	@Override
+	public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
+		// have to do this because minecraft special cases non-op commands
+		// and other commands need op, even if they have permission level 0
+		// TODO probably want to actually check if it's a player instead of always returning true
+		return true;
+	}
+	
 
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {

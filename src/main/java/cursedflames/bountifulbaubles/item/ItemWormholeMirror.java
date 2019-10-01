@@ -68,8 +68,8 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
 	}
 
-	@Override
-	public int getEnchantEffectColor(ItemStack arg0) {
-		return 0x433a6b;
-	}
+//	@Override
+//	public int getEnchantEffectColor(ItemStack arg0) {
+//		return 0x433a6b;
+//	}
 }

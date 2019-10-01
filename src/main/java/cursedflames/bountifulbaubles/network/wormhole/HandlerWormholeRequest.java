@@ -26,9 +26,9 @@ public class HandlerWormholeRequest {
 		ITextComponent rej = new TextComponentString(TextFormatting.RED+"[REJECT]");
 		// TODO fix individual player accept/reject and stop using general form here
 		acc.getStyle().setClickEvent(
-				new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/wormhole acc"));// "+name));
+				new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/wormhole acc "+name));
 		rej.getStyle().setClickEvent(
-				new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/wormhole deny"));// "+name));
+				new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/wormhole deny "+name));
 		
 		
 		base.appendSibling(acc).appendText(" ").appendSibling(rej);

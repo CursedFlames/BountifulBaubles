@@ -9,6 +9,7 @@ import cursedflames.bountifulbaubles.network.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class TeleportRequest {
@@ -44,7 +45,7 @@ public class TeleportRequest {
 		
 		NBTTagCompound tag = new NBTTagCompound();
 		tag.setUniqueId("sender", origin.getUniqueID());
-		tag.setString("name", target.getName());
+		tag.setString("name", origin.getName());
 		NBTPacket clientReq = new NBTPacket(tag, PacketHandler.HandlerIds.WORMHOLE_REQUEST.id);
 		
 		PacketHandler.INSTANCE.sendTo(clientReq, (EntityPlayerMP) target);
@@ -76,19 +77,25 @@ public class TeleportRequest {
 			if (req.target.equals(target.getUniqueID())) {
 //				BountifulBaubles.logger.info(req.origin);
 				if (origin == null || req.origin.equals(origin)) {
+					EntityPlayer player = originPlayer;
+					if (player == null) {
+						player = target.world.getPlayerEntityByUUID(req.origin);
+					}
 					if (!accept) {
 						req.status = Status.REJECT;
-						//TODO show message explaining rejection						
+						if (player != null) {
+							target.sendMessage(
+									new TextComponentString("Rejected teleport request from " + player.getName()));
+						}
+						//TODO show message to origin explaining rejection						
 					} else {
 						req.status = Status.ACCEPT;
-						EntityPlayer player = originPlayer;
-						if (player == null) {
-							player = target.world.getPlayerEntityByUUID(req.origin);
-						}
 						if (player != null) {
-							WormholeUtil.doTeleport(player, target);
-							// item is currently consumed when request is made, instead
-//							WormholeUtil.consumeItem(player);
+							if (WormholeUtil.consumeItem(player)) {
+								WormholeUtil.doTeleport(player, target);
+							}
+							target.sendMessage(
+									new TextComponentString("Accepted teleport request from " + player.getName()));
 						}
 					}
 					requests.remove(i);

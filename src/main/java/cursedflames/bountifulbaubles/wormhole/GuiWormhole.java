@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.client.CPacketCloseWindow;
 
 public class GuiWormhole extends GuiScreen {
 	private static final int WIDTH = 192;
@@ -123,11 +124,20 @@ public class GuiWormhole extends GuiScreen {
 		tag.setTag("target", container.targets.get(index+page*16).toNBT());
 		PacketHandler.INSTANCE
 				.sendToServer(new NBTPacket(tag, PacketHandler.HandlerIds.WORMHOLE.id));
-		Minecraft.getMinecraft().player.closeScreen();
+		mc.player.closeScreen();
 	}
 
 	@Override
 	public boolean doesGuiPauseGame() {
 		return false;
+	}
+	
+	@Override
+    public void onGuiClosed() {
+        super.onGuiClosed();
+        // have to do this to make the gui close properly when it's not a GuiContainer
+        mc.player.connection.sendPacket(new CPacketCloseWindow(mc.player.openContainer.windowId));
+        mc.player.openContainer = mc.player.inventoryContainer;
+        mc.player.inventoryContainer.windowId = 0;
 	}
 }
