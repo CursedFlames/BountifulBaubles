@@ -1,4 +1,4 @@
-package cursedflames.bountifulbaubles.item.items;
+package cursedflames.bountifulbaubles.item.items.ankhparts.shields;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +29,17 @@ public class ItemShieldAnkh extends ItemShieldObsidian {
 	public static final List<Effect> cureEffects = Arrays.asList(Effects.BLINDNESS, Effects.NAUSEA, Effects.HUNGER,
 			Effects.MINING_FATIGUE, Effects.WEAKNESS, Effects.SLOWNESS, Effects.LEVITATION, Effects.POISON,
 			Effects.WITHER);
+	
+	protected static class Curio extends ItemShieldCobalt.Curio {
+		protected Curio(ItemStack stack) {
+			super(stack);
+		}
+		
+		@Override
+		public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
+			EffectPotionNegate.negatePotion(livingEntity, cureEffects);
+		}
+	}
 
 	public ItemShieldAnkh(String name, Properties props) {
 		super(name, props);
@@ -36,22 +47,7 @@ public class ItemShieldAnkh extends ItemShieldObsidian {
 	
 	@Override
 	public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-		//FIXME find a cleaner way to do this
-		ICurio curio = new ICurio() {
-			@Override
-			public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
-				Multimap<String, AttributeModifier> mods = HashMultimap.create();
-				String knockback = SharedMonsterAttributes.KNOCKBACK_RESISTANCE.getName();
-				mods.put(knockback, new AttributeModifier(KNOCKBACK_RESISTANCE_BAUBLE_UUID,
-						"Cobalt Shield knockback resistance", 10, AttributeModifier.Operation.ADDITION));
-				return mods;
-			}
-			
-			@Override
-			public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
-				EffectPotionNegate.negatePotion(livingEntity, cureEffects);
-			}
-		};
+		ICurio curio = new Curio(stack);
 		return CuriosUtil.makeSimpleCap(curio);
 	}
 	

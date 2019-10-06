@@ -1,8 +1,9 @@
-package cursedflames.bountifulbaubles.item.items;
+package cursedflames.bountifulbaubles.item.items.ankhparts.shields;
 
 import java.util.UUID;
 
 import cursedflames.bountifulbaubles.baubleeffect.EffectFireResist.IFireResistItem;
+import cursedflames.bountifulbaubles.item.items.ankhparts.ItemTrinketObsidianSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 

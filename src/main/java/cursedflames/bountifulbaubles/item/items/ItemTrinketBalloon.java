@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import top.theillusivec4.curios.api.capability.ICurio;
 
-public class ItemTrinketBalloon extends BBItem implements ICurio, IJumpItem {
+public class ItemTrinketBalloon extends BBItem implements IJumpItem {
 	public ItemTrinketBalloon() {
 		super("trinket_balloon", new Item.Properties().maxStackSize(1).group(BountifulBaubles.GROUP));
 	}

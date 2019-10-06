@@ -1,4 +1,4 @@
-package cursedflames.bountifulbaubles.item.items;
+package cursedflames.bountifulbaubles.item.items.ankhparts;
 
 import java.util.UUID;
 
@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import top.theillusivec4.curios.api.capability.ICurio;
 
-public class ItemTrinketObsidianSkull extends BBItem implements ICurio, IFireResistItem {
+public class ItemTrinketObsidianSkull extends BBItem implements IFireResistItem {
 	public static final UUID FIRE_RESIST_UUID = UUID
 			.fromString("ecde20fe-73a4-466d-8796-9884d6297ba6");
 	

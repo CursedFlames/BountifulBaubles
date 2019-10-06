@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import cursedflames.bountifulbaubles.baubleeffect.EventHandlerEffect;
 import cursedflames.bountifulbaubles.item.ModItems;
-import cursedflames.bountifulbaubles.item.items.ItemShieldCobalt;
+import cursedflames.bountifulbaubles.item.items.ankhparts.shields.ItemShieldCobalt;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
