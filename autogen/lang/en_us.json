@@ -1,0 +1,59 @@
+//TODO stop hardcoding text color
+
+{
+	"itemGroup.bountifulbaubles": "Bountiful Baubles",
+	"item.bountifulbaubles": {
+		"trinket_balloon": {
+			"": "Balloon",
+			"tooltip.0": "§9Increases jump height and decreases fall damage slightly."
+		},
+		"trinket_obsidian_skull": {
+			"": "Obsidian Skull",
+			"tooltip.0": "§9Grants immunity to burning and 50% resistance to fire damage. (Does not protect against lava)",
+			"tooltip.1": "§aHolding this makes you feel vaguely nervous."
+		},
+		"shield_cobalt": {
+			"": "Cobalt Shield",
+			"tooltip.0": "§9Grants immunity to knockback when held or equipped in curio slot.",
+			"tooltip.1": "Also functions as a regular shield.",
+			"tooltip.2": "Can be repaired in an anvil with iron ingots."
+		},
+		"shield_obsidian": {
+			"": "Obsidian Shield",
+			"tooltip.0": "§9Grants partial fire resistance and immunity to knockback when held or equipped in curio slot.",
+			"tooltip.1": "Also functions as a regular shield.",
+			"tooltip.2": "Can be repaired in an anvil with obsidian."
+		},
+		"shield_ankh": {
+			"": "Ankh Shield",
+			"tooltip.0": "§9Grants partial fire resistance and immunity to knockback and most negative status effects when held or equipped in curio slot.",
+			"tooltip.1": "Also functions as a regular shield.",
+			"tooltip.2": "Can be repaired in an anvil with obsidian."
+		},
+		"magic_mirror": {
+			"": "Magic Mirror",
+			"tooltip.0": "§9Teleports you to your spawn point.",
+			"tooltip.1": "§aIt may bend space at will, but it can't make ugly things beautiful, unfortunately for you."   ,
+			"wrongdim": "You sense that you are too far from home to return."
+		},
+		"potion_recall": {
+			"": "Recall Potion",
+			"tooltip.0": "§9Teleports you to your spawn point."//,
+			// not much point having this tooltip when there's no zing sound
+			// "tooltip.1": "§aAaaaaaand ZING!"
+		},
+		"wormhole_mirror": {
+			"": "Wormhole Mirror",
+			"tooltip.0": "§9Right click to teleport to your spawn point.",
+			"tooltip.1": "§9Right click while sneaking to teleport to another player.",
+			"tooltip.2": "§aYou can feel the void staring back at you."
+		},
+		"potion_wormhole": {
+			"": "Wormhole Potion",
+			"tooltip.0": "§9Teleports you to other players.",
+			"tooltip.sp": "§aYou suddenly feel very alone.",
+			"tooltip.mp": "§aDoes not, however, guarantee that where they are is safe.",
+			"nootherplayers": "No teleportation targets available."
+		}
+	}
+}

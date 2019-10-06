@@ -1,0 +1,3 @@
+potion_recall
+trinket_balloon
+trinket_obsidian_skull

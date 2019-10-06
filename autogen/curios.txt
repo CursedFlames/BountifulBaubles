@@ -1,0 +1,5 @@
+trinket_balloon necklace ring charm
+trinket_obsidian_skull necklace ring charm
+shield_cobalt back body charm
+shield_obsidian back body charm
+shield_ankh back body charm
