@@ -18,6 +18,8 @@ public class ModItems {
 	private static final String PREFIX = BountifulBaubles.MODID+":";
 	public static final Item magic_mirror = null;
 	
+	public static final Item trinket_obsidian_skull = null;
+	
 	public static void registerItems(final RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> r = event.getRegistry();
 		r.register(new ItemMagicMirror("magic_mirror"));

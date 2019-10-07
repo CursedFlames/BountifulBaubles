@@ -36,7 +36,6 @@ public class BBItem extends Item {
 	@OnlyIn(Dist.CLIENT)
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
-		// FIXME shift tooltips
 		boolean isShifting = Screen.hasShiftDown();
 		// TODO add proxies instead of being lazy and using deprecated I18n
 		String base = getTranslationKey()+".tooltip.";
