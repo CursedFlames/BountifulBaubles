@@ -12,6 +12,57 @@
 			"tooltip.0": "§9Grants immunity to burning and 50% resistance to fire damage. (Does not protect against lava)",
 			"tooltip.1": "§aHolding this makes you feel vaguely nervous."
 		},
+		"sunglasses": {
+			"": "Sunglasses",
+			"tooltip.0": "§9Grants immunity to blindness.",
+			"tooltip.1": "§aCool guys don't look at explosions."
+		},
+		"trinket_apple": {
+			"": "Forbidden Fruit",
+			"tooltip.0": "§9Grants immunity to hunger status effect, and nausea."
+		},
+		"trinket_vitamins": {
+			"": "Vitamins",
+			"tooltip.0": "§9Grants immunity to weakness and mining fatigue."
+		},
+		"ring_overclocking": {
+			"": "Ring of Overclocking",
+			"tooltip.0": "§9Grants immunity to slowness and +7% move speed.",
+			"tooltip.1": "§aEveryone knows that blue LEDs make your PC run faster."
+		},
+		"trinket_shulker_heart": {
+			"": "Shulker Heart",
+			"tooltip.0": "§9Grants immunity to levitation",
+			"tooltip.1": "§aIt's squishy..."
+		},
+		"ring_free_action": {
+			"": "Ring of Free Action",
+			"tooltip.0": "§9Grants immunity to slowness and levitation and allows free movement through cobwebs"
+		},
+		"ender_dragon_scale": {
+			"": "Ender Dragon Scale"
+		},
+		"broken_black_dragon_scale": {
+			"": "Cracked Black Dragon Scale",
+			"tooltip.0": "§aBlack dragon scales are said to protect against withering. Perhaps this broken one could be repaired?"
+		},
+		"trinket_black_dragon_scale": {
+			"": "Black Dragon Scale",
+			"tooltip.0": "§9Grants immunity to withering."
+		},
+		"trinket_bezoar": {
+			"": "Bezoar",
+			"tooltip.0": "§9Grants immunity to poison."
+		},
+		"trinket_mixed_dragon_scale": {
+			"": "Mixed Color Dragon Scale",
+			"tooltip.0": "§9Grants immunity to poison and withering.",
+			"tooltip.1": "§aInteresting, the bezoar has fused with the scale and made it appear to be two different colors."
+		},
+		"trinket_ankh_charm": {
+			"": "Ankh Charm",
+			"tooltip.0": "§9Grants immunity to most negative status effects."
+		},
 		"shield_cobalt": {
 			"": "Cobalt Shield",
 			"tooltip.0": "§9Grants immunity to knockback when held or equipped in curio slot.",

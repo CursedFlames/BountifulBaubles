@@ -18,7 +18,7 @@ import net.minecraft.world.dimension.DimensionType;
 
 public class ItemPotionRecall extends BBItem {
 	public ItemPotionRecall() {
-		super("potion_recall", new Item.Properties().maxStackSize(1).group(BountifulBaubles.GROUP));
+		super("potion_recall", ModItems.baseProperties());
 	}
 	
 	@Override

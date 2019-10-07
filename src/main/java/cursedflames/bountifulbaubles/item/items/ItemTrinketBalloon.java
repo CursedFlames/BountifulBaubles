@@ -3,13 +3,14 @@ package cursedflames.bountifulbaubles.item.items;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.EffectJumpBoost.IJumpItem;
 import cursedflames.bountifulbaubles.item.BBItem;
+import cursedflames.bountifulbaubles.item.ModItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import top.theillusivec4.curios.api.capability.ICurio;
 
 public class ItemTrinketBalloon extends BBItem implements IJumpItem {
 	public ItemTrinketBalloon() {
-		super("trinket_balloon", new Item.Properties().maxStackSize(1).group(BountifulBaubles.GROUP));
+		super("trinket_balloon", ModItems.basePropertiesBauble());
 	}
 
 	@Override

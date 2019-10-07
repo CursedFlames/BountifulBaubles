@@ -1,3 +1,15 @@
 potion_recall
 trinket_balloon
 trinket_obsidian_skull
+sunglasses
+trinket_apple
+trinket_vitamins
+ring_overclocking
+trinket_shulker_heart
+ring_free_action
+trinket_bezoar
+ender_dragon_scale
+broken_black_dragon_scale
+trinket_black_dragon_scale
+trinket_mixed_dragon_scale
+trinket_ankh_charm

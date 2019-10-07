@@ -33,7 +33,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 // FIXME readd interdimensional teleportation
 public class ItemMagicMirror extends BBItem {
 	public ItemMagicMirror(String name) {
-		super(name, new Item.Properties().maxStackSize(1).group(BountifulBaubles.GROUP));
+		super(name, ModItems.baseProperties().maxStackSize(1));
 		
 		this.addPropertyOverride(new ResourceLocation("using"), new IItemPropertyGetter() {
 			@Override
