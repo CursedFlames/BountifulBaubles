@@ -34,6 +34,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AnvilUpdateEvent;
@@ -128,13 +129,13 @@ public class ItemShieldCobalt extends ItemShield
 
 					stack = null;
 				}
-				if (FMLCommonHandler.instance().getSide()==Side.CLIENT) {
-					// TODO shield break sound might be wood - use metal tool
-					// break sound instead?
-					// TODO shield break sound not playing - investigate why
-					player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F,
-							0.8F+player.world.rand.nextFloat()*0.4F);
-				}
+				// have to use this so the player hears it to (null arg instead of player)
+				// TODO metal sound instead of wood sound?
+				// TODO find a good volume for this
+				// TODO what category should this be?
+				player.world.playSound(null, player.posX,  player.posY,  player.posZ,
+						SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS,
+						0.9f, 0.8F+player.world.rand.nextFloat()*0.4F);
 			}
 		}
 	}
