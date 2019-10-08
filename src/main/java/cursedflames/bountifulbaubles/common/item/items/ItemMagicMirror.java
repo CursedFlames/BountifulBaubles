@@ -32,8 +32,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 // TODO is teleport interpolation still an issue in 1.14?
 // FIXME readd interdimensional teleportation
 public class ItemMagicMirror extends BBItem {
-	public ItemMagicMirror(String name) {
-		super(name, ModItems.baseProperties().maxStackSize(1));
+	public ItemMagicMirror(String name, Properties props) {
+		super(name, props);
 		
 		this.addPropertyOverride(new ResourceLocation("using"), new IItemPropertyGetter() {
 			@Override

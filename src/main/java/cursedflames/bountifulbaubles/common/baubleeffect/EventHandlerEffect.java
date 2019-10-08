@@ -24,9 +24,7 @@ public class EventHandlerEffect {
 		if (event.getSource().isFireDamage()) {
 			EffectFireResist.onFireDamage(event, entity);
 		} else if (event.getSource()==DamageSource.FALL) {
-//			if (BaublesApi.isBaubleEquipped(entity, ModItems.trinketLuckyHorseshoe)!=-1) {
-//				event.setCanceled(true);
-//			}
+			EffectFallDamageNegate.onFallDamage(event, entity);
 		}
 	}
 	
@@ -36,9 +34,7 @@ public class EventHandlerEffect {
 		if (event.getSource().isFireDamage()) {
 			EffectFireResist.onFireDamage(event, entity);
 		} else if (event.getSource()==DamageSource.FALL) {
-//			if (BaublesApi.isBaubleEquipped(entity, ModItems.trinketLuckyHorseshoe)!=-1) {
-//				event.setCanceled(true);
-//			}
+			EffectFallDamageNegate.onFallDamage(event, entity);
 		}
 	}
 }

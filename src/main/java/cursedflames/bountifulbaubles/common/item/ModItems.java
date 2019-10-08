@@ -6,6 +6,7 @@ import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.items.ItemMagicMirror;
 import cursedflames.bountifulbaubles.common.item.items.ItemPotionRecall;
 import cursedflames.bountifulbaubles.common.item.items.ItemTrinketBalloon;
+import cursedflames.bountifulbaubles.common.item.items.ItemTrinketLuckyHorseshoe;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemRingFreeAction;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemRingOverclocking;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemSunglasses;
@@ -36,10 +37,8 @@ public class ModItems {
 	
 	public static void registerItems(final RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> r = event.getRegistry();
-		r.register(new ItemMagicMirror("magic_mirror"));
-		r.register(new ItemPotionRecall());
 		
-		r.register(new ItemTrinketBalloon());
+		r.register(new ItemTrinketBalloon("trinket_balloon", basePropertiesBauble()));
 		
 		// TODO sunglasses
 		r.register(new ItemSunglasses("sunglasses",
@@ -85,5 +84,10 @@ public class ModItems {
 		r.register(new ItemShieldAnkh("shield_ankh",
 				baseProperties().maxDamage(336*5)));
 		
+		
+		r.register(new ItemMagicMirror("magic_mirror", baseProperties().maxStackSize(1)));
+		r.register(new ItemPotionRecall("potion_recall", baseProperties()));
+		
+		r.register(new ItemTrinketLuckyHorseshoe("trinket_lucky_horseshoe", basePropertiesBauble()));
 	}
 }

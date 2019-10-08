@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
+import net.minecraft.item.Item.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -17,8 +18,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
 public class ItemPotionRecall extends BBItem {
-	public ItemPotionRecall() {
-		super("potion_recall", ModItems.baseProperties());
+	public ItemPotionRecall(String name, Properties props) {
+		super(name, props);
 	}
 	
 	@Override

@@ -13,3 +13,4 @@ broken_black_dragon_scale
 trinket_black_dragon_scale
 trinket_mixed_dragon_scale
 trinket_ankh_charm
+trinket_lucky_horseshoe

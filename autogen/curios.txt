@@ -13,3 +13,4 @@ trinket_ankh_charm charm
 shield_cobalt back body charm
 shield_obsidian back body charm
 shield_ankh back body charm
+trinket_lucky_horseshoe necklace ring charm

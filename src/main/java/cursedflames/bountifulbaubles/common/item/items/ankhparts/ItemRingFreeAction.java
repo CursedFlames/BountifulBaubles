@@ -21,10 +21,14 @@ public class ItemRingFreeAction extends ItemTrinketPotionNegate {
 		
 		@Override
 		public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
-			// TODO does this cause issues with speed boosts from modded blocks?
 			// TODO figure out if there's a way to do non-hacky soulsand negation
 			super.onCurioTick(identifier, index, livingEntity);
-			livingEntity.setMotionMultiplier(null, Vec3d.ZERO);
+			
+			Vec3d motionMultiplier = livingEntity.motionMultiplier;
+			// TODO what if boosted in one direction but slowed in another so magnitude > 1?
+			if (motionMultiplier.lengthSquared() < 3) {
+				livingEntity.motionMultiplier = Vec3d.ZERO;
+			}
 		}
 	}
 	

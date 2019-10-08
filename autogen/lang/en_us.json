@@ -105,6 +105,11 @@
 			"tooltip.sp": "§aYou suddenly feel very alone.",
 			"tooltip.mp": "§aDoes not, however, guarantee that where they are is safe.",
 			"nootherplayers": "No teleportation targets available."
+		},
+		"trinket_lucky_horseshoe": {
+			"": "Lucky Horseshoe",
+			"tooltip.0": "§9Negates fall damage.",
+			"tooltip.1": "§aWhy did the horse need this?"
 		}
 	}
 }
