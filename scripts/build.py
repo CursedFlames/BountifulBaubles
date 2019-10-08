@@ -7,9 +7,9 @@ ITEMMODEL_INPUT_FILE = "autogen/itemModelGen_conf.txt"
 LANG_INPUT_PATH = "autogen/lang/"
 CURIOS_INPUT_FILE = "autogen/curios.txt"
 
-ITEMMODEL_PATH = "src/main/resources/assets/{}/models/item/"
-LANG_PATH = "src/main/resources/assets/{}/lang/"
-CURIOS_PATH = "src/main/resources/data/curios/tags/items/"
+ITEMMODEL_PATH = "src/generated/resources/assets/{}/models/item/"
+LANG_PATH = "src/generated/resources/assets/{}/lang/"
+CURIOS_PATH = "src/generated/resources/data/curios/tags/items/"
 
 MOD_NAME = "bountifulbaubles"  # TODO cl args, etc.
 flattenLang.flatten_lang(LANG_INPUT_PATH, LANG_PATH.format(MOD_NAME))
