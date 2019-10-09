@@ -2,13 +2,13 @@ package cursedflames.bountifulbaubles.common.item.items;
 
 import java.util.Optional;
 
-import cursedflames.bountifulbaubles.common.BountifulBaubles;
+import cursedflames.bountifulbaubles.common.config.Config;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.IItemPropertyGetter;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
@@ -18,12 +18,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.TextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.world.server.ServerChunkProvider;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.server.TicketType;
+import net.minecraftforge.common.DimensionManager;
 
 // TODO bring back quark's custom enchant colors
 // TODO item model improvements
@@ -61,7 +64,7 @@ public class ItemMagicMirror extends BBItem {
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
 		// TODO is this the right way of comparing dimensions?
 		DimensionType dim = player.getSpawnDimension();
-		if (world.getDimension().getType()!=dim/*&&!interdimensional.getBoolean(false)*/) {
+		if (world.getDimension().getType()!=dim && !Config.MAGIC_MIRROR_INTERDIMENSIONAL.get()) {
 			player.sendStatusMessage(new TranslationTextComponent(
 					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));
@@ -74,6 +77,7 @@ public class ItemMagicMirror extends BBItem {
 	public void onUsingTick(ItemStack stack, LivingEntity entity, int count) {
 		count = 72000-count;
 		World world = entity.world;
+		// FIXME particles
 //		if (world.isRemote&&count>0&&count<20&&entity instanceof PlayerEntity) {
 //			for (int i = (count==15||count==16 ? 15 : 5); i>0; i--) {
 //				Vec3d vel = new Vec3d(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5)
@@ -105,43 +109,54 @@ public class ItemMagicMirror extends BBItem {
 		DimensionType dim = player.getSpawnDimension();
 		World world1 = world;
 		if (world.getDimension().getType()!=dim) {
-//			if (!interdimensional.getBoolean(false))
+			if (!Config.MAGIC_MIRROR_INTERDIMENSIONAL.get())
 				return;
-//			world1 = DimensionManager.getWorld(dim);
+			world1 = DimensionManager.getWorld(world.getServer(), dim, true, true);
+		}
+		
+		player.stopRiding();
+		// shouldn't happen, but if it does...?
+		if (player.isSleeping()) {
+		    player.wakeUpPlayer(true, true, false);
 		}
 		if (world1!=null) {
-			if (world!=world1) {
-				// TODO changing dimension this way plays the portal sound
-				// fine for now but if we ever want to change it...
-//				player.changeDimension(dim, new TeleporterRecall());
-			} else {
-				BlockPos spawnPoint = player.getBedLocation(dim);
-				if (spawnPoint!=null) {
-					boolean force = player.isSpawnForced(dim);
-					Optional<Vec3d> optional = PlayerEntity.func_213822_a(world1, spawnPoint, force);
-					if (optional.isPresent()) {
-			            Vec3d pos = optional.get();
-			            doTeleport(player, pos.getX(), pos.getY(), pos.getZ());
-						return;
-			        }
-				}
-				// TODO add check if player is outside of spawn chunk?
-				spawnPoint = world1.getSpawnPoint();
-				
-				if (spawnPoint!=null) {
-					doTeleport(player, spawnPoint.getX()+0.5, spawnPoint.getY(),
-							spawnPoint.getZ()+0.5);
-				}
+			BlockPos spawnPoint = player.getBedLocation(dim);
+			if (spawnPoint!=null) {
+				boolean force = player.isSpawnForced(dim);
+				Optional<Vec3d> optional = PlayerEntity.func_213822_a(world1, spawnPoint, force);
+				if (optional.isPresent()) {
+		            Vec3d pos = optional.get();
+		            doTeleport(player, world, world1, pos.getX(), pos.getY(), pos.getZ());
+					return;
+		        }
+			}
+			// TODO add check if player is outside of spawn chunk?
+			spawnPoint = world1.getSpawnPoint();
+			
+			if (spawnPoint!=null) {
+				doTeleport(player, world, world1, spawnPoint.getX()+0.5, spawnPoint.getY(),
+						spawnPoint.getZ()+0.5);
 			}
 		}
 	}
 	
-	private static void doTeleport(PlayerEntity player, double x, double y, double z) {
-		player.setPositionAndUpdate(x, y, z);
+	private static void doTeleport(PlayerEntity player, World origin, World target,
+			double x, double y, double z) {
+		if (origin != target) {
+			((ServerChunkProvider) target.getChunkProvider()).func_217228_a(
+					TicketType.POST_TELEPORT, 
+					new ChunkPos(new BlockPos(x, y, z)),
+					1, player.getEntityId());
+			((ServerPlayerEntity) player).teleport(
+					(ServerWorld) target, x, y, z, player.rotationYaw, player.rotationPitch);
+		} else {
+			player.setPositionAndUpdate(x, y, z);
+		}
 		if (player.fallDistance>0.0F) {
 			player.fallDistance = 0.0F;
 		}
-		player.world.playSound(null, player.posX, player.posY, player.posZ,
+		// FIXME player can't hear sound upon interdimensional teleport?
+		target.playSound(null, x, y, z,
 				SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
 	}
 }
