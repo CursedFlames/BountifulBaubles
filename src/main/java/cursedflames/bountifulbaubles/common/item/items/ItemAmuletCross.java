@@ -1,10 +1,16 @@
 package cursedflames.bountifulbaubles.common.item.items;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+
+import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.util.CuriosUtil;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import top.theillusivec4.curios.api.CuriosAPI;
@@ -14,12 +20,16 @@ import top.theillusivec4.curios.api.capability.ICurioItemHandler;
 public class ItemAmuletCross extends BBItem {
 	public static final int RESIST_TIME = 36;
 	public static final int VANILLA_RESIST_TIME = 20;
+	private static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,
+			"textures/equipped/amulet_cross.png");
 	
 	public ItemAmuletCross(String name, Properties props) {
 		super(name, props);
 	}
 	
 	protected static class Curio implements ICurio {
+		private BipedModel<LivingEntity> model;
+		
 		@Override
 		public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
 //			// in case other mods add greater i-frames.
@@ -42,6 +52,30 @@ public class ItemAmuletCross extends BBItem {
 //			if (livingEntity.maxHurtResistantTime == RESIST_TIME)
 //					livingEntity.maxHurtResistantTime = VANILLA_RESIST_TIME;
 //		}
+		
+		@Override
+		public boolean hasRender(String identifier, LivingEntity livingEntity) {
+			return true;
+		}
+		
+		@Override
+		public void doRender(String identifier, LivingEntity livingEntity, float limbSwing,
+			      float limbSwingAmount, float partialTicks, float ageInTicks,
+			      float netHeadYaw, float headPitch, float scale) {
+			// FIXME phantom ink
+			Minecraft.getInstance().getTextureManager().bindTexture(texture);
+			ICurio.RenderHelper.rotateIfSneaking(livingEntity);
+			
+			//TODO maybe we want an actual model instead of doing this semi-hacky thing?
+			//TODO make sure this renders properly with player skin shirt layers.
+			GlStateManager.translatef(0F, -0.001F, 0F); // stop z fighting
+			float s = 1.14F/16F;
+			GlStateManager.scalef(s, s, s);
+			if (model==null)
+				model = new BipedModel<>();
+
+			model.bipedBody.render(1);
+		}
 	}
 	
 	@Override

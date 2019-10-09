@@ -43,7 +43,6 @@ public class ModItems {
 		
 		r.register(new ItemBalloon("balloon", basePropertiesBauble()));
 		
-		// TODO sunglasses
 		r.register(new ItemSunglasses("sunglasses",
 				basePropertiesBauble(),
 				Arrays.asList(Effects.HUNGER, Effects.BLINDNESS)));

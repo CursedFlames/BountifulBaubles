@@ -49,7 +49,6 @@ public class ItemShieldCobalt extends ShieldItem {
 			.fromString("9016ba1d-70dd-46c4-b0b4-fc4ea39886c1");
 	
 	protected static class Curio implements ICurio {
-		// TODO base Curio classes to extend - use multiple inheritance with interfaces for each feature maybe?
 		ItemStack stack;
 		protected Curio(ItemStack stack) {
 			this.stack = stack;
@@ -148,7 +147,7 @@ public class ItemShieldCobalt extends ShieldItem {
 				// have to use this so the player hears it to (null arg instead of player)
 				// TODO metal sound instead of wood sound?
 				// TODO find a good volume for this
-				// TODO what category should this be?
+				// TODO what category should this sound be?
 				player.world.playSound(null, player.posX,  player.posY,  player.posZ,
 						SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS,
 						0.9f, 0.8F+player.world.rand.nextFloat()*0.4F);

@@ -43,14 +43,14 @@ public class BountifulBaubles {
 	};
 
 	public BountifulBaubles() {
-		// Register the setup method for modloading
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+//		// Register the setup method for modloading
+//		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		// Register the enqueueIMC method for modloading
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
 //		// Register the processIMC method for modloading
 //		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-		// Register the doClientStuff method for modloading
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+//		// Register the doClientStuff method for modloading
+//		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
@@ -59,21 +59,18 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(ItemBrokenHeart.class);
 	}
 
-	private void setup(final FMLCommonSetupEvent event) {
-		// some preinit code
-		// FIXME remove this debug stuff
-		logger.info("HELLO FROM PREINIT");
-		logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-	}
-
-	private void doClientStuff(final FMLClientSetupEvent event) {
-		// do something that can only be done on the client
-		logger.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
-	}
+//	private void setup(final FMLCommonSetupEvent event) {
+//		// some preinit code
+//	}
+//
+//	private void doClientStuff(final FMLClientSetupEvent event) {
+//		// do something that can only be done on the client
+//		logger.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+//	}
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {
 		// slots actually used by the mod: necklace ring head charm
-		String[] slots = {"necklace", "head", "charm", "back", "body", "belt"};
+		String[] slots = {"necklace", "head", "charm", "back", "body", "belt", "hands"};
 		// idk if there's a way to register multiple with one message
 		for (String slot : slots) {
 			InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> {
@@ -95,7 +92,6 @@ public class BountifulBaubles {
 	@SubscribeEvent
 	public void onServerStarting(FMLServerStartingEvent event) {
 		// do something when the server starts
-		logger.info("HELLO from server starting");
 	}
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -103,7 +99,6 @@ public class BountifulBaubles {
 		@SubscribeEvent
 		public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
 			// register a new block here
-			logger.info("HELLO from Register Block");
 		}
 		
 		@SubscribeEvent

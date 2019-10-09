@@ -37,7 +37,6 @@ public class BBItem extends Item {
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip,
 			ITooltipFlag flagIn) {
 		boolean isShifting = Screen.hasShiftDown();
-		// TODO add proxies instead of being lazy and using deprecated I18n
 		String base = getTranslationKey()+".tooltip.";
 		String shift = "";
 		if (I18n.hasKey(base+"0")) {
