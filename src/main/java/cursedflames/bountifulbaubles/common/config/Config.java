@@ -14,6 +14,7 @@ import net.minecraftforge.fml.config.ModConfig;
 public class Config {
 	public static final String CATEGORY_GENERAL = "general";
 	public static final String CATEGORY_ITEMS = "items";
+	public static final String SUBCAT_BROKEN_HEART = "broken_heart";
 	
 	
 	private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
@@ -23,6 +24,10 @@ public class Config {
 	public static ForgeConfigSpec CLIENT_CONFIG;
 
 	public static ForgeConfigSpec.BooleanValue MAGIC_MIRROR_INTERDIMENSIONAL;
+	
+	public static ForgeConfigSpec.BooleanValue BROKEN_HEART_REGEN;
+	public static ForgeConfigSpec.DoubleValue BROKEN_HEART_REGEN_AMOUNT;
+	
 
 	static {
 		COMMON_BUILDER.comment("General configuration").push(CATEGORY_GENERAL);
@@ -40,6 +45,17 @@ public class Config {
 		MAGIC_MIRROR_INTERDIMENSIONAL = COMMON_BUILDER
 				.comment("Can magic/wormhole mirrors and recall potions recall interdimensionally?")
 				.define("magic_mirror_interdimensional", false);
+		
+		COMMON_BUILDER.comment("Broken Heart settings").push(SUBCAT_BROKEN_HEART);
+		BROKEN_HEART_REGEN = COMMON_BUILDER
+				.comment("Can max HP lost to the broken heart be regained?",
+						"(recommended false on hardcore mode, true otherwise)")
+				.define("regen", true);
+		BROKEN_HEART_REGEN_AMOUNT = COMMON_BUILDER
+				.comment("Amount of max HP regained each sleep, in half hearts.",
+						"Does nothing if max HP regeneration is not enabled")
+				.defineInRange("regen_amount", 4, 0, Double.MAX_VALUE);
+		COMMON_BUILDER.pop();
 	}
 
 	public static void loadConfig(ForgeConfigSpec spec, Path path) {

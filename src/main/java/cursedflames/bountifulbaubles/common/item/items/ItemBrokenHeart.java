@@ -2,6 +2,8 @@ package cursedflames.bountifulbaubles.common.item.items;
 
 import java.util.UUID;
 
+import cursedflames.bountifulbaubles.common.BountifulBaubles;
+import cursedflames.bountifulbaubles.common.config.Config;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.LivingEntity;
@@ -74,16 +76,22 @@ public class ItemBrokenHeart extends BBItem {
 	
 	@SubscribeEvent
 	public static void onPlayerWake(PlayerWakeUpEvent event) {
-		// FIXME add config option to disable heal on wake
 		// TODO this way of checking if slept through night might not be reliable 
 		// - sleeping without spawn point won't work (modded sleeping bags, etc.?)
-		if (event.shouldSetSpawn() && !event.updateWorld()) {
+		if (event.shouldSetSpawn() && !event.updateWorld()
+				&& Config.BROKEN_HEART_REGEN.get()) {
 			LivingEntity entity = event.getEntityLiving();
 			IAttributeInstance maxHealth = entity
 					.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
 			AttributeModifier modifier = maxHealth.getModifier(MODIFIER_UUID);
-			if (modifier!=null) {
+			if (modifier != null) {
 				maxHealth.removeModifier(modifier);
+				double newModifier = modifier.getAmount() + Config.BROKEN_HEART_REGEN_AMOUNT.get();
+				if (newModifier < 0) {
+					modifier = new AttributeModifier(MODIFIER_UUID, "Broken Heart MaxHP drain",
+							newModifier, AttributeModifier.Operation.ADDITION);
+					maxHealth.applyModifier(modifier);
+				}
 			}
 		}
 	}
