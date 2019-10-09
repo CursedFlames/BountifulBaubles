@@ -4,8 +4,8 @@ import cursedflames.bountifulbaubles.common.baubleeffect.EffectJumpBoost.IJumpIt
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import net.minecraft.item.ItemStack;
 
-public class ItemTrinketBalloon extends BBItem implements IJumpItem {
-	public ItemTrinketBalloon(String name, Properties props) {
+public class ItemBalloon extends BBItem implements IJumpItem {
+	public ItemBalloon(String name, Properties props) {
 		super(name, props);
 	}
 

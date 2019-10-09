@@ -21,14 +21,14 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.theillusivec4.curios.api.capability.ICurio;
 
-public class ItemSunglasses extends ItemTrinketPotionNegate { //FIXME render on player
+public class ItemSunglasses extends ItemPotionNegate { //FIXME render on player
 	private static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,
 			"textures/models/armor/sunglasses_layer_1.png");
 	
-	protected class Curio extends ItemTrinketPotionNegate.Curio {
+	protected class Curio extends ItemPotionNegate.Curio {
 		private Object model;
 		
-		protected Curio(ItemTrinketPotionNegate item) {
+		protected Curio(ItemPotionNegate item) {
 			super(item);
 		}
 		

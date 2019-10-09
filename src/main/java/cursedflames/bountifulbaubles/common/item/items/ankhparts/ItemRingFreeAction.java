@@ -13,19 +13,20 @@ import net.minecraft.potion.Effect;
 import net.minecraft.util.math.Vec3d;
 import top.theillusivec4.curios.api.capability.ICurio;
 
-public class ItemRingFreeAction extends ItemTrinketPotionNegate {
-	protected class Curio extends ItemTrinketPotionNegate.Curio {
-		protected Curio(ItemTrinketPotionNegate item) {
+public class ItemRingFreeAction extends ItemPotionNegate {
+	protected class Curio extends ItemPotionNegate.Curio {
+		protected Curio(ItemPotionNegate item) {
 			super(item);
 		}
 		
 		@Override
 		public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
 			// TODO figure out if there's a way to do non-hacky soulsand negation
+			// this would maybe need a PR to forge to add a block collision event?
 			super.onCurioTick(identifier, index, livingEntity);
 			
 			Vec3d motionMultiplier = livingEntity.motionMultiplier;
-			// TODO what if boosted in one direction but slowed in another so magnitude > 1?
+			// TODO what if boosted in one direction but slowed in another so magnitude > sqrt(3)?
 			if (motionMultiplier.lengthSquared() < 3) {
 				livingEntity.motionMultiplier = Vec3d.ZERO;
 			}

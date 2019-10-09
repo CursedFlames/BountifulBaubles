@@ -12,12 +12,12 @@ import net.minecraft.potion.Effect;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import top.theillusivec4.curios.api.capability.ICurio;
 
-public class ItemTrinketPotionNegate extends BBItem {
+public class ItemPotionNegate extends BBItem {
 	protected final List<Effect> cureEffects;
 	
 	protected static class Curio implements ICurio {
-		ItemTrinketPotionNegate item;
-		protected Curio(ItemTrinketPotionNegate item) {
+		ItemPotionNegate item;
+		protected Curio(ItemPotionNegate item) {
 			this.item = item;
 		}
 		@Override
@@ -26,7 +26,7 @@ public class ItemTrinketPotionNegate extends BBItem {
 		}
 	}
 	
-	public ItemTrinketPotionNegate(String name, Properties props, List<Effect> cureEffects) {
+	public ItemPotionNegate(String name, Properties props, List<Effect> cureEffects) {
 		super(name, props);
 		this.cureEffects = cureEffects;
 	}

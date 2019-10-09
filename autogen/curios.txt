@@ -1,16 +1,16 @@
-trinket_balloon necklace ring charm
-trinket_obsidian_skull necklace ring charm
+balloon necklace ring charm
+obsidian_skull necklace ring charm
 sunglasses head
-trinket_apple necklace ring charm
-trinket_vitamins necklace ring charm
+apple necklace ring charm
+vitamins necklace ring charm
 ring_overclocking ring
-trinket_shulker_heart necklace ring charm
+shulker_heart necklace ring charm
 ring_free_action ring
-trinket_bezoar necklace ring charm
-trinket_black_dragon_scale necklace ring charm
-trinket_mixed_dragon_scale necklace ring charm
-trinket_ankh_charm charm
+bezoar necklace ring charm
+black_dragon_scale necklace ring charm
+mixed_dragon_scale necklace ring charm
+ankh_charm charm
 shield_cobalt back body charm
 shield_obsidian back body charm
 shield_ankh back body charm
-trinket_lucky_horseshoe necklace ring charm
+lucky_horseshoe necklace ring charm

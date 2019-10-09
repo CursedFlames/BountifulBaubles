@@ -3,7 +3,7 @@ package cursedflames.bountifulbaubles.common.item.items.ankhparts.shields;
 import java.util.UUID;
 
 import cursedflames.bountifulbaubles.common.baubleeffect.EffectFireResist.IFireResistItem;
-import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemTrinketObsidianSkull;
+import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemObsidianSkull;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
@@ -35,6 +35,6 @@ public class ItemShieldObsidian extends ItemShieldCobalt implements IFireResistI
 
 	@Override
 	public UUID getFireResistUUID(ItemStack stack) {
-		return ItemTrinketObsidianSkull.FIRE_RESIST_UUID;
+		return ItemObsidianSkull.FIRE_RESIST_UUID;
 	}
 }

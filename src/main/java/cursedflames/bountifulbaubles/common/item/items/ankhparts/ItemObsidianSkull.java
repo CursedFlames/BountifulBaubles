@@ -8,14 +8,15 @@ import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item.Properties;
 import top.theillusivec4.curios.api.capability.ICurio;
 
-public class ItemTrinketObsidianSkull extends BBItem implements IFireResistItem {
+public class ItemObsidianSkull extends BBItem implements IFireResistItem {
 	public static final UUID FIRE_RESIST_UUID = UUID
 			.fromString("ecde20fe-73a4-466d-8796-9884d6297ba6");
 	
-	public ItemTrinketObsidianSkull() {
-		super("trinket_obsidian_skull", ModItems.basePropertiesBauble());
+	public ItemObsidianSkull(String name, Properties props) {
+		super(name, props);
 	}
 
 	@Override

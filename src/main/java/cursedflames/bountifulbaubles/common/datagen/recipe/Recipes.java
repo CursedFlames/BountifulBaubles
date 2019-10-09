@@ -23,7 +23,7 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 		ConditionalRecipe.builder().addCondition(
 				and(not(modLoaded("minecraft")))
 		);
-		ShapedRecipeBuilder.shapedRecipe(ModItems.trinket_obsidian_skull)
+		ShapedRecipeBuilder.shapedRecipe(ModItems.obsidian_skull)
 				.patternLine("oro")
 				.patternLine("oro")
 				.patternLine("oro")

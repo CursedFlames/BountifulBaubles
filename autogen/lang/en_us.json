@@ -3,11 +3,11 @@
 {
 	"itemGroup.bountifulbaubles": "Bountiful Baubles",
 	"item.bountifulbaubles": {
-		"trinket_balloon": {
+		"balloon": {
 			"": "Balloon",
 			"tooltip.0": "§9Increases jump height and decreases fall damage slightly."
 		},
-		"trinket_obsidian_skull": {
+		"obsidian_skull": {
 			"": "Obsidian Skull",
 			"tooltip.0": "§9Grants immunity to burning and 50% resistance to fire damage. (Does not protect against lava)",
 			"tooltip.1": "§aHolding this makes you feel vaguely nervous."
@@ -17,11 +17,11 @@
 			"tooltip.0": "§9Grants immunity to blindness.",
 			"tooltip.1": "§aCool guys don't look at explosions."
 		},
-		"trinket_apple": {
+		"apple": {
 			"": "Forbidden Fruit",
 			"tooltip.0": "§9Grants immunity to hunger status effect, and nausea."
 		},
-		"trinket_vitamins": {
+		"vitamins": {
 			"": "Vitamins",
 			"tooltip.0": "§9Grants immunity to weakness and mining fatigue."
 		},
@@ -30,7 +30,7 @@
 			"tooltip.0": "§9Grants immunity to slowness and +7% move speed.",
 			"tooltip.1": "§aEveryone knows that blue LEDs make your PC run faster."
 		},
-		"trinket_shulker_heart": {
+		"shulker_heart": {
 			"": "Shulker Heart",
 			"tooltip.0": "§9Grants immunity to levitation",
 			"tooltip.1": "§aIt's squishy..."
@@ -46,20 +46,20 @@
 			"": "Cracked Black Dragon Scale",
 			"tooltip.0": "§aBlack dragon scales are said to protect against withering. Perhaps this broken one could be repaired?"
 		},
-		"trinket_black_dragon_scale": {
+		"black_dragon_scale": {
 			"": "Black Dragon Scale",
 			"tooltip.0": "§9Grants immunity to withering."
 		},
-		"trinket_bezoar": {
+		"bezoar": {
 			"": "Bezoar",
 			"tooltip.0": "§9Grants immunity to poison."
 		},
-		"trinket_mixed_dragon_scale": {
+		"mixed_dragon_scale": {
 			"": "Mixed Color Dragon Scale",
 			"tooltip.0": "§9Grants immunity to poison and withering.",
 			"tooltip.1": "§aInteresting, the bezoar has fused with the scale and made it appear to be two different colors."
 		},
-		"trinket_ankh_charm": {
+		"ankh_charm": {
 			"": "Ankh Charm",
 			"tooltip.0": "§9Grants immunity to most negative status effects."
 		},
@@ -106,7 +106,7 @@
 			"tooltip.mp": "§aDoes not, however, guarantee that where they are is safe.",
 			"nootherplayers": "No teleportation targets available."
 		},
-		"trinket_lucky_horseshoe": {
+		"lucky_horseshoe": {
 			"": "Lucky Horseshoe",
 			"tooltip.0": "§9Negates fall damage.",
 			"tooltip.1": "§aWhy did the horse need this?"
