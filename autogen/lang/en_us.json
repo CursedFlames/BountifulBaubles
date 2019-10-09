@@ -111,6 +111,24 @@
 			"tooltip.0": "§9Negates fall damage.",
 			"tooltip.1": "§aWhy did the horse need this?"
 		},
+		"amulet_sin_empty": {
+			"": "Sin Pendant (Empty)",
+			"tooltip.0": "§9Crafting component"
+		},
+		"amulet_sin_gluttony": {
+			"": "Gluttony Pendant",
+			"tooltip.0": "§9Eat faster.",
+			"tooltip.1": "§9Grants sinful buff (+damage, +armor) when you eat."
+		},
+		"amulet_sin_pride": {
+			"": "Pride Pendant",
+			"tooltip.0": "§9Grants sinful buff (+damage, +armor) while at full health."
+		},
+		"amulet_sin_wrath": {
+			"": "Wrath Pendant",
+			"tooltip.0": "§9Gives +2 damage.",
+			"tooltip.1": "§9Grants sinful buff (+damage, +armor) after you deal a critical hit."
+		},
 		"broken_heart": {
 			"": "Broken Heart",
 			"tooltip.0": "§9Lethal damage destroys empty heart containers instead.",
@@ -121,5 +139,6 @@
 			"": "Cross Necklace",
 			"tooltip.0": "§9Increases length of invincibility when damaged."
 		}
-	}
+	},
+	"effect.bountifulbaubles.sinful": "Sinful"
 }

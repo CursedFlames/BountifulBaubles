@@ -9,6 +9,9 @@ import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
 import cursedflames.bountifulbaubles.common.item.items.ItemLuckyHorseshoe;
 import cursedflames.bountifulbaubles.common.item.items.ItemMagicMirror;
 import cursedflames.bountifulbaubles.common.item.items.ItemPotionRecall;
+import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinGluttony;
+import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinPride;
+import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinWrath;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemObsidianSkull;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemPotionNegate;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemRingFreeAction;
@@ -19,6 +22,7 @@ import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShi
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldObsidian;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
@@ -30,6 +34,8 @@ public class ModItems {
 	public static final Item obsidian_skull = null;
 	public static final Item broken_heart = null;
 	public static final Item amulet_cross = null;
+	public static final Item amulet_sin_gluttony = null;
+	public static final Item amulet_sin_wrath = null;
 	
 	public static Item.Properties baseProperties() {
 		return new Item.Properties().group(BountifulBaubles.GROUP);
@@ -92,6 +98,14 @@ public class ModItems {
 		r.register(new ItemPotionRecall("potion_recall", baseProperties()));
 		
 		r.register(new ItemLuckyHorseshoe("lucky_horseshoe", basePropertiesBauble()));
+		
+		r.register(new ItemAmuletSinGluttony("amulet_sin_gluttony", basePropertiesBauble(),
+				new ResourceLocation(BountifulBaubles.MODID, "textures/equipped/amulet_sin_gluttony.png")));
+		r.register(new ItemAmuletSinPride("amulet_sin_pride", basePropertiesBauble(),
+				new ResourceLocation(BountifulBaubles.MODID, "textures/equipped/amulet_sin_pride.png")));
+		r.register(new ItemAmuletSinWrath("amulet_sin_wrath", basePropertiesBauble(),
+				new ResourceLocation(BountifulBaubles.MODID, "textures/equipped/amulet_sin_wrath.png")));
+		
 		r.register(new ItemBrokenHeart("broken_heart", basePropertiesBauble()));
 		r.register(new ItemAmuletCross("amulet_cross", basePropertiesBauble()));
 	}
