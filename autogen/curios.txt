@@ -14,3 +14,5 @@ shield_cobalt back body charm
 shield_obsidian back body charm
 shield_ankh back body charm
 lucky_horseshoe necklace ring charm
+broken_heart necklace ring charm
+amulet_cross necklace

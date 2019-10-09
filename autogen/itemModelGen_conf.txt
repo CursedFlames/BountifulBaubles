@@ -14,3 +14,5 @@ black_dragon_scale
 mixed_dragon_scale
 ankh_charm
 lucky_horseshoe
+broken_heart
+amulet_cross

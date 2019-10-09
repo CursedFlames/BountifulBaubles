@@ -110,6 +110,16 @@
 			"": "Lucky Horseshoe",
 			"tooltip.0": "§9Negates fall damage.",
 			"tooltip.1": "§aWhy did the horse need this?"
+		},
+		"broken_heart": {
+			"": "Broken Heart",
+			"tooltip.0": "§9Lethal damage destroys empty heart containers instead.",
+			"tooltip.1": "§9Sleep to regenerate heart containers.",
+			"tooltip.2": "§aHow did this happen?"
+		},
+		"amulet_cross": {
+			"": "Cross Necklace",
+			"tooltip.0": "§9Increases length of invincibility when damaged."
 		}
 	}
 }

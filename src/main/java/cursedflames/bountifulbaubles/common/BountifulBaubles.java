@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import cursedflames.bountifulbaubles.common.baubleeffect.EventHandlerEffect;
 import cursedflames.bountifulbaubles.common.item.ModItems;
+import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldCobalt;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -55,6 +56,7 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.register(EventHandlerEffect.class);
 		MinecraftForge.EVENT_BUS.register(ItemShieldCobalt.class);
+		MinecraftForge.EVENT_BUS.register(ItemBrokenHeart.class);
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {

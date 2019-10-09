@@ -3,15 +3,17 @@ package cursedflames.bountifulbaubles.common.item;
 import java.util.Arrays;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
+import cursedflames.bountifulbaubles.common.item.items.ItemAmuletCross;
+import cursedflames.bountifulbaubles.common.item.items.ItemBalloon;
+import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
+import cursedflames.bountifulbaubles.common.item.items.ItemLuckyHorseshoe;
 import cursedflames.bountifulbaubles.common.item.items.ItemMagicMirror;
 import cursedflames.bountifulbaubles.common.item.items.ItemPotionRecall;
-import cursedflames.bountifulbaubles.common.item.items.ItemBalloon;
-import cursedflames.bountifulbaubles.common.item.items.ItemLuckyHorseshoe;
+import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemObsidianSkull;
+import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemPotionNegate;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemRingFreeAction;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemRingOverclocking;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemSunglasses;
-import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemObsidianSkull;
-import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemPotionNegate;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldAnkh;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldCobalt;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldObsidian;
@@ -25,8 +27,9 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModItems {
 	private static final String PREFIX = BountifulBaubles.MODID+":";
 	public static final Item magic_mirror = null;
-	
 	public static final Item obsidian_skull = null;
+	public static final Item broken_heart = null;
+	public static final Item amulet_cross = null;
 	
 	public static Item.Properties baseProperties() {
 		return new Item.Properties().group(BountifulBaubles.GROUP);
@@ -90,5 +93,7 @@ public class ModItems {
 		r.register(new ItemPotionRecall("potion_recall", baseProperties()));
 		
 		r.register(new ItemLuckyHorseshoe("lucky_horseshoe", basePropertiesBauble()));
+		r.register(new ItemBrokenHeart("broken_heart", basePropertiesBauble()));
+		r.register(new ItemAmuletCross("amulet_cross", basePropertiesBauble()));
 	}
 }
