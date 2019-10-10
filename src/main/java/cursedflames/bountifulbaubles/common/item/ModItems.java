@@ -30,12 +30,32 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(BountifulBaubles.MODID)
 public class ModItems {
 	private static final String PREFIX = BountifulBaubles.MODID+":";
-	public static final Item magic_mirror = null;
+	public static final Item balloon = null;
+	public static final Item sunglasses = null;
+	public static final Item apple = null;
+	public static final Item vitamins = null;
+	public static final Item ring_overclocking = null;
+	public static final Item shulker_heart = null;
+	public static final Item ring_free_action = null;
+	public static final Item bezoar = null;
+	public static final Item ender_dragon_scale = null;
+	public static final Item broken_black_dragon_scale = null;
+	public static final Item black_dragon_scale = null;
+	public static final Item mixed_dragon_scale = null;
+	public static final Item ankh_charm = null;
 	public static final Item obsidian_skull = null;
+	public static final Item shield_cobalt = null;
+	public static final Item shield_obsidian = null;
+	public static final Item shield_ankh = null;
+	public static final Item magic_mirror = null;
+	public static final Item potion_recall = null;
+	public static final Item lucky_horseshoe = null;
+	public static final Item amulet_sin_empty = null;
+	public static final Item amulet_sin_gluttony = null;
+	public static final Item amulet_sin_pride = null;	
+	public static final Item amulet_sin_wrath = null;
 	public static final Item broken_heart = null;
 	public static final Item amulet_cross = null;
-	public static final Item amulet_sin_gluttony = null;
-	public static final Item amulet_sin_wrath = null;
 	
 	public static Item.Properties baseProperties() {
 		return new Item.Properties().group(BountifulBaubles.GROUP);
@@ -99,6 +119,7 @@ public class ModItems {
 		
 		r.register(new ItemLuckyHorseshoe("lucky_horseshoe", basePropertiesBauble()));
 		
+		r.register(new BBItem("amulet_sin_empty", baseProperties()));
 		r.register(new ItemAmuletSinGluttony("amulet_sin_gluttony", basePropertiesBauble(),
 				new ResourceLocation(BountifulBaubles.MODID, "textures/equipped/amulet_sin_gluttony.png")));
 		r.register(new ItemAmuletSinPride("amulet_sin_pride", basePropertiesBauble(),

@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    "glg",
+    "fsa",
+    "gvg"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "l": {
+      "item": "bountifulbaubles:sunglasses"
+    },
+    "f": {
+      "item": "bountifulbaubles:ring_free_action"
+    },
+    "s": {
+      "item": "bountifulbaubles:mixed_dragon_scale"
+    },
+    "a": {
+      "item": "bountifulbaubles:apple"
+    },
+    "v": {
+      "item": "bountifulbaubles:vitamins"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:ankh_charm"
+  }
+}

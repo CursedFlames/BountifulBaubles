@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    " d ",
+    "dad",
+    " g "
+  ],
+  "key": {
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "a": {
+      "item": "bountifulbaubles:amulet_sin_empty"
+    },
+    "g": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:amulet_sin_pride"
+  }
+}

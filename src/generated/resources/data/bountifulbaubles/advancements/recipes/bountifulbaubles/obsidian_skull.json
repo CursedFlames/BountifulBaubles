@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bountifulbaubles:obsidian_skull"
+    ]
+  },
+  "criteria": {
+    "obsidian": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:obsidian"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bountifulbaubles:obsidian_skull"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "obsidian",
+      "has_the_recipe"
+    ]
+  ]
+}

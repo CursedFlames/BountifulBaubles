@@ -13,6 +13,7 @@ import net.minecraftforge.fml.config.ModConfig;
 @Mod.EventBusSubscriber
 public class Config {
 	public static final String CATEGORY_GENERAL = "general";
+	public static final String SUBCAT_RECIPES = "recipes";
 	public static final String CATEGORY_ITEMS = "items";
 	public static final String SUBCAT_BROKEN_HEART = "broken_heart";
 	
@@ -22,6 +23,8 @@ public class Config {
 
 	public static ForgeConfigSpec COMMON_CONFIG;
 	public static ForgeConfigSpec CLIENT_CONFIG;
+	
+//	public static ForgeConfigSpec.BooleanValue MAIN_CRAFTING_RECIPES_ENABLED;
 
 	public static ForgeConfigSpec.BooleanValue MAGIC_MIRROR_INTERDIMENSIONAL;
 	
@@ -31,14 +34,23 @@ public class Config {
 
 	static {
 		COMMON_BUILDER.comment("General configuration").push(CATEGORY_GENERAL);
+		setupGeneralConfig();
 		COMMON_BUILDER.pop();
 		
-		COMMON_BUILDER.comment("Item configuration").push(CATEGORY_GENERAL);
+		COMMON_BUILDER.comment("Item configuration").push(CATEGORY_ITEMS);
 		setupItemConfig();
 		COMMON_BUILDER.pop();
 		
 		COMMON_CONFIG = COMMON_BUILDER.build();
 		CLIENT_CONFIG = CLIENT_BUILDER.build();
+	}
+	
+	private static void setupGeneralConfig() {
+//		COMMON_BUILDER.comment("Recipe settings").push(SUBCAT_RECIPES);
+//		MAIN_CRAFTING_RECIPES_ENABLED = COMMON_BUILDER
+//				.comment("Are the mod's main crafting table recipes enabled?")
+//				.define("main_crafting_recipes", true);
+//		COMMON_BUILDER.pop();
 	}
 	
 	private static void setupItemConfig() {

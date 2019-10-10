@@ -39,11 +39,11 @@ public class BountifulBaubles {
 	
 	public static final Logger logger = LogManager.getLogger();
 	
-	public static final ItemGroup GROUP = new ItemGroup(MODID) {
+	public static final ItemGroup GROUP = new ItemGroup(MODID) { //TODO sort cre-tab/JEI
 		@Override
 		@OnlyIn(Dist.CLIENT)
 		public ItemStack createIcon() {
-			return new ItemStack(Items.APPLE);
+			return new ItemStack(ModItems.obsidian_skull);
 		}
 	};
 
