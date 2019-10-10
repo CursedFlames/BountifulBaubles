@@ -20,5 +20,17 @@ public class AnvilRecipes {
 				20, 1,
 				new ItemStack(ModItems.mixed_dragon_scale),
 				true));
+		AnvilCrafting.addRecipe(new AnvilRecipe(
+				Ingredient.fromItems(ModItems.shield_cobalt),
+				Ingredient.fromItems(ModItems.obsidian_skull),
+				15, 1,
+				new ItemStack(ModItems.shield_obsidian),
+				true));
+		AnvilCrafting.addRecipe(new AnvilRecipe(
+				Ingredient.fromItems(ModItems.shield_obsidian),
+				Ingredient.fromItems(ModItems.ankh_charm),
+				39, 1,
+				new ItemStack(ModItems.shield_ankh),
+				true));
 	}
 }

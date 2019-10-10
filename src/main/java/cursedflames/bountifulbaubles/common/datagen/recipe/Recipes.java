@@ -37,7 +37,7 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 				.patternLine("glg")
 				.patternLine("fsa")
 				.patternLine("gvg")
-				.key('g', Items.GOLD_INGOT)
+				.key('g', Items.GOLD_BLOCK)
 				.key('l', ModItems.sunglasses)
 				.key('f', ModItems.ring_free_action)
 				.key('s', ModItems.mixed_dragon_scale)
