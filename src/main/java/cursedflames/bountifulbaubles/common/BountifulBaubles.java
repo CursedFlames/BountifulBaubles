@@ -12,6 +12,7 @@ import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinGl
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinWrath;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldCobalt;
 import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
+import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.recipe.anvil.AnvilCrafting;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -21,6 +22,7 @@ import net.minecraft.potion.Effect;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.IBrewingRecipe;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -79,6 +81,7 @@ public class BountifulBaubles {
 
 	private void setup(final FMLCommonSetupEvent event) {
 		AnvilRecipes.registerRecipes();
+		BrewingRecipes.registerRecipes();
 	}
 
 //	private void doClientStuff(final FMLClientSetupEvent event) {
