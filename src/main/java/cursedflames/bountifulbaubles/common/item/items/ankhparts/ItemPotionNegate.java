@@ -3,6 +3,7 @@ package cursedflames.bountifulbaubles.common.item.items.ankhparts;
 import java.util.List;
 
 import cursedflames.bountifulbaubles.common.baubleeffect.EffectPotionNegate;
+import cursedflames.bountifulbaubles.common.baubleeffect.EffectPotionNegate.IPotionNegateItem;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.util.CuriosUtil;
 import net.minecraft.entity.LivingEntity;
@@ -12,7 +13,7 @@ import net.minecraft.potion.Effect;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import top.theillusivec4.curios.api.capability.ICurio;
 
-public class ItemPotionNegate extends BBItem {
+public class ItemPotionNegate extends BBItem implements IPotionNegateItem {
 	protected final List<Effect> cureEffects;
 	
 	protected static class Curio implements ICurio {
@@ -39,5 +40,10 @@ public class ItemPotionNegate extends BBItem {
 	public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
 		ICurio curio = getCurio();
 		return CuriosUtil.makeSimpleCap(curio);
+	}
+
+	@Override
+	public List<Effect> getCureEffects() {
+		return cureEffects;
 	}
 }

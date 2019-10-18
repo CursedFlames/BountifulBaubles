@@ -13,6 +13,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.PotionEvent.PotionApplicableEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosAPI;
 
@@ -48,5 +49,10 @@ public class EventHandlerEffect {
 		} else if (event.getSource()==DamageSource.FALL) {
 			EffectFallDamageNegate.onFallDamage(event, entity);
 		}
+	}
+	
+	@SubscribeEvent
+	public static void potionApply(PotionApplicableEvent event) {
+		EffectPotionNegate.potionApply(event);
 	}
 }

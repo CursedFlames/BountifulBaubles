@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.UUID;
 
+import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldObsidian;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -38,8 +39,6 @@ public class EffectFireResist {
 			ICurioItemHandler handler = opt.orElse(null);
 			SortedMap<String, CurioStackHandler> items = handler.getCurioMap();
 			Set<UUID> found = new HashSet<>();
-			ItemStack mainHand = entity.getHeldItemMainhand();
-			ItemStack offHand = entity.getHeldItemOffhand();
 			for (CurioStackHandler stackHandler : items.values()) {
 				int size = stackHandler.getSlots();
 				for (int i = 0; i < size; i++) {
@@ -56,11 +55,14 @@ public class EffectFireResist {
 				}
 			}
 			
+			ItemStack mainHand = entity.getHeldItemMainhand();
+			ItemStack offHand = entity.getHeldItemOffhand();			
 			// this is stupid but it reduces code duplication slightly so...
-			for (ItemStack stack = mainHand; stack != offHand; stack = offHand) {
+			ItemStack stack = mainHand;
+			for (int i = 0; i < 2; i++, stack = offHand) {
 				if (stack.getItem() instanceof IFireResistItem
 						&&!found.contains(((IFireResistItem) stack.getItem()).getFireResistUUID(stack))
-						/*&&stack.getItem() instanceof ItemShieldObsidian*/) {
+						&&stack.getItem() instanceof ItemShieldObsidian) {
 					IFireResistItem fireResist = (IFireResistItem) (stack.getItem());
 					found.add(fireResist.getFireResistUUID(stack));
 					damageMulti *= 1-fireResist.getFireResistance(stack);

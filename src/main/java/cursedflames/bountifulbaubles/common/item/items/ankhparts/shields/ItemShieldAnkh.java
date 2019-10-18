@@ -3,29 +3,21 @@ package cursedflames.bountifulbaubles.common.item.items.ankhparts.shields;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-
 import cursedflames.bountifulbaubles.common.baubleeffect.EffectPotionNegate;
+import cursedflames.bountifulbaubles.common.baubleeffect.EffectPotionNegate.IPotionNegateItem;
 import cursedflames.bountifulbaubles.common.util.CuriosUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.Direction;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import top.theillusivec4.curios.api.capability.CuriosCapability;
 import top.theillusivec4.curios.api.capability.ICurio;
 
-public class ItemShieldAnkh extends ItemShieldObsidian {
+public class ItemShieldAnkh extends ItemShieldObsidian implements IPotionNegateItem {
 	private static final List<Effect> cureEffects = Arrays.asList(Effects.BLINDNESS, Effects.NAUSEA, Effects.HUNGER,
 			Effects.MINING_FATIGUE, Effects.WEAKNESS, Effects.SLOWNESS, Effects.LEVITATION, Effects.POISON,
 			Effects.WITHER);
@@ -58,5 +50,10 @@ public class ItemShieldAnkh extends ItemShieldObsidian {
 				&& ((PlayerEntity)entityIn).getHeldItemOffhand() == stack) {
 			EffectPotionNegate.negatePotion(entityIn, cureEffects);
 		}
+	}
+
+	@Override
+	public List<Effect> getCureEffects() {
+		return cureEffects;
 	}
 }
