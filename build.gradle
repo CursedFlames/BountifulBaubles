@@ -35,11 +35,11 @@ compileJava {
 
 minecraft {
     version = "1.12.2-14.23.5.2838"
-    if (file("../run").exists()) {
-		runDir = "../run/assets"
-	} else {
+//    if (file("../run").exists()) {
+//		runDir = "../run/assets"
+//	} else {
 		runDir = "assets"
-	}
+//	}
 	
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.

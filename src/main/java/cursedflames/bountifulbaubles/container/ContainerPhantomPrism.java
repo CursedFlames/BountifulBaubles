@@ -3,6 +3,8 @@ package cursedflames.bountifulbaubles.container;
 import javax.annotation.Nullable;
 
 import baubles.api.BaublesApi;
+import baubles.api.cap.IBaublesItemHandler;
+import baubles.common.container.SlotBauble;
 import cursedflames.bountifulbaubles.network.NBTPacket;
 import cursedflames.bountifulbaubles.network.PacketHandler;
 import cursedflames.bountifulbaubles.util.GenericSlot;
@@ -14,7 +16,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import vazkii.botania.api.item.IPhantomInkable;
 
@@ -22,7 +23,7 @@ public class ContainerPhantomPrism extends Container {
 	EntityPlayer player;
 	public boolean guiDirty = false;
 	IInventory playerInventory;
-	IItemHandler baublesInventory;
+	IBaublesItemHandler baublesInventory;
 	public int[] currentStates = new int[11];
 
 	public ContainerPhantomPrism(EntityPlayer player) {
@@ -43,7 +44,7 @@ public class ContainerPhantomPrism extends Container {
 			for (int col = 0; col<4&&(row*4+col)<baublesInventory.getSlots(); col++) {
 				int x = 8+(col+5)*18;
 				int y = row*18+26;
-				this.addSlotToContainer(new SlotItemHandler(baublesInventory, col+row*4, x, y));
+				this.addSlotToContainer(new SlotBauble(player, baublesInventory, col+row*4, x, y));
 			}
 		}
 

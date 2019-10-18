@@ -2,6 +2,8 @@ package cursedflames.bountifulbaubles.block;
 
 import baubles.api.BaublesApi;
 import baubles.api.cap.BaublesCapabilities;
+import baubles.api.cap.IBaublesItemHandler;
+import baubles.common.container.SlotBauble;
 import cursedflames.bountifulbaubles.util.GenericSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -68,13 +70,13 @@ public class ContainerReforger extends GenericContainer {
 		this.addSlotToContainer(new Slot(playerInventory, 40, 8+8*18, 80-18));
 
 		// Baubles
-		IItemHandler baublesInventory = BaublesApi.getBaublesHandler(player);
+		IBaublesItemHandler baublesInventory = BaublesApi.getBaublesHandler(player);
 
 		for (int row = 0; row<2; row++) {
 			for (int col = 0; col<4&&(row*4+col)<baublesInventory.getSlots(); col++) {
 				int x = 8+(col+5)*18;
 				int y = row*18+44;
-				this.addSlotToContainer(new SlotItemHandler(baublesInventory, col+row*4, x, y));
+				this.addSlotToContainer(new SlotBauble(player, baublesInventory, col+row*4, x, y));
 			}
 		}
 
