@@ -1,12 +1,15 @@
 package cursedflames.bountifulbaubles.item;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import baubles.api.BaubleType;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.PotionNegation;
+import cursedflames.bountifulbaubles.baubleeffect.PotionNegation.IPotionNegateItem;
 import cursedflames.bountifulbaubles.item.base.AGenericItemBauble;
 import cursedflames.bountifulbaubles.item.base.IItemAttributeModifier;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,7 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 
-public class ItemRingOverclocking extends AGenericItemBauble implements IItemAttributeModifier {
+public class ItemRingOverclocking extends AGenericItemBauble implements IItemAttributeModifier, IPotionNegateItem {
 	public ItemRingOverclocking() {
 		super("ringOverclocking", BountifulBaubles.TAB);
 		BountifulBaubles.registryHelper.addItemModel(this);
@@ -44,5 +47,10 @@ public class ItemRingOverclocking extends AGenericItemBauble implements IItemAtt
 	public void onWornTick(ItemStack stack, EntityLivingBase player) {
 		PotionNegation.negatePotion(player,
 				Potion.getPotionFromResourceLocation("minecraft:slowness"));
+	}
+
+	@Override
+	public List<String> getCureEffects() {
+		return Arrays.asList("minecraft:slowness");
 	}
 }

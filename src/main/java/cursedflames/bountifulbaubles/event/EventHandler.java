@@ -10,6 +10,7 @@ import cursedflames.bountifulbaubles.ModConfig;
 import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
 import cursedflames.bountifulbaubles.baubleeffect.IFireResistance;
 import cursedflames.bountifulbaubles.baubleeffect.IJumpBoost;
+import cursedflames.bountifulbaubles.baubleeffect.PotionNegation;
 import cursedflames.bountifulbaubles.item.ItemAmuletCross;
 import cursedflames.bountifulbaubles.item.ItemShieldObsidian;
 import cursedflames.bountifulbaubles.item.ModItems;
@@ -21,6 +22,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.PotionEvent.PotionApplicableEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -185,6 +187,11 @@ public class EventHandler {
 				}
 			}
 		}
+	}
+	
+	@SubscribeEvent
+	public static void potionApply(PotionApplicableEvent event) {
+		PotionNegation.potionApply(event);
 	}
 
 	// this doesn't work?

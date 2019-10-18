@@ -10,6 +10,7 @@ import baubles.api.IBauble;
 import baubles.api.render.IRenderBauble;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.PotionNegation;
+import cursedflames.bountifulbaubles.baubleeffect.PotionNegation.IPotionNegateItem;
 import cursedflames.bountifulbaubles.item.armor.ItemArmorBB;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -29,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.botania.api.item.IPhantomInkable;
 
 public class ItemSunglasses extends ItemArmorBB
-		implements IBauble/* , ICustomEnchantColor */, ISpecialArmor, IRenderBauble {
+		implements IBauble/* , ICustomEnchantColor */, ISpecialArmor, IRenderBauble, IPotionNegateItem {
 	private static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,
 			"textures/models/armor/sunglasses_layer_1.png");
 
@@ -139,5 +140,10 @@ public class ItemSunglasses extends ItemArmorBB
 			tooltip.add(
 					BountifulBaubles.proxy.translate(BountifulBaubles.MODID+".misc.hasPhantomInk"));
 		}
+	}
+
+	@Override
+	public List<String> getCureEffects() {
+		return Arrays.asList("minecraft:blindness");
 	}
 }
