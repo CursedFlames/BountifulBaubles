@@ -33,7 +33,6 @@ import net.minecraftforge.common.DimensionManager;
 // make it not double-sided
 // make mirror face have enchantment glow
 // TODO is teleport interpolation still an issue in 1.14?
-// FIXME readd interdimensional teleportation
 public class ItemMagicMirror extends BBItem {
 	public ItemMagicMirror(String name, Properties props) {
 		super(name, props);

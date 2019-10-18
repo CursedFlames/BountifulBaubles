@@ -140,5 +140,7 @@
 			"tooltip.0": "§9Increases length of invincibility when damaged."
 		}
 	},
-	"effect.bountifulbaubles.sinful": "Sinful"
+	"effect.bountifulbaubles.sinful": "Sinful",
+	"bountifulbaubles.moreinfo": "§bPress Shift for more info",
+    "bountifulbaubles.broken": "§8§oBroken"
 }

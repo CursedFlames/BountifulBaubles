@@ -35,7 +35,6 @@ public class LootTableInjector {
 	}
 	
 	public static void mobLootTableLoad(LootTableLoadEvent event, LootTable table, ResourceLocation loc) {
-		BountifulBaubles.logger.info("adding loot tables YUIOP");
 		if (loc.equals(EntityType.HUSK.getLootTable())) {
 			LootPool.Builder builder = LootPool.builder()
 					.rolls(ConstantRange.of(1))
@@ -80,9 +79,7 @@ public class LootTableInjector {
 	
 	public static void structureLootTableLoad(LootTableLoadEvent event, LootTable table, ResourceLocation loc) {
 		if (loc.equals(LootTables.CHESTS_SIMPLE_DUNGEON)) {
-			if (Config.DUNGEON_ITEM_RATE.get() > 0) {
-				for (int i = 0; i < 50; i++)
-				BountifulBaubles.logger.info("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+			if (Config.DUNGEON_ITEM_RATE.get() > 0)
 			table.addPool(LootPool.builder()
 					.rolls(ConstantRange.of(1))
 					.acceptCondition(RandomChance.builder((float)(double)Config.DUNGEON_ITEM_RATE.get()))
@@ -106,7 +103,6 @@ public class LootTableInjector {
 							.weight(3))
 					.name(name("dungeon_items"))
 					.build());
-			}
 			if (Config.DUNGEON_POTION_RATE.get() > 0)
 			table.addPool(LootPool.builder()
 					.rolls(RandomValueRange.func_215837_a(1, 6))

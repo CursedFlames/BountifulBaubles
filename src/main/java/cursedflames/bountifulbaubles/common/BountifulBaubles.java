@@ -94,7 +94,7 @@ public class BountifulBaubles {
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {
 		// slots actually used by the mod: necklace ring head charm
-		String[] slots = {"necklace", "head", "charm", "back", "body", "belt", "hands"};
+		String[] slots = {"necklace", "head", "charm"/*, "back", "body", "belt", "hands"*/};
 		// idk if there's a way to register multiple with one message
 		for (String slot : slots) {
 			InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> {
