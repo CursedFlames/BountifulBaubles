@@ -15,6 +15,8 @@ public class Config {
 	public static final String CATEGORY_GENERAL = "general";
 	public static final String SUBCAT_RECIPES = "recipes";
 	public static final String CATEGORY_ITEMS = "items";
+	public static final String SUBCAT_ENDER_DRAGON_SCALE = "ender_dragon_scale";
+	public static final String SUBCAT_MAGIC_MIRROR = "magic_mirror";
 	public static final String SUBCAT_BROKEN_HEART = "broken_heart";
 	
 	
@@ -25,6 +27,8 @@ public class Config {
 	public static ForgeConfigSpec CLIENT_CONFIG;
 	
 //	public static ForgeConfigSpec.BooleanValue MAIN_CRAFTING_RECIPES_ENABLED;
+	
+	public static ForgeConfigSpec.BooleanValue DRAGON_SCALE_DROP_ENABLED;
 
 	public static ForgeConfigSpec.BooleanValue MAGIC_MIRROR_INTERDIMENSIONAL;
 	
@@ -54,9 +58,19 @@ public class Config {
 	}
 	
 	private static void setupItemConfig() {
+		// FIXME add config options for scale drop rates
+		
+		COMMON_BUILDER.comment("Ender Dragon Scale settings").push(SUBCAT_ENDER_DRAGON_SCALE);
+		DRAGON_SCALE_DROP_ENABLED = COMMON_BUILDER
+				.comment("Does the ender dragon drop scales?")
+				.define("dragon_scale_drop_enabled", true);
+		COMMON_BUILDER.pop();
+
+		COMMON_BUILDER.comment("Magic Mirror settings").push(SUBCAT_MAGIC_MIRROR);
 		MAGIC_MIRROR_INTERDIMENSIONAL = COMMON_BUILDER
 				.comment("Can magic/wormhole mirrors and recall potions recall interdimensionally?")
 				.define("magic_mirror_interdimensional", false);
+		COMMON_BUILDER.pop();
 		
 		COMMON_BUILDER.comment("Broken Heart settings").push(SUBCAT_BROKEN_HEART);
 		BROKEN_HEART_REGEN = COMMON_BUILDER

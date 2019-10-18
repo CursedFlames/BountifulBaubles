@@ -13,6 +13,8 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         generator.addProvider(new Recipes(generator));
-//        generator.addProvider(new LootTables(generator));
+        // these ones don't work since they overwrite vanilla instead of adding to tables
+//        generator.addProvider(new LootTablesEntities(generator));
+//        generator.addProvider(new LootTablesChests(generator));
     }
 }

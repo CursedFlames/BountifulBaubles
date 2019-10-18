@@ -20,6 +20,16 @@ public class BrewingRecipes {
 				new ItemStack(ModItems.potion_recall));
 		
 //		BrewingRecipeRegistry.addRecipe(
+//				Ingredient.fromItems(ModItems.potion_wormhole),
+//				Ingredient.fromItems(Items.QUARTZ),
+//				new ItemStack(ModItems.potion_recall));
+		
+//		BrewingRecipeRegistry.addRecipe(
+//				Ingredient.fromStacks(mundanePotion),
+//				Ingredient.fromItems(Items.ENDER_PEARL),
+//				new ItemStack(ModItems.potion_wormhole));
+		
+//		BrewingRecipeRegistry.addRecipe(
 //				Ingredient.fromItems(ModItems.potion_recall),
 //				Ingredient.fromItems(Items.ENDER_PEARL),
 //				new ItemStack(ModItems.potion_wormhole));
