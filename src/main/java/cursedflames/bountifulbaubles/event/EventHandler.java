@@ -73,7 +73,7 @@ public class EventHandler {
 							: (i==-2 ? player.getHeldItemMainhand() : player.getHeldItemOffhand());
 					if (stack.getItem() instanceof IFireResistance
 							&&!found.contains(((IFireResistance) stack.getItem()).getFireResistID())
-							&&(i<7||stack.getItem() instanceof ItemShieldObsidian)) {
+							&&(i>=0||stack.getItem() instanceof ItemShieldObsidian)) {
 						IFireResistance fireResist = (IFireResistance) (stack.getItem());
 						found.add(fireResist.getFireResistID());
 						damageMulti *= 1-fireResist.getResistance();
@@ -121,7 +121,7 @@ public class EventHandler {
 							: (i==-2 ? player.getHeldItemMainhand() : player.getHeldItemOffhand());
 					if (stack.getItem() instanceof IFireResistance
 							&&!found.contains(((IFireResistance) stack.getItem()).getFireResistID())
-							&&(i<7||stack.getItem() instanceof ItemShieldObsidian)) {
+							&&(i>=0||stack.getItem() instanceof ItemShieldObsidian)) {
 						IFireResistance fireResist = (IFireResistance) (stack.getItem());
 						found.add(fireResist.getFireResistID());
 						damageMulti *= 1-fireResist.getResistance();
