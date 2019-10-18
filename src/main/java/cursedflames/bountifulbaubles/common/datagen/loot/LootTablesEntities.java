@@ -53,12 +53,12 @@ public class LootTablesEntities extends BaseLootTableProvider<EntityType<?>> {
 						.addEntry(ItemLootEntry.builder(ModItems.bezoar)
 								.acceptCondition(KilledByPlayer.builder())
 								.acceptCondition(RandomChance.builder(0.05f)))));
-		lootTables.put(EntityType.ENDER_DRAGON, new LootTable.Builder()
-				.addLootPool(LootPool.builder()
-						.rolls(ConstantRange.of(10))
-						.addEntry(ItemLootEntry.builder(ModItems.ender_dragon_scale)
-								.acceptCondition(KilledByPlayer.builder())
-								.acceptCondition(RandomChance.builder(1f)))));
+//		lootTables.put(EntityType.ENDER_DRAGON, new LootTable.Builder()
+//				.addLootPool(LootPool.builder()
+//						.rolls(ConstantRange.of(10))
+//						.addEntry(ItemLootEntry.builder(ModItems.ender_dragon_scale)
+//								.acceptCondition(KilledByPlayer.builder())
+//								.acceptCondition(RandomChance.builder(1f)))));
 	}
 
 	@Override

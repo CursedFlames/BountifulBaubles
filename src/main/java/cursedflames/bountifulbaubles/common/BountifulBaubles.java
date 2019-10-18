@@ -11,6 +11,7 @@ import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinGluttony;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinWrath;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldCobalt;
+import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
 import cursedflames.bountifulbaubles.common.misc.MiscEventHandler;
 import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
@@ -73,6 +74,7 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(EventHandlerEffect.class);
 		MinecraftForge.EVENT_BUS.register(AnvilCrafting.class);
 		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
+		MinecraftForge.EVENT_BUS.register(LootTableInjector.class);
 		
 		MinecraftForge.EVENT_BUS.register(ItemShieldCobalt.class);
 		MinecraftForge.EVENT_BUS.register(ItemAmuletSinGluttony.class);
