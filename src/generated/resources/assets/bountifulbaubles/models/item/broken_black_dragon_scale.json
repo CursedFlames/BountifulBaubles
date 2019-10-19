@@ -1,5 +1,5 @@
 {
-	"parent": "item/handheld",
+	"parent": "item/generated",
 	"textures": {
 		"layer0": "bountifulbaubles:item/broken_black_dragon_scale"
 	}
