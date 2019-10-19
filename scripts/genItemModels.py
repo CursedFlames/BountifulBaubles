@@ -3,7 +3,7 @@ import os.path as path
 
 copypasta = """\
 {{
-\t"parent": "item/handheld",
+\t"parent": "item/generated",
 \t"textures": {{
 \t\t"layer0": "{modid}:item/{itemname}"
 \t}}

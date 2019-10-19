@@ -37,7 +37,7 @@
 		},
 		"ring_free_action": {
 			"": "Ring of Free Action",
-			"tooltip.0": "§9Grants immunity to slowness and levitation and allows free movement through cobwebs"
+			"tooltip.0": "§9Grants immunity to slowness and levitation and allows free movement through cobwebs."
 		},
 		"ender_dragon_scale": {
 			"": "Ender Dragon Scale"
@@ -138,9 +138,17 @@
 		"amulet_cross": {
 			"": "Cross Necklace",
 			"tooltip.0": "§9Increases length of invincibility when damaged."
+		},
+		"gloves_dexterity": {
+			"": "Gauntlets of Dexterity",
+			"tooltip.0": "§9Allows you to switch between items without resetting attack cooldown.",
+			//"tooltip.1": "§9Also gives +0.6 attack speed.", //don't need this because it's displayed by curios
+			"tooltip.1": "§aAnd they say dexterity isn't a useful stat."
 		}
 	},
 	"effect.bountifulbaubles.sinful": "Sinful",
 	"bountifulbaubles.moreinfo": "§bPress Shift for more info",
-    "bountifulbaubles.broken": "§8§oBroken"
+    "bountifulbaubles.broken": "§8§oBroken",
+    "curios.identifier.hands": "Hands", //won't need these two once they're integrated into curios
+    "curios.modifiers.hands": "When on hands:"
 }

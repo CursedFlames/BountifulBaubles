@@ -32,7 +32,7 @@ public class ItemAmuletSinWrath extends ItemAmuletSin {
 		@Override
 		public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
 			Multimap<String, AttributeModifier> mods = HashMultimap.create();
-			String damage = SharedMonsterAttributes.KNOCKBACK_RESISTANCE.getName();
+			String damage = SharedMonsterAttributes.ATTACK_DAMAGE.getName();
 			mods.put(damage, new AttributeModifier(DAMAGE_UUID,
 					"Wrath pendant damage", 2, Operation.ADDITION));
 			return mods;

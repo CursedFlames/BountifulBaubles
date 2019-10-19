@@ -8,11 +8,13 @@ import cursedflames.bountifulbaubles.common.config.Config;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
+import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDexterity;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinGluttony;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinWrath;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldCobalt;
 import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
 import cursedflames.bountifulbaubles.common.misc.MiscEventHandler;
+import cursedflames.bountifulbaubles.common.network.PacketHandler;
 import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.recipe.anvil.AnvilCrafting;
@@ -80,6 +82,9 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(ItemAmuletSinGluttony.class);
 		MinecraftForge.EVENT_BUS.register(ItemAmuletSinWrath.class);
 		MinecraftForge.EVENT_BUS.register(ItemBrokenHeart.class);
+		MinecraftForge.EVENT_BUS.register(ItemGlovesDexterity.class);
+		
+		PacketHandler.registerMessages(); // TODO where are we supposed to do this?
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
@@ -94,7 +99,7 @@ public class BountifulBaubles {
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {
 		// slots actually used by the mod: necklace ring head charm
-		String[] slots = {"necklace", "head", "charm"/*, "back", "body", "belt", "hands"*/};
+		String[] slots = {"necklace", "head", "charm"/*, "back", "body", "belt"*/, "hands"};
 		// idk if there's a way to register multiple with one message
 		for (String slot : slots) {
 			InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> {

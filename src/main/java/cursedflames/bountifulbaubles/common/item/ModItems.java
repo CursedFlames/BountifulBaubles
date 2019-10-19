@@ -6,6 +6,7 @@ import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.items.ItemAmuletCross;
 import cursedflames.bountifulbaubles.common.item.items.ItemBalloon;
 import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
+import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDexterity;
 import cursedflames.bountifulbaubles.common.item.items.ItemLuckyHorseshoe;
 import cursedflames.bountifulbaubles.common.item.items.ItemMagicMirror;
 import cursedflames.bountifulbaubles.common.item.items.ItemPotionRecall;
@@ -28,7 +29,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 
 @ObjectHolder(BountifulBaubles.MODID)
-public class ModItems {
+public class ModItems { //FIXME items don't render properly in 3rd person
 	private static final String PREFIX = BountifulBaubles.MODID+":";
 	public static final Item balloon = null;
 	public static final Item sunglasses = null;
@@ -56,6 +57,7 @@ public class ModItems {
 	public static final Item amulet_sin_wrath = null;
 	public static final Item broken_heart = null;
 	public static final Item amulet_cross = null;
+	public static final Item gloves_dexterity = null;
 	
 	public static Item.Properties baseProperties() {
 		return new Item.Properties().group(BountifulBaubles.GROUP);
@@ -129,5 +131,7 @@ public class ModItems {
 		
 		r.register(new ItemBrokenHeart("broken_heart", basePropertiesBauble()));
 		r.register(new ItemAmuletCross("amulet_cross", basePropertiesBauble()));
+		
+		r.register(new ItemGlovesDexterity("gloves_dexterity", basePropertiesBauble()));
 	}
 }

@@ -20,3 +20,4 @@ amulet_sin_pride
 amulet_sin_wrath
 broken_heart
 amulet_cross
+gloves_dexterity

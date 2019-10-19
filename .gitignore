@@ -25,3 +25,5 @@ run
 forge*changelog.txt
 
 src/main/resources/.cache
+
+scripts/__pycache__
