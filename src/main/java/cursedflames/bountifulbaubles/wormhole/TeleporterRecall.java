@@ -14,9 +14,9 @@ public class TeleporterRecall implements ITeleporter {
 			return;
 		BlockPos spawnPoint = ((EntityPlayer) entity).getBedLocation();
 		if (spawnPoint != null) {
-			// sets spawn point to safe loc near bed, or resets if
-			// the bed isn't there
-			spawnPoint = EntityPlayer.getBedSpawnLocation(world, spawnPoint, false);
+			// player's spawn point, or null if they have none
+			spawnPoint = EntityPlayer.getBedSpawnLocation(world, spawnPoint,
+					((EntityPlayer) entity).isSpawnForced(world.provider.getDimension()));
 		}
 		if (spawnPoint == null) {
 			// TODO add check if player is outside of spawn chunk
