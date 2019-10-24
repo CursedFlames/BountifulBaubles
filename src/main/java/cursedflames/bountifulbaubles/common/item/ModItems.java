@@ -10,6 +10,8 @@ import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDexterity;
 import cursedflames.bountifulbaubles.common.item.items.ItemLuckyHorseshoe;
 import cursedflames.bountifulbaubles.common.item.items.ItemMagicMirror;
 import cursedflames.bountifulbaubles.common.item.items.ItemPotionRecall;
+import cursedflames.bountifulbaubles.common.item.items.ItemPotionWormhole;
+import cursedflames.bountifulbaubles.common.item.items.ItemWormholeMirror;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinGluttony;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinPride;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinWrath;
@@ -29,7 +31,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 
 @ObjectHolder(BountifulBaubles.MODID)
-public class ModItems { //FIXME items don't render properly in 3rd person
+public class ModItems {
 	private static final String PREFIX = BountifulBaubles.MODID+":";
 	public static final Item balloon = null;
 	public static final Item sunglasses = null;
@@ -50,6 +52,8 @@ public class ModItems { //FIXME items don't render properly in 3rd person
 	public static final Item shield_ankh = null;
 	public static final Item magic_mirror = null;
 	public static final Item potion_recall = null;
+	public static final Item wormhole_mirror = null;
+	public static final Item potion_wormhole = null;
 	public static final Item lucky_horseshoe = null;
 	public static final Item amulet_sin_empty = null;
 	public static final Item amulet_sin_gluttony = null;
@@ -118,6 +122,8 @@ public class ModItems { //FIXME items don't render properly in 3rd person
 		
 		r.register(new ItemMagicMirror("magic_mirror", baseProperties().maxStackSize(1)));
 		r.register(new ItemPotionRecall("potion_recall", baseProperties()));
+		r.register(new ItemWormholeMirror("wormhole_mirror", baseProperties().maxStackSize(1)));
+		r.register(new ItemPotionWormhole("potion_wormhole", baseProperties()));
 		
 		r.register(new ItemLuckyHorseshoe("lucky_horseshoe", basePropertiesBauble()));
 		

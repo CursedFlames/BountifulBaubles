@@ -14,6 +14,7 @@ import net.minecraft.world.storage.loot.LootTables;
 import net.minecraft.world.storage.loot.RandomValueRange;
 import net.minecraft.world.storage.loot.conditions.KilledByPlayer;
 import net.minecraft.world.storage.loot.conditions.RandomChance;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -96,6 +97,8 @@ public class LootTableInjector {
 					.addEntry(ItemLootEntry.builder(ModItems.sunglasses)
 							.weight(10))
 					.addEntry(ItemLootEntry.builder(ModItems.amulet_cross)
+							.weight(10))
+					.addEntry(ItemLootEntry.builder(ModItems.gloves_dexterity)
 							.weight(10))
 					.addEntry(ItemLootEntry.builder(ModItems.broken_black_dragon_scale)
 							.weight(3))

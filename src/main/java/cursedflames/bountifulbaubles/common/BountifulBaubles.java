@@ -3,7 +3,9 @@ package cursedflames.bountifulbaubles.common;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import cursedflames.bountifulbaubles.client.gui.ScreenWormhole;
 import cursedflames.bountifulbaubles.common.baubleeffect.EventHandlerEffect;
+import cursedflames.bountifulbaubles.common.command.CommandWormhole;
 import cursedflames.bountifulbaubles.common.config.Config;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.item.ModItems;
@@ -15,23 +17,33 @@ import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShi
 import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
 import cursedflames.bountifulbaubles.common.misc.MiscEventHandler;
 import cursedflames.bountifulbaubles.common.network.PacketHandler;
+import cursedflames.bountifulbaubles.common.proxy.ClientProxy;
+import cursedflames.bountifulbaubles.common.proxy.IProxy;
+import cursedflames.bountifulbaubles.common.proxy.ServerProxy;
 import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.recipe.anvil.AnvilCrafting;
+import cursedflames.bountifulbaubles.common.wormhole.ContainerWormhole;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
@@ -45,6 +57,10 @@ public class BountifulBaubles {
 	public static final String MODID = "bountifulbaubles";
 	
 	public static final Logger logger = LogManager.getLogger();
+	
+	public static IProxy proxy = DistExecutor.runForDist(
+			() -> () -> new ClientProxy(),
+			() -> () -> new ServerProxy());
 	
 	public static final ItemGroup GROUP = new ItemGroup(MODID) { //TODO sort cre-tab/JEI
 		@Override
@@ -64,8 +80,8 @@ public class BountifulBaubles {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
 //		// Register the processIMC method for modloading
 //		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-//		// Register the doClientStuff method for modloading
-//		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+		// Register the doClientStuff method for modloading
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 		
 		
 		Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MODID+"-client.toml"));
@@ -92,10 +108,9 @@ public class BountifulBaubles {
 		BrewingRecipes.registerRecipes();
 	}
 
-//	private void doClientStuff(final FMLClientSetupEvent event) {
-//		// do something that can only be done on the client
-//		logger.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
-//	}
+	private void clientSetup(final FMLClientSetupEvent event) {
+		ScreenManager.registerFactory(ContainerWormhole.CONTAINER_REFORGE, ScreenWormhole::new);
+	}
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {
 		// slots actually used by the mod: necklace ring head charm
@@ -120,19 +135,21 @@ public class BountifulBaubles {
 	// You can use SubscribeEvent and let the Event Bus discover methods to call
 	@SubscribeEvent
 	public void onServerStarting(FMLServerStartingEvent event) {
-		// do something when the server starts
+		CommandWormhole.register(event.getCommandDispatcher());
 	}
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class RegistryEvents {
-		@SubscribeEvent
-		public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-			// register a new block here
-		}
-		
+	public static class RegistryEvents {		
 		@SubscribeEvent
 		public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
 			ModItems.registerItems(event);
+		}
+		
+		@SubscribeEvent
+		public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> event) {
+			event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+				return new ContainerWormhole(windowId, proxy.getClientPlayer());
+			}).setRegistryName(MODID, "wormhole"));
 		}
 		
 		@SubscribeEvent

@@ -1,8 +1,8 @@
 package cursedflames.bountifulbaubles.client.model;
 
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 
 public class ModelGloves extends BipedModel<LivingEntity> {

@@ -13,6 +13,8 @@ broken_black_dragon_scale
 black_dragon_scale
 mixed_dragon_scale
 ankh_charm
+potion_recall
+potion_wormhole
 lucky_horseshoe
 amulet_sin_empty
 amulet_sin_gluttony
