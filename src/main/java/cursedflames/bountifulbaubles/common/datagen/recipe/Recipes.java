@@ -125,5 +125,17 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 				.addCriterion("amulet_sin_empty",
 						InventoryChangeTrigger.Instance.forItems(ModItems.amulet_sin_empty))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.wormhole_mirror)
+				.patternLine("owo")
+				.patternLine("pMp")
+				.patternLine("opo")
+				.key('o', Items.OBSIDIAN)
+				.key('w', ModItems.ender_dragon_scale)
+				.key('M', ModItems.magic_mirror)
+				.key('p', ModItems.potion_wormhole)
+				.setGroup(BountifulBaubles.MODID)
+				.addCriterion("magic_mirror",
+						InventoryChangeTrigger.Instance.forItems(ModItems.magic_mirror))
+				.build(consumer);
 	}
 }

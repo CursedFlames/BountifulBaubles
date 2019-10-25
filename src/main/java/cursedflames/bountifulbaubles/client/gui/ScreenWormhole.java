@@ -75,7 +75,7 @@ public class ScreenWormhole extends Screen implements IHasContainer<ContainerWor
 	@Override
 	public void init() {
 		super.init();
-		BountifulBaubles.logger.info("gui init");
+//		BountifulBaubles.logger.info("gui init");
 		this.guiLeft = (this.width-WIDTH)/2;
 		this.guiTop = (this.height-HEIGHT)/2;
 //		int id = 0;
@@ -184,8 +184,8 @@ public class ScreenWormhole extends Screen implements IHasContainer<ContainerWor
         super.onClose();
         // have to do this to make the gui close properly when it's not a GuiContainer
         // FIXME do we still have to do this?
-//        minecraft.player.connection.sendPacket(new CCloseWindowPacket(minecraft.player.openContainer.windowId));
-//        minecraft.player.openContainer = minecraft.player.container;
-////        minecraft.player.container.windowId = 0;
+        minecraft.player.connection.sendPacket(new CCloseWindowPacket(minecraft.player.openContainer.windowId));
+        minecraft.player.openContainer = minecraft.player.container;
+//        minecraft.player.container.windowId = 0;
 	}
 }

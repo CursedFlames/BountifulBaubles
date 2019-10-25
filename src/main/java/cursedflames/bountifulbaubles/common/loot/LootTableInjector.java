@@ -114,8 +114,8 @@ public class LootTableInjector {
 							.weight(25))
 					.addEntry(ItemLootEntry.builder(ModItems.potion_recall)
 							.weight(50))
-					// FIXME change to wormhole (remember config opt to disable this)
-					.addEntry(ItemLootEntry.builder(ModItems.potion_recall)
+					// FIXME config opt to disable this
+					.addEntry(ItemLootEntry.builder(ModItems.potion_wormhole)
 							.weight(25))
 					.name(name("dungeon_potions"))
 					.build());
@@ -148,8 +148,8 @@ public class LootTableInjector {
 //							.weight(25))
 //					.addEntry(ItemLootEntry.builder(ModItems.potion_recall)
 //							.weight(50))
-//					// FIXME change to wormhole (remember config opt to disable this)
-//					.addEntry(ItemLootEntry.builder(ModItems.potion_recall)
+//					// FIXME config opt to disable this
+//					.addEntry(ItemLootEntry.builder(ModItems.potion_wormhole)
 //							.weight(25))
 //					.build());
 		}

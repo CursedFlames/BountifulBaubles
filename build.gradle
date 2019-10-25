@@ -13,9 +13,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.0.1'
+version = '1.14.4-0.0.2-preview-2'
 group = 'cursedflames.bountifulbaubles' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'bountifulbaubles-1.14.4'
+archivesBaseName = 'bountifulbaubles'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
