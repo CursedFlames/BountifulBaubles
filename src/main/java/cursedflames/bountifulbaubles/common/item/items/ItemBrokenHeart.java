@@ -2,16 +2,19 @@ package cursedflames.bountifulbaubles.common.item.items;
 
 import java.util.UUID;
 
-import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.config.Config;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
+import cursedflames.bountifulbaubles.common.misc.DamageSourcePhylactery;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -40,7 +43,11 @@ public class ItemBrokenHeart extends BBItem {
 	public static void onDamage(LivingDamageEvent event) {
 		LivingEntity entity = event.getEntityLiving();
 		
-		if (!CuriosAPI.getCurioEquipped(ModItems.broken_heart, entity).isPresent())
+		boolean phylactery = CuriosAPI.getCurioEquipped(ModItems.phylactery_charm, entity).isPresent();
+		
+		if (!(phylactery
+				|| event.getSource() instanceof DamageSourcePhylactery
+				|| CuriosAPI.getCurioEquipped(ModItems.broken_heart, entity).isPresent()))
 			return;
 		float healthAfterDamage = (entity.getHealth())-event.getAmount();
 		
@@ -65,6 +72,11 @@ public class ItemBrokenHeart extends BBItem {
 			event.setCanceled(true);
 		}
 		event.setAmount((float) (Math.max(event.getAmount()-maxHealthDamage, 0)));
+		
+		if (phylactery && (entity instanceof PlayerEntity)
+				&& !(event.getSource() instanceof DamageSourcePhylactery)) {
+			ItemMagicMirror.teleportPlayerToSpawn(entity.world, (PlayerEntity) entity);
+		}
 
 //		player.world.playSound(null, player.posX, player.posY, player.posZ,
 //				SoundEvents.ENTITY_PLAYER_HURT, SoundCategory.PLAYERS, 1.0F,
@@ -86,11 +98,17 @@ public class ItemBrokenHeart extends BBItem {
 			AttributeModifier modifier = maxHealth.getModifier(MODIFIER_UUID);
 			if (modifier != null) {
 				maxHealth.removeModifier(modifier);
-				double newModifier = modifier.getAmount() + Config.BROKEN_HEART_REGEN_AMOUNT.get();
+				double gain = Config.BROKEN_HEART_REGEN_AMOUNT.get();
+				double newModifier = modifier.getAmount() + gain;
 				if (newModifier < 0) {
 					modifier = new AttributeModifier(MODIFIER_UUID, "Broken Heart MaxHP drain",
 							newModifier, AttributeModifier.Operation.ADDITION);
 					maxHealth.applyModifier(modifier);
+					entity.sendMessage(new TranslationTextComponent(
+									ModItems.broken_heart.getTranslationKey()+".partial_heal"));
+				} else {
+					entity.sendMessage(new TranslationTextComponent(
+							ModItems.broken_heart.getTranslationKey()+".full_heal"));					
 				}
 			}
 		}

@@ -21,5 +21,8 @@ amulet_sin_gluttony
 amulet_sin_pride
 amulet_sin_wrath
 broken_heart
+phylactery_charm
 amulet_cross
 gloves_dexterity
+disintegration_tablet
+spectral_silt

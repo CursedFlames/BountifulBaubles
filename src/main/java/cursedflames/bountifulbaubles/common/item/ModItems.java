@@ -9,6 +9,7 @@ import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
 import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDexterity;
 import cursedflames.bountifulbaubles.common.item.items.ItemLuckyHorseshoe;
 import cursedflames.bountifulbaubles.common.item.items.ItemMagicMirror;
+import cursedflames.bountifulbaubles.common.item.items.ItemPhylacteryCharm;
 import cursedflames.bountifulbaubles.common.item.items.ItemPotionRecall;
 import cursedflames.bountifulbaubles.common.item.items.ItemPotionWormhole;
 import cursedflames.bountifulbaubles.common.item.items.ItemWormholeMirror;
@@ -24,6 +25,7 @@ import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShi
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldCobalt;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldObsidian;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -60,8 +62,11 @@ public class ModItems {
 	public static final Item amulet_sin_pride = null;	
 	public static final Item amulet_sin_wrath = null;
 	public static final Item broken_heart = null;
+	public static final Item phylactery_charm = null;
 	public static final Item amulet_cross = null;
 	public static final Item gloves_dexterity = null;
+	public static final Item disintegration_tablet = null;
+	public static final Item spectral_silt = null;
 	
 	public static Item.Properties baseProperties() {
 		return new Item.Properties().group(BountifulBaubles.GROUP);
@@ -136,8 +141,14 @@ public class ModItems {
 				new ResourceLocation(BountifulBaubles.MODID, "textures/equipped/amulet_sin_wrath.png")));
 		
 		r.register(new ItemBrokenHeart("broken_heart", basePropertiesBauble()));
+		r.register(new ItemPhylacteryCharm("phylactery_charm", basePropertiesBauble()));
 		r.register(new ItemAmuletCross("amulet_cross", basePropertiesBauble()));
 		
 		r.register(new ItemGlovesDexterity("gloves_dexterity", basePropertiesBauble()));
+		
+		r.register(new BBItem("disintegration_tablet", baseProperties().maxStackSize(1)));
+		r.register(new BBItem("spectral_silt", baseProperties()) {
+			@Override public boolean hasEffect(ItemStack stack) {return true;}
+		});
 	}
 }

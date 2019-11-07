@@ -18,5 +18,6 @@ amulet_sin_gluttony necklace
 amulet_sin_pride necklace
 amulet_sin_wrath necklace
 broken_heart necklace ring charm
+phylactery_charm charm
 amulet_cross necklace
 gloves_dexterity hands

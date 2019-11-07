@@ -133,7 +133,16 @@
 			"": "Broken Heart",
 			"tooltip.0": "§9Lethal damage destroys empty heart containers instead.",
 			"tooltip.1": "§9Sleep to regenerate heart containers.",
-			"tooltip.2": "§aHow did this happen?"
+			"tooltip.2": "§aHow did this happen?",
+			"partial_heal": "§aYou feel revitalized. (Regained some lost max health)",
+			"full_heal": "§aYou feel good as new! (Regained all lost max health)"
+		},
+		"phylactery_charm": {
+			"": "Phylactery Charm",
+			"tooltip.0": "§9When equipped, teleports you to your spawn point.",
+			"tooltip.1": "§9Does not work in situations where a magic mirror could not teleport you.",
+			"tooltip.2": "§9Also functions as a Broken Heart when equipped.",
+			"tooltip.3": "§9If held and right-clicked, functions as a magic mirror, but deals damage to you and teleports you instantly."
 		},
 		"amulet_cross": {
 			"": "Cross Necklace",
@@ -144,6 +153,14 @@
 			"tooltip.0": "§9Allows you to switch between items without resetting attack cooldown.",
 			//"tooltip.1": "§9Also gives +0.6 attack speed.", //don't need this because it's displayed by curios
 			"tooltip.1": "§aAnd they say dexterity isn't a useful stat."
+		},
+		"disintegration_tablet": {
+			"": "Disintegration Tablet",
+			"tooltip.0": "§9Craft with dungeon loot or certain other items to convert them into spectral silt"
+		},
+		"spectral_silt": {
+			"": "Spectral Silt",
+			"tooltip.0": "§9Crafting component"
 		}
 	},
 	"effect.bountifulbaubles.sinful": "Sinful",
