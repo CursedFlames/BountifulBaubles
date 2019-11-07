@@ -63,21 +63,21 @@ public class ItemGlovesDexterity extends BBItem {
 		}
 		
 		// TODO add model
-		@Override
-		public boolean hasRender(String identifier, LivingEntity livingEntity) {
-			return true;
-		}
-
-		@Override
-		public void doRender(String identifier, LivingEntity livingEntity, float limbSwing, float limbSwingAmount,
-				float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-			Minecraft.getInstance().getTextureManager().bindTexture(texture);
-			if (!(this.model instanceof ModelGloves)) {
-				this.model = new ModelGloves();
-			}
-			((ModelGloves) model).render(livingEntity, limbSwing, limbSwingAmount, partialTicks, ageInTicks,
-					netHeadYaw, headPitch, scale);
-		}
+//		@Override
+//		public boolean hasRender(String identifier, LivingEntity livingEntity) {
+//			return true;
+//		}
+//
+//		@Override
+//		public void doRender(String identifier, LivingEntity livingEntity, float limbSwing, float limbSwingAmount,
+//				float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+//			Minecraft.getInstance().getTextureManager().bindTexture(texture);
+//			if (!(this.model instanceof ModelGloves)) {
+//				this.model = new ModelGloves();
+//			}
+//			((ModelGloves) model).render(livingEntity, limbSwing, limbSwingAmount, partialTicks, ageInTicks,
+//					netHeadYaw, headPitch, scale);
+//		}
 	}
 
 	private static final Map<UUID, Integer> entitiesToReset = new HashMap<>();
