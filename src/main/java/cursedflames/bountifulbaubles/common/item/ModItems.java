@@ -6,6 +6,7 @@ import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.items.ItemAmuletCross;
 import cursedflames.bountifulbaubles.common.item.items.ItemBalloon;
 import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
+import cursedflames.bountifulbaubles.common.item.items.ItemDisintegrationTablet;
 import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDexterity;
 import cursedflames.bountifulbaubles.common.item.items.ItemLuckyHorseshoe;
 import cursedflames.bountifulbaubles.common.item.items.ItemMagicMirror;
@@ -146,7 +147,7 @@ public class ModItems {
 		
 		r.register(new ItemGlovesDexterity("gloves_dexterity", basePropertiesBauble()));
 		
-		r.register(new BBItem("disintegration_tablet", baseProperties().maxStackSize(1)));
+		r.register(new ItemDisintegrationTablet("disintegration_tablet", baseProperties().maxStackSize(1)));
 		r.register(new BBItem("spectral_silt", baseProperties()) {
 			@Override public boolean hasEffect(ItemStack stack) {return true;}
 		});

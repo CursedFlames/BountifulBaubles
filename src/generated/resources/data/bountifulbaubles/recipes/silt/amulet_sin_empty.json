@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    "sSs",
+    "sis",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "item": "bountifulbaubles:spectral_silt"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:amulet_sin_empty"
+  }
+}

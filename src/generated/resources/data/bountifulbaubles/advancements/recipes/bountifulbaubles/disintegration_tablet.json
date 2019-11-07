@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bountifulbaubles:disintegration_tablet"
+    ]
+  },
+  "criteria": {
+    "quartz": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:quartz"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bountifulbaubles:disintegration_tablet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "quartz",
+      "has_the_recipe"
+    ]
+  ]
+}

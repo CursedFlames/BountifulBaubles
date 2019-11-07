@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    "sds",
+    "shs",
+    "sds"
+  ],
+  "key": {
+    "s": {
+      "item": "bountifulbaubles:spectral_silt"
+    },
+    "h": {
+      "item": "bountifulbaubles:shulker_heart"
+    },
+    "d": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:broken_heart"
+  }
+}
