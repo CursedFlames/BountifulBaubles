@@ -13,6 +13,7 @@ import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
 import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDexterity;
 import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDigging;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinGluttony;
+import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinPride;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinWrath;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldCobalt;
 import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
@@ -96,6 +97,7 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(ItemShieldCobalt.class);
 		MinecraftForge.EVENT_BUS.register(ItemAmuletSinGluttony.class);
 		MinecraftForge.EVENT_BUS.register(ItemAmuletSinWrath.class);
+		MinecraftForge.EVENT_BUS.register(ItemAmuletSinPride.class);
 		MinecraftForge.EVENT_BUS.register(ItemBrokenHeart.class);
 		MinecraftForge.EVENT_BUS.register(ItemGlovesDexterity.class);
 		MinecraftForge.EVENT_BUS.register(ItemGlovesDigging.class);

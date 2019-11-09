@@ -122,7 +122,8 @@
 		},
 		"amulet_sin_pride": {
 			"": "Pride Pendant",
-			"tooltip.0": "§9Grants sinful buff (+damage, +armor) while at full health."
+			"tooltip.0": "§9Gives step assist.",
+			"tooltip.1": "§9Grants sinful buff (+damage, +armor) while at full health."
 		},
 		"amulet_sin_wrath": {
 			"": "Wrath Pendant",
@@ -162,7 +163,8 @@
 			"tooltip.1s": "§9Mining level: §8Stone",
 			"tooltip.2s": "§6When equipped in curio slot, applies while digging without a tool, but gives §c-15% mining speed when holding a tool.",
 			"tooltip.3s": "§9When equipped in curio slot, §chunger usage from digging without a tool is increased.",
-			"tooltip.4s": "§9When equipped in curio slot, §cthe effect of Efficiency is reduced."
+			"tooltip.4s": "§9When equipped in curio slot, §cthe effect of Efficiency is reduced.",
+			"tooltip.5s": "Can be repaired in an anvil with iron ingots."
 		},
 		"gloves_digging_diamond": {
 			"": "Diamond-clawed Gauntlet",
@@ -172,7 +174,8 @@
 			"tooltip.1s": "§9Mining level: §fIron",
 			"tooltip.2s": "§9When equipped in curio slot, applies while digging without a tool, but gives §c-15% mining speed when holding a tool.",
 			"tooltip.3s": "§9When equipped in curio slot, §chunger usage from digging without a tool is increased.",
-			"tooltip.4s": "§9When equipped in curio slot, §cthe effect of Efficiency is reduced."
+			"tooltip.4s": "§9When equipped in curio slot, §cthe effect of Efficiency is reduced.",
+			"tooltip.5s": "Can be repaired in an anvil with diamonds."
 		},
 		"disintegration_tablet": {
 			"": "Disintegration Tablet",
