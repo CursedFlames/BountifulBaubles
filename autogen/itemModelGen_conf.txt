@@ -24,5 +24,7 @@ broken_heart
 phylactery_charm
 amulet_cross
 gloves_dexterity
+gloves_digging_iron
+gloves_digging_diamond
 disintegration_tablet
 spectral_silt

@@ -149,6 +149,27 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 				.addCriterion("broken_heart",
 						InventoryChangeTrigger.Instance.forItems(ModItems.broken_heart))
 				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.gloves_digging_iron)
+				.patternLine("iii")
+				.patternLine("lil")
+				.patternLine("lll")
+				.key('i', Items.IRON_INGOT)
+				.key('l', Items.LEATHER)
+				.setGroup(BountifulBaubles.MODID)
+				.addCriterion("iron",
+						InventoryChangeTrigger.Instance.forItems(Items.IRON_INGOT))
+				.build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(ModItems.gloves_digging_diamond)
+				.patternLine("ddd")
+				.patternLine("lIl")
+				.patternLine("lll")
+				.key('d', Items.DIAMOND)
+				.key('I', Items.IRON_BLOCK)
+				.key('l', Items.LEATHER)
+				.setGroup(BountifulBaubles.MODID)
+				.addCriterion("diamond",
+						InventoryChangeTrigger.Instance.forItems(Items.DIAMOND))
+				.build(consumer);
 		ShapedRecipeBuilder.shapedRecipe(ModItems.disintegration_tablet)
 				.patternLine("qbq")
 				.patternLine("brb")

@@ -11,6 +11,7 @@ import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
 import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDexterity;
+import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDigging;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinGluttony;
 import cursedflames.bountifulbaubles.common.item.items.amuletsin.ItemAmuletSinWrath;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldCobalt;
@@ -24,14 +25,12 @@ import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.recipe.anvil.AnvilCrafting;
 import cursedflames.bountifulbaubles.common.wormhole.ContainerWormhole;
-import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -99,6 +98,7 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(ItemAmuletSinWrath.class);
 		MinecraftForge.EVENT_BUS.register(ItemBrokenHeart.class);
 		MinecraftForge.EVENT_BUS.register(ItemGlovesDexterity.class);
+		MinecraftForge.EVENT_BUS.register(ItemGlovesDigging.class);
 		
 		PacketHandler.registerMessages(); // TODO where are we supposed to do this?
 	}

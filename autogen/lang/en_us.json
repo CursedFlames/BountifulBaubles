@@ -139,7 +139,7 @@
 		},
 		"phylactery_charm": {
 			"": "Phylactery Charm",
-			"tooltip.0": "§9When equipped, teleports you to your spawn point.",
+			"tooltip.0": "§9When equipped, teleports you to your spawn point upon taking lethal damage.",
 			"tooltip.1": "§9Does not work in situations where a magic mirror could not teleport you.",
 			"tooltip.2": "§9Also functions as a Broken Heart when equipped.",
 			"tooltip.3": "§9If held and right-clicked, functions as a magic mirror, but deals damage to you and teleports you instantly."
@@ -153,6 +153,26 @@
 			"tooltip.0": "§9Allows you to switch between items without resetting attack cooldown.",
 			//"tooltip.1": "§9Also gives +0.6 attack speed.", //don't need this because it's displayed by curios
 			"tooltip.1": "§aAnd they say dexterity isn't a useful stat."
+		},
+		"gloves_digging_iron": {
+			"": "Iron-clawed Gauntlet",
+			"tooltip.0": "§9Weaker than iron tools but breaks all block types.",
+			"tooltip.0s": "§9Weaker than iron tools but breaks all block types.",
+			"tooltip.1": "§bPress Shift for more info",
+			"tooltip.1s": "§9Mining level: §8Stone",
+			"tooltip.2s": "§6When equipped in curio slot, applies while digging without a tool, but gives §c-15% mining speed when holding a tool.",
+			"tooltip.3s": "§9When equipped in curio slot, §chunger usage from digging without a tool is increased.",
+			"tooltip.4s": "§9When equipped in curio slot, §cthe effect of Efficiency is reduced."
+		},
+		"gloves_digging_diamond": {
+			"": "Diamond-clawed Gauntlet",
+			"tooltip.0": "§9Weaker than diamond tools but breaks all block types.",
+			"tooltip.0s": "§9Weaker than diamond tools but breaks all block types.",
+			"tooltip.1": "§bPress Shift for more info",
+			"tooltip.1s": "§9Mining level: §fIron",
+			"tooltip.2s": "§9When equipped in curio slot, applies while digging without a tool, but gives §c-15% mining speed when holding a tool.",
+			"tooltip.3s": "§9When equipped in curio slot, §chunger usage from digging without a tool is increased.",
+			"tooltip.4s": "§9When equipped in curio slot, §cthe effect of Efficiency is reduced."
 		},
 		"disintegration_tablet": {
 			"": "Disintegration Tablet",

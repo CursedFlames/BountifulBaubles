@@ -8,6 +8,7 @@ import cursedflames.bountifulbaubles.common.item.items.ItemBalloon;
 import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
 import cursedflames.bountifulbaubles.common.item.items.ItemDisintegrationTablet;
 import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDexterity;
+import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDigging;
 import cursedflames.bountifulbaubles.common.item.items.ItemLuckyHorseshoe;
 import cursedflames.bountifulbaubles.common.item.items.ItemMagicMirror;
 import cursedflames.bountifulbaubles.common.item.items.ItemPhylacteryCharm;
@@ -25,8 +26,11 @@ import cursedflames.bountifulbaubles.common.item.items.ankhparts.ItemSunglasses;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldAnkh;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldCobalt;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldObsidian;
+import cursedflames.bountifulbaubles.common.misc.SimpleItemTier;
+import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTier;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -66,6 +70,8 @@ public class ModItems {
 	public static final Item phylactery_charm = null;
 	public static final Item amulet_cross = null;
 	public static final Item gloves_dexterity = null;
+	public static final Item gloves_digging_iron = null;
+	public static final Item gloves_digging_diamond = null;
 	public static final Item disintegration_tablet = null;
 	public static final Item spectral_silt = null;
 	
@@ -146,6 +152,25 @@ public class ModItems {
 		r.register(new ItemAmuletCross("amulet_cross", basePropertiesBauble()));
 		
 		r.register(new ItemGlovesDexterity("gloves_dexterity", basePropertiesBauble()));
+		
+		IItemTier gloveTierIron = new SimpleItemTier(
+				ItemTier.STONE.getHarvestLevel(), 
+				ItemTier.IRON.getMaxUses(), 
+				ItemTier.WOOD.getEfficiency(),
+				ItemTier.STONE.getAttackDamage(),
+				ItemTier.IRON.getEnchantability(),
+				()->ItemTier.IRON.getRepairMaterial());
+		
+		IItemTier gloveTierDiamond = new SimpleItemTier(
+				ItemTier.IRON.getHarvestLevel(), 
+				(int) (ItemTier.DIAMOND.getMaxUses()*0.75), 
+				ItemTier.STONE.getEfficiency(),
+				ItemTier.IRON.getAttackDamage(),
+				ItemTier.DIAMOND.getEnchantability(),
+				()->ItemTier.DIAMOND.getRepairMaterial());
+		
+		r.register(new ItemGlovesDigging("gloves_digging_iron", basePropertiesBauble(), gloveTierIron));
+		r.register(new ItemGlovesDigging("gloves_digging_diamond", basePropertiesBauble(), gloveTierDiamond));
 		
 		r.register(new ItemDisintegrationTablet("disintegration_tablet", baseProperties().maxStackSize(1)));
 		r.register(new BBItem("spectral_silt", baseProperties()) {

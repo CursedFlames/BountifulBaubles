@@ -21,3 +21,5 @@ broken_heart necklace ring charm
 phylactery_charm charm
 amulet_cross necklace
 gloves_dexterity hands
+gloves_digging_iron hands
+gloves_digging_diamond hands
