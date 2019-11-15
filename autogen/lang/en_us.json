@@ -32,8 +32,9 @@
 		},
 		"shulker_heart": {
 			"": "Shulker Heart",
-			"tooltip.0": "§9Grants immunity to levitation",
-			"tooltip.1": "§aIt's squishy..."
+			"tooltip.0": "§9Grants immunity to levitation.",
+			"tooltip.1": "§9Can be used to brew potions of flight.",
+			"tooltip.2": "§aIt's squishy..."
 		},
 		"ring_free_action": {
 			"": "Ring of Free Action",
@@ -161,7 +162,7 @@
 			"tooltip.0s": "§9Weaker than iron tools but breaks all block types.",
 			"tooltip.1": "§bPress Shift for more info",
 			"tooltip.1s": "§9Mining level: §8Stone",
-			"tooltip.2s": "§6When equipped in curio slot, applies while digging without a tool, but gives §c-15% mining speed when holding a tool.",
+			"tooltip.2s": "§9When equipped in curio slot, applies while digging without a tool, but gives §c-15% mining speed when holding a tool.",
 			"tooltip.3s": "§9When equipped in curio slot, §chunger usage from digging without a tool is increased.",
 			"tooltip.4s": "§9When equipped in curio slot, §cthe effect of Efficiency is reduced.",
 			"tooltip.5s": "Can be repaired in an anvil with iron ingots."
@@ -186,7 +187,13 @@
 			"tooltip.0": "§9Crafting component"
 		}
 	},
-	"effect.bountifulbaubles.sinful": "Sinful",
+	"item.minecraft": {
+		"potion.effect.flight": "Potion of Flight"
+	},
+	"effect.bountifulbaubles": {
+		"flight": "Flight",
+		"sinful": "Sinful"
+	},
 	"bountifulbaubles.moreinfo": "§bPress Shift for more info",
     "bountifulbaubles.broken": "§8§oBroken",
     "curios.identifier.hands": "Hands", //won't need these two once they're integrated into curios

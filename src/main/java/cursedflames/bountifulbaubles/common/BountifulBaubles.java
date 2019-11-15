@@ -7,6 +7,7 @@ import cursedflames.bountifulbaubles.client.gui.ScreenWormhole;
 import cursedflames.bountifulbaubles.common.baubleeffect.EventHandlerEffect;
 import cursedflames.bountifulbaubles.common.command.CommandWormhole;
 import cursedflames.bountifulbaubles.common.config.Config;
+import cursedflames.bountifulbaubles.common.effect.EffectFlight;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
@@ -32,6 +33,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Potion;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -93,6 +96,8 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(AnvilCrafting.class);
 		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(LootTableInjector.class);
+		
+		MinecraftForge.EVENT_BUS.register(EffectFlight.class);
 		
 		MinecraftForge.EVENT_BUS.register(ItemShieldCobalt.class);
 		MinecraftForge.EVENT_BUS.register(ItemAmuletSinGluttony.class);
@@ -157,6 +162,15 @@ public class BountifulBaubles {
 		@SubscribeEvent
 		public static void onEffectsRegistry(final RegistryEvent.Register<Effect> event) {
 			event.getRegistry().register(new EffectSin());
+			event.getRegistry().register(new EffectFlight());
+		}
+		
+		@SubscribeEvent
+		public static void registerPotionTypes(RegistryEvent.Register<Potion> event) {
+			EffectFlight.flightPotion = new Potion(new EffectInstance(EffectFlight.flightEffect, 3600));
+			EffectFlight.flightPotion.setRegistryName(MODID, "flight");
+//			Potion grounding = new Potion(new EffectInstance(EffectFlight.flightEffect, 24000));
+			event.getRegistry().register(EffectFlight.flightPotion);
 		}
 	}
 }
