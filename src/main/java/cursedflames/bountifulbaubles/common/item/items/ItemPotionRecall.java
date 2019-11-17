@@ -1,6 +1,7 @@
 package cursedflames.bountifulbaubles.common.item.items;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
+import cursedflames.bountifulbaubles.common.config.Config;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.LivingEntity;
@@ -42,7 +43,7 @@ public class ItemPotionRecall extends BBItem {
 			Hand hand) {
 		DimensionType dim = player.getSpawnDimension();
 		if (world.getDimension().getType()!=dim
-				/*&&!ItemMagicMirror.interdimensional.getBoolean(false)*/) {
+				&& !Config.MAGIC_MIRROR_INTERDIMENSIONAL.get()) {
 			player.sendStatusMessage(new TranslationTextComponent(
 					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));

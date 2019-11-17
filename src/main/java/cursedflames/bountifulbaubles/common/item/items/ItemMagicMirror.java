@@ -141,6 +141,8 @@ public class ItemMagicMirror extends BBItem {
 	
 	private static void doTeleport(PlayerEntity player, World origin, World target,
 			double x, double y, double z) {
+		target.playSound(null, player.posX, player.posY, player.posZ,
+				SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
 		if (origin != target) {
 			((ServerChunkProvider) target.getChunkProvider()).func_217228_a(
 					TicketType.POST_TELEPORT, 
@@ -155,7 +157,6 @@ public class ItemMagicMirror extends BBItem {
 			player.fallDistance = 0.0F;
 		}
 		// FIXME player can't hear sound upon interdimensional teleport?
-		// TODO play before teleport as well as after - hear it on both ends?
 		target.playSound(null, x, y, z,
 				SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
 	}

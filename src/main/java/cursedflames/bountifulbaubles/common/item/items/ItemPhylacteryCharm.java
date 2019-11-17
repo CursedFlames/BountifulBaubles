@@ -30,8 +30,10 @@ public class ItemPhylacteryCharm extends BBItem {
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));
 		}
 		player.setActiveHand(hand);
-		ItemMagicMirror.teleportPlayerToSpawn(world, player);
-		player.attackEntityFrom(new DamageSourcePhylactery(), 7);
+		if (!world.isRemote) {
+			ItemMagicMirror.teleportPlayerToSpawn(world, player);
+			player.attackEntityFrom(new DamageSourcePhylactery(), 7);
+		}
 		return new ActionResult<ItemStack>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 }

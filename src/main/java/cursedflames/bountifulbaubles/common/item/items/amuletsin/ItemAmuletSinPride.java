@@ -1,11 +1,17 @@
 package cursedflames.bountifulbaubles.common.item.items.amuletsin;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
+import com.google.common.collect.Multimap;
+
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -14,6 +20,7 @@ import top.theillusivec4.curios.api.CuriosAPI;
 import top.theillusivec4.curios.api.capability.ICurio;
 
 public class ItemAmuletSinPride extends ItemAmuletSin {
+	UUID REACH_ID = UUID.fromString("111189c1-842f-4af2-88f5-6f58865ae440");
 	public ItemAmuletSinPride(String name, Properties props, ResourceLocation texture) {
 		super(name, props, texture);
 	}
@@ -36,6 +43,15 @@ public class ItemAmuletSinPride extends ItemAmuletSin {
 					livingEntity.removePotionEffect(sinfulEffect);
 				}
 			}
+		}
+		
+		@Override
+		public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
+			Multimap<String, AttributeModifier> attributes = super.getAttributeModifiers(identifier);
+			String reach = PlayerEntity.REACH_DISTANCE.getName();
+			attributes.put(reach,
+					new AttributeModifier(REACH_ID, "pride pendant reach bonus", 0.5, Operation.ADDITION));
+			return attributes;
 		}
 		
 		@Override

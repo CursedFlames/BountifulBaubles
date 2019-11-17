@@ -196,6 +196,7 @@
 	},
 	"bountifulbaubles.moreinfo": "§bPress Shift for more info",
     "bountifulbaubles.broken": "§8§oBroken",
-    "curios.identifier.hands": "Hands", //won't need these two once they're integrated into curios
-    "curios.modifiers.hands": "When on hands:"
+    "curios.identifier.hands": "Hands", //integrated into newer curios versions, can probably remove soon
+    "curios.modifiers.hands": "When on hands:",
+	"attribute.name.generic.reachDistance": "Reach" //why is this not in vanilla?
 }
