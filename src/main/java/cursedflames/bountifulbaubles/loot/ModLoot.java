@@ -221,15 +221,20 @@ public class ModLoot {
 			EntityDragon dragon = (EntityDragon) event.getEntity();
 			// final burst of XP/actual death is at 200 ticks
 			if (dragon.deathTicks==199) {
+				BountifulBaubles.logger.info(dragon.world.restoringBlockSnapshots);
 				int numScales = dragon.world.rand.nextInt(4)+3;
 				for (int i = 0; i<numScales; i++) {
 					ItemStack stack = new ItemStack(ModItems.enderDragonScale);
-					// offset scales with more and more randomness each time
-					double xOff = (Math.random()-0.5)*(((double) (i+1))*0.5);
-					double zOff = (Math.random()-0.5)*(((double) (i+1))*0.5);
+					double angle = Math.random()*Math.PI*2; // no Math.TAU, smh
+					double xOff = Math.cos(angle)*2;
+					double zOff = Math.sin(angle)*2;
+					double xVel = xOff*0.15;
+					double zVel = zOff*0.15;
 					EntityItem dropped = new EntityItem(dragon.world, dragon.posX+xOff, dragon.posY,
 							dragon.posZ+zOff, stack);
 					dragon.world.spawnEntity(dropped);
+					dropped.motionX = xVel;
+					dropped.motionZ = zVel;
 				}
 			}
 		}
