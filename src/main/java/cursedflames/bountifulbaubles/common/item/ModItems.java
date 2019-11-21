@@ -7,6 +7,7 @@ import cursedflames.bountifulbaubles.common.item.items.ItemAmuletCross;
 import cursedflames.bountifulbaubles.common.item.items.ItemBalloon;
 import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
 import cursedflames.bountifulbaubles.common.item.items.ItemDisintegrationTablet;
+import cursedflames.bountifulbaubles.common.item.items.ItemEnderDragonScale;
 import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDexterity;
 import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDigging;
 import cursedflames.bountifulbaubles.common.item.items.ItemLuckyHorseshoe;
@@ -108,7 +109,7 @@ public class ModItems {
 		r.register(new ItemPotionNegate("bezoar",
 				basePropertiesBauble(),
 				Arrays.asList(Effects.POISON)));
-		r.register(new BBItem("ender_dragon_scale", baseProperties()));
+		r.register(new ItemEnderDragonScale("ender_dragon_scale", baseProperties()));
 		r.register(new BBItem("broken_black_dragon_scale", baseProperties()));
 		r.register(new ItemPotionNegate("black_dragon_scale",
 				basePropertiesBauble(),

@@ -19,14 +19,16 @@ public class MiscEventHandler {
 			EnderDragonEntity dragon = (EnderDragonEntity) event.getEntity();
 			// final burst of XP/actual death is at 200 ticks
 			if (dragon.deathTicks==199) {
-				int numScales = dragon.world.rand.nextInt(4)+3;
+				int numScales = dragon.world.rand.nextInt(5)+6;
 				for (int i = 0; i<numScales; i++) {
 					ItemStack stack = new ItemStack(ModItems.ender_dragon_scale);
-					// offset scales with more and more randomness each time
-					double xOff = (Math.random()-0.5)*(((double) (i+1))*0.5);
-					double zOff = (Math.random()-0.5)*(((double) (i+1))*0.5);
+					double angle = Math.random()*Math.PI*2; // no Math.TAU, smh
+					// TODO maybe make the offsets smaller and amplify motion instead? idk
+					double xOff = Math.cos(angle)*5;
+					double zOff = Math.sin(angle)*5;
 					ItemEntity dropped = new ItemEntity(dragon.world, dragon.posX+xOff, dragon.posY,
 							dragon.posZ+zOff, stack);
+//					dropped.setMotion(x*0.2, 0, z*0.2);
 					dragon.world.addEntity(dropped);
 				}
 			}
