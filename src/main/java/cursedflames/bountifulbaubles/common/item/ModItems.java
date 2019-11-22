@@ -3,6 +3,7 @@ package cursedflames.bountifulbaubles.common.item;
 import java.util.Arrays;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
+import cursedflames.bountifulbaubles.common.block.ModBlocks;
 import cursedflames.bountifulbaubles.common.item.items.ItemAmuletCross;
 import cursedflames.bountifulbaubles.common.item.items.ItemBalloon;
 import cursedflames.bountifulbaubles.common.item.items.ItemBrokenHeart;
@@ -28,6 +29,7 @@ import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShi
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldCobalt;
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldObsidian;
 import cursedflames.bountifulbaubles.common.misc.SimpleItemTier;
+import net.minecraft.block.Block;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -83,8 +85,16 @@ public class ModItems {
 		return baseProperties().maxStackSize(1);
 	}
 	
+	public static void registerItemBlocks(IForgeRegistry<Item> r) {
+		for (Block block : ModBlocks.ItemBlockBlocks) {
+			r.register(new BBItemBlock(block, baseProperties()));
+		}
+	}
+	
 	public static void registerItems(final RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> r = event.getRegistry();
+		
+		registerItemBlocks(r);
 		
 		r.register(new ItemBalloon("balloon", basePropertiesBauble()));
 		

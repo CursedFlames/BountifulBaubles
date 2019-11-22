@@ -2,6 +2,13 @@
 
 {
 	"itemGroup.bountifulbaubles": "Bountiful Baubles",
+	"block.bountifulbaubles": {
+		"water_candle": {
+			"": "Water Candle",
+			"tooltip.0": "§9Increases nearby monster spawn rates.",
+			"tooltip.1": "§aYou feel like you're being watched."
+		}
+	},
 	"item.bountifulbaubles": {
 		"balloon": {
 			"": "Balloon",
@@ -41,7 +48,8 @@
 			"tooltip.0": "§9Grants immunity to slowness and levitation and allows free movement through cobwebs."
 		},
 		"ender_dragon_scale": {
-			"": "Ender Dragon Scale"
+			"": "Ender Dragon Scale",
+			"tooltip.0": "§aIt feels unnaturally light."
 		},
 		"broken_black_dragon_scale": {
 			"": "Cracked Black Dragon Scale",

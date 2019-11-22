@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import cursedflames.bountifulbaubles.client.gui.ScreenWormhole;
 import cursedflames.bountifulbaubles.common.baubleeffect.EventHandlerEffect;
+import cursedflames.bountifulbaubles.common.block.ModBlocks;
 import cursedflames.bountifulbaubles.common.command.CommandWormhole;
 import cursedflames.bountifulbaubles.common.config.Config;
 import cursedflames.bountifulbaubles.common.effect.EffectFlight;
@@ -27,6 +28,7 @@ import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.recipe.anvil.AnvilCrafting;
 import cursedflames.bountifulbaubles.common.wormhole.ContainerWormhole;
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
@@ -121,7 +123,7 @@ public class BountifulBaubles {
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {
 		// slots actually used by the mod: necklace ring head charm
-		String[] slots = {"necklace", "head", "charm"/*, "back", "body", "belt"*/, "hands"};
+		String[] slots = {"necklace", "head", "charm", "back", "body"/*, "belt"*/, "hands"};
 		// idk if there's a way to register multiple with one message
 		for (String slot : slots) {
 			InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> {
@@ -146,7 +148,11 @@ public class BountifulBaubles {
 	}
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class RegistryEvents {		
+	public static class RegistryEvents {
+		@SubscribeEvent
+		public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
+			ModBlocks.registerBlocks(event);
+		}
 		@SubscribeEvent
 		public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
 			ModItems.registerItems(event);

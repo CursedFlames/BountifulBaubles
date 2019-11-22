@@ -1,10 +1,10 @@
-balloon necklace ring charm
-obsidian_skull necklace ring charm
+balloon necklace ring charm body
+obsidian_skull head necklace charm
 sunglasses head
 apple necklace ring charm
 vitamins necklace ring charm
 ring_overclocking ring
-shulker_heart necklace ring charm
+shulker_heart necklace ring charm body
 ring_free_action ring
 bezoar necklace ring charm
 black_dragon_scale necklace ring charm
@@ -17,7 +17,7 @@ lucky_horseshoe necklace ring charm
 amulet_sin_gluttony necklace
 amulet_sin_pride necklace
 amulet_sin_wrath necklace
-broken_heart necklace ring charm
+broken_heart necklace ring charm body
 phylactery_charm charm
 amulet_cross necklace
 gloves_dexterity hands
