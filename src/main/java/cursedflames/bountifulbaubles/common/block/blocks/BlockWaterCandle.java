@@ -1,5 +1,7 @@
 package cursedflames.bountifulbaubles.common.block.blocks;
 
+import cursedflames.bountifulbaubles.common.BountifulBaubles;
+import cursedflames.bountifulbaubles.common.ModCapabilities;
 import cursedflames.bountifulbaubles.common.block.BBBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,8 +21,11 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
 
 public class BlockWaterCandle extends BBBlock implements IWaterLoggable {
+	public static final double EFFECT_RADIUS_SQUARED = 24*24;
+	
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final VoxelShape SCONCE_SHAPE = VoxelShapes.or(
 			Block.makeCuboidShape(4.5, 0, 4.5, 11.5, 1, 11.5),
@@ -95,5 +100,27 @@ public class BlockWaterCandle extends BBBlock implements IWaterLoggable {
 		} else {
 			return false;
 		}
+	}
+	
+	@Override
+	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean moving) {
+		if (oldState.getBlock() == this) return;
+		world.getCapability(ModCapabilities.CANDLE_REGISTRY).ifPresent(reg -> {
+			BountifulBaubles.logger.info("adding water candle pos");
+			reg.addPos(pos);
+		});
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moving) {
+		if (newState.getBlock() != this) {
+			world.getCapability(ModCapabilities.CANDLE_REGISTRY).ifPresent(reg -> {
+				BountifulBaubles.logger.info("removing water candle pos");
+				reg.removePos(pos);
+			});
+		}
+		
+		super.onReplaced(state, world, pos, newState, moving);
 	}
 }

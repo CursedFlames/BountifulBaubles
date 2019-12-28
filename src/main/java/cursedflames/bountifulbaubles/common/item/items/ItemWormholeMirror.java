@@ -57,12 +57,7 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 					teleportPlayerToSpawn(world, player);
 				}
 			} else {
-				if (world.getPlayers().size()<2) {
-					player.sendStatusMessage(new TranslationTextComponent(
-							ModItems.potion_wormhole.getTranslationKey()+".nootherplayers"), true);
-				} else {
-					ItemPotionWormhole.doWormhole((ServerPlayerEntity) player);
-				}
+				ItemPotionWormhole.doWormhole((ServerPlayerEntity) player);
 			}
 		}
 	}

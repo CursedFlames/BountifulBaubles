@@ -5,7 +5,7 @@
 	"block.bountifulbaubles": {
 		"water_candle": {
 			"": "Water Candle",
-			"tooltip.0": "§9Increases nearby monster spawn rates.",
+			"tooltip.0": "§9Increases nearby monster spawn rates. §d(Not yet implemented.)",
 			"tooltip.1": "§aYou feel like you're being watched."
 		}
 	},

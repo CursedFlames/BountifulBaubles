@@ -51,7 +51,8 @@ public class ItemPotionWormhole extends BBItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player,
 			Hand hand) {
-		if (world.getPlayers().size()<2) {
+		// FIXME this check doesn't work on the client side, we need something else.
+		if (/*world.getPlayers().size()<2*/ false) {
 			player.sendStatusMessage(new TranslationTextComponent(
 					ModItems.potion_wormhole.getTranslationKey()+".nootherplayers"), true);
 			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));
@@ -61,6 +62,11 @@ public class ItemPotionWormhole extends BBItem {
 	}
 	
 	public static void doWormhole(ServerPlayerEntity player) {
+		if (player.world.getPlayers().size()<2) {
+			player.sendStatusMessage(new TranslationTextComponent(
+					ModItems.potion_wormhole.getTranslationKey()+".nootherplayers"), true);
+			return;
+		}
 		INamedContainerProvider containerProvider = new INamedContainerProvider() {
 			@Override
 			public Container createMenu(int windowId, PlayerInventory playerInventory,

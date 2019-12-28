@@ -27,6 +27,7 @@ import cursedflames.bountifulbaubles.common.proxy.ServerProxy;
 import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.recipe.anvil.AnvilCrafting;
+import cursedflames.bountifulbaubles.common.watercandle.WaterCandleHandler;
 import cursedflames.bountifulbaubles.common.wormhole.ContainerWormhole;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
@@ -37,6 +38,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Potion;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -52,6 +54,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import top.theillusivec4.curios.api.CuriosAPI;
@@ -74,6 +77,8 @@ public class BountifulBaubles {
 			return new ItemStack(ModItems.obsidian_skull);
 		}
 	};
+	
+	public static MinecraftServer server;
 
 	public BountifulBaubles() {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
@@ -99,6 +104,8 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(LootTableInjector.class);
 		
+		MinecraftForge.EVENT_BUS.register(WaterCandleHandler.class);
+		
 		MinecraftForge.EVENT_BUS.register(EffectFlight.class);
 		
 		MinecraftForge.EVENT_BUS.register(ItemShieldCobalt.class);
@@ -113,6 +120,7 @@ public class BountifulBaubles {
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
+		ModCapabilities.registerCapabilities();
 		AnvilRecipes.registerRecipes();
 		BrewingRecipes.registerRecipes();
 	}
@@ -141,10 +149,15 @@ public class BountifulBaubles {
 //				event.getIMCStream().map(m -> m.getMessageSupplier().get()).collect(Collectors.toList()));
 //	}
 
-	// You can use SubscribeEvent and let the Event Bus discover methods to call
 	@SubscribeEvent
 	public void onServerStarting(FMLServerStartingEvent event) {
+		server = event.getServer();
 		CommandWormhole.register(event.getCommandDispatcher());
+	}
+	
+	@SubscribeEvent
+	public void onServerStopping(FMLServerStoppingEvent event) {
+		server = null;
 	}
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
