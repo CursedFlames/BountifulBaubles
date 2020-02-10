@@ -62,7 +62,9 @@ public class ItemModifierBook extends GenericItemBB implements ICustomEnchantCol
 
 	@Override
 	public boolean hasEffect(ItemStack stack) {
-		return stack.getTagCompound().getString("baubleModifier")!="none";
+		return stack.hasTagCompound() 
+				? stack.getTagCompound().getString("baubleModifier")!="none"
+				: false;
 	}
 
 	@Override
