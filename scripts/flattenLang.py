@@ -1,5 +1,6 @@
 import commentjson
 import os.path as path
+import os
 
 
 # I'm sure there's a more pythonic way to do this but whatever
@@ -22,17 +23,19 @@ def recursive_parse(obj, out, path):
 
 def flatten_lang(input_dir, output_dir):
     print("Flattening lang files...", end="", flush=True)
-    # TODO find all lang files
     count = 0
     key_count = 0
-    with open(path.join(input_dir, "en_us.json")) as lang:
-        obj = commentjson.load(lang)
-        out = {}
-        key_count += recursive_parse(obj, out, "")
-        # TODO configurable outfile
-        with open(path.join(output_dir, "en_us.json"), "w") as outfile:
-            commentjson.dump(out, outfile)
-            count += 1
+    for filename in os.listdir(input_dir):
+        if not filename.endswith(".json"):
+            continue
+        with open(path.join(input_dir, filename)) as lang:
+            obj = commentjson.load(lang)
+            out = {}
+            key_count += recursive_parse(obj, out, "")
+            # TODO configurable outfile?
+            with open(path.join(output_dir, filename), "w") as outfile:
+                commentjson.dump(out, outfile, sort_keys=True)
+                count += 1
     print("\rFlattened {} lang files with {} keys".format(count, key_count))
 
 

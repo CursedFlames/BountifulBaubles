@@ -1,0 +1,208 @@
+//TODO stop hardcoding text color
+
+{
+	//"itemGroup.bountifulbaubles": "Bountiful Baubles",
+	//"block.bountifulbaubles": {
+	//	"water_candle": {
+	//		"": "Water Candle",
+	//		"tooltip.0": "§9Increases nearby monster spawn rates. §d(Not yet implemented.)",
+	//		"tooltip.1": "§aYou feel like you're being watched."
+	//	}
+	//},
+	"item.bountifulbaubles": {
+		"balloon": {
+			"": "Воздушный шарик",
+			"tooltip.0": "§9Увеличивает высоту прыжка и снижает урон от падения."
+		},
+		"obsidian_skull": {
+			"": "Обсидиановый череп",
+			"tooltip.0": "§9Дает иммунитет к горению и 50% защиту от огня (Не защищает от лавы)",
+			"tooltip.1": "§aДержа это, ты чувствуешь себя нервным."
+		},
+		"sunglasses": {
+			"": "Солнечные очки",
+			"tooltip.0": "§9Дает иммунитет к слепоте",
+			"tooltip.1": "§aКрутые парни не смотрят на взрывы."
+		},
+		"apple": {
+			"": "Запретный плод",
+			"tooltip.0": "§9Дает иммунитет к эффекту голода и тошноты."
+		},
+		"vitamins": {
+			"": "Витамины",
+			"tooltip.0": "§9Дает иммунитет к слабости и усталости."
+		},
+		"ring_overclocking": {
+			"": "Кольцо оверклокера",
+			"tooltip.0": "§9Дает иммунитет к замедлению и увеличивает скорость передвижения на 7%",
+			"tooltip.1": "§aЕсли кто не знал - синяя светодиодная подсветка делает ваш компьютер быстрее."
+		},
+		"shulker_heart": {
+			"": "Сердце шалкера",
+			"tooltip.0": "§9Дает иммунитет к левитации",
+			// "tooltip.1": "§9Can be used to brew potions of flight.",
+			"tooltip.2": "§a§aОно мягкое....."
+		},
+		"ring_free_action": {
+			"": "Кольцо свободных действий",
+			"tooltip.0": "§9Дает иммунитет к замедлению и левитации. Позволяет передвигаться без замедления через паутину."
+		},
+		"ender_dragon_scale": {
+			"": "Чешуя дракона края"
+			// "tooltip.0": "§aIt feels unnaturally light."
+		},
+		"broken_black_dragon_scale": {
+			"": "Треснутая чешуя дракона края",
+			"tooltip.0": "§aЧерная чешуя дракона, поврежденная во время боя. Может быть её можно както починить ?"
+		},
+		"black_dragon_scale": {
+			"": "Чешуя черного дракона",
+			"tooltip.0": "§9Дает иммунитет к иссушению"
+		},
+		"bezoar": {
+			"": "Беозар",
+			"tooltip.0": "§9Дает иммунитет к отравлению"
+		},
+		"mixed_dragon_scale": {
+			"": "Смешанная чешуя дракона",
+			"tooltip.0": "§9Даёт иммунитет к иссушению и отравлению",
+			"tooltip.1": "§aИнтересно, беозар слился с чешуей и сделал ее равзноцветной. "
+		},
+		"ankh_charm": {
+			"": "Амулет Анх",
+			"tooltip.0": "§9Дает иммунитет почти к всем негативным эффектам"
+		},
+		"shield_cobalt": {
+			"": "Кобальтовый щит",
+			"tooltip.0": "§9Дает иммунитет к отбрасыванию если экипирован в слот аксессуаров.",
+			"tooltip.1": "Может быть использован  как обычный щит.",
+			"tooltip.2": "Может быть отремонтирован железными слитками на наковальне."
+		},
+		"shield_obsidian": {
+			"": "Обсидиановый щит",
+			"tooltip.0": "§9При ношении в слоте аксессуаров дает иммунитет к отбрасыванию и защиту от огня.",
+			"tooltip.1": "Может быть использован  как обычный щит.",
+			"tooltip.2": "Может быть отремонтирован обсидианом на наковальне."
+		},
+		"shield_ankh": {
+			"": "Щит Анх",
+			"tooltip.0": "§9Дает частичную огнестойкость и невосприимчивость к эффектам отбрасывания и большинству негативных эффектов, если в руках или слоте аксессуаров.",
+			"tooltip.1": "Можно использовать как обычный щит",
+			"tooltip.2": "Можно починить на наковальне с помощью обсидиана"
+		},
+		"magic_mirror": {
+			"": "Магическое зеркало",
+			"tooltip.0": "§9При использовании зеркала игрок телепортируется к последней точке возрождения",
+			"tooltip.1": "§aМожет согнуть пространство по желанию, но это не может сделать уродливые вещи красивыми, к сожалению для вас.",
+			"wrongdim": "Вы чувствуете, что вы слишком далеко от дома, чтобы вернуться."
+		},
+		"potion_recall": {
+			"": "Зелье возврата",
+			"tooltip.0": "§9Телепортирует к точке возрождения"//,
+			// not much point having this tooltip when there's no zing sound
+			// "tooltip.1": "§aAaaaaaand ZING!"
+		},
+		"wormhole_mirror": {
+			"": "Зеркало червоточины",
+			"tooltip.0": "§9При нажатии на правую кнопку игрок телепортируется к последней точке возрождения",
+			"tooltip.1": "§9Нажмите правую кнопку когда крадетесь чтобы телепортироваться к игроку",
+			"tooltip.2": "§aВы можете почувствовать пустоту, смотрящую на вас."
+		},
+		"potion_wormhole": {
+			"": "Зелье червоточины",
+			"tooltip.0": "§9Телепортирует вас к другому игроку",
+			"tooltip.sp": "§aВы вдруг чувствуете себя очень одиноким.",
+			"tooltip.mp": "§aОднако не гарантирует, что там, где игрок находится, безопасно.",
+			"nootherplayers": "Нет доступных целей для телепортации."
+		},
+		"lucky_horseshoe": {
+			"": "Счастливая подкова",
+			"tooltip.0": "§9Убирает урон от падения.",
+			"tooltip.1": "§aЗачем лошади это нужно?"
+		},
+		"amulet_sin_empty": {
+			"": "Ожерелье грешника (пусто)",
+			"tooltip.0": "§9Материал"
+		},
+		"amulet_sin_gluttony": {
+			"": "Ожерелье обжорства",
+			"tooltip.0": "§9Ешь быстрее.",
+			"tooltip.1": "§9Дарует греховный бафф (+урон, +броня) когда вы едите."
+		},
+		"amulet_sin_pride": {
+			"": "Ожерелье гордости",
+			// "tooltip.0": "§9Gives step assist.",
+			"tooltip.1": "§9Дарует бафф гордости (+к урону, +к броне) когда полное здоровье."
+		},
+		"amulet_sin_wrath": {
+			"": "Ожерелье ярости",
+			"tooltip.0": "§9Дает +2 к урону.",
+			"tooltip.1": "§9Дает баф ярости (+к урону, +к броне) после нанесения критического удара."
+		},
+		"broken_heart": {
+			"": "Разбитое сердце",
+			"tooltip.0": "§9Летальный урон разрушает пустое сердце",
+			"tooltip.1": "§9Поспите чтобы востановить заряд сердца",
+			"tooltip.2": "§aКак это случилось?"
+			// "partial_heal": "§aYou feel revitalized. (Regained some lost max health)",
+			// "full_heal": "§aYou feel good as new! (Regained all lost max health)"
+		},
+		//"phylactery_charm": {
+		//	"": "Phylactery Charm",
+		//	"tooltip.0": "§9When equipped, teleports you to your spawn point upon taking lethal damage.",
+		//	"tooltip.1": "§9Does not work in situations where a magic mirror could not teleport you.",
+		//	"tooltip.2": "§9Also functions as a Broken Heart when equipped.",
+		//	"tooltip.3": "§9If held and right-clicked, functions as a magic mirror, but deals damage to you and teleports you instantly."
+		//},
+		"amulet_cross": {
+			"": "Золотой крестик",
+			"tooltip.0": "§9Увеличивает время неуязвимости после получения урона"
+		},
+		//"gloves_dexterity": {
+		//	"": "Gauntlets of Dexterity",
+		//	"tooltip.0": "§9Allows you to switch between items without resetting attack cooldown.",
+		//	//"tooltip.1": "§9Also gives +0.6 attack speed.", //don't need this because it's displayed by curios
+		//	"tooltip.1": "§aAnd they say dexterity isn't a useful stat."
+		//},
+		//"gloves_digging_iron": {
+		//	"": "Iron-clawed Gauntlet",
+		//	"tooltip.0": "§9Weaker than iron tools but breaks all block types.",
+		//	"tooltip.0s": "§9Weaker than iron tools but breaks all block types.",
+		//	"tooltip.1": "§bPress Shift for more info",
+		//	"tooltip.1s": "§9Mining level: §8Stone",
+		//	"tooltip.2s": "§9When equipped in curio slot, applies while digging without a tool, but gives §c-15% mining speed when holding a tool.",
+		//	"tooltip.3s": "§9When equipped in curio slot, §chunger usage from digging without a tool is increased.",
+		//	"tooltip.4s": "§9When equipped in curio slot, §cthe effect of Efficiency is reduced.",
+		//	"tooltip.5s": "Can be repaired in an anvil with iron ingots."
+		//},
+		//"gloves_digging_diamond": {
+		//	"": "Diamond-clawed Gauntlet",
+		//	"tooltip.0": "§9Weaker than diamond tools but breaks all block types.",
+		//	"tooltip.0s": "§9Weaker than diamond tools but breaks all block types.",
+		//	"tooltip.1": "§bPress Shift for more info",
+		//	"tooltip.1s": "§9Mining level: §fIron",
+		//	"tooltip.2s": "§9When equipped in curio slot, applies while digging without a tool, but gives §c-15% mining speed when holding a tool.",
+		//	"tooltip.3s": "§9When equipped in curio slot, §chunger usage from digging without a tool is increased.",
+		//	"tooltip.4s": "§9When equipped in curio slot, §cthe effect of Efficiency is reduced.",
+		//	"tooltip.5s": "Can be repaired in an anvil with diamonds."
+		//},
+		"disintegration_tablet": {
+			"": "Доска для измельчения",
+			"tooltip.0": "§9Совместите с лутом из данжа, чтобы получить спектральную пыль."
+		},
+		"spectral_silt": {
+			"": "Спектральная пыль",
+			"tooltip.0": "§9Компонент"
+		}
+	},
+	//"item.minecraft": {
+	//	"potion.effect.flight": "Potion of Flight"
+	//},
+	"effect.bountifulbaubles": {
+	//	"flight": "Flight",
+		"sinful": "Грешник"
+	},
+	"bountifulbaubles.moreinfo": "§bНажмите SHIFT чтобы увидеть больше информации.",
+    "bountifulbaubles.broken": "§8§oСломанный"
+	//"attribute.name.generic.reachDistance": "Reach" //why is this not in vanilla?
+}

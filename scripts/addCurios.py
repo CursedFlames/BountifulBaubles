@@ -24,7 +24,7 @@ def add_curios(input_file, output_dir, modid):
             item_count += 1
         for curiotype in items:
             with open(path.join(output_dir, curiotype+".json"), "w") as outfile:
-                list_string = ",".join(map(lambda a: '"'+modid+":"+a+'"', list(items[curiotype])))
+                list_string = ",".join(sorted(list(map(lambda a: '"'+modid+":"+a+'"', list(items[curiotype])))))
                 outfile.writelines(copypasta.format(list_string))
                 type_count += 1
     print("\rGenerated {} curios files with {} items".format(type_count, item_count))
