@@ -104,7 +104,8 @@ public class BountifulBaubles {
 		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(LootTableInjector.class);
 		
-		MinecraftForge.EVENT_BUS.register(WaterCandleHandler.class);
+		// TODO performance test water candle and re-enable it
+//		MinecraftForge.EVENT_BUS.register(WaterCandleHandler.class);
 		
 		MinecraftForge.EVENT_BUS.register(EffectFlight.class);
 		
