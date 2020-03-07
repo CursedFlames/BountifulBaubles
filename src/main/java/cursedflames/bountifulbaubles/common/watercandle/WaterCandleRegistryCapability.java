@@ -141,6 +141,7 @@ public class WaterCandleRegistryCapability implements ICapabilityProvider, ICapa
 					Entity entity = ent.type.spawn(world, null, null, tryPos, SpawnReason.SPAWNER, false, false);
 					// TODO make some kind of subtler effect for showing that it's spawned by water candle?
 					// blue glow, maybe
+					// TODO also maybe make the mobs tougher but with better loot?
 //					if (entity instanceof LivingEntity) {
 //						LivingEntity living = (LivingEntity) entity;
 //						living.addPotionEffect(new EffectInstance(Effects.GLOWING, Integer.MAX_VALUE/4));
