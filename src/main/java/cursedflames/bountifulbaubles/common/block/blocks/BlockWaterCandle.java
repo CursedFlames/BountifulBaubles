@@ -61,7 +61,7 @@ public class BlockWaterCandle extends BBBlock implements IWaterLoggable {
 	}
 	
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return func_220055_a(worldIn, pos.down(), Direction.UP);
+		return hasEnoughSolidSide(worldIn, pos.down(), Direction.UP);
 	}
 
 	@Override

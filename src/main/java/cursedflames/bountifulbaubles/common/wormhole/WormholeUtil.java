@@ -51,16 +51,16 @@ public class WormholeUtil {
 	
 	public static void doTeleport(PlayerEntity origin, PlayerEntity target) {
 		//TODO check if sleeping/riding entity?
-		origin.setPositionAndUpdate(target.posX, target.posY, target.posZ);
+		origin.setPositionAndUpdate(target.getX(), target.getY(), target.getZ());
 		
 		if (origin.fallDistance>0.0F) {
 			origin.fallDistance = 0.0F;
 		}
-		origin.lastTickPosX = origin.posX;
-		origin.lastTickPosY = origin.posY;
-		origin.lastTickPosZ = origin.posZ;
+		origin.lastTickPosX = origin.getX();
+		origin.lastTickPosY = origin.getY();
+		origin.lastTickPosZ = origin.getZ();
 		// TODO maybe use a different sound for wormhole mirror?
-		origin.world.playSound(null, target.posX, target.posY, target.posZ,
+		origin.world.playSound(null, target.getPosition(),
 				SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
 	}
 }

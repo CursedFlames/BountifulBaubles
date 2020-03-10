@@ -45,7 +45,7 @@ public class WaterCandleHandler {
 //			BountifulBaubles.logger.info(poses.size() + " candles nearby");
 //			BountifulBaubles.logger.info("found entity to duplicate at " + entity.posX + ", " + entity.posY + ", " + entity.posZ);
 			for (int i = entity.world.rand.nextInt(5); i >= 0; i--) {
-				reg.addEntityToSpawn(entity.getType(), new BlockPos(entity.posX, entity.posY, entity.posZ));
+				reg.addEntityToSpawn(entity.getType(), entity.getPosition());
 			}
 //			entity.getType().spawn(entity.world, null, null, pos, reason, false, false);
 		});

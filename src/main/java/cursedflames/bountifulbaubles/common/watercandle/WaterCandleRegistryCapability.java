@@ -73,9 +73,9 @@ public class WaterCandleRegistryCapability implements ICapabilityProvider, ICapa
 			CompoundNBT tag = new CompoundNBT();
 			ListNBT list = new ListNBT();
 			for (BlockPos pos : positions) {
-				list.add(new IntNBT(pos.getX()));
-				list.add(new IntNBT(pos.getY()));
-				list.add(new IntNBT(pos.getZ()));
+				list.add(IntNBT.of(pos.getX()));
+				list.add(IntNBT.of(pos.getY()));
+				list.add(IntNBT.of(pos.getZ()));
 			}
 			
 			tag.put("candles", list);
@@ -93,9 +93,9 @@ public class WaterCandleRegistryCapability implements ICapabilityProvider, ICapa
 
 		@Override
 		public Set<BlockPos> getCandlePos(Entity entity) {
-			double x = entity.posX;
-			double y = entity.posY;
-			double z = entity.posZ;
+			double x = entity.getX();
+			double y = entity.getY();
+			double z = entity.getZ();
 			Set<BlockPos> poses = new HashSet<>();
 			for (BlockPos pos : positions) {
 				double xOff = pos.getX()-x;
@@ -135,7 +135,7 @@ public class WaterCandleRegistryCapability implements ICapabilityProvider, ICapa
 						world.rand.nextInt(horRange*2+1)-horRange,
 						world.rand.nextInt(verRange*2+1)-verRange,
 						world.rand.nextInt(horRange*2+1)-horRange);
-				if (world.areCollisionShapesEmpty(ent.type.func_220328_a(tryPos.getX(), tryPos.getY(), tryPos.getZ())) &&
+				if (world.doesNotCollide(ent.type.func_220328_a(tryPos.getX(), tryPos.getY(), tryPos.getZ())) &&
 						EntitySpawnPlacementRegistry.func_223515_a(ent.type, world, SpawnReason.SPAWNER, tryPos, world.rand)) {
 					// TODO check if too close to player
 					Entity entity = ent.type.spawn(world, null, null, tryPos, SpawnReason.SPAWNER, false, false);

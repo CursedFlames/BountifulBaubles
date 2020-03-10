@@ -1,11 +1,13 @@
 package cursedflames.bountifulbaubles.common.item.items;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.util.CuriosUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
@@ -59,12 +61,13 @@ public class ItemAmuletCross extends BBItem {
 		}
 		
 		@Override
-		public void doRender(String identifier, LivingEntity livingEntity, float limbSwing,
-			      float limbSwingAmount, float partialTicks, float ageInTicks,
-			      float netHeadYaw, float headPitch, float scale) {
+		public void render(String identifier, MatrixStack matrixStack,
+			      IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing,
+			      float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
+			      float headPitch) {
 			// FIXME phantom ink
 			Minecraft.getInstance().getTextureManager().bindTexture(texture);
-			ICurio.RenderHelper.rotateIfSneaking(livingEntity);
+//			ICurio.RenderHelper.rotateIfSneaking(livingEntity);
 			
 			//TODO maybe we want an actual model instead of doing this semi-hacky thing?
 			//TODO make sure this renders properly with player skin shirt layers.
@@ -72,8 +75,10 @@ public class ItemAmuletCross extends BBItem {
 			float s = 1.14F/16F;
 			GlStateManager.scalef(s, s, s);
 			if (model==null)
-				model = new BipedModel<>();
+				model = new BipedModel<LivingEntity>(s, s, light, light);
 
+			ICurio.RenderHelper.followBodyRotations(livingEntity, model);
+			
 			model.bipedBody.render(1);
 		}
 	}

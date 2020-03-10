@@ -46,7 +46,7 @@ public class LootTablesChests extends BaseLootTableProvider<ResourceLocation> {
 						.addEntry(ItemLootEntry.builder(ModItems.amulet_sin_empty)
 								.weight(3)))
 				.addLootPool(LootPool.builder()
-						.rolls(RandomValueRange.func_215837_a(1, 6))
+						.rolls(new RandomValueRange(1, 6))
 						.acceptCondition(RandomChance.builder(0.75f))
 						.addEntry(EmptyLootEntry.func_216167_a()
 								.weight(25))

@@ -81,7 +81,7 @@ public class ItemBrokenHeart extends BBItem {
 //		player.world.playSound(null, player.posX, player.posY, player.posZ,
 //				SoundEvents.ENTITY_PLAYER_HURT, SoundCategory.PLAYERS, 1.0F,
 //				(player.world.rand.nextFloat()-player.world.rand.nextFloat())*0.15F+0.75F);
-		entity.world.playSound(null, entity.posX, entity.posY, entity.posZ,
+		entity.world.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
 				SoundEvents.ENTITY_IRON_GOLEM_HURT, SoundCategory.PLAYERS, 0.7F,
 				(entity.world.rand.nextFloat()-entity.world.rand.nextFloat())*0.1F+0.8F);
 	}

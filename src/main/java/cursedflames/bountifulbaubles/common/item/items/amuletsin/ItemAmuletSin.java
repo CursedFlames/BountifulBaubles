@@ -1,11 +1,16 @@
 package cursedflames.bountifulbaubles.common.item.items.amuletsin;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
+import cursedflames.bountifulbaubles.client.model.ModelAmulet;
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.util.CuriosUtil;
+import it.unimi.dsi.fastutil.Stack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,11 +39,13 @@ public class ItemAmuletSin extends BBItem {
 	}
 	
 	protected static class Curio implements ICurio {
-		private BipedModel<LivingEntity> model;
+		private Object model;
 		
 		ItemAmuletSin item;
-		protected Curio(ItemAmuletSin item) {
+		ItemStack stack;
+		protected Curio(ItemAmuletSin item, ItemStack stack) {
 			this.item = item;
+			this.stack = stack;
 		}
 		
 		@Override
@@ -47,22 +54,32 @@ public class ItemAmuletSin extends BBItem {
 		}
 		
 		@Override
-		public void doRender(String identifier, LivingEntity livingEntity, float limbSwing,
-			      float limbSwingAmount, float partialTicks, float ageInTicks,
-			      float netHeadYaw, float headPitch, float scale) {
-			// TODO phantom ink
-			Minecraft.getInstance().getTextureManager().bindTexture(item.texture);
-			ICurio.RenderHelper.rotateIfSneaking(livingEntity);
-			
-			//TODO maybe we want an actual model instead of doing this semi-hacky thing?
-			//TODO make sure this renders properly with player skin shirt layers.
-			GlStateManager.translatef(0F, -0.001F, 0F); // stop z fighting
-			float s = 1.14F/16F;
-			GlStateManager.scalef(s, s, s);
-			if (model==null)
-				model = new BipedModel<>();
+		public void render(String identifier, MatrixStack matrixStack,
+				IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing,
+				float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
+				float headPitch) {
+			ICurio.RenderHelper.translateIfSneaking(matrixStack, livingEntity);
+			ICurio.RenderHelper.rotateIfSneaking(matrixStack, livingEntity);
 
-			model.bipedBody.render(1);
+//			Minecraft.getInstance().getTextureManager().bindTexture(item.texture);
+			if (!(this.model instanceof ModelAmulet)) {
+				this.model = new ModelAmulet<>();
+			}
+			ModelAmulet<?> amuletModel = (ModelAmulet<?>) this.model;
+			
+			IVertexBuilder vertexBuilder = ItemRenderer
+					.getArmorVertexConsumer(renderTypeBuffer, amuletModel.getLayer(p_228282_1_),
+							false, stack.hasEffect());
+			
+//			// TODO maybe we want an actual model instead of doing this semi-hacky thing?
+//			// TODO make sure this renders properly with player skin shirt layers.
+//			GlStateManager.translatef(0F, -0.001F, 0F); // stop z fighting
+//			float s = 1.14F / 16F;
+//			GlStateManager.scalef(s, s, s);
+//			if (model == null)
+//				model = new BipedModel<>();
+//
+//			model.bipedBody.render(1);
 		}
 	}
 	

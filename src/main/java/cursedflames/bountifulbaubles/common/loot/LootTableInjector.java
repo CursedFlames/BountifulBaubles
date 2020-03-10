@@ -108,7 +108,7 @@ public class LootTableInjector {
 					.build());
 			if (Config.DUNGEON_POTION_RATE.get() > 0)
 			table.addPool(LootPool.builder()
-					.rolls(RandomValueRange.func_215837_a(1, 6))
+					.rolls(new RandomValueRange(1, 6))
 					.acceptCondition(RandomChance.builder((float)(double)Config.DUNGEON_POTION_RATE.get()))
 					.addEntry(EmptyLootEntry.func_216167_a()
 							.weight(25))

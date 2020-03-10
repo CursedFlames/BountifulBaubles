@@ -116,7 +116,7 @@ public class ItemMagicMirror extends BBItem {
 		player.stopRiding();
 		// shouldn't happen, but if it does...?
 		if (player.isSleeping()) {
-		    player.wakeUpPlayer(true, true, false);
+		    player.wakeUp();
 		}
 		if (world1!=null) {
 			BlockPos spawnPoint = player.getBedLocation(dim);
@@ -141,10 +141,10 @@ public class ItemMagicMirror extends BBItem {
 	
 	private static void doTeleport(PlayerEntity player, World origin, World target,
 			double x, double y, double z) {
-		target.playSound(null, player.posX, player.posY, player.posZ,
+		target.playSound(null, player.getX(), player.getY(), player.getZ(),
 				SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
 		if (origin != target) {
-			((ServerChunkProvider) target.getChunkProvider()).func_217228_a(
+			((ServerChunkProvider) target.getChunkProvider()).registerTicket(
 					TicketType.POST_TELEPORT, 
 					new ChunkPos(new BlockPos(x, y, z)),
 					1, player.getEntityId());

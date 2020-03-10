@@ -45,7 +45,7 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 //						vel.x, vel.y, vel.z);
 //			}
 //		}
-		boolean sneaking = entity.isSneaking();
+		boolean sneaking = entity.isCrouching();
 		if (!world.isRemote&&count==15 && entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) entity;
 			if (!sneaking) {
