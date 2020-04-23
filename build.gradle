@@ -12,19 +12,17 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
 		classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
-		classpath "com.wynprice.cursemaven:CurseMaven:1.1.0"
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'java'
-apply plugin: "com.wynprice.cursemaven"
 
 reobf {
 	
 }
 
 
-version = "1.12.2-0.1.4"
+version = "1.12.2-0.1.5-wormhole"
 group = "cursedflames.bountifulbaubles" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Bountiful Baubles"
 
@@ -84,7 +82,7 @@ dependencies {
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
 	compile "baubles:Baubles:1.12:1.5.2"
-	deobfCompile curse.resolve("albedo", "2714505")
+	deobfCompile "albedo:albedo:1.12.2:1.1.0"
 	
 	// compile against the JEI API but do not include it at runtime
 	deobfProvided "mezz.jei:jei_1.12.2:4.12.1.217:api"
