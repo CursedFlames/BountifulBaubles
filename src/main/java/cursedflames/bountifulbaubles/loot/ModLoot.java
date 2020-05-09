@@ -131,7 +131,7 @@ public class ModLoot {
 							ModItems.brokenBlackDragonScale.getRegistryName().toString()));
 					entries.add(new LootEntryItem(ModItems.sinPendantEmpty, 3, 0,
 							new LootFunction[0], new LootCondition[0],
-							ModItems.brokenBlackDragonScale.getRegistryName().toString()));
+							ModItems.sinPendantEmpty.getRegistryName().toString()));
 					entries.add(new LootEntryItem(ModItems.phantomPrism, 1, 0, new LootFunction[0],
 							new LootCondition[0],
 							ModItems.phantomPrism.getRegistryName().toString()));
