@@ -116,6 +116,8 @@ public class ContainerWormhole extends Container {
 		changes.setInteger("pinCount", pinCount);
 //		BountifulBaubles.logger.info(changes);
 		for (int j = 0; j<this.listeners.size(); ++j) {
+			if (!(this.listeners.get(j) instanceof EntityPlayerMP))
+				continue;
 			PacketHandler.INSTANCE.sendTo(
 					new NBTPacket(changes, PacketHandler.HandlerIds.WORMHOLE_UPDATE_GUI.id),
 					((EntityPlayerMP) this.listeners.get(j)));
