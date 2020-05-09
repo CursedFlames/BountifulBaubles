@@ -48,6 +48,7 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 				teleportPlayerToSpawn(world, player);
 			}
 		}
+		// TODO was there a reason we do these two on separate ticks?
 		if (!world.isRemote&&count==16&&sneaking) {
 			if (world.playerEntities.size()<2) {
 				player.sendStatusMessage(

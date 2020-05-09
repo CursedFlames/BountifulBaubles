@@ -40,6 +40,8 @@ public class TeleportRequest {
 	public static TeleportRequest makeReq(World world, EntityPlayer origin, EntityPlayer target) {
 		if (!(target instanceof EntityPlayerMP)) return null; // I don't think this should happen
 		
+		origin.sendMessage(new TextComponentString("Teleport request sent to " + target.getName()));
+		
 		TeleportRequest req = new TeleportRequest(world, origin.getUniqueID(), target.getUniqueID());
 		requests.add(req);
 		
@@ -71,6 +73,12 @@ public class TeleportRequest {
 			TeleportRequest req = requests.get(i);
 			if (req.reqTickTime < timeoutTime) {
 				req.status = Status.TIMEOUT;
+				EntityPlayer from = target.world.getPlayerEntityByUUID(req.origin);
+				EntityPlayer to = target.world.getPlayerEntityByUUID(req.target);
+				if (from != null && to != null) {
+					from.sendMessage(new TextComponentString("Teleport request to " + to.getName() + " has expired."));
+					to.sendMessage(new TextComponentString("Teleport request from " + from.getName() + " has expired."));
+				}
 				requests.remove(i);
 				continue;
 			}
@@ -84,18 +92,40 @@ public class TeleportRequest {
 					if (!accept) {
 						req.status = Status.REJECT;
 						if (player != null) {
-							target.sendMessage(
-									new TextComponentString("Rejected teleport request from " + player.getName()));
-						}
-						//TODO show message to origin explaining rejection						
+							target.sendMessage(new TextComponentString(
+									"Rejected teleport request from " + player.getName() + "."));
+							player.sendMessage(
+									new TextComponentString("Teleport request to " + target.getName() + " was rejected."));
+						}				
 					} else {
+						target.sendMessage(new TextComponentString(
+								"Accepted teleport request from " + player.getName() + "."));
+						player.sendMessage(new TextComponentString(
+								"Teleport request to " + target.getName() + " was accepted."));
 						req.status = Status.ACCEPT;
 						if (player != null) {
-							if (WormholeUtil.consumeItem(player)) {
+							TextComponentString message1 = null;
+							TextComponentString message2 = null;
+							if (player.isPlayerSleeping()) {
+								message1 = new TextComponentString(
+										"Teleport failed as " + player.getName() + " is asleep.");
+								message2 = new TextComponentString("Teleport failed as you are asleep.");
+							} else if (player.isRiding()) {
+								message1 = new TextComponentString(
+										"Teleport failed as " + player.getName() + " is mounted.");
+								message2 = new TextComponentString("Teleport failed as you are mounted.");
+							} else if (WormholeUtil.consumeItem(player)) {
 								WormholeUtil.doTeleport(player, target);
+							} else {
+								message1 = new TextComponentString("Teleport failed as " + player.getName()
+										+ " has no wormhole potions or mirror.");
+								message2 = new TextComponentString(
+										"Teleport failed as you have no wormhole potions or mirror.");
 							}
-							target.sendMessage(
-									new TextComponentString("Accepted teleport request from " + player.getName()));
+							if (message1 != null)
+								target.sendMessage(message1);
+							if (message2 != null)
+								player.sendMessage(message2);
 						}
 					}
 					requests.remove(i);

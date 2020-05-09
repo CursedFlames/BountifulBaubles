@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.item.base.GenericItemBB;
 import cursedflames.bountifulbaubles.util.Config.EnumPropSide;
+import cursedflames.bountifulbaubles.util.Util;
 import cursedflames.bountifulbaubles.wormhole.TeleporterRecall;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -100,7 +101,7 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 				entity.lastTickPosZ = entity.posZ;
 			}
 		}
-		if (!world.isRemote&&count==15) {
+		if (count==15) {
 			if (entity instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) entity;
 				teleportPlayerToSpawn(world, player);
@@ -117,31 +118,42 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 			world1 = DimensionManager.getWorld(dim);
 		}
 		if (world1!=null) {
-			if (world!=world1) {
-				// TODO changing dimension this way plays the portal sound
-				// fine for now but if we ever want to change it...
-				player.changeDimension(dim, new TeleporterRecall());
-			} else {
-				BlockPos spawnPoint = player.getBedLocation(dim);
-				if (spawnPoint!=null) {
-					// player's spawn point, or null if they have none
-					spawnPoint = EntityPlayer.getBedSpawnLocation(world1, spawnPoint, player.isSpawnForced(dim));
-				}
-				if (spawnPoint==null) {
-					// TODO add check if player is outside of spawn chunk
-					spawnPoint = world1.provider.getRandomizedSpawnPoint();
-				}
-				if (spawnPoint!=null) {
-					player.setPositionAndUpdate(spawnPoint.getX()+0.5, spawnPoint.getY(),
-							spawnPoint.getZ()+0.5);
-					if (player.fallDistance>0.0F) {
-						player.fallDistance = 0.0F;
+			if (player.isPlayerSleeping())
+				return; // disallow teleport while asleep
+			// Unmount on teleport
+			BountifulBaubles.logger.info(player.getPosition());
+			if (player.isRiding()) {
+				player.dismountRidingEntity();
+			}
+			BountifulBaubles.logger.info(player.getPosition());
+			if (!world.isRemote) {
+				if (world!=world1) {
+					// TODO changing dimension this way plays the portal sound
+					// fine for now but if we ever want to change it...
+					player.changeDimension(dim, new TeleporterRecall());
+				} else {
+					BlockPos spawnPoint = player.getBedLocation(dim);
+					if (spawnPoint!=null) {
+						// player's spawn point, or null if they have none
+						spawnPoint = EntityPlayer.getBedSpawnLocation(world1, spawnPoint, player.isSpawnForced(dim));
 					}
-					player.lastTickPosX = player.posX;
-					player.lastTickPosY = player.posY;
-					player.lastTickPosZ = player.posZ;
-					player.world.playSound(null, player.posX, player.posY, player.posZ,
-							SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
+					if (spawnPoint==null) {
+						// TODO add check if player is outside of spawn chunk
+						spawnPoint = world1.provider.getRandomizedSpawnPoint();
+					}
+					if (spawnPoint!=null) {
+						player.setPositionAndUpdate(spawnPoint.getX()+0.5, spawnPoint.getY(),
+								spawnPoint.getZ()+0.5);
+						BountifulBaubles.logger.info(player.getPosition());
+						if (player.fallDistance>0.0F) {
+							player.fallDistance = 0.0F;
+						}
+						player.lastTickPosX = player.posX;
+						player.lastTickPosY = player.posY;
+						player.lastTickPosZ = player.posZ;
+						player.world.playSound(null, player.posX, player.posY, player.posZ,
+								SoundEvents.ENTITY_ENDERMEN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
+					}
 				}
 			}
 		}

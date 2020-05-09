@@ -52,6 +52,11 @@ public class WormholeUtil {
 	}
 	
 	public static void doTeleport(EntityPlayer origin, EntityPlayer target) {
+		// Unmount on teleport
+		if (origin.isRiding()) {
+			origin.dismountRidingEntity();
+		}
+		
 		origin.setPositionAndUpdate(target.posX, target.posY, target.posZ);
 		
 		if (origin.fallDistance>0.0F) {
