@@ -55,14 +55,14 @@ public class ModCrafting {
 		boolean gaiaSpirit = doesOreExist("eternalLifeEssence");
 		
 		if (ModConfig.recipesEnabled.getBoolean(true)) {
-		r.register(new ShapedOreRecipe(
-				new ResourceLocation(BountifulBaubles.MODID, "ringgold"), 
-				ModItems.goldRing, new String[] {
-				" g ",
-				"g g",
-				" g " },
-				'g', "ingotGold")
-				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "ringgold")));
+//		r.register(new ShapedOreRecipe(
+//				new ResourceLocation(BountifulBaubles.MODID, "ringgold"), 
+//				ModItems.goldRing, new String[] {
+//				" g ",
+//				"g g",
+//				" g " },
+//				'g', "ingotGold")
+//				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "ringgold")));
 		r.register(new ShapedOreRecipe(
 				new ResourceLocation(BountifulBaubles.MODID, "ringiron"), 
 				ModItems.ironRing, new String[] {
