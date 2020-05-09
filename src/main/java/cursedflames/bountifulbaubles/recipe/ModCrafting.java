@@ -36,6 +36,7 @@ public class ModCrafting {
 		boolean steelIngot = doesOreExist("ingotSteel");
 		boolean ingotEnderium = doesOreExist("ingotEnderium");
 		boolean ingotCobalt = doesOreExist("ingotCobalt");
+		
 		boolean runeMana = doesOreExist("runeManaB");
 		boolean runeFire = doesOreExist("runeFireB");
 		boolean runeWater = doesOreExist("runeWaterB");
@@ -53,6 +54,8 @@ public class ModCrafting {
 		boolean runeSloth = doesOreExist("runeSlothB");
 		boolean runeLust = doesOreExist("runeLustB");
 		boolean gaiaSpirit = doesOreExist("eternalLifeEssence");
+		
+		boolean ruby = doesOreExist("gemRuby");
 		
 		if (ModConfig.recipesEnabled.getBoolean(true)) {
 //		r.register(new ShapedOreRecipe(
@@ -205,7 +208,7 @@ public class ModCrafting {
 				"iii",
 				"i i" },
 				'i', "ingotGold",
-				'g', OreDictionary.doesOreNameExist("gemRuby") ? "gemRuby" : "gemDiamond")
+				'g', ruby ? "gemRuby" : "gemDiamond")
 				.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "crownGold")));
 		if (runePride) {
 			r.register(new ShapedOreRecipe(
