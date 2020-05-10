@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.ws.Provider;
-
 import com.google.common.collect.Lists;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;

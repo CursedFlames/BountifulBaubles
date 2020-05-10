@@ -11,6 +11,7 @@ import cursedflames.bountifulbaubles.common.network.PacketHandler;
 import cursedflames.bountifulbaubles.common.network.wormhole.SPacketWormholeRequest;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -43,6 +44,10 @@ public class TeleportRequest {
 	public static TeleportRequest makeReq(World world, PlayerEntity origin, PlayerEntity target) {
 		if (!(target instanceof ServerPlayerEntity)) return null; // I don't think this should happen
 		
+		origin.sendMessage(new StringTextComponent("Teleport request sent to ")
+				.appendSibling(target.getName())
+				.appendText("."));
+		
 		TeleportRequest req = new TeleportRequest(world, origin.getUniqueID(), target.getUniqueID());
 		requests.add(req);
 		
@@ -56,7 +61,7 @@ public class TeleportRequest {
 		long timeoutTime = target.world.getGameTime()-REQ_EXPIRY_TIME;
 		
 		if (originPlayers == null) {
-			// FIXME this doesn't actually work?
+			// there was a comment saying "this doesn't actually work?" but it seems to work so idk
 			originPlayers = (List<PlayerEntity>) target.world.getPlayers();
 		}
 		
@@ -71,32 +76,73 @@ public class TeleportRequest {
 			TeleportRequest req = requests.get(i);
 			if (req.reqTickTime < timeoutTime) {
 				req.status = Status.TIMEOUT;
+				PlayerEntity from = target.world.getPlayerByUuid(req.origin);
+				PlayerEntity to = target.world.getPlayerByUuid(req.target);
+				if (from != null && to != null) {
+					from.sendMessage(new StringTextComponent("Teleport request to ")
+							.appendSibling(to.getName())
+							.appendText(" has expired."));
+					to.sendMessage(new StringTextComponent("Teleport request from ")
+							.appendSibling(from.getName())
+							.appendText(" has expired."));
+				}
 				requests.remove(i);
 				continue;
 			}
 			if (req.target.equals(target.getUniqueID())) {
-//				BountifulBaubles.logger.info(req.origin);
 				if (originIDs.contains(req.origin)) {
 					PlayerEntity player = origins.get(req.origin);
 					if (!accept) {
 						req.status = Status.REJECT;
 						if (player != null) {
-							// FIXME use localization here
-							target.sendMessage(
-									new StringTextComponent("Rejected teleport request from ")
-									.appendSibling(player.getName()));
+							// FIXME use localization for teleportation messages
+//							target.sendMessage(
+//									new StringTextComponent("Rejected teleport request from ")
+//									.appendSibling(player.getName()));
+							target.sendMessage(new StringTextComponent(
+									"Rejected teleport request from ").appendSibling(player.getName())
+									.appendText("."));
+							player.sendMessage(new StringTextComponent(
+									"Teleport request to ").appendSibling(target.getName())
+									.appendText(" was rejected."));
 							count++;
-						}
-						//TODO show message to origin explaining rejection						
+						}					
 					} else {
 						req.status = Status.ACCEPT;
 						if (player != null) {
-							if (WormholeUtil.consumeItem(player)) {
+							target.sendMessage(new StringTextComponent(
+									"Accepted teleport request from ").appendSibling(player.getName())
+									.appendText("."));
+							player.sendMessage(new StringTextComponent(
+									"Teleport request to ").appendSibling(target.getName())
+									.appendText(" was accepted."));
+							ITextComponent message1 = null;
+							ITextComponent message2 = null;
+							/*if (player.isPlayerSleeping()) {
+								message1 = new StringTextComponent(
+										"Teleport failed as " + player.getName() + " is asleep.");
+								message2 = new StringTextComponent("Teleport failed as you are asleep.");
+							} else */
+							if (player.isPassenger()) {
+								message1 = new StringTextComponent(
+										"Teleport failed as ")
+										.appendSibling(player.getName())
+										.appendText(" is mounted.");
+								message2 = new StringTextComponent("Teleport failed as you are mounted.");
+							} else if (WormholeUtil.consumeItem(player)) {
 								WormholeUtil.doTeleport(player, target);
+							} else {
+								message1 = new StringTextComponent(
+										"Teleport failed as ")
+										.appendSibling(player.getName())
+										.appendText(" has no wormhole potions or mirror.");
+								message2 = new StringTextComponent(
+										"Teleport failed as you have no wormhole potions or mirror.");
 							}
-							target.sendMessage(
-									new StringTextComponent("Accepted teleport request from ")
-									.appendSibling(player.getName()));
+							if (message1 != null)
+								target.sendMessage(message1);
+							if (message2 != null)
+								player.sendMessage(message2);
 							count++;
 						}
 					}
