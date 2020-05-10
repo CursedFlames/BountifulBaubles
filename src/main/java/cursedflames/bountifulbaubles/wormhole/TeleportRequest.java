@@ -13,8 +13,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 public class TeleportRequest {
-	// TODO cancel request when player switches item away from wormhole items
-	// TODO show message when requests are rejected or timed out
 	public static enum Status {
 		PENDING, ACCEPT, REJECT, TIMEOUT
 	}
@@ -62,12 +60,10 @@ public class TeleportRequest {
 			origin = null;
 		} else {
 			originPlayer = target.world.getPlayerEntityByName(name);
-//			BountifulBaubles.logger.info(originPlayer);
 			if (originPlayer == null) {
 				return;
 			}
 			origin = originPlayer.getUniqueID();
-//			BountifulBaubles.logger.info(origin);
 		}
 		for (int i = requests.size()-1; i >= 0; i--) {
 			TeleportRequest req = requests.get(i);
@@ -77,13 +73,13 @@ public class TeleportRequest {
 				EntityPlayer to = target.world.getPlayerEntityByUUID(req.target);
 				if (from != null && to != null) {
 					from.sendMessage(new TextComponentString("Teleport request to " + to.getName() + " has expired."));
-					to.sendMessage(new TextComponentString("Teleport request from " + from.getName() + " has expired."));
+					to.sendMessage(
+							new TextComponentString("Teleport request from " + from.getName() + " has expired."));
 				}
 				requests.remove(i);
 				continue;
 			}
 			if (req.target.equals(target.getUniqueID())) {
-//				BountifulBaubles.logger.info(req.origin);
 				if (origin == null || req.origin.equals(origin)) {
 					EntityPlayer player = originPlayer;
 					if (player == null) {
@@ -94,16 +90,16 @@ public class TeleportRequest {
 						if (player != null) {
 							target.sendMessage(new TextComponentString(
 									"Rejected teleport request from " + player.getName() + "."));
-							player.sendMessage(
-									new TextComponentString("Teleport request to " + target.getName() + " was rejected."));
-						}				
+							player.sendMessage(new TextComponentString(
+									"Teleport request to " + target.getName() + " was rejected."));
+						}		
 					} else {
-						target.sendMessage(new TextComponentString(
-								"Accepted teleport request from " + player.getName() + "."));
-						player.sendMessage(new TextComponentString(
-								"Teleport request to " + target.getName() + " was accepted."));
 						req.status = Status.ACCEPT;
 						if (player != null) {
+							target.sendMessage(new TextComponentString(
+									"Accepted teleport request from " + player.getName() + "."));
+							player.sendMessage(new TextComponentString(
+									"Teleport request to " + target.getName() + " was accepted."));
 							TextComponentString message1 = null;
 							TextComponentString message2 = null;
 							if (player.isPlayerSleeping()) {
