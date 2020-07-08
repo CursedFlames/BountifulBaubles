@@ -13,15 +13,20 @@ import top.theillusivec4.curios.api.CuriosAPI;
 import top.theillusivec4.curios.api.capability.ICurioItemHandler;
 import top.theillusivec4.curios.api.inventory.CurioStackHandler;
 
-public class EffectFallDamageNegate {
+public class EffectFallDamageResistNegate {
 	public static interface IFallDamageNegateItem {
 		default boolean shouldNegate(LivingEntity entity, ItemStack stack) {
 			return true;
 		}
 	}
 	
-	public static void onFall(LivingEvent event, LivingEntity entity) {
+	public static interface IFallDamageResistItem {
+		float getFallResist(LivingEntity entity, ItemStack stack);
+	}
+	
+	public static float onFall(LivingEvent event, LivingEntity entity) {
 		LazyOptional<ICurioItemHandler> opt = CuriosAPI.getCuriosHandler(entity);
+		float decrease = 0f;
 		if (opt.isPresent()) {
 			ICurioItemHandler handler = opt.orElse(null);
 			SortedMap<String, CurioStackHandler> items = handler.getCurioMap();
@@ -33,19 +38,38 @@ public class EffectFallDamageNegate {
 					if (item instanceof IFallDamageNegateItem) {
 						if (((IFallDamageNegateItem) item).shouldNegate(entity, stack)) {
 							event.setCanceled(true);
-							return;
+							return 0f;
 						}
+					} else if (item instanceof IFallDamageResistItem) {
+						decrease += Math.max(0, ((IFallDamageResistItem) item).getFallResist(entity, stack));
 					}
 				}
 			}
 		}
+		return decrease;
 	}
 	
 	public static void onFallDamage(LivingAttackEvent event, LivingEntity entity) {
-		onFall(event, entity);
+		float decrease = onFall(event, entity);
+		
+		if (!event.isCanceled() && decrease > 0) {
+			float finalDamage = Math.max(0, event.getAmount() - decrease);
+			if (finalDamage == 0) {
+				event.setCanceled(true);
+			}
+		}
 	}
 	
 	public static void onFallDamage(LivingHurtEvent event, LivingEntity entity) {
-		onFall(event, entity);
+		float decrease = onFall(event, entity);
+		
+		if (!event.isCanceled() && decrease > 0) {
+			float finalDamage = Math.max(0, event.getAmount() - decrease);
+			if (finalDamage == 0) {
+				event.setCanceled(true);
+			} else {
+				event.setAmount(finalDamage);
+			}
+		}
 	}
 }

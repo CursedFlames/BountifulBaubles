@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosAPI;
 import top.theillusivec4.curios.api.capability.ICurioItemHandler;
 import top.theillusivec4.curios.api.inventory.CurioStackHandler;
@@ -17,8 +16,6 @@ import top.theillusivec4.curios.api.inventory.CurioStackHandler;
 public class EffectJumpBoost {
 	public static interface IJumpItem {
 		public float getJumpBoost(ItemStack stack);
-
-		public float getFallResist(ItemStack stack);
 		
 		public default boolean stacksWithSelf() {
 			return false;
@@ -42,8 +39,6 @@ public class EffectJumpBoost {
 						found.add(item);
 						IJumpItem jumpBoost = (IJumpItem) item;
 						entity.setMotion(entity.getMotion().add(0, jumpBoost.getJumpBoost(stack), 0));
-						// FIXME this doesn't seem to work anymore in 1.15?
-						entity.fallDistance -= jumpBoost.getFallResist(stack);
 					}
 				}
 			}

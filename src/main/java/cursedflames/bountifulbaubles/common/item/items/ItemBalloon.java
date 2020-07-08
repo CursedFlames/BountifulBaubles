@@ -1,10 +1,12 @@
 package cursedflames.bountifulbaubles.common.item.items;
 
+import cursedflames.bountifulbaubles.common.baubleeffect.EffectFallDamageResistNegate.IFallDamageResistItem;
 import cursedflames.bountifulbaubles.common.baubleeffect.EffectJumpBoost.IJumpItem;
 import cursedflames.bountifulbaubles.common.item.BBItem;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 
-public class ItemBalloon extends BBItem implements IJumpItem {
+public class ItemBalloon extends BBItem implements IJumpItem, IFallDamageResistItem {
 	public ItemBalloon(String name, Properties props) {
 		super(name, props);
 	}
@@ -15,7 +17,7 @@ public class ItemBalloon extends BBItem implements IJumpItem {
 	}
 
 	@Override
-	public float getFallResist(ItemStack stack) {
-		return 5f;
+	public float getFallResist(LivingEntity entity, ItemStack stack) {
+		return 4f;
 	}
 }

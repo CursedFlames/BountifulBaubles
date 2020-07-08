@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 import cursedflames.bountifulbaubles.common.item.ModItems;
-import cursedflames.bountifulbaubles.common.item.items.ItemAmuletCross;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -29,7 +28,7 @@ public class EventHandlerEffect {
 		if (event.getSource().isFireDamage()) {
 			EffectFireResist.onFireDamage(event, entity);
 		} else if (event.getSource()==DamageSource.FALL) {
-			EffectFallDamageNegate.onFallDamage(event, entity);
+			EffectFallDamageResistNegate.onFallDamage(event, entity);
 		}
 	}
 	
@@ -47,7 +46,7 @@ public class EventHandlerEffect {
 		if (event.getSource().isFireDamage()) {
 			EffectFireResist.onFireDamage(event, entity);
 		} else if (event.getSource()==DamageSource.FALL) {
-			EffectFallDamageNegate.onFallDamage(event, entity);
+			EffectFallDamageResistNegate.onFallDamage(event, entity);
 		}
 	}
 	
