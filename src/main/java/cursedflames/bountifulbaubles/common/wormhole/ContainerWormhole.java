@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.ws.Provider;
-
 import com.google.common.collect.Lists;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
@@ -14,7 +12,6 @@ import cursedflames.bountifulbaubles.common.capability.CapabilityWormholePins;
 import cursedflames.bountifulbaubles.common.capability.CapabilityWormholePins.IWormholePins;
 import cursedflames.bountifulbaubles.common.network.PacketHandler;
 import cursedflames.bountifulbaubles.common.network.wormhole.SPacketUpdateWormholeGui;
-import cursedflames.bountifulbaubles.common.network.wormhole.SPacketWormholeRequest;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;

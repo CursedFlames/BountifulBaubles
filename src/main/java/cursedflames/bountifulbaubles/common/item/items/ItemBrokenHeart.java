@@ -90,7 +90,8 @@ public class ItemBrokenHeart extends BBItem {
 	public static void onPlayerWake(PlayerWakeUpEvent event) {
 		// TODO this way of checking if slept through night might not be reliable 
 		// - sleeping without spawn point won't work (modded sleeping bags, etc.?)
-		if (event.shouldSetSpawn() && !event.updateWorld()
+		// TODO removed shouldSetSpawn check from 1.14, does this still behave as expected?
+		if (!event.updateWorld()
 				&& Config.BROKEN_HEART_REGEN.get()) {
 			LivingEntity entity = event.getEntityLiving();
 			IAttributeInstance maxHealth = entity

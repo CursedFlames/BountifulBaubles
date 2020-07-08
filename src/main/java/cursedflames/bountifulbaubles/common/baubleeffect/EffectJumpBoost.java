@@ -42,6 +42,7 @@ public class EffectJumpBoost {
 						found.add(item);
 						IJumpItem jumpBoost = (IJumpItem) item;
 						entity.setMotion(entity.getMotion().add(0, jumpBoost.getJumpBoost(stack), 0));
+						// FIXME this doesn't seem to work anymore in 1.15?
 						entity.fallDistance -= jumpBoost.getFallResist(stack);
 					}
 				}
