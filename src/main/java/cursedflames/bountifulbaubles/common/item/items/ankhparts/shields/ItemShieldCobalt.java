@@ -7,11 +7,19 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.mojang.blaze3d.matrix.MatrixStack;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.util.CuriosUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.Quaternion;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -57,6 +65,35 @@ public class ItemShieldCobalt extends ShieldItem {
 			mods.put(knockback, new AttributeModifier(KNOCKBACK_RESISTANCE_BAUBLE_UUID,
 					"Cobalt Shield knockback resistance", 10, AttributeModifier.Operation.ADDITION));
 			return mods;
+		}
+		
+		@Override
+		public boolean hasRender(String identifier, LivingEntity livingEntity) {
+			return true;
+		}
+		
+		@Override
+		public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light,
+				LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks,
+				float ageInTicks, float netHeadYaw, float headPitch) {
+			RenderHelper.translateIfSneaking(matrixStack, livingEntity);
+			RenderHelper.rotateIfSneaking(matrixStack, livingEntity);
+			
+			boolean armor = !livingEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).isEmpty();
+			
+			matrixStack.push();
+			matrixStack.scale(0.6f, 0.6f, 0.6f);
+			matrixStack.multiply(new Quaternion(0, 0, 1, 0));
+			matrixStack.translate(0.5f, -0.25f, armor ? 0.75f : 0.7f);
+			
+			// LivingRenderer.getOverlay(livingEntity, 0f) gives the correct overlay for hit flashes.
+			// we don't need it here so we just use default overlay
+			Minecraft.getInstance().getItemRenderer()
+			.renderItem(stack, TransformType.NONE,
+					light, OverlayTexture.DEFAULT_UV,
+					matrixStack, renderTypeBuffer);
+			
+			matrixStack.pop();
 		}
 	}
 	
