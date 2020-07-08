@@ -7,15 +7,11 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.mojang.blaze3d.platform.GlStateManager;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.util.CuriosUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -61,24 +57,6 @@ public class ItemShieldCobalt extends ShieldItem {
 			mods.put(knockback, new AttributeModifier(KNOCKBACK_RESISTANCE_BAUBLE_UUID,
 					"Cobalt Shield knockback resistance", 10, AttributeModifier.Operation.ADDITION));
 			return mods;
-		}
-		
-		@Override
-		public boolean hasRender(String identifier, LivingEntity livingEntity) {
-			return true; //TODO phantom ink stuff
-		}
-		
-		@Override
-		public void doRender(String identifier, LivingEntity livingEntity, float limbSwing,
-			      float limbSwingAmount, float partialTicks, float ageInTicks,
-			      float netHeadYaw, float headPitch, float scale) {
-			RenderHelper.rotateIfSneaking(livingEntity);
-			boolean armor = !livingEntity.getItemStackFromSlot(EquipmentSlotType.CHEST).isEmpty();
-			GlStateManager.scaled(0.6, 0.6, 0.6);
-			GlStateManager.rotated(180, 0, 0, 1);
-			GlStateManager.translated(0.5, -0.25, armor ? 0.75 : 0.7);
-			Minecraft.getInstance().gameRenderer.itemRenderer.renderItem(livingEntity, stack,
-					ItemCameraTransforms.TransformType.NONE);
 		}
 	}
 	
@@ -148,7 +126,7 @@ public class ItemShieldCobalt extends ShieldItem {
 				// TODO metal sound instead of wood sound?
 				// TODO find a good volume for this
 				// TODO what category should this sound be?
-				player.world.playSound(null, player.posX,  player.posY,  player.posZ,
+				player.world.playSound(null, player.getX(),  player.getY(),  player.getZ(),
 						SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS,
 						0.9f, 0.8F+player.world.rand.nextFloat()*0.4F);
 			}

@@ -1,19 +1,9 @@
 package cursedflames.bountifulbaubles.common.item.items.amuletsin;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.platform.GlStateManager;
-
-import cursedflames.bountifulbaubles.client.model.ModelAmulet;
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.util.CuriosUtil;
-import it.unimi.dsi.fastutil.Stack;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.Effect;
@@ -42,44 +32,8 @@ public class ItemAmuletSin extends BBItem {
 		private Object model;
 		
 		ItemAmuletSin item;
-		ItemStack stack;
-		protected Curio(ItemAmuletSin item, ItemStack stack) {
+		protected Curio(ItemAmuletSin item) {
 			this.item = item;
-			this.stack = stack;
-		}
-		
-		@Override
-		public boolean hasRender(String identifier, LivingEntity livingEntity) {
-			return true;
-		}
-		
-		@Override
-		public void render(String identifier, MatrixStack matrixStack,
-				IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing,
-				float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
-				float headPitch) {
-			ICurio.RenderHelper.translateIfSneaking(matrixStack, livingEntity);
-			ICurio.RenderHelper.rotateIfSneaking(matrixStack, livingEntity);
-
-//			Minecraft.getInstance().getTextureManager().bindTexture(item.texture);
-			if (!(this.model instanceof ModelAmulet)) {
-				this.model = new ModelAmulet<>();
-			}
-			ModelAmulet<?> amuletModel = (ModelAmulet<?>) this.model;
-			
-			IVertexBuilder vertexBuilder = ItemRenderer
-					.getArmorVertexConsumer(renderTypeBuffer, amuletModel.getLayer(p_228282_1_),
-							false, stack.hasEffect());
-			
-//			// TODO maybe we want an actual model instead of doing this semi-hacky thing?
-//			// TODO make sure this renders properly with player skin shirt layers.
-//			GlStateManager.translatef(0F, -0.001F, 0F); // stop z fighting
-//			float s = 1.14F / 16F;
-//			GlStateManager.scalef(s, s, s);
-//			if (model == null)
-//				model = new BipedModel<>();
-//
-//			model.bipedBody.render(1);
 		}
 	}
 	

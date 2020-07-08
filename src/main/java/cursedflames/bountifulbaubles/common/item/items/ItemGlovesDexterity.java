@@ -8,7 +8,6 @@ import java.util.UUID;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-import cursedflames.bountifulbaubles.client.model.ModelGloves;
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.network.PacketHandler;
@@ -51,7 +50,6 @@ public class ItemGlovesDexterity extends BBItem {
 
 	protected static class Curio implements ICurio {
 		ItemStack stack;
-		private Object model;
 
 		protected Curio(ItemStack stack) {
 			this.stack = stack;
@@ -61,23 +59,6 @@ public class ItemGlovesDexterity extends BBItem {
 		public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
 			return modifiers;
 		}
-		
-		// TODO add model
-//		@Override
-//		public boolean hasRender(String identifier, LivingEntity livingEntity) {
-//			return true;
-//		}
-//
-//		@Override
-//		public void doRender(String identifier, LivingEntity livingEntity, float limbSwing, float limbSwingAmount,
-//				float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-//			Minecraft.getInstance().getTextureManager().bindTexture(texture);
-//			if (!(this.model instanceof ModelGloves)) {
-//				this.model = new ModelGloves();
-//			}
-//			((ModelGloves) model).render(livingEntity, limbSwing, limbSwingAmount, partialTicks, ageInTicks,
-//					netHeadYaw, headPitch, scale);
-//		}
 	}
 
 	private static final Map<UUID, Integer> entitiesToReset = new HashMap<>();
