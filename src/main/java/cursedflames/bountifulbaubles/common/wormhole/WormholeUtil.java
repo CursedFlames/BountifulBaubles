@@ -50,7 +50,13 @@ public class WormholeUtil {
 	}
 	
 	public static void doTeleport(PlayerEntity origin, PlayerEntity target) {
-		//TODO check if sleeping/riding entity?
+		// stopRiding() breaks the teleport so we have code elsewhere to just make the teleport fail if mounted
+		// still here in case this function is somehow called without that check - better to fail than get softlocked
+		origin.stopRiding();
+		// shouldn't happen, but if it does...?
+		if (origin.isSleeping()) {
+			origin.wakeUp();
+		}
 		origin.setPositionAndUpdate(target.getX(), target.getY(), target.getZ());
 		
 		if (origin.fallDistance>0.0F) {

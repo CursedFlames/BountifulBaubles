@@ -63,7 +63,7 @@ public class ContainerWormhole extends Container {
 //			targets.add(new DebugTarget("debug"+i));
 //		}
 
-		List<? extends PlayerEntity> players = player.world.getPlayers();
+		List<PlayerEntity> players = new ArrayList<>(player.world.getPlayers());
 		// can't teleport to yourself
 		players.remove(player);
 		boolean survivalOnly = !(player.isCreative() || player.isSpectator());
@@ -113,9 +113,8 @@ public class ContainerWormhole extends Container {
 
 	@Override
 	public void detectAndSendChanges() {
-//		BountifulBaubles.logger.info("detect and send chang");
 		super.detectAndSendChanges();
-//		BountifulBaubles.logger.info(dirty);
+		
 		if (player.world.isRemote || !dirty)
 			return;
 		CompoundNBT changes = new CompoundNBT();
@@ -130,11 +129,12 @@ public class ContainerWormhole extends Container {
 		}
 		changes.put("targets", targetsNBT);
 		changes.putInt("pinCount", pinCount);
-//		BountifulBaubles.logger.info(changes);
+		
 		for (int j = 0; j < this.listeners.size(); ++j) {
-//			PacketHandler.INSTANCE.sendTo(new NBTPacket(changes, PacketHandler.HandlerIds.WORMHOLE_UPDATE_GUI.id),
-//					((ServerPlayerEntity) this.listeners.get(j)));
-			ServerPlayerEntity player = (ServerPlayerEntity) this.listeners.get(j);
+			IContainerListener listener = this.listeners.get(j);
+			if (!(listener instanceof ServerPlayerEntity))
+				continue;
+			ServerPlayerEntity player = (ServerPlayerEntity) listener;
 			PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player),
 					new SPacketUpdateWormholeGui(changes));
 		}
