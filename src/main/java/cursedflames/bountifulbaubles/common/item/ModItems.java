@@ -100,7 +100,7 @@ public class ModItems {
 		
 		r.register(new ItemSunglasses("sunglasses",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.HUNGER, Effects.BLINDNESS)));
+				Arrays.asList(Effects.BLINDNESS)));
 		r.register(new ItemPotionNegate("apple",
 				basePropertiesBauble(),
 				Arrays.asList(Effects.HUNGER, Effects.NAUSEA)));
