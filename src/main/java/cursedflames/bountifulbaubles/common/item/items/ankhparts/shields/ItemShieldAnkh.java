@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.common.item.items.ankhparts.shields;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 import cursedflames.bountifulbaubles.common.baubleeffect.EffectPotionNegate;
 import cursedflames.bountifulbaubles.common.baubleeffect.EffectPotionNegate.IPotionNegateItem;
@@ -12,15 +12,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.Effect;
-import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import top.theillusivec4.curios.api.capability.ICurio;
 
 public class ItemShieldAnkh extends ItemShieldObsidian implements IPotionNegateItem {
-	private static final List<Effect> cureEffects = Arrays.asList(Effects.BLINDNESS, Effects.NAUSEA, Effects.HUNGER,
-			Effects.MINING_FATIGUE, Effects.WEAKNESS, Effects.SLOWNESS, Effects.LEVITATION, Effects.POISON,
-			Effects.WITHER);
+	private static List<Supplier<Effect>> cureEffects;
 	
 	protected static class Curio extends ItemShieldCobalt.Curio {
 		protected Curio(ItemStack stack) {
@@ -33,8 +30,9 @@ public class ItemShieldAnkh extends ItemShieldObsidian implements IPotionNegateI
 		}
 	}
 
-	public ItemShieldAnkh(String name, Properties props) {
+	public ItemShieldAnkh(String name, Properties props, List<Supplier<Effect>> cureEffects) {
 		super(name, props);
+		this.cureEffects = cureEffects;
 	}
 	
 	@Override
@@ -53,7 +51,7 @@ public class ItemShieldAnkh extends ItemShieldObsidian implements IPotionNegateI
 	}
 
 	@Override
-	public List<Effect> getCureEffects() {
+	public List<Supplier<Effect>> getCureEffects() {
 		return cureEffects;
 	}
 }

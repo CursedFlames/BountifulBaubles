@@ -13,6 +13,11 @@ import top.theillusivec4.curios.api.CuriosAPI;
 import top.theillusivec4.curios.api.capability.ICurioItemHandler;
 import top.theillusivec4.curios.api.inventory.CurioStackHandler;
 
+// TODO do we want to fix the thud sound on falling > 3 blocks without taking damage?
+// see: LivingFallEvent - want to cancel if we would end up cancelling the damage
+// We need LivingEntity.computeFallDamage to see how much damage would end up happening though
+// and it's protected, and I don't think this is important enough to merit an AT.
+
 public class EffectFallDamageResistNegate {
 	public static interface IFallDamageNegateItem {
 		default boolean shouldNegate(LivingEntity entity, ItemStack stack) {

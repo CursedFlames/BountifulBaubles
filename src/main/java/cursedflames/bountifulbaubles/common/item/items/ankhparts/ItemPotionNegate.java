@@ -1,6 +1,7 @@
 package cursedflames.bountifulbaubles.common.item.items.ankhparts;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import cursedflames.bountifulbaubles.common.baubleeffect.EffectPotionNegate;
 import cursedflames.bountifulbaubles.common.baubleeffect.EffectPotionNegate.IPotionNegateItem;
@@ -14,7 +15,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import top.theillusivec4.curios.api.capability.ICurio;
 
 public class ItemPotionNegate extends BBItem implements IPotionNegateItem {
-	protected final List<Effect> cureEffects;
+	protected final List<Supplier<Effect>> cureEffects;
 	
 	protected static class Curio implements ICurio {
 		ItemPotionNegate item;
@@ -27,7 +28,7 @@ public class ItemPotionNegate extends BBItem implements IPotionNegateItem {
 		}
 	}
 	
-	public ItemPotionNegate(String name, Properties props, List<Effect> cureEffects) {
+	public ItemPotionNegate(String name, Properties props, List<Supplier<Effect>> cureEffects) {
 		super(name, props);
 		this.cureEffects = cureEffects;
 	}
@@ -43,7 +44,7 @@ public class ItemPotionNegate extends BBItem implements IPotionNegateItem {
 	}
 
 	@Override
-	public List<Effect> getCureEffects() {
+	public List<Supplier<Effect>> getCureEffects() {
 		return cureEffects;
 	}
 }

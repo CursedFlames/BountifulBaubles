@@ -1,6 +1,7 @@
 package cursedflames.bountifulbaubles.common.item.items.ankhparts;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -38,7 +39,7 @@ public class ItemRingFreeAction extends ItemPotionNegate {
 		return new Curio(this);
 	}
 	
-	public ItemRingFreeAction(String name, Properties props, List<Effect> cureEffects) {
+	public ItemRingFreeAction(String name, Properties props, List<Supplier<Effect>> cureEffects) {
 		super(name, props, cureEffects);
 	}
 }

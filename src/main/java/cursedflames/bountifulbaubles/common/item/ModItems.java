@@ -1,6 +1,8 @@
 package cursedflames.bountifulbaubles.common.item;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Supplier;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.block.ModBlocks;
@@ -34,6 +36,7 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTier;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -100,37 +103,38 @@ public class ModItems {
 		
 		r.register(new ItemSunglasses("sunglasses",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.BLINDNESS)));
+				Arrays.asList(()->Effects.BLINDNESS)));
 		r.register(new ItemPotionNegate("apple",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.HUNGER, Effects.NAUSEA)));
+				Arrays.asList(()->Effects.HUNGER, ()->Effects.NAUSEA)));
 		r.register(new ItemPotionNegate("vitamins",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.MINING_FATIGUE, Effects.WEAKNESS)));
+				Arrays.asList(()->Effects.MINING_FATIGUE, ()->Effects.WEAKNESS)));
 		r.register(new ItemRingOverclocking("ring_overclocking",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.SLOWNESS)));
+				Arrays.asList(()->Effects.SLOWNESS)));
 		r.register(new ItemPotionNegate("shulker_heart",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.LEVITATION)));
+				Arrays.asList(()->Effects.LEVITATION)));
 		r.register(new ItemRingFreeAction("ring_free_action",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.SLOWNESS, Effects.LEVITATION)));
+				Arrays.asList(()->Effects.SLOWNESS, ()->Effects.LEVITATION)));
 		r.register(new ItemPotionNegate("bezoar",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.POISON)));
+				Arrays.asList(()->Effects.POISON)));
 		r.register(new ItemEnderDragonScale("ender_dragon_scale", baseProperties()));
 		r.register(new BBItem("broken_black_dragon_scale", baseProperties()));
 		r.register(new ItemPotionNegate("black_dragon_scale",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.WITHER)));
+				Arrays.asList(()->Effects.WITHER)));
 		r.register(new ItemPotionNegate("mixed_dragon_scale",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.POISON, Effects.WITHER)));
+				Arrays.asList(()->Effects.POISON, ()->Effects.WITHER)));
+		List<Supplier<Effect>> ankhEffects = Arrays.asList(()->Effects.BLINDNESS, ()->Effects.HUNGER, ()->Effects.NAUSEA, ()->Effects.MINING_FATIGUE,
+				()->Effects.WEAKNESS, ()->Effects.SLOWNESS, ()->Effects.LEVITATION, ()->Effects.POISON, ()->Effects.WITHER);
 		r.register(new ItemPotionNegate("ankh_charm",
 				basePropertiesBauble(),
-				Arrays.asList(Effects.BLINDNESS, Effects.HUNGER, Effects.NAUSEA, Effects.MINING_FATIGUE,
-						Effects.WEAKNESS, Effects.SLOWNESS, Effects.LEVITATION, Effects.POISON, Effects.WITHER)));
+				ankhEffects));
 		
 		
 		r.register(new ItemObsidianSkull("obsidian_skull",
@@ -140,7 +144,8 @@ public class ModItems {
 		r.register(new ItemShieldObsidian("shield_obsidian",
 				baseProperties().maxDamage(336*4)));
 		r.register(new ItemShieldAnkh("shield_ankh",
-				baseProperties().maxDamage(336*5)));
+				baseProperties().maxDamage(336*5),
+				ankhEffects));
 		
 		
 		r.register(new ItemMagicMirror("magic_mirror", baseProperties().maxStackSize(1)));

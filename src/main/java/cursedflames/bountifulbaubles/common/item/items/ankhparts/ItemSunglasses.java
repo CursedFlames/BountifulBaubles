@@ -1,6 +1,7 @@
 package cursedflames.bountifulbaubles.common.item.items.ankhparts;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import net.minecraft.potion.Effect;
@@ -24,7 +25,7 @@ public class ItemSunglasses extends ItemPotionNegate { // TODO make equippable a
 		return new Curio(this);
 	}
 	
-	public ItemSunglasses(String name, Properties props, List<Effect> cureEffects) {
+	public ItemSunglasses(String name, Properties props, List<Supplier<Effect>> cureEffects) {
 		super(name, props, cureEffects);
 	}
 

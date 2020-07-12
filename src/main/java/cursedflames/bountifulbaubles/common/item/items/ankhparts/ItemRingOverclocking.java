@@ -2,6 +2,7 @@ package cursedflames.bountifulbaubles.common.item.items.ankhparts;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -34,7 +35,7 @@ public class ItemRingOverclocking extends ItemPotionNegate {
 		return new Curio(this);
 	}
 	
-	public ItemRingOverclocking(String name, Properties props, List<Effect> cureEffects) {
+	public ItemRingOverclocking(String name, Properties props, List<Supplier<Effect>> cureEffects) {
 		super(name, props, cureEffects);
 	}
 }

@@ -1,10 +1,8 @@
 package cursedflames.bountifulbaubles.common.baubleeffect;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.SortedMap;
-import java.util.UUID;
+import java.util.function.Supplier;
 
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldAnkh;
 import net.minecraft.entity.Entity;
@@ -17,33 +15,24 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.PotionEvent.PotionApplicableEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosAPI;
 import top.theillusivec4.curios.api.capability.ICurioItemHandler;
 import top.theillusivec4.curios.api.inventory.CurioStackHandler;
 
 public class EffectPotionNegate {
 	public static interface IPotionNegateItem {
-		public List<Effect> getCureEffects();
-	}
-	
-	public static void negatePotion(Entity entity, Effect potion) {
-		if (!(entity instanceof PlayerEntity))
-			return;
-		PlayerEntity player = (PlayerEntity) entity;
-		if (player.isPotionActive(potion)) {
-			player.removePotionEffect(potion);
-		}
+		// We need to use a Supplier here since mods can override vanilla potions with their own types.
+		// This feels like an inelegant approach,
+		// if you happen to be reading this code and know of a better way, please let me know.
+		public List<Supplier<Effect>> getCureEffects();
 	}
 
-	public static void negatePotion(Entity entity, List<Effect> potions) {
+	public static void negatePotion(Entity entity, List<Supplier<Effect>> potions) {
 		if (!(entity instanceof PlayerEntity))
 			return;
 		PlayerEntity player = (PlayerEntity) entity;
-		for (Effect potion : potions) {
-//			if (potion!=null) {
-				player.removePotionEffect(potion);
-//			}
+		for (Supplier<Effect> potion : potions) {
+			player.removePotionEffect(potion.get());
 		}
 	}
 	
@@ -60,10 +49,12 @@ public class EffectPotionNegate {
 					ItemStack stack = stackHandler.getStackInSlot(i);
 					Item item = stack.getItem();
 					if (item instanceof IPotionNegateItem) {
-						List<Effect> potions = ((IPotionNegateItem) item).getCureEffects();
-						if (potions.contains(potion.getPotion())) {
-							event.setResult(Result.DENY);
-							return;
+						List<Supplier<Effect>> potions = ((IPotionNegateItem) item).getCureEffects();
+						for (Supplier<Effect> supp : potions) {
+							if (supp.get() == potion.getPotion()) {
+								event.setResult(Result.DENY);
+								return;
+							}
 						}
 					}
 				}
@@ -75,10 +66,12 @@ public class EffectPotionNegate {
 			for (int i = 0; i < 2; i++, stack = offHand) {
 				if (stack.getItem() instanceof IPotionNegateItem
 						&&stack.getItem() instanceof ItemShieldAnkh) {
-					List<Effect> potions = ((IPotionNegateItem) stack.getItem()).getCureEffects();
-					if (potions.contains(potion.getPotion())) {
-						event.setResult(Result.DENY);
-						return;
+					List<Supplier<Effect>> potions = ((IPotionNegateItem) stack.getItem()).getCureEffects();
+					for (Supplier<Effect> supp : potions) {
+						if (supp.get() == potion.getPotion()) {
+							event.setResult(Result.DENY);
+							return;
+						}
 					}
 				}
 			}
