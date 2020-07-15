@@ -9,7 +9,6 @@ import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.wormhole.ContainerWormhole;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,7 +24,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class ItemPotionWormhole extends BBItem {

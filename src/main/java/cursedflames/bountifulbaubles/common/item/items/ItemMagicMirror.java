@@ -1,32 +1,22 @@
 package cursedflames.bountifulbaubles.common.item.items;
 
-import java.util.Optional;
-
-import cursedflames.bountifulbaubles.common.config.Config;
 import cursedflames.bountifulbaubles.common.item.BBItem;
-import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerChunkProvider;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.server.TicketType;
-import net.minecraftforge.common.DimensionManager;
 
 // TODO bring back quark's custom enchant colors
 // TODO item model improvements
@@ -55,12 +45,13 @@ public class ItemMagicMirror extends BBItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
 		// TODO is this the right way of comparing dimensions?
-		DimensionType dim = player.getSpawnDimension();
-		if (world.getDimension().getType()!=dim && !Config.MAGIC_MIRROR_INTERDIMENSIONAL.get()) {
-			player.sendStatusMessage(new TranslationTextComponent(
-					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
-			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));
-		}
+		// FIXME readd dimension check
+//		DimensionType dim = player.getSpawnDimension();
+//		if (world.getDimension().getType()!=dim && !Config.MAGIC_MIRROR_INTERDIMENSIONAL.get()) {
+//			player.sendStatusMessage(new TranslationTextComponent(
+//					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
+//			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));
+//		}
 		player.setActiveHand(hand);
 		return new ActionResult<ItemStack>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
@@ -98,13 +89,13 @@ public class ItemMagicMirror extends BBItem {
 	}
 	
 	public static void teleportPlayerToSpawn(World world, PlayerEntity player) {
-		DimensionType dim = player.getSpawnDimension();
+//		DimensionType dim = player.getSpawnDimension();
 		World world1 = world;
-		if (world.getDimension().getType()!=dim) {
-			if (!Config.MAGIC_MIRROR_INTERDIMENSIONAL.get())
-				return;
-			world1 = DimensionManager.getWorld(world.getServer(), dim, true, true);
-		}
+//		if (world.getDimension().getType()!=dim) {
+//			if (!Config.MAGIC_MIRROR_INTERDIMENSIONAL.get())
+//				return;
+//			world1 = DimensionManager.getWorld(world.getServer(), dim, true, true);
+//		}
 		
 		player.stopRiding();
 		// shouldn't happen, but if it does...?
@@ -112,7 +103,8 @@ public class ItemMagicMirror extends BBItem {
 		    player.wakeUp();
 		}
 		if (world1!=null) {
-			BlockPos spawnPoint = player.getBedLocation(dim);
+			// FIXME readd bed teleportation
+			BlockPos spawnPoint = null;/*player.getBedLocation(dim);
 			if (spawnPoint!=null) {
 				boolean force = player.isSpawnForced(dim);
 				Optional<Vector3d> optional = PlayerEntity.func_213822_a(world1, spawnPoint, force);
@@ -121,9 +113,11 @@ public class ItemMagicMirror extends BBItem {
 		            doTeleport(player, world, world1, pos.getX(), pos.getY(), pos.getZ());
 					return;
 		        }
-			}
+			}*/
 			// TODO add check if player is outside of spawn chunk?
-			spawnPoint = world1.getSpawnPoint();
+			// FIXME make sure this behaves properly both in SP and MP and doesn't crash
+			// func_241135_u_ = getSpawnPoint
+			spawnPoint = ((ServerWorld) world1).func_241135_u_();
 			
 			if (spawnPoint!=null) {
 				doTeleport(player, world, world1, spawnPoint.getX()+0.5, spawnPoint.getY(),
@@ -134,7 +128,7 @@ public class ItemMagicMirror extends BBItem {
 	
 	private static void doTeleport(PlayerEntity player, World origin, World target,
 			double x, double y, double z) {
-		target.playSound(null, player.getX(), player.getY(), player.getZ(),
+		target.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(),
 				SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
 		if (origin != target) {
 			((ServerChunkProvider) target.getChunkProvider()).registerTicket(

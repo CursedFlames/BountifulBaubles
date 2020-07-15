@@ -11,22 +11,13 @@ import org.apache.logging.log4j.Logger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.IDataProvider;
 import net.minecraft.data.LootTableProvider;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTableManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.ConstantRange;
-import net.minecraft.world.storage.loot.DynamicLootEntry;
-import net.minecraft.world.storage.loot.ItemLootEntry;
-import net.minecraft.world.storage.loot.LootParameterSets;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTableManager;
-import net.minecraft.world.storage.loot.functions.CopyName;
-import net.minecraft.world.storage.loot.functions.CopyNbt;
-import net.minecraft.world.storage.loot.functions.SetContents;
 
 // derived from https://github.com/Team-Hollow/Deeper-Caverns/blob/master/src/main/java/teamhollow/deepercaverns/datagen/BaseLootTableProvider.java
 public abstract class BaseLootTableProvider<T> extends LootTableProvider {

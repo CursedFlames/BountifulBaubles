@@ -4,18 +4,16 @@ import java.util.Map.Entry;
 
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootParameterSets;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTable.Builder;
+import net.minecraft.loot.conditions.KilledByPlayer;
+import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.ConstantRange;
-import net.minecraft.world.storage.loot.ItemLootEntry;
-import net.minecraft.world.storage.loot.LootParameterSets;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTable.Builder;
-import net.minecraft.world.storage.loot.conditions.KilledByPlayer;
-import net.minecraft.world.storage.loot.conditions.LootConditionManager;
-import net.minecraft.world.storage.loot.conditions.RandomChance;
 
 public class LootTablesEntities extends BaseLootTableProvider<EntityType<?>> {
 	public LootTablesEntities(DataGenerator dataGeneratorIn) {

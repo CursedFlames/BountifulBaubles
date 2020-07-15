@@ -4,17 +4,16 @@ import java.util.Map.Entry;
 
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.EmptyLootEntry;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootParameterSets;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.RandomValueRange;
+import net.minecraft.loot.conditions.RandomChance;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.ConstantRange;
-import net.minecraft.world.storage.loot.EmptyLootEntry;
-import net.minecraft.world.storage.loot.ItemLootEntry;
-import net.minecraft.world.storage.loot.LootParameterSets;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTable.Builder;
-import net.minecraft.world.storage.loot.conditions.RandomChance;
-import net.minecraft.world.storage.loot.LootTables;
-import net.minecraft.world.storage.loot.RandomValueRange;
 
 public class LootTablesChests extends BaseLootTableProvider<ResourceLocation> {
 	public LootTablesChests(DataGenerator dataGeneratorIn) {
@@ -58,12 +57,12 @@ public class LootTablesChests extends BaseLootTableProvider<ResourceLocation> {
 	}
 
 	@Override
-	protected ResourceLocation getResourceLocation(Entry<ResourceLocation, Builder> entry) {
+	protected ResourceLocation getResourceLocation(Entry<ResourceLocation, LootTable.Builder> entry) {
 		return entry.getKey();
 	}
 
 	@Override
-	protected LootTable getLootTable(Entry<ResourceLocation, Builder> entry) {
+	protected LootTable getLootTable(Entry<ResourceLocation, LootTable.Builder> entry) {
 		return entry.getValue().setParameterSet(LootParameterSets.CHEST).build();
 	}
 }

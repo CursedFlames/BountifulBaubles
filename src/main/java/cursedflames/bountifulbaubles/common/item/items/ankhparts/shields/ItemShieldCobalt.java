@@ -237,9 +237,8 @@ public class ItemShieldCobalt extends ShieldItem {
 	}
 
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot,
-			ItemStack stack) {
-		Multimap<Attribute, AttributeModifier> mods = super.getAttributeModifiers(slot, stack);
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot) {
+		Multimap<Attribute, AttributeModifier> mods = HashMultimap.create();
 		if (slot==EquipmentSlotType.MAINHAND||slot==EquipmentSlotType.OFFHAND) {
 			Attribute knockback = Attributes.KNOCKBACK_RESISTANCE;
 			mods.put(knockback, new AttributeModifier(KNOCKBACK_RESISTANCE_UUID,

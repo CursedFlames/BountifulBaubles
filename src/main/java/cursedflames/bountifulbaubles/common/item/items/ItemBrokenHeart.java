@@ -94,22 +94,24 @@ public class ItemBrokenHeart extends BBItem {
 		if (!event.updateWorld()
 				&& Config.BROKEN_HEART_REGEN.get()) {
 			LivingEntity entity = event.getEntityLiving();
-			ModifiableAttributeInstance maxHealth = entity
-					.getAttribute(Attributes.MAX_HEALTH);
-			AttributeModifier modifier = maxHealth.getModifier(MODIFIER_UUID);
-			if (modifier != null) {
-				maxHealth.removeModifier(modifier);
-				double gain = Config.BROKEN_HEART_REGEN_AMOUNT.get();
-				double newModifier = modifier.getAmount() + gain;
-				if (newModifier < 0) {
-					modifier = new AttributeModifier(MODIFIER_UUID, "Broken Heart MaxHP drain",
-							newModifier, AttributeModifier.Operation.ADDITION);
-					maxHealth.func_233767_b_(modifier);
-					entity.sendMessage(new TranslationTextComponent(
-									ModItems.broken_heart.getTranslationKey()+".partial_heal"), Util.DUMMY_UUID);
-				} else {
-					entity.sendMessage(new TranslationTextComponent(
-							ModItems.broken_heart.getTranslationKey()+".full_heal"), Util.DUMMY_UUID);					
+			if (!entity.world.isRemote) {
+				ModifiableAttributeInstance maxHealth = entity
+						.getAttribute(Attributes.MAX_HEALTH);
+				AttributeModifier modifier = maxHealth.getModifier(MODIFIER_UUID);
+				if (modifier != null) {
+					maxHealth.removeModifier(modifier);
+					double gain = Config.BROKEN_HEART_REGEN_AMOUNT.get();
+					double newModifier = modifier.getAmount() + gain;
+					if (newModifier < 0) {
+						modifier = new AttributeModifier(MODIFIER_UUID, "Broken Heart MaxHP drain",
+								newModifier, AttributeModifier.Operation.ADDITION);
+						maxHealth.func_233767_b_(modifier);
+						entity.sendMessage(new TranslationTextComponent(
+										ModItems.broken_heart.getTranslationKey()+".partial_heal"), Util.DUMMY_UUID);
+					} else {
+						entity.sendMessage(new TranslationTextComponent(
+								ModItems.broken_heart.getTranslationKey()+".full_heal"), Util.DUMMY_UUID);					
+					}
 				}
 			}
 		}
