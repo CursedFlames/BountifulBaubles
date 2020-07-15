@@ -7,13 +7,18 @@ import java.util.UUID;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 
+import cursedflames.bountifulbaubles.client.model.ModelGlovesDexterity;
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.network.PacketHandler;
 import cursedflames.bountifulbaubles.common.network.PacketUpdateToolCooldown;
 import cursedflames.bountifulbaubles.common.util.CuriosUtil;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -50,6 +55,7 @@ public class ItemGlovesDexterity extends BBItem {
 
 	protected static class Curio implements ICurio {
 		ItemStack stack;
+		private Object model;
 
 		protected Curio(ItemStack stack) {
 			this.stack = stack;
@@ -58,6 +64,31 @@ public class ItemGlovesDexterity extends BBItem {
 		@Override
 		public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
 			return modifiers;
+		}
+		
+		@Override
+		public boolean hasRender(String identifier, LivingEntity livingEntity) {
+			return true;
+		}
+		
+		@Override
+		public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light,
+				LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks,
+				float ageInTicks, float netHeadYaw, float headPitch) {	
+			
+			if (!(this.model instanceof ModelGlovesDexterity)) {
+				this.model = new ModelGlovesDexterity();
+			}
+			
+			ModelGlovesDexterity model = (ModelGlovesDexterity) this.model;
+			
+			RenderHelper.followBodyRotations(livingEntity, model);
+			model.setLivingAnimations(livingEntity, limbSwing, limbSwingAmount, partialTicks);
+			model.setAngles(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+			
+			IVertexBuilder builder = ItemRenderer.getArmorVertexConsumer(renderTypeBuffer,
+					model.getLayer(texture), false, stack.hasEffect());
+			model.render(matrixStack, builder, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
 		}
 	}
 

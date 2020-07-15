@@ -4,8 +4,17 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+
+import cursedflames.bountifulbaubles.client.model.ModelGlovesClawed;
+import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.BBItem;
+import cursedflames.bountifulbaubles.common.util.CuriosUtil;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -17,19 +26,26 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.item.ToolItem;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectUtils;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.entity.player.PlayerEvent.HarvestCheck;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.capability.ICurio;
 
 public class ItemGlovesDigging extends BBItem {
+	// TODO separate textures for different item tiers
+	private static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,
+			"textures/equipped/gloves_clawed_diamond.png");
 	// TODO gold gloves?
 	// TODO allow fortune and silk touch? - needs https://github.com/MinecraftForge/MinecraftForge/pull/5871
 	// TODO attack damage buff with empty hand?
@@ -40,15 +56,45 @@ public class ItemGlovesDigging extends BBItem {
 		this.tier = tier;
 	}
 	
-//	protected static class Curio implements ICurio {
-//		
-//	}
-//	
-//	@Override
-//	public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-//		ICurio curio = new Curio();
-//		return CuriosUtil.makeSimpleCap(curio);
-//	}
+	protected static class Curio implements ICurio {
+		ItemStack stack;
+		private Object model;
+		
+		protected Curio(ItemStack stack) {
+			this.stack = stack;
+		}
+		
+		@Override
+		public boolean hasRender(String identifier, LivingEntity livingEntity) {
+			return true;
+		}
+		
+		@Override
+		public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light,
+				LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks,
+				float ageInTicks, float netHeadYaw, float headPitch) {	
+			
+			if (!(this.model instanceof ModelGlovesClawed)) {
+				this.model = new ModelGlovesClawed();
+			}
+			
+			ModelGlovesClawed model = (ModelGlovesClawed) this.model;
+			
+			RenderHelper.followBodyRotations(livingEntity, model);
+			model.setLivingAnimations(livingEntity, limbSwing, limbSwingAmount, partialTicks);
+			model.setAngles(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+			
+			IVertexBuilder builder = ItemRenderer.getArmorVertexConsumer(renderTypeBuffer,
+					model.getLayer(texture), false, stack.hasEffect());
+			model.render(matrixStack, builder, light, OverlayTexture.DEFAULT_UV, 1f, 1f, 1f, 1f);
+		}
+	}
+	
+	@Override
+	public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
+		ICurio curio = new Curio(stack);
+		return CuriosUtil.makeSimpleCap(curio);
+	}
 	
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
