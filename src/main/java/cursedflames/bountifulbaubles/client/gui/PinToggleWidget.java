@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.client.gui;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
@@ -38,7 +39,7 @@ public class PinToggleWidget extends ToggleWidget {
 	}
 
 	@Override
-	public void renderButton(int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
+	public void renderButton(MatrixStack matrixStack, int p_renderButton_2_, int p_renderButton_3_, float p_renderButton_4_) {
 		boolean hovered = this.isHovered();
 		boolean enabled = this.active;
 		Minecraft mc = Minecraft.getInstance();
@@ -56,7 +57,7 @@ public class PinToggleWidget extends ToggleWidget {
 		}
 
 		GlStateManager.disableDepthTest();
-		PinToggleWidget.blit(this.x, this.y, 0, 0, this.width, this.height, 16, 16);
+		PinToggleWidget.blit(matrixStack, this.x, this.y, 0, 0, this.width, this.height, 16, 16);
 		GlStateManager.enableDepthTest();
 	}
 }

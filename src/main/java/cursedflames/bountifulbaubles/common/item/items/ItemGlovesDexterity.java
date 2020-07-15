@@ -36,6 +36,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
+import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 public class ItemGlovesDexterity extends BBItem {
 	private static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,
@@ -75,17 +76,15 @@ public class ItemGlovesDexterity extends BBItem {
 				return;
 			PlayerEntity player = (PlayerEntity) entity;
 //			BountifulBaubles.logger.info("mainhand");
-			LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(player);
-			if (opt.isPresent()) {
-				ICuriosItemHandler handler = opt.orElse(null);
-				ICurioStacksHandler stackHandler = handler.getStackHandler("hands");
+			IDynamicStackHandler stackHandler = CuriosUtil.getItemStacksForSlotType(player, "hands", false);
+			if (stackHandler != null) {
 				int size = stackHandler.getSlots();
 				for (int i = 0; i < size; i++) {
 					ItemStack stack = stackHandler.getStackInSlot(i);
 					Item item = stack.getItem();
 					if (item instanceof ItemGlovesDexterity) {
-//						BountifulBaubles.logger.info("put");
-//						BountifulBaubles.logger.info(player.ticksSinceLastSwing);
+	//						BountifulBaubles.logger.info("put");
+	//						BountifulBaubles.logger.info(player.ticksSinceLastSwing);
 						entitiesToReset.put(player.getUniqueID(), player.ticksSinceLastSwing);
 						PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
 								new PacketUpdateToolCooldown(player.ticksSinceLastSwing));

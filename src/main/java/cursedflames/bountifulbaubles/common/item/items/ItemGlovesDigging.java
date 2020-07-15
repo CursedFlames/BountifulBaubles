@@ -134,7 +134,8 @@ public class ItemGlovesDigging extends BBItem {
 			breakspeed /= 5.0F;
 		}
 
-		if (!entity.onGround) {
+		// func_233570_aj_ = isOnGround()
+		if (!entity.func_233570_aj_()) {
 			breakspeed /= 5.0F;
 		}
 		return breakspeed;

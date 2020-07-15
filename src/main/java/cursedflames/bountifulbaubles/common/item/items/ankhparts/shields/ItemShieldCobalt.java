@@ -14,14 +14,13 @@ import cursedflames.bountifulbaubles.common.util.CuriosUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Quaternion;
-import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Attributes;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
@@ -34,6 +33,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -61,21 +61,22 @@ public class ItemShieldCobalt extends ShieldItem {
 		@Override
 		public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier) {
 			Multimap<Attribute, AttributeModifier> mods = HashMultimap.create();
-			String knockback = Attributes.KNOCKBACK_RESISTANCE.getName();
+			Attribute knockback = Attributes.KNOCKBACK_RESISTANCE;
 			mods.put(knockback, new AttributeModifier(KNOCKBACK_RESISTANCE_BAUBLE_UUID,
 					"Cobalt Shield knockback resistance", 10, AttributeModifier.Operation.ADDITION));
 			return mods;
 		}
 		
 		@Override
-		public boolean hasRender(String identifier, LivingEntity livingEntity) {
+		public boolean canRender(String identifier, int index, LivingEntity livingEntity) {
 			return true;
 		}
 		
 		@Override
-		public void render(String identifier, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light,
-				LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks,
-				float ageInTicks, float netHeadYaw, float headPitch) {
+		public void render(String identifier, int index, MatrixStack matrixStack,
+			      IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing,
+			      float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw,
+			      float headPitch) {
 			RenderHelper.translateIfSneaking(matrixStack, livingEntity);
 			RenderHelper.rotateIfSneaking(matrixStack, livingEntity);
 			
@@ -83,14 +84,14 @@ public class ItemShieldCobalt extends ShieldItem {
 			
 			matrixStack.push();
 			matrixStack.scale(0.6f, 0.6f, 0.6f);
-			matrixStack.multiply(new Quaternion(0, 0, 1, 0));
+			matrixStack.rotate(new Quaternion(0, 0, 1, 0));
 			matrixStack.translate(0.5f, -0.25f, armor ? 0.75f : 0.7f);
 			
 			// LivingRenderer.getOverlay(livingEntity, 0f) gives the correct overlay for hit flashes.
 			// we don't need it here so we just use default overlay
 			Minecraft.getInstance().getItemRenderer()
 			.renderItem(stack, TransformType.NONE,
-					light, OverlayTexture.DEFAULT_UV,
+					light, OverlayTexture.NO_OVERLAY,
 					matrixStack, renderTypeBuffer);
 			
 			matrixStack.pop();
@@ -163,7 +164,7 @@ public class ItemShieldCobalt extends ShieldItem {
 				// TODO metal sound instead of wood sound?
 				// TODO find a good volume for this
 				// TODO what category should this sound be?
-				player.world.playSound(null, player.getX(),  player.getY(),  player.getZ(),
+				player.world.playSound(null, player.getPosX(),  player.getPosY(),  player.getPosZ(),
 						SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS,
 						0.9f, 0.8F+player.world.rand.nextFloat()*0.4F);
 			}
@@ -240,7 +241,7 @@ public class ItemShieldCobalt extends ShieldItem {
 			ItemStack stack) {
 		Multimap<Attribute, AttributeModifier> mods = super.getAttributeModifiers(slot, stack);
 		if (slot==EquipmentSlotType.MAINHAND||slot==EquipmentSlotType.OFFHAND) {
-			String knockback = Attributes.KNOCKBACK_RESISTANCE.getName();
+			Attribute knockback = Attributes.KNOCKBACK_RESISTANCE;
 			mods.put(knockback, new AttributeModifier(KNOCKBACK_RESISTANCE_UUID,
 					"Cobalt Shield knockback resistance", 10, AttributeModifier.Operation.ADDITION));
 		}

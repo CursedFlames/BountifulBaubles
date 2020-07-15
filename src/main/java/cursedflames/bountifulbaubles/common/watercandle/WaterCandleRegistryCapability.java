@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
-import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.ModCapabilities;
 import cursedflames.bountifulbaubles.common.block.ModBlocks;
 import cursedflames.bountifulbaubles.common.block.blocks.BlockWaterCandle;
@@ -12,13 +11,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.IntNBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -135,7 +131,7 @@ public class WaterCandleRegistryCapability implements ICapabilityProvider, ICapa
 						world.rand.nextInt(horRange*2+1)-horRange,
 						world.rand.nextInt(verRange*2+1)-verRange,
 						world.rand.nextInt(horRange*2+1)-horRange);
-				if (world.doesNotCollide(ent.type.func_220328_a(tryPos.getX(), tryPos.getY(), tryPos.getZ())) &&
+				if (world.hasNoCollisions(ent.type.func_220328_a(tryPos.getX(), tryPos.getY(), tryPos.getZ())) &&
 						EntitySpawnPlacementRegistry.func_223515_a(ent.type, world, SpawnReason.SPAWNER, tryPos, world.rand)) {
 					// TODO check if too close to player
 					Entity entity = ent.type.spawn(world, null, null, tryPos, SpawnReason.SPAWNER, false, false);

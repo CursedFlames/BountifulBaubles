@@ -36,13 +36,6 @@ import net.minecraftforge.common.DimensionManager;
 public class ItemMagicMirror extends BBItem {
 	public ItemMagicMirror(String name, Properties props) {
 		super(name, props);
-		
-		this.addPropertyOverride(new ResourceLocation("using"), new IItemPropertyGetter() {
-			@Override
-			public float call(ItemStack stack, World world, LivingEntity entity) {
-				return entity != null && entity.isHandActive() && entity.getActiveItemStack()==stack ? 1f : 0f;
-			}
-		});
 	}
 	
 	public UseAction getUseAction(ItemStack stack) {

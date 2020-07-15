@@ -22,7 +22,7 @@ public class PlayerTarget implements IWormholeTarget {
 
 	public PlayerTarget(PlayerEntity player) {
 		id = player.getUniqueID();
-		name = player.getName().getFormattedText(); //FIXME
+		name = player.getName().getString(); //FIXME is getString the right method?
 	}
 
 	public PlayerTarget(UUID id) {

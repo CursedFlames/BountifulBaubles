@@ -9,10 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICurio;
-import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 public class ItemAmuletCross extends BBItem {
 	public static final int RESIST_TIME = 36;
@@ -26,20 +23,21 @@ public class ItemAmuletCross extends BBItem {
 	
 	protected static class Curio implements ICurio {
 		private BipedModel<LivingEntity> model;
+		private ItemStack stack;
+
+		protected Curio(ItemStack stack) {
+			this.stack = stack;
+		}
 		
 		@Override
 		public void curioTick(String identifier, int index, LivingEntity livingEntity) {
 //			// in case other mods add greater i-frames.
 //			if (livingEntity.maxHurtResistantTime < RESIST_TIME)
 //					livingEntity.maxHurtResistantTime = RESIST_TIME;
-			LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(livingEntity);
-			if (opt.isPresent()) {
-				ItemStack stack = opt.orElse(null).getStackInSlot(identifier, index);
-				CompoundNBT tag = stack.getTag();
-				if (tag != null && tag.contains("damaged")) {
-					tag.remove("damaged");
-					livingEntity.hurtResistantTime = RESIST_TIME;
-				}
+			CompoundNBT tag = stack.getTag();
+			if (tag != null && tag.contains("damaged")) {
+				tag.remove("damaged");
+				livingEntity.hurtResistantTime = RESIST_TIME;
 			}
 		}
 		
@@ -53,7 +51,7 @@ public class ItemAmuletCross extends BBItem {
 	
 	@Override
 	public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
-		ICurio curio = new Curio();
+		ICurio curio = new Curio(stack);
 		return CuriosUtil.makeSimpleCap(curio);
 	}
 }

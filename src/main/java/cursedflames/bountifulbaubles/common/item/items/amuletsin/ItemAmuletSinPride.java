@@ -12,9 +12,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -49,7 +49,7 @@ public class ItemAmuletSinPride extends ItemAmuletSin {
 		@Override
 		public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier) {
 			Multimap<Attribute, AttributeModifier> attributes = super.getAttributeModifiers(identifier);
-			String reach = PlayerEntity.REACH_DISTANCE.getName();
+			Attribute reach = ForgeMod.REACH_DISTANCE.get();
 			attributes.put(reach,
 					new AttributeModifier(REACH_ID, "pride pendant reach bonus", 0.5, Operation.ADDITION));
 			return attributes;

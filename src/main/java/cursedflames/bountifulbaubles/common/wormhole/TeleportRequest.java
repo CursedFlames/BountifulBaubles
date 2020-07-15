@@ -53,7 +53,7 @@ public class TeleportRequest {
 		requests.add(req);
 		
 		PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) target),
-				new SPacketWormholeRequest(origin.getName().getFormattedText()));
+				new SPacketWormholeRequest(origin.getName().getString())); //FIXME is getString the right method?
 		return req;
 	}
 	
