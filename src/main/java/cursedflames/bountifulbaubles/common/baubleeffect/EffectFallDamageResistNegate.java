@@ -1,6 +1,6 @@
 package cursedflames.bountifulbaubles.common.baubleeffect;
 
-import java.util.SortedMap;
+import java.util.Map;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -10,8 +10,8 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.capability.ICurioItemHandler;
-import top.theillusivec4.curios.api.inventory.CurioStackHandler;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 // TODO do we want to fix the thud sound on falling > 3 blocks without taking damage?
 // see: LivingFallEvent - want to cancel if we would end up cancelling the damage
@@ -30,15 +30,15 @@ public class EffectFallDamageResistNegate {
 	}
 	
 	public static float onFall(LivingEvent event, LivingEntity entity) {
-		LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
+		LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
 		float decrease = 0f;
 		if (opt.isPresent()) {
-			ICurioItemHandler handler = opt.orElse(null);
-			SortedMap<String, CurioStackHandler> items = handler.getCurioMap();
-			for (CurioStackHandler stackHandler : items.values()) {
+			ICuriosItemHandler handler = opt.orElse(null);
+			Map<String, ICurioStacksHandler> items = handler.getCurios();
+			for (ICurioStacksHandler stackHandler : items.values()) {
 				int size = stackHandler.getSlots();
 				for (int i = 0; i < size; i++) {
-					ItemStack stack = stackHandler.getStackInSlot(i);
+					ItemStack stack = stackHandler.getStacks().getStackInSlot(i);
 					Item item = stack.getItem();
 					if (item instanceof IFallDamageNegateItem) {
 						if (((IFallDamageNegateItem) item).shouldNegate(entity, stack)) {

@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.common.baubleeffect;
 
 import java.util.List;
-import java.util.SortedMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldAnkh;
@@ -16,8 +16,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.PotionEvent.PotionApplicableEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.capability.ICurioItemHandler;
-import top.theillusivec4.curios.api.inventory.CurioStackHandler;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 public class EffectPotionNegate {
 	public static interface IPotionNegateItem {
@@ -39,14 +39,14 @@ public class EffectPotionNegate {
 	public static void potionApply(PotionApplicableEvent event) {
 		EffectInstance potion = event.getPotionEffect();
 		LivingEntity entity = event.getEntityLiving();
-		LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
+		LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
 		if (opt.isPresent()) {
-			ICurioItemHandler handler = opt.orElse(null);
-			SortedMap<String, CurioStackHandler> items = handler.getCurioMap();
+			ICuriosItemHandler handler = opt.orElse(null);
+			Map<String, ICurioStacksHandler> items = handler.getCurios();
 			
-			for (CurioStackHandler stackHandler : items.values()) {
+			for (ICurioStacksHandler stackHandler : items.values()) {
 				for (int i = 0; i < stackHandler.getSlots(); i++) {
-					ItemStack stack = stackHandler.getStackInSlot(i);
+					ItemStack stack = stackHandler.getStacks().getStackInSlot(i);
 					Item item = stack.getItem();
 					if (item instanceof IPotionNegateItem) {
 						List<Supplier<Effect>> potions = ((IPotionNegateItem) item).getCureEffects();

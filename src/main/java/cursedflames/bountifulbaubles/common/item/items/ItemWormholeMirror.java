@@ -33,9 +33,9 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 		// TODO change particles
 //		if (world.isRemote&&count>0&&count<20) {
 //			for (int i = (count==15||count==16 ? 15 : 5); i>0; i--) {
-//				Vec3d vel = new Vec3d(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5)
+//				Vector3d vel = new Vector3d(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5)
 //						.normalize().scale(((Math.random()*8+1)*0.02));
-//				Vec3d off = new Vec3d(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5)
+//				Vector3d off = new Vector3d(Math.random()-0.5, Math.random()-0.5, Math.random()-0.5)
 //						.normalize().scale(count==16 ? 1.1 : 0.1);
 //				BountifulBaubles.proxy.spawnParticleGradient(world, entity.posX+off.x,
 //						entity.posY+1+off.y, entity.posZ+off.z,

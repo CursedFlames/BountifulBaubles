@@ -20,7 +20,7 @@ import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.Attributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -59,9 +59,9 @@ public class ItemShieldCobalt extends ShieldItem {
 		}
 		
 		@Override
-		public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
-			Multimap<String, AttributeModifier> mods = HashMultimap.create();
-			String knockback = SharedMonsterAttributes.KNOCKBACK_RESISTANCE.getName();
+		public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier) {
+			Multimap<Attribute, AttributeModifier> mods = HashMultimap.create();
+			String knockback = Attributes.KNOCKBACK_RESISTANCE.getName();
 			mods.put(knockback, new AttributeModifier(KNOCKBACK_RESISTANCE_BAUBLE_UUID,
 					"Cobalt Shield knockback resistance", 10, AttributeModifier.Operation.ADDITION));
 			return mods;
@@ -236,11 +236,11 @@ public class ItemShieldCobalt extends ShieldItem {
 	}
 
 	@Override
-	public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot,
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot,
 			ItemStack stack) {
-		Multimap<String, AttributeModifier> mods = super.getAttributeModifiers(slot, stack);
+		Multimap<Attribute, AttributeModifier> mods = super.getAttributeModifiers(slot, stack);
 		if (slot==EquipmentSlotType.MAINHAND||slot==EquipmentSlotType.OFFHAND) {
-			String knockback = SharedMonsterAttributes.KNOCKBACK_RESISTANCE.getName();
+			String knockback = Attributes.KNOCKBACK_RESISTANCE.getName();
 			mods.put(knockback, new AttributeModifier(KNOCKBACK_RESISTANCE_UUID,
 					"Cobalt Shield knockback resistance", 10, AttributeModifier.Operation.ADDITION));
 		}

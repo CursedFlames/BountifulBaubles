@@ -11,6 +11,7 @@ import cursedflames.bountifulbaubles.common.network.PacketHandler;
 import cursedflames.bountifulbaubles.common.network.wormhole.SPacketWormholeRequest;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -45,8 +46,8 @@ public class TeleportRequest {
 		if (!(target instanceof ServerPlayerEntity)) return null; // I don't think this should happen
 		
 		origin.sendMessage(new StringTextComponent("Teleport request sent to ")
-				.appendSibling(target.getName())
-				.appendText("."));
+				.func_230529_a_(target.getName())
+				.func_240702_b_("."), Util.DUMMY_UUID);
 		
 		TeleportRequest req = new TeleportRequest(world, origin.getUniqueID(), target.getUniqueID());
 		requests.add(req);
@@ -80,11 +81,11 @@ public class TeleportRequest {
 				PlayerEntity to = target.world.getPlayerByUuid(req.target);
 				if (from != null && to != null) {
 					from.sendMessage(new StringTextComponent("Teleport request to ")
-							.appendSibling(to.getName())
-							.appendText(" has expired."));
+							.func_230529_a_(to.getName())
+							.func_240702_b_(" has expired."), Util.DUMMY_UUID);
 					to.sendMessage(new StringTextComponent("Teleport request from ")
-							.appendSibling(from.getName())
-							.appendText(" has expired."));
+							.func_230529_a_(from.getName())
+							.func_240702_b_(" has expired."), Util.DUMMY_UUID);
 				}
 				requests.remove(i);
 				continue;
@@ -98,24 +99,24 @@ public class TeleportRequest {
 							// FIXME use localization for teleportation messages
 //							target.sendMessage(
 //									new StringTextComponent("Rejected teleport request from ")
-//									.appendSibling(player.getName()));
+//									.func_230529_a_(player.getName()));
 							target.sendMessage(new StringTextComponent(
-									"Rejected teleport request from ").appendSibling(player.getName())
-									.appendText("."));
+									"Rejected teleport request from ").func_230529_a_(player.getName())
+									.func_240702_b_("."), Util.DUMMY_UUID);
 							player.sendMessage(new StringTextComponent(
-									"Teleport request to ").appendSibling(target.getName())
-									.appendText(" was rejected."));
+									"Teleport request to ").func_230529_a_(target.getName())
+									.func_240702_b_(" was rejected."), Util.DUMMY_UUID);
 							count++;
 						}					
 					} else {
 						req.status = Status.ACCEPT;
 						if (player != null) {
 							target.sendMessage(new StringTextComponent(
-									"Accepted teleport request from ").appendSibling(player.getName())
-									.appendText("."));
+									"Accepted teleport request from ").func_230529_a_(player.getName())
+									.func_240702_b_("."), Util.DUMMY_UUID);
 							player.sendMessage(new StringTextComponent(
-									"Teleport request to ").appendSibling(target.getName())
-									.appendText(" was accepted."));
+									"Teleport request to ").func_230529_a_(target.getName())
+									.func_240702_b_(" was accepted."), Util.DUMMY_UUID);
 							ITextComponent message1 = null;
 							ITextComponent message2 = null;
 							/*if (player.isPlayerSleeping()) {
@@ -126,23 +127,23 @@ public class TeleportRequest {
 							if (player.isPassenger()) {
 								message1 = new StringTextComponent(
 										"Teleport failed as ")
-										.appendSibling(player.getName())
-										.appendText(" is mounted.");
+										.func_230529_a_(player.getName())
+										.func_240702_b_(" is mounted.");
 								message2 = new StringTextComponent("Teleport failed as you are mounted.");
 							} else if (WormholeUtil.consumeItem(player)) {
 								WormholeUtil.doTeleport(player, target);
 							} else {
 								message1 = new StringTextComponent(
 										"Teleport failed as ")
-										.appendSibling(player.getName())
-										.appendText(" has no wormhole potions or mirror.");
+										.func_230529_a_(player.getName())
+										.func_240702_b_(" has no wormhole potions or mirror.");
 								message2 = new StringTextComponent(
 										"Teleport failed as you have no wormhole potions or mirror.");
 							}
 							if (message1 != null)
-								target.sendMessage(message1);
+								target.sendMessage(message1, Util.DUMMY_UUID);
 							if (message2 != null)
-								player.sendMessage(message2);
+								player.sendMessage(message2, Util.DUMMY_UUID);
 							count++;
 						}
 					}

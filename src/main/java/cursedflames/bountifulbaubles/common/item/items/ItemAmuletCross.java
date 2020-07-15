@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICurio;
-import top.theillusivec4.curios.api.capability.ICurioItemHandler;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 public class ItemAmuletCross extends BBItem {
 	public static final int RESIST_TIME = 36;
@@ -32,7 +32,7 @@ public class ItemAmuletCross extends BBItem {
 //			// in case other mods add greater i-frames.
 //			if (livingEntity.maxHurtResistantTime < RESIST_TIME)
 //					livingEntity.maxHurtResistantTime = RESIST_TIME;
-			LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(livingEntity);
+			LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(livingEntity);
 			if (opt.isPresent()) {
 				ItemStack stack = opt.orElse(null).getStackInSlot(identifier, index);
 				CompoundNBT tag = stack.getTag();

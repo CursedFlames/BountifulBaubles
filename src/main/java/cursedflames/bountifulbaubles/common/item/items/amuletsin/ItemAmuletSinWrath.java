@@ -7,9 +7,10 @@ import com.google.common.collect.Multimap;
 
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -30,10 +31,9 @@ public class ItemAmuletSinWrath extends ItemAmuletSin {
 		}
 		
 		@Override
-		public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
-			Multimap<String, AttributeModifier> mods = HashMultimap.create();
-			String damage = SharedMonsterAttributes.ATTACK_DAMAGE.getName();
-			mods.put(damage, new AttributeModifier(DAMAGE_UUID,
+		public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier) {
+			Multimap<Attribute, AttributeModifier> mods = HashMultimap.create();
+			mods.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_UUID,
 					"Wrath pendant damage", 2, Operation.ADDITION));
 			return mods;
 		}

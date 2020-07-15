@@ -89,8 +89,8 @@ public class ItemGlovesDigging extends BBItem {
 			return;
 		LivingEntity entity = event.getEntityLiving();
 
-		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosApi
-				.getCurioEquipped(stack -> stack.getItem() instanceof ItemGlovesDigging, entity);
+		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosApi.getCuriosHelper()
+				.findEquippedCurio(stack -> stack.getItem() instanceof ItemGlovesDigging, entity);
 		if (!opt.isPresent())
 			return;
 		ItemStack stack = opt.get().getRight();
@@ -144,8 +144,8 @@ public class ItemGlovesDigging extends BBItem {
 	public static void breakSpeed(BreakSpeed event) {
 		LivingEntity entity = event.getEntityLiving();
 
-		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosApi
-				.getCurioEquipped(stack -> stack.getItem() instanceof ItemGlovesDigging, entity);
+		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosApi.getCuriosHelper()
+				.findEquippedCurio(stack -> stack.getItem() instanceof ItemGlovesDigging, entity);
 		if (!opt.isPresent())
 			return;
 		ItemStack stack = opt.get().getRight();
@@ -187,8 +187,8 @@ public class ItemGlovesDigging extends BBItem {
 		ItemStack handitemstack = entity.getHeldItemMainhand();
 		if (isTool(handitemstack, event.getState())) return;
 		
-		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosApi
-				.getCurioEquipped(stack -> stack.getItem() instanceof ItemGlovesDigging, entity);
+		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosApi.getCuriosHelper()
+				.findEquippedCurio(stack -> stack.getItem() instanceof ItemGlovesDigging, entity);
 		if (!opt.isPresent())
 			return;
 		ImmutableTriple<String, Integer, ItemStack> curio = opt.get();

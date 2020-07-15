@@ -73,9 +73,9 @@ public class WaterCandleRegistryCapability implements ICapabilityProvider, ICapa
 			CompoundNBT tag = new CompoundNBT();
 			ListNBT list = new ListNBT();
 			for (BlockPos pos : positions) {
-				list.add(IntNBT.of(pos.getX()));
-				list.add(IntNBT.of(pos.getY()));
-				list.add(IntNBT.of(pos.getZ()));
+				list.add(IntNBT.valueOf(pos.getX()));
+				list.add(IntNBT.valueOf(pos.getY()));
+				list.add(IntNBT.valueOf(pos.getZ()));
 			}
 			
 			tag.put("candles", list);
@@ -93,9 +93,9 @@ public class WaterCandleRegistryCapability implements ICapabilityProvider, ICapa
 
 		@Override
 		public Set<BlockPos> getCandlePos(Entity entity) {
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
+			double x = entity.getPosX();
+			double y = entity.getPosY();
+			double z = entity.getPosZ();
 			Set<BlockPos> poses = new HashSet<>();
 			for (BlockPos pos : positions) {
 				double xOff = pos.getX()-x;

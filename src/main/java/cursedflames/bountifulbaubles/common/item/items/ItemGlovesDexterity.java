@@ -13,11 +13,11 @@ import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.network.PacketHandler;
 import cursedflames.bountifulbaubles.common.network.PacketUpdateToolCooldown;
 import cursedflames.bountifulbaubles.common.util.CuriosUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -34,16 +34,16 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICurio;
-import top.theillusivec4.curios.api.capability.ICurioItemHandler;
-import top.theillusivec4.curios.api.inventory.CurioStackHandler;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 public class ItemGlovesDexterity extends BBItem {
 	private static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,
 			"textures/equipped/gloves_dexterity.png");
-	private static final Multimap<String, AttributeModifier> modifiers = HashMultimap.create();
+	private static final Multimap<Attribute, AttributeModifier> modifiers = HashMultimap.create();
 
 	static {
-		modifiers.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+		modifiers.put(Attributes.ATTACK_SPEED,
 				new AttributeModifier(UUID.fromString("f10e9f23-cdff-45d4-94c9-46d5ea53eac8"),
 						"gloves_dexterity attack speed", 0.6, Operation.ADDITION));
 	}
@@ -56,7 +56,7 @@ public class ItemGlovesDexterity extends BBItem {
 		}
 
 		@Override
-		public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
+		public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier) {
 			return modifiers;
 		}
 	}
@@ -75,10 +75,10 @@ public class ItemGlovesDexterity extends BBItem {
 				return;
 			PlayerEntity player = (PlayerEntity) entity;
 //			BountifulBaubles.logger.info("mainhand");
-			LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(player);
+			LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(player);
 			if (opt.isPresent()) {
-				ICurioItemHandler handler = opt.orElse(null);
-				CurioStackHandler stackHandler = handler.getStackHandler("hands");
+				ICuriosItemHandler handler = opt.orElse(null);
+				ICurioStacksHandler stackHandler = handler.getStackHandler("hands");
 				int size = stackHandler.getSlots();
 				for (int i = 0; i < size; i++) {
 					ItemStack stack = stackHandler.getStackInSlot(i);

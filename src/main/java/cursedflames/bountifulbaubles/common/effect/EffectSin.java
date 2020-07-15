@@ -1,8 +1,8 @@
 package cursedflames.bountifulbaubles.common.effect;
 
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.ResourceLocation;
@@ -18,11 +18,11 @@ public class EffectSin extends Effect {
 	public EffectSin() {
 		super(EffectType.BENEFICIAL, 0x101317);
 		setRegistryName(new ResourceLocation(BountifulBaubles.MODID, "sinful"));
-		addAttributesModifier(SharedMonsterAttributes.ATTACK_DAMAGE, UUID_DAMAGE, 0.25D,
+		addAttributesModifier(Attributes.ATTACK_DAMAGE, UUID_DAMAGE, 0.25D,
 				Operation.MULTIPLY_BASE);
-		addAttributesModifier(SharedMonsterAttributes.ARMOR, UUID_ARMOR, 3,
+		addAttributesModifier(Attributes.ARMOR, UUID_ARMOR, 3,
 				Operation.ADDITION);
-		addAttributesModifier(SharedMonsterAttributes.ARMOR_TOUGHNESS, UUID_ARMOR_TOUGHNESS, 1,
+		addAttributesModifier(Attributes.ARMOR_TOUGHNESS, UUID_ARMOR_TOUGHNESS, 1,
 				Operation.ADDITION);
 	}
 }

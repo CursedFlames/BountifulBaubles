@@ -1,8 +1,8 @@
 package cursedflames.bountifulbaubles.common.baubleeffect;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.SortedMap;
 import java.util.UUID;
 
 import cursedflames.bountifulbaubles.common.item.items.ankhparts.shields.ItemShieldObsidian;
@@ -12,12 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.capability.ICurioItemHandler;
-import top.theillusivec4.curios.api.inventory.CurioStackHandler;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 public class EffectFireResist {
 	public static interface IFireResistItem {
@@ -31,22 +29,22 @@ public class EffectFireResist {
 	}
 	
 	private static float[] calcFireResist(LivingEntity entity) {
-		LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
+		LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
 		float damageMulti = 1F;
 		float damageMultiLava = 1F;
 		float maxDamageNegate = 0F;
 		if (opt.isPresent()) {
-			ICurioItemHandler handler = opt.orElse(null);
-			SortedMap<String, CurioStackHandler> items = handler.getCurioMap();
+			ICuriosItemHandler handler = opt.orElse(null);
+			Map<String, ICurioStacksHandler> items = handler.getCurios();
 			Set<UUID> found = new HashSet<>();
-			for (CurioStackHandler stackHandler : items.values()) {
+			for (ICurioStacksHandler stackHandler : items.values()) {
 				int size = stackHandler.getSlots();
 				for (int i = 0; i < size; i++) {
-					ItemStack stack = stackHandler.getStackInSlot(i);
+					ItemStack stack = stackHandler.getStacks().getStackInSlot(i);
 					Item item = stack.getItem();
-					if (stack.getItem() instanceof IFireResistItem
-							&&!found.contains(((IFireResistItem) stack.getItem()).getFireResistUUID(stack))) {
-						IFireResistItem fireResist = (IFireResistItem) (stack.getItem());
+					if (item instanceof IFireResistItem
+							&&!found.contains(((IFireResistItem) item).getFireResistUUID(stack))) {
+						IFireResistItem fireResist = (IFireResistItem) item;
 						found.add(fireResist.getFireResistUUID(stack));
 						damageMulti *= 1-fireResist.getFireResistance(stack);
 						damageMultiLava *= 1-fireResist.getFireResistanceLava(stack);

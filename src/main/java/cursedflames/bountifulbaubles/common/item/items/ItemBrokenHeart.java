@@ -7,13 +7,13 @@ import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.misc.DamageSourcePhylactery;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.Util;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
@@ -57,8 +57,8 @@ public class ItemBrokenHeart extends BBItem {
 		
 		if (entity.getMaxHealth()<=maxHealthDamage)
 			return;
-		IAttributeInstance maxHealth = entity
-				.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
+		ModifiableAttributeInstance maxHealth = entity
+				.getAttribute(Attributes.MAX_HEALTH);
 		AttributeModifier modifier = maxHealth.getModifier(MODIFIER_UUID);
 		double prevMaxHealthDamage = 0;
 		if (modifier!=null) {
@@ -67,7 +67,7 @@ public class ItemBrokenHeart extends BBItem {
 		}
 		modifier = new AttributeModifier(MODIFIER_UUID, "Broken Heart MaxHP drain",
 				prevMaxHealthDamage-maxHealthDamage, AttributeModifier.Operation.ADDITION);
-		maxHealth.applyModifier(modifier);
+		maxHealth.func_233767_b_(modifier);
 		if (event.getAmount()-maxHealthDamage<0.1) {
 			event.setCanceled(true);
 		}
@@ -81,7 +81,7 @@ public class ItemBrokenHeart extends BBItem {
 //		player.world.playSound(null, player.posX, player.posY, player.posZ,
 //				SoundEvents.ENTITY_PLAYER_HURT, SoundCategory.PLAYERS, 1.0F,
 //				(player.world.rand.nextFloat()-player.world.rand.nextFloat())*0.15F+0.75F);
-		entity.world.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
+		entity.world.playSound(null, entity.getPosX(), entity.getPosY(), entity.getPosZ(),
 				SoundEvents.ENTITY_IRON_GOLEM_HURT, SoundCategory.PLAYERS, 0.7F,
 				(entity.world.rand.nextFloat()-entity.world.rand.nextFloat())*0.1F+0.8F);
 	}
@@ -94,8 +94,8 @@ public class ItemBrokenHeart extends BBItem {
 		if (!event.updateWorld()
 				&& Config.BROKEN_HEART_REGEN.get()) {
 			LivingEntity entity = event.getEntityLiving();
-			IAttributeInstance maxHealth = entity
-					.getAttribute(SharedMonsterAttributes.MAX_HEALTH);
+			ModifiableAttributeInstance maxHealth = entity
+					.getAttribute(Attributes.MAX_HEALTH);
 			AttributeModifier modifier = maxHealth.getModifier(MODIFIER_UUID);
 			if (modifier != null) {
 				maxHealth.removeModifier(modifier);
@@ -104,12 +104,12 @@ public class ItemBrokenHeart extends BBItem {
 				if (newModifier < 0) {
 					modifier = new AttributeModifier(MODIFIER_UUID, "Broken Heart MaxHP drain",
 							newModifier, AttributeModifier.Operation.ADDITION);
-					maxHealth.applyModifier(modifier);
+					maxHealth.func_233767_b_(modifier);
 					entity.sendMessage(new TranslationTextComponent(
-									ModItems.broken_heart.getTranslationKey()+".partial_heal"));
+									ModItems.broken_heart.getTranslationKey()+".partial_heal"), Util.DUMMY_UUID);
 				} else {
 					entity.sendMessage(new TranslationTextComponent(
-							ModItems.broken_heart.getTranslationKey()+".full_heal"));					
+							ModItems.broken_heart.getTranslationKey()+".full_heal"), Util.DUMMY_UUID);					
 				}
 			}
 		}

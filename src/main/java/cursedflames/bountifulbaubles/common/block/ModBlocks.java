@@ -6,6 +6,7 @@ import java.util.List;
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.block.blocks.BlockWaterCandle;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -27,7 +28,7 @@ public class ModBlocks {
 		Block water_candle = new BlockWaterCandle("water_candle",
 				Block.Properties.create(
 						new Material.Builder(MaterialColor.BLUE).build(), MaterialColor.BLUE)
-						.lightValue(7).hardnessAndResistance(1.5f, 3f)
+						.setLightLevel((BlockState state)->7).hardnessAndResistance(1.5f, 3f)
 						.harvestLevel(-1).harvestTool(ToolType.PICKAXE).sound(SoundType.METAL));
 		r.register(water_candle);
 		ItemBlockBlocks.add(water_candle);

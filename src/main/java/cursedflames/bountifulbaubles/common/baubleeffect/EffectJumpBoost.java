@@ -1,8 +1,8 @@
 package cursedflames.bountifulbaubles.common.baubleeffect;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.SortedMap;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.capability.ICurioItemHandler;
-import top.theillusivec4.curios.api.inventory.CurioStackHandler;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 public class EffectJumpBoost {
 	public static interface IJumpItem {
@@ -24,15 +24,15 @@ public class EffectJumpBoost {
 	
 	public static void onJump(LivingEvent.LivingJumpEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-		LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
+		LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
 		if (opt.isPresent()) {
-			ICurioItemHandler handler = opt.orElse(null);
-			SortedMap<String, CurioStackHandler> items = handler.getCurioMap();
+			ICuriosItemHandler handler = opt.orElse(null);
+			Map<String, ICurioStacksHandler> items = handler.getCurios();
 			Set<Item> found = new HashSet<>();
-			for (CurioStackHandler stackHandler : items.values()) {
+			for (ICurioStacksHandler stackHandler : items.values()) {
 				int size = stackHandler.getSlots();
 				for (int i = 0; i < size; i++) {
-					ItemStack stack = stackHandler.getStackInSlot(i);
+					ItemStack stack = stackHandler.getStacks().getStackInSlot(i);
 					Item item = stack.getItem();
 					if (item instanceof IJumpItem &&
 							(!found.contains(item) || ((IJumpItem)item).stacksWithSelf())) {

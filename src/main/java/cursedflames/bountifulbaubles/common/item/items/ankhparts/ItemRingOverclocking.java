@@ -7,8 +7,9 @@ import java.util.function.Supplier;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.potion.Effect;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -21,10 +22,9 @@ public class ItemRingOverclocking extends ItemPotionNegate {
 		}
 		
 		@Override
-		public Multimap<String, AttributeModifier> getAttributeModifiers(String identifier) {
-			Multimap<String, AttributeModifier> mods = HashMultimap.create();
-			String knockback = SharedMonsterAttributes.MOVEMENT_SPEED.getName();
-			mods.put(knockback, new AttributeModifier(SPEED_UUID,
+		public Multimap<Attribute, AttributeModifier> getAttributeModifiers(String identifier) {
+			Multimap<Attribute, AttributeModifier> mods = HashMultimap.create();
+			mods.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_UUID,
 					"Ring of overclocking speed", 0.07, AttributeModifier.Operation.MULTIPLY_TOTAL));
 			return mods;
 		}
