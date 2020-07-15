@@ -16,8 +16,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import top.theillusivec4.curios.api.CuriosAPI;
-import top.theillusivec4.curios.api.capability.ICurio;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class ItemAmuletSinPride extends ItemAmuletSin {
 	UUID REACH_ID = UUID.fromString("111189c1-842f-4af2-88f5-6f58865ae440");
@@ -31,7 +31,7 @@ public class ItemAmuletSinPride extends ItemAmuletSin {
 		}
 		
 		@Override
-		public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
+		public void curioTick(String identifier, int index, LivingEntity livingEntity) {
 			boolean hasEffect = livingEntity.isPotionActive(sinfulEffect);
 			// less than 1/4 heart below full
 			if ((livingEntity.getHealth()+0.5)>livingEntity.getMaxHealth()) {
@@ -55,7 +55,7 @@ public class ItemAmuletSinPride extends ItemAmuletSin {
 		}
 		
 		@Override
-		public void onUnequipped(String identifier, LivingEntity livingEntity) {
+		public void onUnequip(String identifier, int index, LivingEntity livingEntity) {
 			livingEntity.removePotionEffect(sinfulEffect);
 //			if (livingEntity.stepHeight == STEP_HEIGHT || livingEntity.stepHeight == STEP_HEIGHT_SNEAKING) {
 //				livingEntity.stepHeight = VANILLA_STEP_HEIGHT;
@@ -76,7 +76,7 @@ public class ItemAmuletSinPride extends ItemAmuletSin {
 	public static void onPlayerTick(LivingUpdateEvent event) {
 		LivingEntity entity = event.getEntityLiving();
 		Optional<ImmutableTriple<String, Integer, ItemStack>> opt =
-				CuriosAPI.getCurioEquipped(ModItems.amulet_sin_pride, entity);
+				CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.amulet_sin_pride, entity);
 		if (!opt.isPresent()) {
 			if (entity.stepHeight == STEP_HEIGHT || entity.stepHeight == STEP_HEIGHT_SNEAKING) {
 				entity.stepHeight = VANILLA_STEP_HEIGHT;

@@ -17,7 +17,8 @@ import net.minecraft.world.World;
 
 public class Tooltips {
 	public static void addTooltip(String baseKey, List<ITextComponent> tooltip) {
-		boolean isShifting = Screen.hasShiftDown();
+		// FIXME check that this is the right function
+		boolean isShifting = Screen.func_231173_s_();
 		String shift = "";
 		if (I18n.hasKey(baseKey+"0")) {
 			if (isShifting&&I18n.hasKey(baseKey+"0s")) {

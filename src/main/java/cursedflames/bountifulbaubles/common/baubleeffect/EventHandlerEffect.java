@@ -14,7 +14,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.PotionEvent.PotionApplicableEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class EventHandlerEffect {
 	@SubscribeEvent
@@ -36,7 +36,7 @@ public class EventHandlerEffect {
 	public static void onHurt(LivingHurtEvent event) {
 		LivingEntity entity = event.getEntityLiving();
 		Optional<ImmutableTriple<String, Integer, ItemStack>> opt =
-				CuriosAPI.getCurioEquipped(ModItems.amulet_cross, entity);
+				CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.amulet_cross, entity);
 		if (opt.isPresent()) {
 //			entity.maxHurtResistantTime = ItemAmuletCross.RESIST_TIME;
 			ItemStack stack = opt.get().getRight();

@@ -19,10 +19,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.server.ServerChunkProvider;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.server.TicketType;
@@ -122,9 +122,9 @@ public class ItemMagicMirror extends BBItem {
 			BlockPos spawnPoint = player.getBedLocation(dim);
 			if (spawnPoint!=null) {
 				boolean force = player.isSpawnForced(dim);
-				Optional<Vec3d> optional = PlayerEntity.func_213822_a(world1, spawnPoint, force);
+				Optional<Vector3d> optional = PlayerEntity.func_213822_a(world1, spawnPoint, force);
 				if (optional.isPresent()) {
-		            Vec3d pos = optional.get();
+					Vector3d pos = optional.get();
 		            doTeleport(player, world, world1, pos.getX(), pos.getY(), pos.getZ());
 					return;
 		        }

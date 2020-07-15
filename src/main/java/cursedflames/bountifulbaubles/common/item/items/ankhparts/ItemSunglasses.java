@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 import cursedflames.bountifulbaubles.common.BountifulBaubles;
 import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
-import top.theillusivec4.curios.api.capability.ICurio;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class ItemSunglasses extends ItemPotionNegate { // TODO make equippable as helmet too
 	private static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,

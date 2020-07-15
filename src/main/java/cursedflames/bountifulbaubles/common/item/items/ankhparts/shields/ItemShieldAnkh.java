@@ -14,7 +14,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.Effect;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import top.theillusivec4.curios.api.capability.ICurio;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class ItemShieldAnkh extends ItemShieldObsidian implements IPotionNegateItem {
 	private static List<Supplier<Effect>> cureEffects;
@@ -25,7 +25,7 @@ public class ItemShieldAnkh extends ItemShieldObsidian implements IPotionNegateI
 		}
 		
 		@Override
-		public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
+		public void curioTick(String identifier, int index, LivingEntity livingEntity) {
 			EffectPotionNegate.negatePotion(livingEntity, cureEffects);
 		}
 	}

@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.capability.ICurioItemHandler;
 import top.theillusivec4.curios.api.inventory.CurioStackHandler;
 
@@ -30,7 +30,7 @@ public class EffectFallDamageResistNegate {
 	}
 	
 	public static float onFall(LivingEvent event, LivingEntity entity) {
-		LazyOptional<ICurioItemHandler> opt = CuriosAPI.getCuriosHandler(entity);
+		LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
 		float decrease = 0f;
 		if (opt.isPresent()) {
 			ICurioItemHandler handler = opt.orElse(null);

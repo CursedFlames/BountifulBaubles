@@ -27,7 +27,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.entity.player.PlayerEvent.HarvestCheck;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class ItemGlovesDigging extends BBItem {
 	// TODO gold gloves?
@@ -89,7 +89,7 @@ public class ItemGlovesDigging extends BBItem {
 			return;
 		LivingEntity entity = event.getEntityLiving();
 
-		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosAPI
+		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosApi
 				.getCurioEquipped(stack -> stack.getItem() instanceof ItemGlovesDigging, entity);
 		if (!opt.isPresent())
 			return;
@@ -144,7 +144,7 @@ public class ItemGlovesDigging extends BBItem {
 	public static void breakSpeed(BreakSpeed event) {
 		LivingEntity entity = event.getEntityLiving();
 
-		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosAPI
+		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosApi
 				.getCurioEquipped(stack -> stack.getItem() instanceof ItemGlovesDigging, entity);
 		if (!opt.isPresent())
 			return;
@@ -187,7 +187,7 @@ public class ItemGlovesDigging extends BBItem {
 		ItemStack handitemstack = entity.getHeldItemMainhand();
 		if (isTool(handitemstack, event.getState())) return;
 		
-		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosAPI
+		Optional<ImmutableTriple<String, Integer, ItemStack>> opt = CuriosApi
 				.getCurioEquipped(stack -> stack.getItem() instanceof ItemGlovesDigging, entity);
 		if (!opt.isPresent())
 			return;
@@ -213,7 +213,8 @@ public class ItemGlovesDigging extends BBItem {
 		
 		// don't do damage to item if block is instamineable without gloves
 		if (hardness != 0F) {
-			stack.damageItem(1, entity, e->CuriosAPI.onBrokenCurio(curio.getLeft(), curio.getMiddle(), e));
+			stack.damageItem(1, entity, e->CuriosApi.getCuriosHelper()
+					.onBrokenCurio(curio.getLeft(), curio.getMiddle(), e));
 		}
 	}
 	

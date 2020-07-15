@@ -19,7 +19,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class ItemBrokenHeart extends BBItem {
 	public static final UUID MODIFIER_UUID = UUID
@@ -43,11 +43,11 @@ public class ItemBrokenHeart extends BBItem {
 	public static void onDamage(LivingDamageEvent event) {
 		LivingEntity entity = event.getEntityLiving();
 		
-		boolean phylactery = CuriosAPI.getCurioEquipped(ModItems.phylactery_charm, entity).isPresent();
+		boolean phylactery = CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.phylactery_charm, entity).isPresent();
 		
 		if (!(phylactery
 				|| event.getSource() instanceof DamageSourcePhylactery
-				|| CuriosAPI.getCurioEquipped(ModItems.broken_heart, entity).isPresent()))
+				|| CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.broken_heart, entity).isPresent()))
 			return;
 		float healthAfterDamage = (entity.getHealth())-event.getAmount();
 		

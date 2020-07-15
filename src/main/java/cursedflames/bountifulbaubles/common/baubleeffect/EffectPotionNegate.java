@@ -15,7 +15,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.PotionEvent.PotionApplicableEvent;
 import net.minecraftforge.eventbus.api.Event.Result;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.capability.ICurioItemHandler;
 import top.theillusivec4.curios.api.inventory.CurioStackHandler;
 
@@ -39,7 +39,7 @@ public class EffectPotionNegate {
 	public static void potionApply(PotionApplicableEvent event) {
 		EffectInstance potion = event.getPotionEffect();
 		LivingEntity entity = event.getEntityLiving();
-		LazyOptional<ICurioItemHandler> opt = CuriosAPI.getCuriosHandler(entity);
+		LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
 		if (opt.isPresent()) {
 			ICurioItemHandler handler = opt.orElse(null);
 			SortedMap<String, CurioStackHandler> items = handler.getCurioMap();

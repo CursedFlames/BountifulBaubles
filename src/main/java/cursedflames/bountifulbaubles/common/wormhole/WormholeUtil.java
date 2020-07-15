@@ -7,6 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 
 public class WormholeUtil {
 	/**
@@ -57,16 +58,16 @@ public class WormholeUtil {
 		if (origin.isSleeping()) {
 			origin.wakeUp();
 		}
-		origin.setPositionAndUpdate(target.getX(), target.getY(), target.getZ());
+		origin.setPositionAndUpdate(target.getPosX(), target.getPosY(), target.getPosZ());
 		
 		if (origin.fallDistance>0.0F) {
 			origin.fallDistance = 0.0F;
 		}
-		origin.lastTickPosX = origin.getX();
-		origin.lastTickPosY = origin.getY();
-		origin.lastTickPosZ = origin.getZ();
+		origin.lastTickPosX = origin.getPosX();
+		origin.lastTickPosY = origin.getPosY();
+		origin.lastTickPosZ = origin.getPosZ();
 		// TODO maybe use a different sound for wormhole mirror?
-		origin.world.playSound(null, target.getPosition(),
+		origin.world.playSound(null, new BlockPos(target.getPositionVec()),
 				SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
 	}
 }

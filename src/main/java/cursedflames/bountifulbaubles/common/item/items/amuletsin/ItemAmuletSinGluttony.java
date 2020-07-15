@@ -12,8 +12,8 @@ import net.minecraft.item.UseAction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import top.theillusivec4.curios.api.CuriosAPI;
-import top.theillusivec4.curios.api.capability.ICurio;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class ItemAmuletSinGluttony extends ItemAmuletSin {
 	public ItemAmuletSinGluttony(String name, Properties props, ResourceLocation texture) {
@@ -35,7 +35,7 @@ public class ItemAmuletSinGluttony extends ItemAmuletSin {
 	public static void onItemUse(LivingEntityUseItemEvent.Tick event) {
 		LivingEntity entity = event.getEntityLiving();
 		Optional<ImmutableTriple<String, Integer, ItemStack>> opt =
-				CuriosAPI.getCurioEquipped(ModItems.amulet_sin_gluttony, entity);
+				CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.amulet_sin_gluttony, entity);
 		if (opt.isPresent()) {
 			ItemStack stack = event.getItem();
 			UseAction action = stack.getItem().getUseAction(stack);
@@ -51,7 +51,7 @@ public class ItemAmuletSinGluttony extends ItemAmuletSin {
 	public static void onItemUse(LivingEntityUseItemEvent.Start event) {
 		LivingEntity entity = event.getEntityLiving();
 		Optional<ImmutableTriple<String, Integer, ItemStack>> opt =
-				CuriosAPI.getCurioEquipped(ModItems.amulet_sin_gluttony, entity);
+				CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.amulet_sin_gluttony, entity);
 		if (opt.isPresent()) {
 			ItemStack stack = event.getItem();
 			UseAction action = stack.getItem().getUseAction(stack);
@@ -67,7 +67,7 @@ public class ItemAmuletSinGluttony extends ItemAmuletSin {
 	public static void onItemUse(LivingEntityUseItemEvent.Finish event) {
 		LivingEntity entity = event.getEntityLiving();
 		Optional<ImmutableTriple<String, Integer, ItemStack>> opt =
-				CuriosAPI.getCurioEquipped(ModItems.amulet_sin_gluttony, entity);
+				CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.amulet_sin_gluttony, entity);
 		if (opt.isPresent()) {
 			ItemStack stack = event.getItem();
 			UseAction action = stack.getItem().getUseAction(stack);

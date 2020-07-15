@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.Effect;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import top.theillusivec4.curios.api.capability.ICurio;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class ItemPotionNegate extends BBItem implements IPotionNegateItem {
 	protected final List<Supplier<Effect>> cureEffects;
@@ -23,7 +23,7 @@ public class ItemPotionNegate extends BBItem implements IPotionNegateItem {
 			this.item = item;
 		}
 		@Override
-		public void onCurioTick(String identifier, int index, LivingEntity livingEntity) {
+		public void curioTick(String identifier, int index, LivingEntity livingEntity) {
 			EffectPotionNegate.negatePotion(livingEntity, item.cureEffects);
 		}
 	}

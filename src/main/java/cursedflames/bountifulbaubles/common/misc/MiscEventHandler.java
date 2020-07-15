@@ -26,8 +26,8 @@ public class MiscEventHandler {
 					// TODO maybe make the offsets smaller and amplify motion instead? idk
 					double xOff = Math.cos(angle)*5;
 					double zOff = Math.sin(angle)*5;
-					ItemEntity dropped = new ItemEntity(dragon.world, dragon.getX()+xOff, dragon.getY(),
-							dragon.getZ()+zOff, stack);
+					ItemEntity dropped = new ItemEntity(dragon.world, dragon.getPosX()+xOff, dragon.getPosY(),
+							dragon.getPosZ()+zOff, stack);
 //					dropped.setMotion(x*0.2, 0, z*0.2);
 					dragon.world.addEntity(dropped);
 				}

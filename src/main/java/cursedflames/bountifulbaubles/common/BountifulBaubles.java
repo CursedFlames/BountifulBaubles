@@ -1,5 +1,8 @@
 package cursedflames.bountifulbaubles.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +30,6 @@ import cursedflames.bountifulbaubles.common.proxy.ServerProxy;
 import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.recipe.anvil.AnvilCrafting;
-import cursedflames.bountifulbaubles.common.watercandle.WaterCandleHandler;
 import cursedflames.bountifulbaubles.common.wormhole.ContainerWormhole;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
@@ -57,8 +59,8 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
-import top.theillusivec4.curios.api.CuriosAPI;
-import top.theillusivec4.curios.api.imc.CurioIMCMessage;
+import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.SlotTypePreset;
 
 @Mod("bountifulbaubles")
 public class BountifulBaubles {
@@ -131,17 +133,36 @@ public class BountifulBaubles {
 	}
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {
-		// slots actually used by the mod: necklace ring head charm
-		String[] slots = {"necklace", "head", "charm", "back", "body"/*, "belt"*/, "hands"};
-		// idk if there's a way to register multiple with one message
-		for (String slot : slots) {
-			InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> {
-				return new CurioIMCMessage(slot);
-			});
+//		// slots actually used by the mod: necklace ring head charm
+//		String[] slots = {"necklace", "head", "charm", "back", "body"/*, "belt"*/, "hands"};
+//		// idk if there's a way to register multiple with one message
+//		for (String slot : slots) {
+//			InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> {
+////				return new CurioIMCMessage(slot);
+//				return new SlotTypeMessage.Builder(slot).build();
+//				SlotTypePreset.HANDS
+//			});
+//		}
+//		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> {
+//			return new CurioIMCMessage("ring").setSize(2);
+//		});
+		SlotTypePreset[] slots = {
+				SlotTypePreset.HEAD, SlotTypePreset.NECKLACE, SlotTypePreset.BACK, SlotTypePreset.BODY,
+				SlotTypePreset.HANDS, SlotTypePreset.RING, SlotTypePreset.CHARM
+		};
+		List<SlotTypeMessage.Builder> builders = new ArrayList<>();
+		for (SlotTypePreset slot : slots) {
+			SlotTypeMessage.Builder builder = slot.getMessageBuilder();
+			if (slot == SlotTypePreset.RING) {
+				builder.size(2);
+			}
+			builders.add(builder);
 		}
-		InterModComms.sendTo("curios", CuriosAPI.IMC.REGISTER_TYPE, () -> {
-			return new CurioIMCMessage("ring").setSize(2);
-		});
+		for (SlotTypeMessage.Builder builder : builders) {
+			SlotTypeMessage message = builder.build();
+			InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+					()->message);
+		}
 	}
 //
 //	private void processIMC(final InterModProcessEvent event) {

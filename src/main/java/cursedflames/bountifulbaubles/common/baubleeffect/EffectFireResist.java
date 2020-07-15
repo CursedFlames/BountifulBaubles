@@ -15,7 +15,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.capability.ICurioItemHandler;
 import top.theillusivec4.curios.api.inventory.CurioStackHandler;
 
@@ -31,7 +31,7 @@ public class EffectFireResist {
 	}
 	
 	private static float[] calcFireResist(LivingEntity entity) {
-		LazyOptional<ICurioItemHandler> opt = CuriosAPI.getCuriosHandler(entity);
+		LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
 		float damageMulti = 1F;
 		float damageMultiLava = 1F;
 		float maxDamageNegate = 0F;

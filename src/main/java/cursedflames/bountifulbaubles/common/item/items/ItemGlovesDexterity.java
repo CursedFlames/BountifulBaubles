@@ -32,8 +32,8 @@ import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
-import top.theillusivec4.curios.api.CuriosAPI;
-import top.theillusivec4.curios.api.capability.ICurio;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.capability.ICurioItemHandler;
 import top.theillusivec4.curios.api.inventory.CurioStackHandler;
 
@@ -75,7 +75,7 @@ public class ItemGlovesDexterity extends BBItem {
 				return;
 			PlayerEntity player = (PlayerEntity) entity;
 //			BountifulBaubles.logger.info("mainhand");
-			LazyOptional<ICurioItemHandler> opt = CuriosAPI.getCuriosHandler(player);
+			LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(player);
 			if (opt.isPresent()) {
 				ICurioItemHandler handler = opt.orElse(null);
 				CurioStackHandler stackHandler = handler.getStackHandler("hands");

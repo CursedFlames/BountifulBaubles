@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import top.theillusivec4.curios.api.CuriosAPI;
+import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.capability.ICurioItemHandler;
 import top.theillusivec4.curios.api.inventory.CurioStackHandler;
 
@@ -24,7 +24,7 @@ public class EffectJumpBoost {
 	
 	public static void onJump(LivingEvent.LivingJumpEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-		LazyOptional<ICurioItemHandler> opt = CuriosAPI.getCuriosHandler(entity);
+		LazyOptional<ICurioItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
 		if (opt.isPresent()) {
 			ICurioItemHandler handler = opt.orElse(null);
 			SortedMap<String, CurioStackHandler> items = handler.getCurioMap();

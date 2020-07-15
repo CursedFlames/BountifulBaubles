@@ -9,7 +9,7 @@ import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.Properties;
-import top.theillusivec4.curios.api.capability.ICurio;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class ItemObsidianSkull extends BBItem implements IFireResistItem {
 	public static final UUID FIRE_RESIST_UUID = UUID

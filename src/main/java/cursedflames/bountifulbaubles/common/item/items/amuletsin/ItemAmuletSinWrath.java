@@ -14,8 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import top.theillusivec4.curios.api.CuriosAPI;
-import top.theillusivec4.curios.api.capability.ICurio;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class ItemAmuletSinWrath extends ItemAmuletSin {
 	public static final UUID DAMAGE_UUID = UUID.fromString("2d75d7e2-38bb-465e-a2b1-8a59c552fe40");
@@ -47,7 +47,7 @@ public class ItemAmuletSinWrath extends ItemAmuletSin {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onCrit(CriticalHitEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-		if (CuriosAPI.getCurioEquipped(ModItems.amulet_sin_wrath, entity).isPresent()) {
+		if (CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.amulet_sin_wrath, entity).isPresent()) {
 			applyEffect(entity, 3, 6*20, true);
 		}
 	}
