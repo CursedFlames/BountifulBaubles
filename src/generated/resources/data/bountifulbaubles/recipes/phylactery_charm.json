@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "bountifulbaubles",
+  "ingredients": [
+    {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "bountifulbaubles:magic_mirror"
+    },
+    {
+      "item": "bountifulbaubles:broken_heart"
+    }
+  ],
+  "result": {
+    "item": "bountifulbaubles:phylactery_charm"
+  }
+}

@@ -39,8 +39,12 @@ public class ModItems {
 		return baseSettings().maxCount(1);
 	}
 	
-	public static final Item TEST_ITEM = add("test_item",
-			new BBItem(baseSettings()));
+	
+//	public static final Item TEST_ITEM = add("test_item",
+//			new BBItem(baseSettings()));
+	public static final Item BALLOON = add("balloon",
+			new BBItem(baseSettingsCurio()));
+	
 	
 	public static void registerItems() {
 		for (Identifier id : ITEMS.keySet()) {

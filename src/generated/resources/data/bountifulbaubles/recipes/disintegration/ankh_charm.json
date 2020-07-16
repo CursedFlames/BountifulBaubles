@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "bountifulbaubles",
+  "ingredients": [
+    {
+      "item": "bountifulbaubles:ankh_charm"
+    },
+    {
+      "item": "bountifulbaubles:disintegration_tablet"
+    }
+  ],
+  "result": {
+    "item": "bountifulbaubles:spectral_silt",
+    "count": 5
+  }
+}

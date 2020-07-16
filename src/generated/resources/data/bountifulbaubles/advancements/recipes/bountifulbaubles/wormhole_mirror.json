@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bountifulbaubles:wormhole_mirror"
+    ]
+  },
+  "criteria": {
+    "magic_mirror": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bountifulbaubles:magic_mirror"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bountifulbaubles:wormhole_mirror"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "magic_mirror",
+      "has_the_recipe"
+    ]
+  ]
+}

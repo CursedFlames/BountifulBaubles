@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    "c",
+    "a",
+    "g"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:cake"
+    },
+    "a": {
+      "item": "bountifulbaubles:amulet_sin_empty"
+    },
+    "g": {
+      "item": "minecraft:golden_apple"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:amulet_sin_gluttony"
+  }
+}

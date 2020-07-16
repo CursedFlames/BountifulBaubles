@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    "sws",
+    "w w",
+    "sws"
+  ],
+  "key": {
+    "s": {
+      "item": "bountifulbaubles:spectral_silt"
+    },
+    "w": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:balloon"
+  }
+}
