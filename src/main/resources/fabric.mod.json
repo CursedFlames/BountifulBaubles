@@ -29,9 +29,9 @@
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": "1.16.x"
+    "minecraft": "1.16.x",
+    "curios": ">=1.16.1-0.1"
   },
   "suggests": {
-    "flamingo": "*"
   }
 }
