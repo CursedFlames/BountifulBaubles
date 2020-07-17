@@ -6,8 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.common.baubleeffect.StatusEffectNegate;
+import cursedflames.bountifulbaubles.common.item.items.ItemPotionNegate;
+import cursedflames.bountifulbaubles.common.item.items.potion.ItemPotionBase;
+import cursedflames.bountifulbaubles.common.item.items.shield.ItemShieldBase;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.minecraft.block.Blocks;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -44,47 +48,54 @@ public class ModItems {
 			new BBItem(baseSettingsCurio()));
 	
 	public static final Item SUNGLASSES = add("sunglasses",
-			new BBItem(baseSettingsCurio()));
+			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.BLINDNESS)));
 	public static final Item APPLE = add("apple",
-			new BBItem(baseSettingsCurio()));
+			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.HUNGER)));
 	public static final Item VITAMINS = add("vitamins",
-			new BBItem(baseSettingsCurio()));
+			new ItemPotionNegate(baseSettingsCurio(),
+					StatusEffectNegate.negate(StatusEffects.WEAKNESS, StatusEffects.MINING_FATIGUE)));
 	public static final Item RING_OVERCLOCKING = add("ring_overclocking",
-			new BBItem(baseSettingsCurio()));
+			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.SLOWNESS)));
 	public static final Item SHULKER_HEART = add("shulker_heart",
-			new BBItem(baseSettingsCurio()));
+			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.LEVITATION)));
 	public static final Item RING_FREE_ACTION = add("ring_free_action",
-			new BBItem(baseSettingsCurio()));
+			new ItemPotionNegate(baseSettingsCurio(),
+					StatusEffectNegate.negate(StatusEffects.SLOWNESS, StatusEffects.LEVITATION)));
 	public static final Item BEZOAR = add("bezoar",
-			new BBItem(baseSettingsCurio()));
+			new ItemPotionNegate(baseSettingsCurio(),
+					StatusEffectNegate.negate(StatusEffects.POISON)));
 	public static final Item ENDER_DRAGON_SCALE = add("ender_dragon_scale",
 			new BBItem(baseSettings()));
 	public static final Item BROKEN_BLACK_DRAGON_SCALE = add("broken_black_dragon_scale",
 			new BBItem(baseSettings()));
 	public static final Item BLACK_DRAGON_SCALE = add("black_dragon_scale",
-			new BBItem(baseSettingsCurio()));
+			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.WITHER)));
 	public static final Item MIXED_DRAGON_SCALE = add("mixed_dragon_scale",
-			new BBItem(baseSettingsCurio()));
+			new ItemPotionNegate(baseSettingsCurio(),
+					StatusEffectNegate.negate(StatusEffects.POISON, StatusEffects.WITHER)));
 	public static final Item ANKH_CHARM = add("ankh_charm",
-			new BBItem(baseSettingsCurio()));
+			new ItemPotionNegate(baseSettingsCurio(),
+					StatusEffectNegate.negate(StatusEffects.BLINDNESS, StatusEffects.HUNGER, StatusEffects.WEAKNESS,
+							StatusEffects.MINING_FATIGUE, StatusEffects.SLOWNESS, StatusEffects.LEVITATION,
+							StatusEffects.POISON, StatusEffects.WITHER)));
 	
 	public static final Item OBSIDIAN_SKULL = add("obsidian_skull",
 			new BBItem(baseSettingsCurio()));
 	public static final Item SHIELD_COBALT = add("shield_cobalt",
-			new BBItem(baseSettings().maxDamage(336*3)));
+			new ItemShieldBase(baseSettings().maxDamage(336*3)));
 	public static final Item SHIELD_OBSIDIAN = add("shield_obsidian",
-			new BBItem(baseSettings().maxDamage(336*4)));
+			new ItemShieldBase(baseSettings().maxDamage(336*4)));
 	public static final Item SHIELD_ANKH = add("shield_ankh",
-			new BBItem(baseSettings().maxDamage(336*5)));
+			new ItemShieldBase(baseSettings().maxDamage(336*5)));
 	
 	public static final Item MAGIC_MIRROR = add("magic_mirror",
 			new BBItem(baseSettings().maxCount(1)));
 	public static final Item POTION_RECALL = add("potion_recall",
-			new BBItem(baseSettings()));
+			new ItemPotionBase(baseSettings()));
 	public static final Item WORMHOLE_MIRROR = add("wormhole_mirror",
 			new BBItem(baseSettings().maxCount(1)));
 	public static final Item POTION_WORMHOLE = add("potion_wormhole",
-			new BBItem(baseSettings()));
+			new ItemPotionBase(baseSettings()));
 	
 	public static final Item LUCKY_HORSESHOE = add("lucky_horseshoe",
 			new BBItem(baseSettingsCurio()));
