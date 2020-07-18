@@ -72,4 +72,20 @@ public abstract class MixinLivingEntity extends Entity {
 			self.timeUntilRegen += ItemAmuletCross.INVINCIBILITY_TICK_BUFF;
 		}
 	}
+
+	@Inject(method = "getVelocityMultiplier",
+			at = @At("RETURN"),
+			cancellable = true)
+	private void onGetVelocityMultiplier(CallbackInfoReturnable<Float> info) {
+		LivingEntity self = (LivingEntity) (Object) this;
+		
+		if (info.getReturnValue() < 1) {
+			boolean hasFreeAction = CuriosApi.getCuriosHelper()
+					.findEquippedCurio(ModItems.RING_FREE_ACTION, self).isPresent();
+			
+			if (hasFreeAction) {
+				info.setReturnValue(1F);
+			}
+		}
+	}
 }

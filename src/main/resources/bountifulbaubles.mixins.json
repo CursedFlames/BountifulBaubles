@@ -4,6 +4,7 @@
 	"package": "cursedflames.bountifulbaubles.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
+		"common.MixinEntity",
 		"common.MixinLivingEntity",
 		"common.MixinPlayerEntity"
 	],

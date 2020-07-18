@@ -17,12 +17,16 @@ public class ItemPotionNegate extends BBItem implements IStatusEffectNegate {
 	public ItemPotionNegate(Settings settings, Predicate<StatusEffectInstance> effectNegateCheck) {
 		super(settings);
 		this.negateCheck = effectNegateCheck;
-		addCurioComponent(this, (item, stack)->new Curio(item));
+		this.addCurio();
 	}
 
 	@Override
 	public boolean shouldNegate(StatusEffectInstance effect) {
 		return negateCheck.test(effect);
+	}
+	
+	protected void addCurio() {
+		addCurioComponent(this, (item, stack)->new Curio(item));
 	}
 	
 	protected static class Curio implements ICurio {

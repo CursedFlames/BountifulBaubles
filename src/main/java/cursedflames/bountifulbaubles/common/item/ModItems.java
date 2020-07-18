@@ -9,6 +9,8 @@ import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.baubleeffect.StatusEffectNegate;
 import cursedflames.bountifulbaubles.common.item.items.ItemAmuletCross;
 import cursedflames.bountifulbaubles.common.item.items.ItemPotionNegate;
+import cursedflames.bountifulbaubles.common.item.items.ItemRingFreeAction;
+import cursedflames.bountifulbaubles.common.item.items.ItemRingOverclocking;
 import cursedflames.bountifulbaubles.common.item.items.potion.ItemPotionBase;
 import cursedflames.bountifulbaubles.common.item.items.shield.ItemShieldBase;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -56,11 +58,11 @@ public class ModItems {
 			new ItemPotionNegate(baseSettingsCurio(),
 					StatusEffectNegate.negate(StatusEffects.WEAKNESS, StatusEffects.MINING_FATIGUE)));
 	public static final Item RING_OVERCLOCKING = add("ring_overclocking",
-			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.SLOWNESS)));
+			new ItemRingOverclocking(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.SLOWNESS)));
 	public static final Item SHULKER_HEART = add("shulker_heart",
 			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.LEVITATION)));
 	public static final Item RING_FREE_ACTION = add("ring_free_action",
-			new ItemPotionNegate(baseSettingsCurio(),
+			new ItemRingFreeAction(baseSettingsCurio(),
 					StatusEffectNegate.negate(StatusEffects.SLOWNESS, StatusEffects.LEVITATION)));
 	public static final Item BEZOAR = add("bezoar",
 			new ItemPotionNegate(baseSettingsCurio(),
