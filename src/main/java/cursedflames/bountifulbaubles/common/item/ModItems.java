@@ -7,6 +7,7 @@ import java.util.Map;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.baubleeffect.StatusEffectNegate;
+import cursedflames.bountifulbaubles.common.item.items.ItemAmuletCross;
 import cursedflames.bountifulbaubles.common.item.items.ItemPotionNegate;
 import cursedflames.bountifulbaubles.common.item.items.potion.ItemPotionBase;
 import cursedflames.bountifulbaubles.common.item.items.shield.ItemShieldBase;
@@ -24,13 +25,13 @@ public class ModItems {
 	
 	public static final ItemGroup GROUP = FabricItemGroupBuilder.build(
 			modId(BountifulBaubles.MODID),
-			()->new ItemStack(ModItems.OBSIDIAN_SKULL));
+			()->new ItemStack(ModItems.GLOVES_DEXTERITY));
 
-	private static Item add(String id, Item item) {
+	private static <T extends Item> T add(String id, T item) {
 		return add(modId(id), item);
 	}
 	
-	private static Item add(Identifier id, Item item) {
+	private static <T extends Item> T add(Identifier id, T item) {
 		ITEMS.put(id, item);
 		return item;
 	}
@@ -114,7 +115,7 @@ public class ModItems {
 	public static final Item PHYLACTERY_CHARM = add("phylactery_charm",
 			new BBItem(baseSettingsCurio()));
 	public static final Item AMULET_CROSS = add("amulet_cross",
-			new BBItem(baseSettingsCurio()));
+			new ItemAmuletCross(baseSettingsCurio()));
 	
 	public static final Item GLOVES_DEXTERITY = add("gloves_dexterity",
 			new BBItem(baseSettingsCurio()));

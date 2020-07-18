@@ -8,9 +8,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import cursedflames.bountifulbaubles.common.baubleeffect.StatusEffectNegate.IStatusEffectNegate;
+import cursedflames.bountifulbaubles.common.item.ModItems;
+import cursedflames.bountifulbaubles.common.item.items.ItemAmuletCross;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -51,5 +54,22 @@ public abstract class MixinLivingEntity extends Entity {
 			}
 		}
 		// TODO also check for items in hands
+	}
+
+	// TODO this might cause compat issues with BetterHurtTimer once it's ported to fabric?
+	@Inject(method = "damage",
+			at = @At(
+					value = "FIELD",
+					target = "Lnet/minecraft/entity/LivingEntity;hurtTime:I",
+					shift = At.Shift.AFTER))
+	private void onHurtTime(DamageSource source, float amount, CallbackInfoReturnable<Boolean> info) {
+		LivingEntity self = (LivingEntity) (Object) this;
+		
+		boolean hasCrossNecklace = CuriosApi.getCuriosHelper()
+				.findEquippedCurio(ModItems.AMULET_CROSS, self).isPresent();
+		
+		if (hasCrossNecklace) {
+			self.timeUntilRegen += ItemAmuletCross.INVINCIBILITY_TICK_BUFF;
+		}
 	}
 }

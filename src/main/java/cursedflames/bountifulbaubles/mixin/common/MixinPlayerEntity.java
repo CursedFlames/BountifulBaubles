@@ -22,9 +22,9 @@ public abstract class MixinPlayerEntity {
 	// Rather than dealing the red heart damage manually if Broken Heart is taking effect
 	@Inject(method = "applyDamage",
 			at = @At(
-			value = "INVOKE",
-			target = "Lnet/minecraft/entity/player/PlayerEntity;setHealth(F)V",
-			ordinal = 0
+				value = "INVOKE",
+				target = "Lnet/minecraft/entity/player/PlayerEntity;setHealth(F)V",
+				ordinal = 0
 			), cancellable = true)
 	private void onApplyDamage(DamageSource source, float amount, CallbackInfo info) {
 		PlayerEntity player = (PlayerEntity)(Object)this;
