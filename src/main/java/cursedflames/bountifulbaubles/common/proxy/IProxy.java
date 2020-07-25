@@ -2,6 +2,7 @@ package cursedflames.bountifulbaubles.common.proxy;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public interface IProxy {
@@ -14,5 +15,8 @@ public interface IProxy {
 	
 	public default PlayerEntity getClientPlayer() {
 		return null;
+	}
+	
+	public default void clientSetup(final FMLClientSetupEvent event) {
 	}
 }

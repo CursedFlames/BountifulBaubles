@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import cursedflames.bountifulbaubles.client.gui.ScreenWormhole;
 import cursedflames.bountifulbaubles.common.baubleeffect.EventHandlerEffect;
 import cursedflames.bountifulbaubles.common.block.ModBlocks;
 import cursedflames.bountifulbaubles.common.command.CommandWormhole;
@@ -32,20 +31,14 @@ import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.recipe.anvil.AnvilCrafting;
 import cursedflames.bountifulbaubles.common.wormhole.ContainerWormhole;
 import net.minecraft.block.Block;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -134,16 +127,7 @@ public class BountifulBaubles {
 	}
 
 	private void clientSetup(final FMLClientSetupEvent event) {
-		ScreenManager.registerFactory(ContainerWormhole.CONTAINER_REFORGE, ScreenWormhole::new);
-		
-		// This is janky af lmao
-		
-		// New replacement for Item.addPropertyOverride, no mapping :V
-		ItemModelsProperties.func_239418_a_(ModItems.magic_mirror, new ResourceLocation("using"),
-			(ItemStack stack, ClientWorld world, LivingEntity entity) -> {
-				return entity != null && entity.isHandActive() && entity.getActiveItemStack()==stack ? 1f : 0f;
-			}
-		);
+		proxy.clientSetup(event);
 	}
 
 	private void enqueueIMC(final InterModEnqueueEvent event) {

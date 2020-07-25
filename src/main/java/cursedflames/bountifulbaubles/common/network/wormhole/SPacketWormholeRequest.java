@@ -49,8 +49,6 @@ public class SPacketWormholeRequest {
 			// No idea wtf the second parameter here is, it doesn't seem to do anything
 			// and every vanilla usage just passes the constant Util.DUMMY_UUID
 			Minecraft.getInstance().player.sendMessage(base, Util.DUMMY_UUID);
-//			Minecraft.getInstance().player.sendMessage(new TextComponentString(
-//					"(Omit the second argument to accept/reject all)"));
 		});
 		ctx.get().setPacketHandled(true);
 	}
