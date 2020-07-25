@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.common.item.items;
 
+import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -7,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class ItemWormholeMirror extends ItemMagicMirror {
@@ -45,14 +47,12 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 		if (!world.isRemote&&count==15 && entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) entity;
 			if (!sneaking) {
-				// FIXME readd dimension check
-//				DimensionType dim = player.getSpawnDimension();
-//				if (world.getDimension().getType()!=dim && !Config.MAGIC_MIRROR_INTERDIMENSIONAL.get()) {
-//					player.sendStatusMessage(new TranslationTextComponent(
-//							ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
-//				} else {
+				if (!world.isRemote && !ItemMagicMirror.canDoTeleport(world, player)) {
+					player.sendStatusMessage(new TranslationTextComponent(
+							ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
+				} else {
 					teleportPlayerToSpawn(world, player);
-//				}
+				}
 			} else {
 				ItemPotionWormhole.doWormhole((ServerPlayerEntity) player);
 			}

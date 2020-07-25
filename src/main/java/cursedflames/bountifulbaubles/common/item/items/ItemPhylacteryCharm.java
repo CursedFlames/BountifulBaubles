@@ -1,12 +1,14 @@
 package cursedflames.bountifulbaubles.common.item.items;
 
 import cursedflames.bountifulbaubles.common.item.BBItem;
+import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.misc.DamageSourcePhylactery;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class ItemPhylacteryCharm extends BBItem {
@@ -17,14 +19,11 @@ public class ItemPhylacteryCharm extends BBItem {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-		// TODO is this the right way of comparing dimensions?
-		// FIXME readd dimension check
-//		DimensionType dim = player.getSpawnDimension();
-//		if (world.getDimension().getType()!=dim && !Config.MAGIC_MIRROR_INTERDIMENSIONAL.get()) {
-//			player.sendStatusMessage(new TranslationTextComponent(
-//					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
-//			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));
-//		}
+		if (!world.isRemote && !ItemMagicMirror.canDoTeleport(world, player)) {
+			player.sendStatusMessage(new TranslationTextComponent(
+					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
+			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));
+		}
 		player.setActiveHand(hand);
 		if (!world.isRemote) {
 			ItemMagicMirror.teleportPlayerToSpawn(world, player);

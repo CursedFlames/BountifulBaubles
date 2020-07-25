@@ -1,6 +1,10 @@
 package cursedflames.bountifulbaubles.common.item.items;
 
+import java.util.Optional;
+
+import cursedflames.bountifulbaubles.common.config.Config;
 import cursedflames.bountifulbaubles.common.item.BBItem;
+import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -9,10 +13,14 @@ import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerChunkProvider;
 import net.minecraft.world.server.ServerWorld;
@@ -44,14 +52,11 @@ public class ItemMagicMirror extends BBItem {
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-		// TODO is this the right way of comparing dimensions?
-		// FIXME readd dimension check
-//		DimensionType dim = player.getSpawnDimension();
-//		if (world.getDimension().getType()!=dim && !Config.MAGIC_MIRROR_INTERDIMENSIONAL.get()) {
-//			player.sendStatusMessage(new TranslationTextComponent(
-//					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
-//			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));
-//		}
+		if (!world.isRemote && !canDoTeleport(world, player)) {
+			player.sendStatusMessage(new TranslationTextComponent(
+					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
+			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));
+		}
 		player.setActiveHand(hand);
 		return new ActionResult<ItemStack>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
@@ -88,14 +93,24 @@ public class ItemMagicMirror extends BBItem {
 		}
 	}
 	
+	public static boolean canDoTeleport(World world, PlayerEntity player) {
+		// We have no way to check client-side.
+		if (world.isRemote) return true;
+		RegistryKey<World> spawnDim = ((ServerPlayerEntity) player).func_241141_L_();
+		if (world.func_234923_W_()!=spawnDim && !Config.MAGIC_MIRROR_INTERDIMENSIONAL.get()) {
+			return false;
+		}
+		return true;
+	}
+	
 	public static void teleportPlayerToSpawn(World world, PlayerEntity player) {
-//		DimensionType dim = player.getSpawnDimension();
+		if (world.isRemote) return;
+		RegistryKey<World> spawnDim = ((ServerPlayerEntity) player).func_241141_L_();
 		World world1 = world;
-//		if (world.getDimension().getType()!=dim) {
-//			if (!Config.MAGIC_MIRROR_INTERDIMENSIONAL.get())
-//				return;
-//			world1 = DimensionManager.getWorld(world.getServer(), dim, true, true);
-//		}
+		if (!canDoTeleport(world, player)) return;
+		if (world1.func_234923_W_() != spawnDim) {
+			world1 = world1.getServer().getWorld(spawnDim);
+		}
 		
 		player.stopRiding();
 		// shouldn't happen, but if it does...?
@@ -103,20 +118,19 @@ public class ItemMagicMirror extends BBItem {
 		    player.wakeUp();
 		}
 		if (world1!=null) {
-			// FIXME readd bed teleportation
-			BlockPos spawnPoint = null;/*player.getBedLocation(dim);
+			BlockPos spawnPoint = ((ServerPlayerEntity) player).func_241140_K_();
 			if (spawnPoint!=null) {
-				boolean force = player.isSpawnForced(dim);
-				Optional<Vector3d> optional = PlayerEntity.func_213822_a(world1, spawnPoint, force);
+				// TODO what was "force" supposed to do?
+				boolean force = false;//player.isSpawnForced(dim);
+				Optional<Vector3d> optional =
+						PlayerEntity.func_234567_a_((ServerWorld) world1, spawnPoint, force, true);
 				if (optional.isPresent()) {
 					Vector3d pos = optional.get();
 		            doTeleport(player, world, world1, pos.getX(), pos.getY(), pos.getZ());
 					return;
 		        }
-			}*/
+			}
 			// TODO add check if player is outside of spawn chunk?
-			// FIXME make sure this behaves properly both in SP and MP and doesn't crash
-			// func_241135_u_ = getSpawnPoint
 			spawnPoint = ((ServerWorld) world1).func_241135_u_();
 			
 			if (spawnPoint!=null) {
