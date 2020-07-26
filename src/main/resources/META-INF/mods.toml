@@ -50,3 +50,11 @@ Adds a variety of baubles and other items inspired by Terraria and other games.
     versionRange="[1.16,1.17)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.bountifulbaubles]]
+    modId="curios"
+    mandatory=true
+    versionRange="[FORGE-1.16.1-3.0,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
