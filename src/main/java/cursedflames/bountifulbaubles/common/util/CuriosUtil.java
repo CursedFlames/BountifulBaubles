@@ -44,7 +44,7 @@ public class CuriosUtil {
 		LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosHelper().getCuriosHandler(entity);
 		if (!opt.isPresent()) return null;
 		Optional<ICurioStacksHandler> opt2 = opt.orElse(null).getStacksHandler(identifier);
-		if (opt2.isEmpty()) return null;
+		if (!opt2.isPresent()) return null;
 		if (isCosmetic) {
 			return opt2.get().getCosmeticStacks();
 		} else {

@@ -43,6 +43,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -170,9 +171,8 @@ public class BountifulBaubles {
 //	}
 
 	@SubscribeEvent
-	public void onServerStarting(FMLServerStartingEvent event) {
-		server = event.getServer();
-		CommandWormhole.register(event.getCommandDispatcher());
+	public void onRegisterCommands(RegisterCommandsEvent event) {
+		CommandWormhole.register(event.getDispatcher());
 	}
 	
 	@SubscribeEvent
