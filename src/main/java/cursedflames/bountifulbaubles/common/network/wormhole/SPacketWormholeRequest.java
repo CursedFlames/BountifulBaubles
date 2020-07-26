@@ -35,19 +35,18 @@ public class SPacketWormholeRequest {
 			// TODO use translatable text component
 			IFormattableTextComponent base = new StringTextComponent(
 					playerName+" has requested to teleport to you. Use /wormhole, or click: ");
-			ITextComponent acc = new StringTextComponent(TextFormatting.GREEN+"[ACCEPT]");
-			ITextComponent rej = new StringTextComponent(TextFormatting.RED+"[REJECT]");
+			IFormattableTextComponent acc = new StringTextComponent(TextFormatting.GREEN+"[ACCEPT]");
+			IFormattableTextComponent rej = new StringTextComponent(TextFormatting.RED+"[REJECT]");
 			
-			acc.getStyle().setClickEvent(
-					new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/wormhole acc "+playerName));
-			rej.getStyle().setClickEvent(
-					new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/wormhole deny "+playerName));
+			acc.func_240700_a_(style -> style.setClickEvent(
+					new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/wormhole acc "+playerName)));
+			rej.func_240700_a_(style -> style.setClickEvent(
+					new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/wormhole deny "+playerName)));
 			
 			// func_230529_a_ = appendSibling
 			// func_240702_b_ = appendText
 			base.func_230529_a_(acc).func_240702_b_(" ").func_230529_a_(rej);
-			// No idea wtf the second parameter here is, it doesn't seem to do anything
-			// and every vanilla usage just passes the constant Util.DUMMY_UUID
+			
 			Minecraft.getInstance().player.sendMessage(base, Util.DUMMY_UUID);
 		});
 		ctx.get().setPacketHandled(true);
