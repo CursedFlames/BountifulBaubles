@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cursedflames.bountifulbaubles.common.item.ModItems;
+import cursedflames.bountifulbaubles.common.loot.LootInjector;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotTypeInfo;
 import top.theillusivec4.curios.api.SlotTypeInfo.BuildScheme;
@@ -24,6 +26,8 @@ public class BountifulBaubles implements ModInitializer {
 		registerCurioSlots();
 		
 		ModItems.registerItems();
+		
+		LootTableLoadingCallback.EVENT.register(LootInjector::addLoot);
 	}
 	
 	private static void registerCurioSlots() {
