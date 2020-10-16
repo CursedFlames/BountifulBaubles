@@ -18,6 +18,7 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
@@ -132,9 +133,9 @@ public class WaterCandleRegistryCapability implements ICapabilityProvider, ICapa
 						world.rand.nextInt(verRange*2+1)-verRange,
 						world.rand.nextInt(horRange*2+1)-horRange);
 				if (world.hasNoCollisions(ent.type.func_220328_a(tryPos.getX(), tryPos.getY(), tryPos.getZ())) &&
-						EntitySpawnPlacementRegistry.func_223515_a(ent.type, world, SpawnReason.SPAWNER, tryPos, world.rand)) {
+						EntitySpawnPlacementRegistry.func_223515_a(ent.type, (ServerWorld) world, SpawnReason.SPAWNER, tryPos, world.rand)) {
 					// TODO check if too close to player
-					Entity entity = ent.type.spawn(world, null, null, tryPos, SpawnReason.SPAWNER, false, false);
+					Entity entity = ent.type.spawn((ServerWorld) world, null, null, tryPos, SpawnReason.SPAWNER, false, false);
 					// TODO make some kind of subtler effect for showing that it's spawned by water candle?
 					// blue glow, maybe
 					// TODO also maybe make the mobs tougher but with better loot?

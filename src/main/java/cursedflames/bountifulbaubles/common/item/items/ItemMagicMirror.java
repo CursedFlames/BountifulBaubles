@@ -123,7 +123,8 @@ public class ItemMagicMirror extends BBItem {
 				// TODO what was "force" supposed to do?
 				boolean force = false;//player.isSpawnForced(dim);
 				Optional<Vector3d> optional =
-						PlayerEntity.func_234567_a_((ServerWorld) world1, spawnPoint, force, true);
+						PlayerEntity.func_242374_a((ServerWorld) world1, spawnPoint,
+								((ServerPlayerEntity) player).func_242109_L(), force, true);
 				if (optional.isPresent()) {
 					Vector3d pos = optional.get();
 		            doTeleport(player, world, world1, pos.getX(), pos.getY(), pos.getZ());
