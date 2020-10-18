@@ -10,10 +10,6 @@
 		}
 	},
 	"item.bountifulbaubles": {
-		"balloon": {
-			"": "Balloon",
-			"tooltip.0": "§9Increases jump height and decreases fall damage slightly."
-		},
 		"obsidian_skull": {
 			"": "Obsidian Skull",
 			"tooltip.0": "§9Grants immunity to burning and 50% resistance to fire damage. (Does not protect against lava)",
@@ -115,10 +111,18 @@
 			"tooltip.mp": "§aDoes not, however, guarantee that where they are is safe.",
 			"nootherplayers": "No teleportation targets available."
 		},
+		"balloon": {
+			"": "Balloon",
+			"tooltip.0": "§9Increases jump height and decreases fall damage slightly."
+		},
 		"lucky_horseshoe": {
 			"": "Lucky Horseshoe",
 			"tooltip.0": "§9Negates fall damage.",
 			"tooltip.1": "§aWhy did the horse need this?"
+		},
+		"horseshoe_balloon": {
+			"": "Horseshoe Balloon",
+			"tooltip.0": "§9Increases jump height and negates fall damage."
 		},
 		"amulet_sin_empty": {
 			"": "Sin Pendant (Empty)",

@@ -1,5 +1,4 @@
 potion_recall
-balloon
 obsidian_skull
 sunglasses
 apple
@@ -15,7 +14,9 @@ mixed_dragon_scale
 ankh_charm
 potion_recall
 potion_wormhole
+balloon
 lucky_horseshoe
+horseshoe_balloon
 amulet_sin_empty
 amulet_sin_gluttony
 amulet_sin_pride

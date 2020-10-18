@@ -1,4 +1,3 @@
-balloon necklace ring charm body
 obsidian_skull head necklace charm
 sunglasses head
 apple necklace ring charm
@@ -13,7 +12,9 @@ ankh_charm charm
 shield_cobalt back body charm
 shield_obsidian back body charm
 shield_ankh back body charm
+balloon necklace ring charm body
 lucky_horseshoe necklace ring charm
+horseshoe_balloon necklace ring charm body
 amulet_sin_gluttony necklace
 amulet_sin_pride necklace
 amulet_sin_wrath necklace

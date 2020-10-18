@@ -13,6 +13,7 @@ import cursedflames.bountifulbaubles.common.item.items.ItemDisintegrationTablet;
 import cursedflames.bountifulbaubles.common.item.items.ItemEnderDragonScale;
 import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDexterity;
 import cursedflames.bountifulbaubles.common.item.items.ItemGlovesDigging;
+import cursedflames.bountifulbaubles.common.item.items.ItemHorseshoeBalloon;
 import cursedflames.bountifulbaubles.common.item.items.ItemLuckyHorseshoe;
 import cursedflames.bountifulbaubles.common.item.items.ItemMagicMirror;
 import cursedflames.bountifulbaubles.common.item.items.ItemPhylacteryCharm;
@@ -46,7 +47,6 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(BountifulBaubles.MODID)
 public class ModItems {
 	private static final String PREFIX = BountifulBaubles.MODID+":";
-	public static final Item balloon = null;
 	public static final Item sunglasses = null;
 	public static final Item apple = null;
 	public static final Item vitamins = null;
@@ -67,7 +67,9 @@ public class ModItems {
 	public static final Item potion_recall = null;
 	public static final Item wormhole_mirror = null;
 	public static final Item potion_wormhole = null;
+	public static final Item balloon = null;
 	public static final Item lucky_horseshoe = null;
+	public static final Item horseshoe_balloon = null;
 	public static final Item amulet_sin_empty = null;
 	public static final Item amulet_sin_gluttony = null;
 	public static final Item amulet_sin_pride = null;	
@@ -98,8 +100,6 @@ public class ModItems {
 		IForgeRegistry<Item> r = event.getRegistry();
 		
 		registerItemBlocks(r);
-		
-		r.register(new ItemBalloon("balloon", basePropertiesBauble()));
 		
 		r.register(new ItemSunglasses("sunglasses",
 				basePropertiesBauble(),
@@ -152,8 +152,10 @@ public class ModItems {
 		r.register(new ItemPotionRecall("potion_recall", baseProperties()));
 		r.register(new ItemWormholeMirror("wormhole_mirror", baseProperties().maxStackSize(1)));
 		r.register(new ItemPotionWormhole("potion_wormhole", baseProperties()));
-		
+
+		r.register(new ItemBalloon("balloon", basePropertiesBauble()));
 		r.register(new ItemLuckyHorseshoe("lucky_horseshoe", basePropertiesBauble()));
+		r.register(new ItemHorseshoeBalloon("horseshoe_balloon", basePropertiesBauble()));
 		
 		r.register(new BBItem("amulet_sin_empty", baseProperties()));
 		r.register(new ItemAmuletSinGluttony("amulet_sin_gluttony", basePropertiesBauble(),

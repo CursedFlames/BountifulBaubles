@@ -32,5 +32,11 @@ public class AnvilRecipes {
 				39, 1,
 				new ItemStack(ModItems.shield_ankh),
 				true));
+		AnvilCrafting.addRecipe(new AnvilRecipe(
+				Ingredient.fromItems(ModItems.balloon),
+				Ingredient.fromItems(ModItems.lucky_horseshoe),
+				15, 1,
+				new ItemStack(ModItems.horseshoe_balloon),
+				true));
 	}
 }
