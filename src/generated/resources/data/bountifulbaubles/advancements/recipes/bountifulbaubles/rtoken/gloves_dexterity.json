@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "bountifulbaubles:silt/amulet_sin_empty"
+      "bountifulbaubles:rtoken/gloves_dexterity"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "bountifulbaubles:silt/amulet_sin_empty"
+        "recipe": "bountifulbaubles:rtoken/gloves_dexterity"
       }
     }
   },

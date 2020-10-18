@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "bountifulbaubles:silt/lucky_horseshoe"
+      "bountifulbaubles:rtoken/magic_mirror"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "bountifulbaubles:silt/lucky_horseshoe"
+        "recipe": "bountifulbaubles:rtoken/magic_mirror"
       }
     }
   },

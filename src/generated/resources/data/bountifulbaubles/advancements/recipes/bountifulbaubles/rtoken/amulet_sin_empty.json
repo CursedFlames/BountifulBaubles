@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "bountifulbaubles:silt/shield_cobalt"
+      "bountifulbaubles:rtoken/amulet_sin_empty"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "bountifulbaubles:silt/shield_cobalt"
+        "recipe": "bountifulbaubles:rtoken/amulet_sin_empty"
       }
     }
   },

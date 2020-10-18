@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "bountifulbaubles:silt/sunglasses"
+      "bountifulbaubles:rtoken/lucky_horseshoe"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "bountifulbaubles:silt/sunglasses"
+        "recipe": "bountifulbaubles:rtoken/lucky_horseshoe"
       }
     }
   },

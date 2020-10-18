@@ -2,22 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "group": "bountifulbaubles",
   "pattern": [
-    "s s",
-    "gSg",
-    "s s"
+    " s ",
+    "sgs",
+    " s "
   ],
   "key": {
     "s": {
       "item": "bountifulbaubles:spectral_silt"
     },
-    "S": {
-      "item": "minecraft:stick"
-    },
     "g": {
-      "item": "minecraft:black_stained_glass"
+      "item": "minecraft:gold_ingot"
     }
   },
   "result": {
-    "item": "bountifulbaubles:sunglasses"
+    "item": "bountifulbaubles:resplendent_token"
   }
 }

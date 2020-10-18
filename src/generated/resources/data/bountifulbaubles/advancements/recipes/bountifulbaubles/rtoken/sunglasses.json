@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "bountifulbaubles:silt/magic_mirror"
+      "bountifulbaubles:rtoken/sunglasses"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "bountifulbaubles:silt/magic_mirror"
+        "recipe": "bountifulbaubles:rtoken/sunglasses"
       }
     }
   },

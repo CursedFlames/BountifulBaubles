@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "bountifulbaubles:silt/amulet_cross"
+      "bountifulbaubles:rtoken/shield_cobalt"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "bountifulbaubles:silt/amulet_cross"
+        "recipe": "bountifulbaubles:rtoken/shield_cobalt"
       }
     }
   },

@@ -29,3 +29,4 @@ gloves_digging_iron
 gloves_digging_diamond
 disintegration_tablet
 spectral_silt
+resplendent_token

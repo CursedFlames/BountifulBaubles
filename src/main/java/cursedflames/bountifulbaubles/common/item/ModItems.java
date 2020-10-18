@@ -82,6 +82,7 @@ public class ModItems {
 	public static final Item gloves_digging_diamond = null;
 	public static final Item disintegration_tablet = null;
 	public static final Item spectral_silt = null;
+	public static final Item resplendent_token = null;
 	
 	public static Item.Properties baseProperties() {
 		return new Item.Properties().group(BountifulBaubles.GROUP);
@@ -193,6 +194,9 @@ public class ModItems {
 		r.register(new ItemDisintegrationTablet("disintegration_tablet", baseProperties().maxStackSize(1)));
 		r.register(new BBItem("spectral_silt", baseProperties()) {
 			@Override public boolean hasEffect(ItemStack stack) {return true;}
+		});
+		r.register(new BBItem("resplendent_token", baseProperties()) {
+//			@Override public boolean hasEffect(ItemStack stack) {return true;}
 		});
 	}
 }

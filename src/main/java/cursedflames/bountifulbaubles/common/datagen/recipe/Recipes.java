@@ -32,7 +32,7 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 //		);
 		registerMainCraftingRecipes(consumer);
 		registerDisintegrationCraftingRecipes(consumer);
-		registerSpectralSiltCraftingRecipes(consumer);
+		registerResplendentTokenCraftingRecipes(consumer);
 	}
 	
 	protected void registerMainCraftingRecipes(Consumer<IFinishedRecipe> consumer) {
@@ -181,6 +181,17 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 				.addCriterion("quartz",
 						InventoryChangeTrigger.Instance.forItems(Items.QUARTZ))
 				.build(consumer);
+
+		ShapedRecipeBuilder.shapedRecipe(ModItems.resplendent_token)
+				.patternLine(" s ")
+				.patternLine("sgs")
+				.patternLine(" s ")
+				.key('s', ModItems.spectral_silt)
+				.key('g', Items.GOLD_INGOT)
+				.setGroup(BountifulBaubles.MODID)
+				.addCriterion("silt",
+						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
+				.build(consumer);
 	}
 	
 	private static void addDisintegrationRecipe(Consumer<IFinishedRecipe> consumer, Item item) {
@@ -228,116 +239,114 @@ public class Recipes extends RecipeProvider implements IConditionBuilder {
 	}
 	
 
-	protected void registerSpectralSiltCraftingRecipes(Consumer<IFinishedRecipe> consumer) {
+	protected void registerResplendentTokenCraftingRecipes(Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shapedRecipe(ModItems.balloon)
-				.patternLine("sws")
-				.patternLine("w w")
-				.patternLine("sws")
-				.key('s', ModItems.spectral_silt)
+				.patternLine(" w ")
+				.patternLine("wTw")
+				.patternLine(" w ")
+				.key('T', ModItems.resplendent_token)
 				.key('w', ItemTags.WOOL)
 				.setGroup(BountifulBaubles.MODID)
 				.addCriterion("silt",
 						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
-				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "silt/balloon"));
+				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "rtoken/balloon"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.sunglasses)
-				.patternLine("s s")
+				.patternLine(" T ")
 				.patternLine("gSg")
-				.patternLine("s s")
-				.key('s', ModItems.spectral_silt)
+				.key('T', ModItems.resplendent_token)
 				.key('S', Items.STICK)
 				.key('g', Items.BLACK_STAINED_GLASS)
 				.setGroup(BountifulBaubles.MODID)
 				.addCriterion("silt",
 						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
-				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "silt/sunglasses"));
+				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "rtoken/sunglasses"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.broken_black_dragon_scale)
-				.patternLine("sds")
-				.patternLine("sSs")
-				.patternLine("sss")
-				.key('s', ModItems.spectral_silt)
+				.patternLine(" d ")
+				.patternLine("TST")
+				.key('T', ModItems.resplendent_token)
 				.key('S', ModItems.ender_dragon_scale)
 				.key('d', Items.BLACK_DYE)
 				.setGroup(BountifulBaubles.MODID)
 				.addCriterion("silt",
 						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
-				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "silt/broken_black_dragon_scale"));
+				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "rtoken/broken_black_dragon_scale"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.shield_cobalt)
-				.patternLine("sDs")
-				.patternLine("sSs")
-				.patternLine("sss")
-				.key('s', ModItems.spectral_silt)
+				.patternLine("D")
+				.patternLine("S")
+				.patternLine("T")
+				.key('T', ModItems.resplendent_token)
 				.key('S', Items.SHIELD)
 				.key('D', Items.DIAMOND_BLOCK)
 				.setGroup(BountifulBaubles.MODID)
 				.addCriterion("silt",
 						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
-				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "silt/shield_cobalt"));
+				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "rtoken/shield_cobalt"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.magic_mirror)
-				.patternLine("sps")
+				.patternLine("ppp")
 				.patternLine("gdg")
-				.patternLine("sps")
-				.key('s', ModItems.spectral_silt)
+				.patternLine(" T ")
+				.key('T', ModItems.resplendent_token)
 				.key('p', ModItems.potion_recall)
 				.key('d', Items.DIAMOND)
 				.key('g', Tags.Items.GLASS)
 				.setGroup(BountifulBaubles.MODID)
 				.addCriterion("silt",
 						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
-				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "silt/magic_mirror"));
+				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "rtoken/magic_mirror"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.lucky_horseshoe)
-				.patternLine("gsg")
-				.patternLine("gsg")
-				.patternLine("sgs")
-				.key('s', ModItems.spectral_silt)
+				.patternLine("g g")
+				.patternLine("gTg")
+				.patternLine(" g ")
+				.key('T', ModItems.resplendent_token)
 				.key('g', Items.GOLD_INGOT)
 				.setGroup(BountifulBaubles.MODID)
 				.addCriterion("silt",
 						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
-				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "silt/lucky_horseshoe"));
+				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "rtoken/lucky_horseshoe"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.amulet_sin_empty)
-				.patternLine("sSs")
-				.patternLine("sis")
-				.patternLine("sss")
-				.key('s', ModItems.spectral_silt)
-				.key('i', Items.IRON_INGOT)
+				.patternLine("S")
+				.patternLine("i")
+				.patternLine("T")
+				.key('T', ModItems.resplendent_token)
+				.key('i', Items.IRON_BLOCK)
 				.key('S', Items.STRING)
 				.setGroup(BountifulBaubles.MODID)
 				.addCriterion("silt",
 						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
-				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "silt/amulet_sin_empty"));
+				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "rtoken/amulet_sin_empty"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.broken_heart) // TODO recipe that makes more sense
-				.patternLine("sds")
-				.patternLine("shs")
-				.patternLine("sds")
-				.key('s', ModItems.spectral_silt)
+				.patternLine(" T ")
+				.patternLine("dhd")
+				.patternLine(" d ")
+				.key('T', ModItems.resplendent_token)
 				.key('h', ModItems.shulker_heart)
 				.key('d', Items.DIAMOND)
 				.setGroup(BountifulBaubles.MODID)
 				.addCriterion("silt",
 						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
-				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "silt/broken_heart"));
+				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "rtoken/broken_heart"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.amulet_cross)
-				.patternLine("sSs")
-				.patternLine("sgs")
-				.patternLine("sgs")
-				.key('s', ModItems.spectral_silt)
-				.key('g', Items.GOLD_INGOT)
+				.patternLine("S")
+				.patternLine("g")
+				.patternLine("T")
+				.key('T', ModItems.resplendent_token)
+				.key('g', Items.GOLD_BLOCK)
 				.key('S', Items.STRING)
 				.setGroup(BountifulBaubles.MODID)
 				.addCriterion("silt",
 						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
-				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "silt/amulet_cross"));
+				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "rtoken/amulet_cross"));
 		ShapedRecipeBuilder.shapedRecipe(ModItems.gloves_dexterity)
-				.patternLine("sls")
+				.patternLine(" ll")
 				.patternLine("lel")
-				.patternLine("sis")
-				.key('s', ModItems.spectral_silt)
+				.patternLine("Ti ")
+				.key('T', ModItems.resplendent_token)
 				.key('i', Items.IRON_INGOT)
 				.key('l', Items.LEATHER)
 				.key('e', Items.EMERALD)
 				.setGroup(BountifulBaubles.MODID)
 				.addCriterion("silt",
 						InventoryChangeTrigger.Instance.forItems(ModItems.spectral_silt))
-				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "silt/gloves_dexterity"));
+				.build(consumer, new ResourceLocation(BountifulBaubles.MODID, "rtoken/gloves_dexterity"));
 	}
 }

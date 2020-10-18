@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "group": "bountifulbaubles",
   "pattern": [
-    "sds",
-    "shs",
-    "sds"
+    " T ",
+    "dhd",
+    " d "
   ],
   "key": {
-    "s": {
-      "item": "bountifulbaubles:spectral_silt"
+    "T": {
+      "item": "bountifulbaubles:resplendent_token"
     },
     "h": {
       "item": "bountifulbaubles:shulker_heart"

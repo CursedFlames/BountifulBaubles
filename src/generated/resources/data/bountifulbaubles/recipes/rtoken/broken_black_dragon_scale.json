@@ -2,13 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "group": "bountifulbaubles",
   "pattern": [
-    "sds",
-    "sSs",
-    "sss"
+    " d ",
+    "TST"
   ],
   "key": {
-    "s": {
-      "item": "bountifulbaubles:spectral_silt"
+    "T": {
+      "item": "bountifulbaubles:resplendent_token"
     },
     "S": {
       "item": "bountifulbaubles:ender_dragon_scale"

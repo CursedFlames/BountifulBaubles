@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "group": "bountifulbaubles",
   "pattern": [
-    "sws",
-    "w w",
-    "sws"
+    " w ",
+    "wTw",
+    " w "
   ],
   "key": {
-    "s": {
-      "item": "bountifulbaubles:spectral_silt"
+    "T": {
+      "item": "bountifulbaubles:resplendent_token"
     },
     "w": {
       "tag": "minecraft:wool"
