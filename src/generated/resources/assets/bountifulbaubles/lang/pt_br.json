@@ -1,7 +1,7 @@
 {
 "attribute.name.generic.reachDistance": "Alcance", 
 "block.bountifulbaubles.water_candle": "Vela de água", 
-"block.bountifulbaubles.water_candle.tooltip.0": "§9Aumenta as taxas de renascimento de monstros próximos. \u00a7d(Ainda não implementado.)", 
+"block.bountifulbaubles.water_candle.tooltip.0": "§9Aumenta as taxas de renascimento de monstros próximos. §d(Ainda não implementado.)", 
 "block.bountifulbaubles.water_candle.tooltip.1": "§aVocê se sente como se estivesse sendo observado.", 
 "bountifulbaubles.broken": "§8§oQuebrado", 
 "bountifulbaubles.moreinfo": "§bPressione Shift para obter mais informações", 
@@ -33,7 +33,7 @@
 "item.bountifulbaubles.black_dragon_scale": "Escama de Dragão Negro", 
 "item.bountifulbaubles.black_dragon_scale.tooltip.0": "§9Concede imunidade a Decomposição.", 
 "item.bountifulbaubles.broken_black_dragon_scale": "Escama de Dragão Negro Rachada", 
-"item.bountifulbaubles.broken_black_dragon_scale.tooltip.0": "\§aAs Escama de Dragão Negro protegem contra a Decomposição. Talvez esta rechadura possa ser consertada?", 
+"item.bountifulbaubles.broken_black_dragon_scale.tooltip.0": "§aAs Escama de Dragão Negro protegem contra a Decomposição. Talvez esta rechadura possa ser consertada?", 
 "item.bountifulbaubles.broken_heart": "Coração Partido", 
 "item.bountifulbaubles.broken_heart.full_heal": "§aVocê se sente bem como novo! (Recuperou toda a saúde máxima perdida)", 
 "item.bountifulbaubles.broken_heart.partial_heal": "§aVocê se sente revitalizado. (Recuperou alguma saúde máxima perdida))", 
