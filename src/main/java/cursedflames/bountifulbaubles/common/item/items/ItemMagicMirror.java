@@ -55,10 +55,10 @@ public class ItemMagicMirror extends BBItem {
 		if (!world.isRemote && !canDoTeleport(world, player)) {
 			player.sendStatusMessage(new TranslationTextComponent(
 					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
-			return new ActionResult<ItemStack>(ActionResultType.FAIL, player.getHeldItem(hand));
+			return ActionResult.resultFail(player.getHeldItem(hand));
 		}
 		player.setActiveHand(hand);
-		return new ActionResult<ItemStack>(ActionResultType.SUCCESS, player.getHeldItem(hand));
+		return ActionResult.resultConsume(player.getHeldItem(hand));
 	}
 	
 	@Override

@@ -8,6 +8,7 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -29,18 +30,25 @@ public class ClientProxy implements IProxy {
 	public PlayerEntity getClientPlayer() {
 		return Minecraft.getInstance().player;
 	}
+
+	private static void addProperty(Item item, ResourceLocation loc) {
+		// New replacement for Item.addPropertyOverride, no mapping :V
+		ItemModelsProperties.func_239418_a_(item, loc,
+				(ItemStack stack, ClientWorld world, LivingEntity entity) -> {
+					return entity != null && entity.isHandActive() && entity.getActiveItemStack()==stack ? 1f : 0f;
+				}
+		);
+	}
 	
 	@Override
 	public void clientSetup(final FMLClientSetupEvent event) {
 		ScreenManager.registerFactory(ContainerWormhole.CONTAINER_REFORGE, ScreenWormhole::new);
 		
 		// This is janky af lmao
-		
-		// New replacement for Item.addPropertyOverride, no mapping :V
-		ItemModelsProperties.func_239418_a_(ModItems.magic_mirror, new ResourceLocation("using"),
-			(ItemStack stack, ClientWorld world, LivingEntity entity) -> {
-				return entity != null && entity.isHandActive() && entity.getActiveItemStack()==stack ? 1f : 0f;
-			}
-		);
+
+		addProperty(ModItems.magic_mirror, new ResourceLocation("using"));
+		addProperty(ModItems.shield_cobalt, new ResourceLocation("blocking"));
+		addProperty(ModItems.shield_obsidian, new ResourceLocation("blocking"));
+		addProperty(ModItems.shield_ankh, new ResourceLocation("blocking"));
 	}
 }

@@ -113,11 +113,11 @@ public class ItemShieldCobalt extends ShieldItem {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		if (isUsable(itemstack)) {
 			playerIn.setActiveHand(handIn);
-			return new ActionResult<ItemStack>(ActionResultType.SUCCESS, itemstack);
+			return ActionResult.resultConsume(itemstack);
 		} else {
 			// TODO broken texture when unusable?
 			// TODO say broken in tooltip
-			return new ActionResult<ItemStack>(ActionResultType.FAIL, itemstack);
+			return ActionResult.resultFail(itemstack);
 		}
 	}
 
