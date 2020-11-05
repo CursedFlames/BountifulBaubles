@@ -1,0 +1,207 @@
+//TODO stop hardcoding text color
+
+{
+  "itemGroup.bountifulbaubles": "Bountiful Baubles",
+  "block.bountifulbaubles": {
+    "water_candle": {
+      "": "Vela de água",
+      "tooltip.0": "§9Aumenta as taxas de renascimento de monstros próximos. §d(Ainda não implementado.)",
+      "tooltip.1": "§aVocê se sente como se estivesse sendo observado."
+    }
+  },
+  "item.bountifulbaubles": {
+    "balloon": {
+      "": "Balão",
+      "tooltip.0": "§9Aumenta a altura dos saltos e diminui ligeiramente o dano causado por queda."
+    },
+    "obsidian_skull": {
+      "": "Caveira de Obsidiana",
+      "tooltip.0": "§9Concede imunidade a queimaduras e 50% de resistência a danos de fogo. (Não protege contra lava)",
+      "tooltip.1": "§aSegurar isso deixa você um pouco nervoso."
+    },
+    "sunglasses": {
+      "": "Oculos Escuros",
+      "tooltip.0": "§9Concede imunidade à cegueira.",
+      "tooltip.1": "§aCaras legais não olham para explosões."
+    },
+    "apple": {
+      "": "Fruta Proibida",
+      "tooltip.0": "§9Concede imunidade aos efeitos de estado Fome e Náusea."
+    },
+    "vitamins": {
+      "": "Vitaminas",
+      "tooltip.0": "§9Concede imunidade à Fraqueza e Fadiga do Minerador."
+    },
+    "ring_overclocking": {
+      "": "Anel de Overclocking",
+      "tooltip.0": "§9Concede imunidade à Lentidão e +7% de velocidade de movimento.",
+      "tooltip.1": "§aTodo mundo sabe que LEDs azuis fazem seu PC funcionar mais rápido."
+    },
+    "shulker_heart": {
+      "": "Coração de Shulker",
+      "tooltip.0": "§9Concede imunidade à Levitação.",
+      "tooltip.1": "§9Pode ser usado para preparar poções de voo.",
+      "tooltip.2": "§aÉ mole..."
+    },
+    "ring_free_action": {
+      "": "Anel de Ação Livre",
+      "tooltip.0": "§9Concede imunidade à lentidão e levitação e permite a livre circulação através de teias de aranha."
+    },
+    "ender_dragon_scale": {
+      "": "Escama de Dragão do Fim",
+      "tooltip.0": "§aParece estranhamente leve."
+    },
+    "broken_black_dragon_scale": {
+      "": "Escama de Dragão Negro Rachada",
+      "tooltip.0": "§aAs Escama de Dragão Negro protegem contra a Decomposição. Talvez esta rechadura possa ser consertada?"
+    },
+    "black_dragon_scale": {
+      "": "Escama de Dragão Negro",
+      "tooltip.0": "§9Concede imunidade a Decomposição."
+    },
+    "bezoar": {
+      "": "Bezoar",
+      "tooltip.0": "§9Concede imunidade ao veneno."
+    },
+    "mixed_dragon_scale": {
+      "": "Escama de Dragão de Cor Mista",
+      "tooltip.0": "§9Concede imunidade ao Veneno e a Decomposição.",
+      "tooltip.1": "§aInteressante, o Bezoar se fundiu com a escama e fez com que parecesse ter duas cores diferentes."
+    },
+    "ankh_charm": {
+      "": "Amuleto de Ankh",
+      "tooltip.0": "§9Concede imunidade à maioria dos efeitos de estado negativos."
+    },
+    "shield_cobalt": {
+      "": "Escudo de Cobalto",
+      "tooltip.0": "§9Concede imunidade a repulsão quando segurado ou equipado no slot curio.",
+      "tooltip.1": "Também funciona como um escudo normal.",
+      "tooltip.2": "Pode ser reparado em bigorna com Barras de ferro."
+    },
+    "shield_obsidian": {
+      "": "Escudo de Obsidiana",
+      "tooltip.0": "§9Concede resistência parcial ao fogo e imunidade ao repulsão quando segurado ou equipado no slot curio.",
+      "tooltip.1": "Também funciona como um escudo normal.",
+      "tooltip.2": "Pode ser reparado em bigorna com obsidiana."
+    },
+    "shield_ankh": {
+      "": "Escodo de Ankh",
+      "tooltip.0": "§9Concede resistência parcial ao fogo e imunidade a repulsão e à maioria dos efeitos negativos de estado quando segurado ou equipado no slot curio.",
+      "tooltip.1": "Também funciona como um escudo normal.",
+      "tooltip.2": "Pode ser reparado em bigorna com obsidiana."
+    },
+    "magic_mirror": {
+      "": "Espelho Mágico",
+      "tooltip.0": "§9Teleporta você para o seu ponto de renascimento.",
+      "tooltip.1": "§aPode dobrar o espaço à vontade, mas não pode tornar belas as coisas feias, infelizmente para você.",
+      "wrongdim": "Você sente que está muito longe de casa para voltar."
+    },
+    "potion_recall": {
+      "": "Poção da Lembrnaça",
+      "tooltip.0": "§9Teleporta você para o seu ponto de renascimento."
+    },
+    "wormhole_mirror": {
+      "": "Espelho Buraco de Minhoca",
+      "tooltip.0": "§9Clique com o botão direito para se teletransportar para o seu ponto de desova.",
+      "tooltip.1": "§9Clique com o botão direito do mouse enquanto esgueirando para se teleportar para outro jogador.",
+      "tooltip.2": "§aVocê pode sentir o vazio olhando para você."
+    },
+    "potion_wormhole": {
+      "": "Poção do Buraco de Minhoca",
+      "tooltip.0": "§9Teleporta você para outros jogadores.",
+      "tooltip.sp": "§aDe repente você se sente muito sozinho.",
+      "tooltip.mp": "§aNo entanto, não garante que onde eles estão é seguro.",
+      "nootherplayers": "Nenhum alvo de teletransporte disponível."
+    },
+    "lucky_horseshoe": {
+      "": "Ferradura da Sorte",
+      "tooltip.0": "§9Nega os danos por queda.",
+      "tooltip.1": "§aPor que o cavalo precisava disso?"
+    },
+    "amulet_sin_empty": {
+      "": "Pingente do Pecado (Vasio)",
+      "tooltip.0": "§9Componente de fabricação"
+    },
+    "amulet_sin_gluttony": {
+      "": "Pingente da Gula",
+      "tooltip.0": "§9Coma mais rápido.",
+      "tooltip.1": "§9Concede efeito Pecador (+dano, +armadura) quando você come."
+    },
+    "amulet_sin_pride": {
+      "": "Pingente do Orgulho",
+      "tooltip.0": "§9Concede auxiliar de degrau.",
+      "tooltip.1": "§9Concede o efeito Pecador (+dano, +armadura) enquanto estiver com a saúde cheia."
+    },
+    "amulet_sin_wrath": {
+      "": "Pingente da Ira",
+      "tooltip.0": "§9Concede +2 de dano.",
+      "tooltip.1": "§9Concede o efeito Pecador (+dano, +armadura) após você causar um acerto crítico."
+    },
+    "broken_heart": {
+      "": "Coração Partido",
+      "tooltip.0": "§9O dano letal destrói os recipientes vazios de coração.",
+      "tooltip.1": "§9Durma para regenerar os recipientes de coração.",
+      "tooltip.2": "§aComo isso aconteceu?",
+      "partial_heal": "§aVocê se sente revitalizado. (Recuperou alguma saúde máxima perdida)",
+      "full_heal": "§aVocê se sente bem como novo! (Recuperou toda a saúde máxima perdida)"
+    },
+    "phylactery_charm": {
+      "": "Pingente de Filactéria",
+      "tooltip.0": "§9Quando equipado, teletransporta você para seu ponto de renascimento ao receber dano letal.",
+      "tooltip.1": "§9Não funciona em situações em que um espelho mágico não poderia teletransportar você.",
+      "tooltip.2": "§9Também funciona quando um Coração Partido estiver equipado.",
+      "tooltip.3": "§9Se segurado e clicado com o botão direito, funciona como um espelho mágico, mas causa dano e teletransporta você instantaneamente."
+    },
+    "amulet_cross": {
+      "": "Colar com Cruz",
+      "tooltip.0": "§9Aumenta a tempo de invencibilidade depois de sofrer dano."
+    },
+    "gloves_dexterity": {
+      "": "Manoplas de Destreza",
+      "tooltip.0": "§9Permite que você alterne entre os itens sem redefinir o cooldown de ataque.",
+      "tooltip.1": "§aE eles dizem que a destreza não é uma estatística útil."
+    },
+    "gloves_digging_iron": {
+      "": "Manoplas com Garras de Ferro",
+      "tooltip.0": "§9Mais fraco do que ferramentas de ferro, mas quebra todos os tipos de blocos.",
+      "tooltip.0s": "§9Mais fraco do que ferramentas de ferro, mas quebra todos os tipos de blocos.",
+      "tooltip.1": "§bPressione Shift para mais informações",
+      "tooltip.1s": "§9Nível de mineração: §8Pedra",
+      "tooltip.2s": "§9Quando equipado no slot curio, aplica-se ao cavar sem uma ferramenta, mas dá §c-15% da velocidade de mineração ao segurar uma ferramenta.",
+      "tooltip.3s": "§9Quando equipado no slot Curio, §co uso de fome ao cavar sem uma ferramenta é aumentado.",
+      "tooltip.4s": "§9Quando equipado no slot Curio, §co efeito de Eficiência é reduzido.",
+      "tooltip.5s": "Pode ser reparado em bigorna com Barras de Ferro."
+    },
+    "gloves_digging_diamond": {
+      "": "Manoplas com Garras de Diamante",
+      "tooltip.0": "§9Mais fraco do que ferramentas de diamante, mas quebra todos os tipos de blocos.",
+      "tooltip.0s": "§9Mais fraco do que ferramentas de diamante, mas quebra todos os tipos de blocos.",
+      "tooltip.1": "§bPressione Shift para mais informações",
+      "tooltip.1s": "§9Nível de mineração: §fFerro",
+      "tooltip.2s": "§9Quando equipado no slot curio, aplica-se ao cavar sem uma ferramenta, mas dá §c-15% da velocidade de mineração ao segurar uma ferramenta.",
+      "tooltip.3s": "§9Quando equipado no slot Curio, §co uso de fome ao cavar sem uma ferramenta é aumentado.",
+      "tooltip.4s": "§9Quando equipado no slot Curio, §co efeito de Eficiência é reduzido.",
+      "tooltip.5s": "Pode ser reparado em bigorna com diamantes."
+    },
+    "disintegration_tablet": {
+      "": "Tábua de Desintegração",
+      "tooltip.0": "§9Usado para converter loot de masmorra ou alguns outros itens em Sedimento Espectral"
+    },
+    "spectral_silt": {
+      "": "Sedimento Espectral",
+      "tooltip.0": "§9Componente de fabricação"
+    }
+  },
+  "item.minecraft": {
+    "potion.effect.flight": "Poção de Vôo"
+  },
+  "effect.bountifulbaubles": {
+    "flight": "Vôo",
+    "sinful": "Pecador"
+  },
+  "bountifulbaubles.moreinfo": "§bPressione Shift para obter mais informações",
+  "bountifulbaubles.broken": "§8§oQuebrado",
+  "curios.identifier.hands": "Mãos", // TODO do we still need this here?
+  "curios.modifiers.hands": "Quando nas mãos:",
+  "attribute.name.generic.reachDistance": "Alcance"
+}
