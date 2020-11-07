@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = "${mc_version}-0.0.1"
+version = "${mc_version}-${mod_version}"
 group = 'cursedflames.bountifulbaubles' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'Bountiful Baubles FORGE'
 
