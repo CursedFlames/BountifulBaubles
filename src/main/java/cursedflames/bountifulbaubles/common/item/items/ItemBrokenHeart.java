@@ -85,15 +85,9 @@ public class ItemBrokenHeart extends BBItem {
 				SoundEvents.ENTITY_IRON_GOLEM_HURT, SoundCategory.PLAYERS, 0.7F,
 				(entity.world.rand.nextFloat()-entity.world.rand.nextFloat())*0.1F+0.8F);
 	}
-	
-	@SubscribeEvent
-	public static void onPlayerWake(PlayerWakeUpEvent event) {
-		// TODO this way of checking if slept through night might not be reliable 
-		// - sleeping without spawn point won't work (modded sleeping bags, etc.?)
-		// TODO removed shouldSetSpawn check from 1.14, does this still behave as expected?
-		if (!event.updateWorld()
-				&& Config.BROKEN_HEART_REGEN.get()) {
-			LivingEntity entity = event.getEntityLiving();
+
+	public static void healEntityMaxHealth(LivingEntity entity) {
+		if (Config.BROKEN_HEART_REGEN.get()) {
 			if (!entity.world.isRemote) {
 				ModifiableAttributeInstance maxHealth = entity
 						.getAttribute(Attributes.MAX_HEALTH);
@@ -107,10 +101,10 @@ public class ItemBrokenHeart extends BBItem {
 								newModifier, AttributeModifier.Operation.ADDITION);
 						maxHealth.func_233767_b_(modifier);
 						entity.sendMessage(new TranslationTextComponent(
-										ModItems.broken_heart.getTranslationKey()+".partial_heal"), Util.DUMMY_UUID);
+								ModItems.broken_heart.getTranslationKey() + ".partial_heal"), Util.DUMMY_UUID);
 					} else {
 						entity.sendMessage(new TranslationTextComponent(
-								ModItems.broken_heart.getTranslationKey()+".full_heal"), Util.DUMMY_UUID);					
+								ModItems.broken_heart.getTranslationKey() + ".full_heal"), Util.DUMMY_UUID);
 					}
 				}
 			}

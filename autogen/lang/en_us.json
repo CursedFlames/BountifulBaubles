@@ -146,7 +146,8 @@
 		"broken_heart": {
 			"": "Broken Heart",
 			"tooltip.0": "§9Lethal damage destroys empty heart containers instead.",
-			"tooltip.1": "§9Sleep to regenerate heart containers.",
+			// TODO we probably don't want this tooltip when regen is disabled
+			"tooltip.1": "§9Heart containers regenerate at dawn.",
 			"tooltip.2": "§aHow did this happen?",
 			"partial_heal": "§aYou feel revitalized. (Regained some lost max health)",
 			"full_heal": "§aYou feel good as new! (Regained all lost max health)"

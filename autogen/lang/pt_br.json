@@ -140,8 +140,8 @@
     "broken_heart": {
       "": "Coração Partido",
       "tooltip.0": "§9O dano letal destrói os recipientes vazios de coração.",
-      "tooltip.1": "§9Durma para regenerar os recipientes de coração.",
-      "tooltip.2": "§aComo isso aconteceu?",
+      // TODO missing the "regen at dawn" tooltip line
+      "tooltip.1": "§aComo isso aconteceu?",
       "partial_heal": "§aVocê se sente revitalizado. (Recuperou alguma saúde máxima perdida)",
       "full_heal": "§aVocê se sente bem como novo! (Recuperou toda a saúde máxima perdida)"
     },

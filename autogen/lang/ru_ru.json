@@ -142,8 +142,8 @@
 		"broken_heart": {
 			"": "Разбитое сердце",
 			"tooltip.0": "§9Летальный урон разрушает пустое сердце",
-			"tooltip.1": "§9Поспите чтобы востановить заряд сердца",
-			"tooltip.2": "§aКак это случилось?"
+			// TODO missing the "regen at dawn" tooltip line
+			"tooltip.1": "§aКак это случилось?"
 			// "partial_heal": "§aYou feel revitalized. (Regained some lost max health)",
 			// "full_heal": "§aYou feel good as new! (Regained all lost max health)"
 		},
