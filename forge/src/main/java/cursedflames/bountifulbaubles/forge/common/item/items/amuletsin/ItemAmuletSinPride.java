@@ -1,0 +1,95 @@
+package cursedflames.bountifulbaubles.forge.common.item.items.amuletsin;
+
+import java.util.Optional;
+import java.util.UUID;
+
+import org.apache.commons.lang3.tuple.ImmutableTriple;
+
+import com.google.common.collect.Multimap;
+
+import cursedflames.bountifulbaubles.forge.common.item.ModItems;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributeModifier.Operation;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
+import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.capability.ICurio;
+
+public class ItemAmuletSinPride extends ItemAmuletSin {
+	UUID REACH_ID = UUID.fromString("111189c1-842f-4af2-88f5-6f58865ae440");
+	public ItemAmuletSinPride(String name, Settings props, Identifier texture) {
+		super(name, props, texture);
+	}
+	
+	protected class Curio extends ItemAmuletSin.Curio {
+		protected Curio(ItemAmuletSin item) {
+			super(item);
+		}
+		
+		@Override
+		public void curioTick(String identifier, int index, LivingEntity livingEntity) {
+			boolean hasEffect = livingEntity.hasStatusEffect(sinfulEffect);
+			// less than 1/4 heart below full
+			if ((livingEntity.getHealth()+0.5)>livingEntity.getMaxHealth()) {
+				if (!hasEffect) {
+					applyEffect(livingEntity, 0, Integer.MAX_VALUE, false);
+				}
+			} else {
+				if (hasEffect) {
+					livingEntity.removeStatusEffect(sinfulEffect);
+				}
+			}
+		}
+		
+		@Override
+		public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(String identifier) {
+			Multimap<EntityAttribute, EntityAttributeModifier> attributes = super.getAttributeModifiers(identifier);
+			EntityAttribute reach = ForgeMod.REACH_DISTANCE.get();
+			attributes.put(reach,
+					new EntityAttributeModifier(REACH_ID, "pride pendant reach bonus", 0.5, Operation.ADDITION));
+			return attributes;
+		}
+		
+		@Override
+		public void onUnequip(String identifier, int index, LivingEntity livingEntity) {
+			livingEntity.removeStatusEffect(sinfulEffect);
+//			if (livingEntity.stepHeight == STEP_HEIGHT || livingEntity.stepHeight == STEP_HEIGHT_SNEAKING) {
+//				livingEntity.stepHeight = VANILLA_STEP_HEIGHT;
+//			}
+		}
+	}
+	
+	@Override
+	protected ICurio getCurio() {
+		return new cursedflames.bountifulbaubles.forge.common.item.items.amuletsin.ItemAmuletSinPride.Curio(this);
+	}
+	// slightly off from 1.25 to prevent weird effects with other mods
+	public static final float STEP_HEIGHT = 1.24993f;
+	public static final float STEP_HEIGHT_SNEAKING = 0.60007f;
+	public static final float VANILLA_STEP_HEIGHT = 0.6f;
+	
+	@SubscribeEvent
+	public static void onPlayerTick(LivingUpdateEvent event) {
+		LivingEntity entity = event.getEntityLiving();
+		Optional<ImmutableTriple<String, Integer, ItemStack>> opt =
+				CuriosApi.getCuriosHelper().findEquippedCurio(ModItems.amulet_sin_pride, entity);
+		if (!opt.isPresent()) {
+			if (entity.stepHeight == STEP_HEIGHT || entity.stepHeight == STEP_HEIGHT_SNEAKING) {
+				entity.stepHeight = VANILLA_STEP_HEIGHT;
+			}
+		} else {
+			if (entity.isSneaking()) {
+				entity.stepHeight = STEP_HEIGHT_SNEAKING;
+			} else {
+				if (entity.stepHeight < STEP_HEIGHT) {
+					entity.stepHeight = STEP_HEIGHT;
+				}
+			}
+		}
+	}
+}

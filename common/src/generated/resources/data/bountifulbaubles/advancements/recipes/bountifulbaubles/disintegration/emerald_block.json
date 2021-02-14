@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bountifulbaubles:disintegration/emerald_block"
+    ]
+  },
+  "criteria": {
+    "disintegrationTablet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bountifulbaubles:disintegration_tablet"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bountifulbaubles:disintegration/emerald_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "disintegrationTablet",
+      "has_the_recipe"
+    ]
+  ]
+}

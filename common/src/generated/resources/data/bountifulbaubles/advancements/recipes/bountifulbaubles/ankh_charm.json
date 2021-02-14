@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bountifulbaubles:ankh_charm"
+    ]
+  },
+  "criteria": {
+    "mixed_dragon_scale": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bountifulbaubles:mixed_dragon_scale"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bountifulbaubles:ankh_charm"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mixed_dragon_scale",
+      "has_the_recipe"
+    ]
+  ]
+}

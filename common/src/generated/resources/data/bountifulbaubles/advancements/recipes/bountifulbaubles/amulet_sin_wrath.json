@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "bountifulbaubles:amulet_sin_wrath"
+    ]
+  },
+  "criteria": {
+    "amulet_sin_empty": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "bountifulbaubles:amulet_sin_empty"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "bountifulbaubles:amulet_sin_wrath"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "amulet_sin_empty",
+      "has_the_recipe"
+    ]
+  ]
+}

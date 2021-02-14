@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    " w ",
+    "wTw",
+    " w "
+  ],
+  "key": {
+    "T": {
+      "item": "bountifulbaubles:resplendent_token"
+    },
+    "w": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:balloon"
+  }
+}
