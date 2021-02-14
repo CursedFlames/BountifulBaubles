@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    " ll",
+    "lel",
+    "Ti "
+  ],
+  "key": {
+    "T": {
+      "item": "bountifulbaubles:resplendent_token"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    },
+    "e": {
+      "item": "minecraft:emerald"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:gloves_dexterity"
+  }
+}

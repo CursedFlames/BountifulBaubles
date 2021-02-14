@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    "n",
+    "e",
+    "b"
+  ],
+  "key": {
+    "n": {
+      "item": "minecraft:nether_star"
+    },
+    "e": {
+      "item": "bountifulbaubles:ender_dragon_scale"
+    },
+    "b": {
+      "item": "bountifulbaubles:broken_black_dragon_scale"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:black_dragon_scale"
+  }
+}

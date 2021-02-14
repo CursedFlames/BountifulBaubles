@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    "S",
+    "i",
+    "T"
+  ],
+  "key": {
+    "T": {
+      "item": "bountifulbaubles:resplendent_token"
+    },
+    "i": {
+      "item": "minecraft:iron_block"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:amulet_sin_empty"
+  }
+}

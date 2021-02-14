@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    " b ",
+    "bab",
+    " h "
+  ],
+  "key": {
+    "b": {
+      "item": "minecraft:bone"
+    },
+    "a": {
+      "item": "bountifulbaubles:amulet_sin_empty"
+    },
+    "h": {
+      "tag": "forge:heads"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:amulet_sin_wrath"
+  }
+}

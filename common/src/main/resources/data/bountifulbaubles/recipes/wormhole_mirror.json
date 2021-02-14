@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    "owo",
+    "pMp",
+    "opo"
+  ],
+  "key": {
+    "o": {
+      "item": "minecraft:obsidian"
+    },
+    "w": {
+      "item": "bountifulbaubles:ender_dragon_scale"
+    },
+    "M": {
+      "item": "bountifulbaubles:magic_mirror"
+    },
+    "p": {
+      "item": "bountifulbaubles:potion_wormhole"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:wormhole_mirror"
+  }
+}

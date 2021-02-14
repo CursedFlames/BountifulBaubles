@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bountifulbaubles",
+  "pattern": [
+    "D",
+    "S",
+    "T"
+  ],
+  "key": {
+    "T": {
+      "item": "bountifulbaubles:resplendent_token"
+    },
+    "S": {
+      "item": "minecraft:shield"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result": {
+    "item": "bountifulbaubles:shield_cobalt"
+  }
+}
