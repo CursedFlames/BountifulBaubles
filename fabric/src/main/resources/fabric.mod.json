@@ -1,18 +1,19 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "bountifulbaubles",
   "version": "${version}",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Bountiful Baubles",
+  "description": "Adds a variety of baubles and other items inspired by Terraria and other games.",
   "authors": [
-    "Me!"
+    "CursedFlames"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/bountifulbaubles",
+    "sources": "https://github.com/CursedFlames/BountifulBaubles",
+	"issues": "https://github.com/CursedFlames/BountifulBaubles/issues"
   },
-  "license": "Insert License Here",
-  "icon": "assets/examplemod/icon.png",
+  "license": "All Rights Reserved",
+  "icon": "assets/bountifulbaubles/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -23,10 +24,6 @@
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": ">=1.16.4",
-    "architectury": ">=1.1.55"
-  },
-  "suggests": {
-    "flamingo": "*"
+    "minecraft": ">=1.16.4"
   }
 }

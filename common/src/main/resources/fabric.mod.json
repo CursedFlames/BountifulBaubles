@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "id": "bountifulbaubles",
+  "version": "${version}",
+  "accessWidener" : "bountifulbaubles.accesswidener"
+}
