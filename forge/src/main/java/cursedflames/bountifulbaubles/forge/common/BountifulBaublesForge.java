@@ -61,10 +61,6 @@ import top.theillusivec4.curios.api.SlotTypePreset;
 
 @Mod("bountifulbaubles")
 public class BountifulBaublesForge extends BountifulBaubles {
-	public static final String MODID = "bountifulbaubles";
-	
-	public static final Logger logger = LogManager.getLogger();
-	
 	public static IProxy proxy = DistExecutor.runForDist(
 			() -> () -> new ClientProxy(),
 			() -> () -> new ServerProxy());

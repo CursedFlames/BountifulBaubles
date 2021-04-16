@@ -14,11 +14,33 @@ loom {
 	accessWidener "src/main/resources/bountifulbaubles.accesswidener"
 }
 
+repositories {
+	maven {
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
+	maven {
+		name = "NerdHubMC"
+		url = "https://maven.abusedmaster.xyz/"
+	}
+	maven {
+		name = 'Ladysnake Mods'
+		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+	}
+}
+
 dependencies {
     modCompile "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modCompile "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
     // Remove the next line if you don't want to depend on the API
-    modCompile "me.shedaniel:architectury:${rootProject.architectury_version}:fabric"
+    // modCompile "me.shedaniel:architectury:${rootProject.architectury_version}:fabric"
+
+	// Need to specify cardinal components dependencies ourself, since the version trinkets wants isn't on the maven
+	modImplementation("dev.emi:trinkets:${rootProject.trinkets_version}") {
+		transitive = false
+	}
+	modImplementation include("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${rootProject.cardinal_components_version}")
+	modImplementation include("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${rootProject.cardinal_components_version}")
 
     compileOnly(project(path: ":common")) {
         transitive = false
