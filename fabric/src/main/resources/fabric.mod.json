@@ -21,6 +21,7 @@
     ]
   },
   "accessWidener" : "bountifulbaubles.accesswidener",
+  "mixins": ["bountifulbaubles.mixins.json"],
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",

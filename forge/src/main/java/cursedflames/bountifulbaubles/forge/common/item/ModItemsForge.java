@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.forge.common.item;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.bountifulbaubles.common.item.BBItem;
+import cursedflames.bountifulbaubles.common.item.BBEquipmentItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -16,6 +16,6 @@ public class ModItemsForge extends ModItems {
 			}
 		};
 		// Discard trinket slot information on forge
-		EquipmentItem = (a, b) -> new BBItem(a);
+		EquipmentItem = (a, b) -> new BBEquipmentItem(a);
 	}
 }

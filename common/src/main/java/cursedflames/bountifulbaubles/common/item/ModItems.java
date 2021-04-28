@@ -1,5 +1,7 @@
 package cursedflames.bountifulbaubles.common.item;
 
+import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
+import static net.minecraft.entity.effect.StatusEffects.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -34,7 +36,15 @@ public class ModItems {
 		return new HashSet<>(Arrays.asList(args));
 	}
 
+	private static <A, B> B cast(A obj) {
+		return (B) obj;
+	}
+
+	protected static final String FACE = "head:mask";
 	protected static final String NECKLACE = "chest:necklace";
+	protected static final String GLOVES = "hand:gloves";
+	protected static final String RING = "hand:ring";
+	protected static final String RING_2 = "offhand:ring";
 
 	protected static Item.Settings baseSettings() {
 		return new Item.Settings().group(GROUP);
@@ -82,40 +92,54 @@ public class ModItems {
 	public static Item resplendent_token = null;
 
 	protected static void init() {
-//		sunglasses = add("sunglasses",
-//			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.BLINDNESS)));
-//		apple = add("apple",
-//			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.HUNGER)));
-//		vitamins = add("vitamins",
-//			new ItemPotionNegate(baseSettingsCurio(),
-//					StatusEffectNegate.negate(StatusEffects.WEAKNESS, StatusEffects.MINING_FATIGUE)));
-//		ring_overclocking = add("ring_overclocking",
-//			new ItemRingOverclocking(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.SLOWNESS)));
-//		shulker_heart = add("shulker_heart",
-//			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.LEVITATION)));
-//		ring_free_action = add("ring_free_action",
-//			new ItemRingFreeAction(baseSettingsCurio(),
-//					StatusEffectNegate.negate(StatusEffects.SLOWNESS, StatusEffects.LEVITATION)));
-//		bezoar = add("bezoar",
-//			new ItemPotionNegate(baseSettingsCurio(),
-//					StatusEffectNegate.negate(StatusEffects.POISON)));
+		sunglasses = add("sunglasses",
+				EquipmentItem.apply(baseSettingsCurio(), set(FACE)));
+		PotionImmunity.add(cast(sunglasses), set(BLINDNESS));
+
+		apple = add("apple",
+				EquipmentItem.apply(baseSettingsCurio(), set()));
+		PotionImmunity.add(cast(apple), set(HUNGER));
+
+		vitamins = add("vitamins",
+				EquipmentItem.apply(baseSettingsCurio(), set()));
+		PotionImmunity.add(cast(vitamins), set(WEAKNESS, MINING_FATIGUE));
+
+		ring_overclocking = add("ring_overclocking",
+				EquipmentItem.apply(baseSettingsCurio(), set(RING, RING_2)));
+		PotionImmunity.add(cast(ring_overclocking), set(SLOWNESS));
+
+		shulker_heart = add("shulker_heart",
+				EquipmentItem.apply(baseSettingsCurio(), set()));
+		PotionImmunity.add(cast(shulker_heart), set(LEVITATION));
+
+		ring_free_action = add("ring_free_action",
+				EquipmentItem.apply(baseSettingsCurio(), set(RING, RING_2)));
+		PotionImmunity.add(cast(ring_free_action), set(SLOWNESS, LEVITATION));
+
+		bezoar = add("bezoar",
+				EquipmentItem.apply(baseSettingsCurio(), set()));
+		PotionImmunity.add(cast(bezoar), set(POISON));
+
 		ender_dragon_scale = add("ender_dragon_scale",
-			new BBItem(baseSettings()));
+				new BBItem(baseSettings()));
 		broken_black_dragon_scale = add("broken_black_dragon_scale",
-			new BBItem(baseSettings()));
-//		black_dragon_scale = add("black_dragon_scale",
-//			new ItemPotionNegate(baseSettingsCurio(), StatusEffectNegate.negate(StatusEffects.WITHER)));
-//		mixed_dragon_scale = add("mixed_dragon_scale",
-//			new ItemPotionNegate(baseSettingsCurio(),
-//					StatusEffectNegate.negate(StatusEffects.POISON, StatusEffects.WITHER)));
-//		ankh_charm = add("ankh_charm",
-//			new ItemPotionNegate(baseSettingsCurio(),
-//					StatusEffectNegate.negate(StatusEffects.BLINDNESS, StatusEffects.HUNGER, StatusEffects.WEAKNESS,
-//							StatusEffects.MINING_FATIGUE, StatusEffects.SLOWNESS, StatusEffects.LEVITATION,
-//							StatusEffects.POISON, StatusEffects.WITHER)));
+				new BBItem(baseSettings()));
+
+		black_dragon_scale = add("black_dragon_scale",
+				EquipmentItem.apply(baseSettingsCurio(), set()));
+		PotionImmunity.add(cast(black_dragon_scale), set(WITHER));
+
+		mixed_dragon_scale = add("mixed_dragon_scale",
+				EquipmentItem.apply(baseSettingsCurio(), set()));
+		PotionImmunity.add(cast(mixed_dragon_scale), set(POISON, WITHER));
+
+		ankh_charm = add("ankh_charm",
+				EquipmentItem.apply(baseSettingsCurio(), set()));
+		PotionImmunity.add(cast(ankh_charm), set(BLINDNESS, HUNGER, WEAKNESS, MINING_FATIGUE, SLOWNESS, LEVITATION, POISON, WITHER));
+
 
 		obsidian_skull = add("obsidian_skull",
-			new BBItem(baseSettingsCurio()));
+				EquipmentItem.apply(baseSettingsCurio(), set()));
 //		shield_cobalt = add("shield_cobalt",
 //			new ItemShieldBase(baseSettings().maxDamage(336*3)));
 //		shield_obsidian = add("shield_obsidian",
@@ -124,49 +148,53 @@ public class ModItems {
 //			new ItemShieldBase(baseSettings().maxDamage(336*5)));
 
 		magic_mirror = add("magic_mirror",
-			new BBItem(baseSettings().maxCount(1)));
+				new BBItem(baseSettings().maxCount(1)));
 //		potion_recall = add("potion_recall",
 //			new ItemPotionBase(baseSettings()));
 		wormhole_mirror = add("wormhole_mirror",
-			new BBItem(baseSettings().maxCount(1)));
+				new BBItem(baseSettings().maxCount(1)));
 //		potion_wormhole = add("potion_wormhole",
 //			new ItemPotionBase(baseSettings()));
 
 		balloon = add("balloon",
-			new BBItem(baseSettingsCurio()));
+				EquipmentItem.apply(baseSettingsCurio(), set()));
 		lucky_horseshoe = add("lucky_horseshoe",
-			new BBItem(baseSettingsCurio()));
+				EquipmentItem.apply(baseSettingsCurio(), set()));
 		horseshoe_balloon = add("horseshoe_balloon",
-			new BBItem(baseSettingsCurio()));
+				EquipmentItem.apply(baseSettingsCurio(), set()));
 
 		amulet_sin_empty = add("amulet_sin_empty",
-			new BBItem(baseSettings()));
+				new BBItem(baseSettings()));
 		amulet_sin_gluttony = add("amulet_sin_gluttony",
-			new BBItem(baseSettingsCurio()));
+				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
 		amulet_sin_pride = add("amulet_sin_pride",
-			new BBItem(baseSettingsCurio()));
+				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
 		amulet_sin_wrath = add("amulet_sin_wrath",
-			EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
+				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
 
 		broken_heart = add("broken_heart",
-			new BBItem(baseSettingsCurio()));
+				EquipmentItem.apply(baseSettingsCurio(), set()));
 		phylactery_charm = add("phylactery_charm",
-			new BBItem(baseSettingsCurio()));
+				EquipmentItem.apply(baseSettingsCurio(), set()));
 //		amulet_cross = add("amulet_cross",
 //			new ItemAmuletCross(baseSettingsCurio()));
+		amulet_cross = add("amulet_cross",
+				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
 
 //		gloves_dexterity = add("gloves_dexterity",
 //			new ItemGlovesDexterity(baseSettingsCurio()));
+		gloves_dexterity = add("gloves_dexterity",
+				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
 		gloves_digging_iron = add("gloves_digging_iron",
-			new BBItem(baseSettingsCurio()));
+				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
 		gloves_digging_diamond = add("gloves_digging_diamond",
-			new BBItem(baseSettingsCurio()));
+				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
 
 		disintegration_tablet = add("disintegration_tablet",
-			new BBItem(baseSettings().maxCount(1)));
+				new BBItem(baseSettings().maxCount(1)));
 		spectral_silt = add("spectral_silt",
-			new BBItem(baseSettings()));
+				new BBItem(baseSettings()));
 		resplendent_token = add("resplendent_token",
-			new BBItem(baseSettings()));
+				new BBItem(baseSettings()));
 	}
 }

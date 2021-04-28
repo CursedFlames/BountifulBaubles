@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "cursedflames.bountifulbaubles.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+	"MixinLivingEntity"
+  ],
+  "client": [
+  ],
+  "injectors": {
+	"defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
