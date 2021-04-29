@@ -1,11 +1,15 @@
 package cursedflames.bountifulbaubles.fabric.common.equipment;
 
+import com.google.common.collect.Multimap;
 import cursedflames.bountifulbaubles.common.item.BBEquipmentItem;
 import dev.emi.trinkets.api.Trinket;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.Set;
+import java.util.UUID;
 import java.util.function.BiConsumer;
 
 public class BBTrinketItem extends BBEquipmentItem implements Trinket {
@@ -39,5 +43,10 @@ public class BBTrinketItem extends BBEquipmentItem implements Trinket {
 		for (BiConsumer<PlayerEntity, ItemStack> listener : tickListeners) {
 			listener.accept(player, stack);
 		}
+	}
+
+	@Override
+	public Multimap<EntityAttribute, EntityAttributeModifier> getTrinketModifiers(String group, String slot, UUID uuid, ItemStack stack) {
+		return getModifiers(group + ":" + slot, stack);
 	}
 }

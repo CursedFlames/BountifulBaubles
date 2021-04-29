@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.common.item;
 
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
-import static net.minecraft.entity.effect.StatusEffects.*;
+import cursedflames.bountifulbaubles.common.util.AttributeModifierSupplier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -14,6 +14,9 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 import static cursedflames.bountifulbaubles.common.util.BBUtil.modId;
+import static net.minecraft.entity.attribute.EntityAttributeModifier.Operation.*;
+import static net.minecraft.entity.attribute.EntityAttributes.*;
+import static net.minecraft.entity.effect.StatusEffects.*;
 
 public class ModItems {
 	protected static final Map<Identifier, Item> ITEMS = new HashMap<>();
@@ -36,8 +39,13 @@ public class ModItems {
 		return new HashSet<>(Arrays.asList(args));
 	}
 
+	@SuppressWarnings("unchecked")
 	private static <A, B> B cast(A obj) {
 		return (B) obj;
+	}
+
+	private static BBEquipmentItem equipment(Item obj) {
+		return cast(obj);
 	}
 
 	protected static final String FACE = "head:mask";
@@ -94,31 +102,32 @@ public class ModItems {
 	protected static void init() {
 		sunglasses = add("sunglasses",
 				EquipmentItem.apply(baseSettingsCurio(), set(FACE)));
-		PotionImmunity.add(cast(sunglasses), set(BLINDNESS));
+		PotionImmunity.add(equipment(sunglasses), set(BLINDNESS));
 
 		apple = add("apple",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
-		PotionImmunity.add(cast(apple), set(HUNGER));
+		PotionImmunity.add(equipment(apple), set(HUNGER));
 
 		vitamins = add("vitamins",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
-		PotionImmunity.add(cast(vitamins), set(WEAKNESS, MINING_FATIGUE));
+		PotionImmunity.add(equipment(vitamins), set(WEAKNESS, MINING_FATIGUE));
 
 		ring_overclocking = add("ring_overclocking",
 				EquipmentItem.apply(baseSettingsCurio(), set(RING, RING_2)));
-		PotionImmunity.add(cast(ring_overclocking), set(SLOWNESS));
+		PotionImmunity.add(equipment(ring_overclocking), set(SLOWNESS));
+		equipment(ring_overclocking).addModifier(GENERIC_MOVEMENT_SPEED, new AttributeModifierSupplier(0.07, MULTIPLY_TOTAL));
 
 		shulker_heart = add("shulker_heart",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
-		PotionImmunity.add(cast(shulker_heart), set(LEVITATION));
+		PotionImmunity.add(equipment(shulker_heart), set(LEVITATION));
 
 		ring_free_action = add("ring_free_action",
 				EquipmentItem.apply(baseSettingsCurio(), set(RING, RING_2)));
-		PotionImmunity.add(cast(ring_free_action), set(SLOWNESS, LEVITATION));
+		PotionImmunity.add(equipment(ring_free_action), set(SLOWNESS, LEVITATION));
 
 		bezoar = add("bezoar",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
-		PotionImmunity.add(cast(bezoar), set(POISON));
+		PotionImmunity.add(equipment(bezoar), set(POISON));
 
 		ender_dragon_scale = add("ender_dragon_scale",
 				new BBItem(baseSettings()));
@@ -127,15 +136,15 @@ public class ModItems {
 
 		black_dragon_scale = add("black_dragon_scale",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
-		PotionImmunity.add(cast(black_dragon_scale), set(WITHER));
+		PotionImmunity.add(equipment(black_dragon_scale), set(WITHER));
 
 		mixed_dragon_scale = add("mixed_dragon_scale",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
-		PotionImmunity.add(cast(mixed_dragon_scale), set(POISON, WITHER));
+		PotionImmunity.add(equipment(mixed_dragon_scale), set(POISON, WITHER));
 
 		ankh_charm = add("ankh_charm",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
-		PotionImmunity.add(cast(ankh_charm), set(BLINDNESS, HUNGER, WEAKNESS, MINING_FATIGUE, SLOWNESS, LEVITATION, POISON, WITHER));
+		PotionImmunity.add(equipment(ankh_charm), set(BLINDNESS, HUNGER, WEAKNESS, MINING_FATIGUE, SLOWNESS, LEVITATION, POISON, WITHER));
 
 
 		obsidian_skull = add("obsidian_skull",
@@ -185,6 +194,7 @@ public class ModItems {
 //			new ItemGlovesDexterity(baseSettingsCurio()));
 		gloves_dexterity = add("gloves_dexterity",
 				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
+		equipment(gloves_dexterity).addModifier(GENERIC_ATTACK_SPEED, new AttributeModifierSupplier(0.6, ADDITION));
 		gloves_digging_iron = add("gloves_digging_iron",
 				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
 		gloves_digging_diamond = add("gloves_digging_diamond",
