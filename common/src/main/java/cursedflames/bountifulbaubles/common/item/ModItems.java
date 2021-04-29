@@ -1,6 +1,9 @@
 package cursedflames.bountifulbaubles.common.item;
 
+import cursedflames.bountifulbaubles.common.equipment.FallDamageImmunity;
+import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
+import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
 import cursedflames.bountifulbaubles.common.util.AttributeModifierSupplier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -124,6 +127,7 @@ public class ModItems {
 		ring_free_action = add("ring_free_action",
 				EquipmentItem.apply(baseSettingsCurio(), set(RING, RING_2)));
 		PotionImmunity.add(equipment(ring_free_action), set(SLOWNESS, LEVITATION));
+		SlowdownImmunity.add(equipment(ring_free_action));
 
 		bezoar = add("bezoar",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
@@ -167,10 +171,14 @@ public class ModItems {
 
 		balloon = add("balloon",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
+
 		lucky_horseshoe = add("lucky_horseshoe",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
+		FallDamageImmunity.add(equipment(lucky_horseshoe));
+
 		horseshoe_balloon = add("horseshoe_balloon",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
+		FallDamageImmunity.add(equipment(horseshoe_balloon));
 
 		amulet_sin_empty = add("amulet_sin_empty",
 				new BBItem(baseSettings()));
@@ -194,6 +202,7 @@ public class ModItems {
 //			new ItemGlovesDexterity(baseSettingsCurio()));
 		gloves_dexterity = add("gloves_dexterity",
 				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
+		FastToolSwitching.add(equipment(gloves_dexterity));
 		equipment(gloves_dexterity).addModifier(GENERIC_ATTACK_SPEED, new AttributeModifierSupplier(0.6, ADDITION));
 		gloves_digging_iron = add("gloves_digging_iron",
 				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
