@@ -5,19 +5,20 @@ import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EquipmentProxyFabric extends EquipmentProxy {
 	@Override
 	public List<Item> getEquipped(PlayerEntity player) {
 		Inventory inventory = TrinketsApi.getTrinketsInventory(player);
-		List<Item> items = new ArrayList<>();
+		// Start with held items, then add any equipped trinkets
+		List<Item> items = getHeldEquipment(player);
 		for (int i = 0; i < inventory.size(); i++) {
-			Item item = inventory.getStack(i).getItem();
-			if (item != null) {
-				items.add(item);
+			ItemStack stack = inventory.getStack(i);
+			if (!stack.isEmpty()) {
+				items.add(stack.getItem());
 			}
 		}
 		return items;

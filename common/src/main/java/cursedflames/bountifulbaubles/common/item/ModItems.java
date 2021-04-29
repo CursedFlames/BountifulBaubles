@@ -1,7 +1,9 @@
 package cursedflames.bountifulbaubles.common.item;
 
+import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.equipment.FallDamageImmunity;
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
+import cursedflames.bountifulbaubles.common.equipment.FireResist;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
 import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
 import cursedflames.bountifulbaubles.common.util.AttributeModifierSupplier;
@@ -153,6 +155,7 @@ public class ModItems {
 
 		obsidian_skull = add("obsidian_skull",
 				EquipmentItem.apply(baseSettingsCurio(), set()));
+		FireResist.add(equipment(obsidian_skull));
 //		shield_cobalt = add("shield_cobalt",
 //			new ItemShieldBase(baseSettings().maxDamage(336*3)));
 //		shield_obsidian = add("shield_obsidian",

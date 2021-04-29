@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class SlowdownImmunity {
     private static final Set<Item> items = new HashSet<>();
-    public static void add(BBEquipmentItem item) {
+    public static void add(Item item) {
         items.add(item);
     }
 
