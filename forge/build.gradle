@@ -32,6 +32,7 @@ dependencies {
     forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
     // Remove the next line if you don't want to depend on the API
 //    modCompile "me.shedaniel:architectury:${rootProject.architectury_version}:forge"
+    compileOnly "com.google.code.findbugs:jsr305:3.+"
 
 //    modImplementation "top.theillusivec4.curios:curios-forge:${rootProject.curios_forge_version}"
 //    modApi "top.theillusivec4.curios:curios-forge:${rootProject.curios_forge_version}:api"

@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.common.item;
 
+import cursedflames.bountifulbaubles.common.util.Tooltips;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
@@ -20,6 +21,6 @@ public class BBItem extends Item {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-//		Tooltips.addTooltip(this, stack, tooltip, context);
+		Tooltips.addTooltip(this, stack, world, tooltip, context);
 	}
 }

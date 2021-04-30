@@ -1,15 +1,15 @@
 package cursedflames.bountifulbaubles.common.equipment;
 
-import cursedflames.bountifulbaubles.common.item.BBEquipmentItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 
 import java.util.HashSet;
 import java.util.Set;
 
+// TODO actually implement
 public class FireResist {
     private static final Set<Item> items = new HashSet<>();
-    public static void add(BBEquipmentItem item) {
+    public static void add(Item item) {
         items.add(item);
     }
 

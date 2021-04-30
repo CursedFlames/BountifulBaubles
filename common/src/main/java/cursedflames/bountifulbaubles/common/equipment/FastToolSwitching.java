@@ -1,6 +1,5 @@
 package cursedflames.bountifulbaubles.common.equipment;
 
-import cursedflames.bountifulbaubles.common.item.BBEquipmentItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 
@@ -9,7 +8,7 @@ import java.util.Set;
 
 public class FastToolSwitching {
     private static final Set<Item> items = new HashSet<>();
-    public static void add(BBEquipmentItem item) {
+    public static void add(Item item) {
         items.add(item);
     }
 

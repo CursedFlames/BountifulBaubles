@@ -19,10 +19,11 @@ repositories {
 		name = "TerraformersMC"
 		url = "https://maven.terraformersmc.com/"
 	}
-	maven {
-		name = "NerdHubMC"
-		url = "https://maven.abusedmaster.xyz/"
-	}
+    maven { url 'https://jitpack.io' }
+//	maven {
+//		name = "NerdHubMC"
+//		url = "https://maven.abusedmaster.xyz/"
+//	}
 	maven {
 		name = 'Ladysnake Mods'
 		url = 'https://ladysnake.jfrog.io/artifactory/mods'
@@ -34,6 +35,7 @@ dependencies {
     modCompile "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
     // Remove the next line if you don't want to depend on the API
     // modCompile "me.shedaniel:architectury:${rootProject.architectury_version}:fabric"
+    compileOnly "com.google.code.findbugs:jsr305:3.+"
 
 	// Need to specify cardinal components dependencies ourself, since the version trinkets wants isn't on the maven
 	modImplementation("dev.emi:trinkets:${rootProject.trinkets_version}") {
@@ -41,6 +43,8 @@ dependencies {
 	}
 	modImplementation include("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${rootProject.cardinal_components_version}")
 	modImplementation include("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${rootProject.cardinal_components_version}")
+
+    modImplementation "com.github.CrimsonDawn45:Fabric-Shield-Lib:${rootProject.fabric_shield_lib_version}-${rootProject.minecraft_version}"
 
     compileOnly(project(path: ":common")) {
         transitive = false

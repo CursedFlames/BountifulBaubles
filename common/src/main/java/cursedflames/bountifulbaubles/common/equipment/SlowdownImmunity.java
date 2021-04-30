@@ -1,6 +1,5 @@
 package cursedflames.bountifulbaubles.common.equipment;
 
-import cursedflames.bountifulbaubles.common.item.BBEquipmentItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 

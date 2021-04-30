@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.common.equipment;
 
 import com.google.common.collect.HashMultimap;
-import cursedflames.bountifulbaubles.common.item.BBEquipmentItem;
+import cursedflames.bountifulbaubles.common.item.IEquipmentItem;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -13,12 +13,12 @@ import java.util.Set;
 public class PotionImmunity {
 	private static final HashMultimap<StatusEffect, Item> immunitiesByStatus = HashMultimap.create();
 	private static final HashMultimap<Item, StatusEffect> immunitiesByItem = HashMultimap.create();
-	public static void add(BBEquipmentItem item, Set<StatusEffect> effects) {
+	public static void add(Item item, Set<StatusEffect> effects) {
 		for (StatusEffect effect : effects) {
 			immunitiesByStatus.put(effect, item);
 			immunitiesByItem.put(item, effect);
 		}
-		item.attachOnTick(PotionImmunity::negateEffects);
+		((IEquipmentItem) item).attachOnTick(PotionImmunity::negateEffects);
 	}
 
 	private static void negateEffects(PlayerEntity player, ItemStack stack) {
