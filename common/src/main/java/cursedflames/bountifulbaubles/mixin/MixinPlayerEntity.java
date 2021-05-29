@@ -1,16 +1,30 @@
 package cursedflames.bountifulbaubles.mixin;
 
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
-import cursedflames.bountifulbaubles.common.item.ModItems;
+import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.stat.Stats;
+import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(PlayerEntity.class)
-public class MixinPlayerEntity {
+public abstract class MixinPlayerEntity extends LivingEntity {
+    private MixinPlayerEntity(EntityType<? extends LivingEntity> entityType, World world) {
+        super(entityType, world);
+    }
+
+    @Shadow public abstract void increaseStat(Identifier damageTaken, int round);
+
     // === Fast Tool Switching ===
     // Janky hack to conditionally block `resetLastAttackedTicks` calls from `tick()`
     @Unique private boolean isInTick = false;
@@ -41,5 +55,25 @@ public class MixinPlayerEntity {
             ))
     private void afterResetLastAttackedTicks(CallbackInfo ci) {
         isInTick = false;
+    }
+
+    // === MaxHp undying ===
+    @Inject(method = "applyDamage",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setHealth(F)V"),
+            cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
+    private void onApplyDamage(DamageSource damageSource, float damageAmount, CallbackInfo ci, float previousHealth) {
+        System.out.println("damageSource = " + damageSource + ", damageAmount = " + damageAmount + ", ci = " + ci + ", previousHealth = " + previousHealth);
+        float healthAfter = previousHealth - damageAmount;
+        if (healthAfter <= 0 && MaxHpUndying.hasMaxHpUndying((PlayerEntity)(Object)this)) {
+            ci.cancel();
+            // Same as vanilla logic, but we don't go below MIN_VALUE health, to avoid death
+            this.setHealth(Float.MIN_VALUE);
+            this.getDamageTracker().onDamage(damageSource, previousHealth, damageAmount);
+            if (damageAmount < 3.4028235E37F) {
+                this.increaseStat(Stats.DAMAGE_TAKEN, Math.round(damageAmount * 10.0F));
+            }
+            // Deal the excess damage to the maxhp instead - this will kill the player if they go below 1 maxhp
+            MaxHpUndying.applyMaxHpDrain((PlayerEntity)(Object)this, healthAfter);
+        }
     }
 }

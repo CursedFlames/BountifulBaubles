@@ -3,6 +3,7 @@ package cursedflames.bountifulbaubles.common.item;
 import cursedflames.bountifulbaubles.common.equipment.FallDamageResist;
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
 import cursedflames.bountifulbaubles.common.equipment.FireResist;
+import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
 import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
 import cursedflames.bountifulbaubles.common.util.AttributeModifierSupplier;
@@ -66,6 +67,9 @@ public class ModItems {
 	protected static final String RING = "hand:ring";
 	protected static final String RING_2 = "offhand:ring";
 
+	protected static final Set<String> RINGS = set(RING, RING_2);
+	protected static final Set<String> MISC = set(NECKLACE, RING, RING_2);
+
 	protected static Item.Settings baseSettings() {
 		return new Item.Settings().group(GROUP);
 	}
@@ -117,29 +121,29 @@ public class ModItems {
 		PotionImmunity.add(sunglasses, set(BLINDNESS));
 
 		apple = add("apple",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		PotionImmunity.add(apple, set(HUNGER, NAUSEA));
 
 		vitamins = add("vitamins",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		PotionImmunity.add(vitamins, set(WEAKNESS, MINING_FATIGUE));
 
 		ring_overclocking = add("ring_overclocking",
-				EquipmentItem.apply(baseSettingsCurio(), set(RING, RING_2)));
+				EquipmentItem.apply(baseSettingsCurio(), RINGS));
 		PotionImmunity.add(ring_overclocking, set(SLOWNESS));
 		equipment(ring_overclocking).addModifier(GENERIC_MOVEMENT_SPEED, new AttributeModifierSupplier(0.07, MULTIPLY_TOTAL));
 
 		shulker_heart = add("shulker_heart",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		PotionImmunity.add(shulker_heart, set(LEVITATION));
 
 		ring_free_action = add("ring_free_action",
-				EquipmentItem.apply(baseSettingsCurio(), set(RING, RING_2)));
+				EquipmentItem.apply(baseSettingsCurio(), RINGS));
 		PotionImmunity.add(ring_free_action, set(SLOWNESS, LEVITATION));
 		SlowdownImmunity.add(ring_free_action);
 
 		bezoar = add("bezoar",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		PotionImmunity.add(bezoar, set(POISON));
 
 		// TODO reimplement floatiness
@@ -149,20 +153,20 @@ public class ModItems {
 				new BBItem(baseSettings()));
 
 		black_dragon_scale = add("black_dragon_scale",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		PotionImmunity.add(black_dragon_scale, set(WITHER));
 
 		mixed_dragon_scale = add("mixed_dragon_scale",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		PotionImmunity.add(mixed_dragon_scale, set(POISON, WITHER));
 
 		ankh_charm = add("ankh_charm",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		PotionImmunity.add(ankh_charm, set(BLINDNESS, HUNGER, NAUSEA, WEAKNESS, MINING_FATIGUE, SLOWNESS, LEVITATION, POISON, WITHER));
 
 
 		obsidian_skull = add("obsidian_skull",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		FireResist.add(obsidian_skull);
 
 		shield_cobalt = add("shield_cobalt",
@@ -193,14 +197,14 @@ public class ModItems {
 //			new ItemPotionBase(baseSettings()));
 
 		balloon = add("balloon",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 
 		lucky_horseshoe = add("lucky_horseshoe",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		FallDamageResist.addImmunity(lucky_horseshoe);
 
 		horseshoe_balloon = add("horseshoe_balloon",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		FallDamageResist.addImmunity(horseshoe_balloon);
 
 		amulet_sin_empty = add("amulet_sin_empty",
@@ -213,9 +217,11 @@ public class ModItems {
 				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
 
 		broken_heart = add("broken_heart",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
+		MaxHpUndying.add(broken_heart);
 		phylactery_charm = add("phylactery_charm",
-				EquipmentItem.apply(baseSettingsCurio(), set()));
+				EquipmentItem.apply(baseSettingsCurio(), MISC));
+		MaxHpUndying.add(phylactery_charm);
 		equipment(phylactery_charm).setApplyWhenHeld();
 //		amulet_cross = add("amulet_cross",
 //			new ItemAmuletCross(baseSettingsCurio()));

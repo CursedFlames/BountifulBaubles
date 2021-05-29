@@ -6,8 +6,6 @@ import net.minecraft.util.Identifier;
 import java.util.UUID;
 
 public class BBUtil {
-	public static UUID UUID_BROKEN_HEART_MAXHP_DRAIN = UUID.fromString("554f3929-4193-4ae5-a4da-4b528a89ca32");
-
 	public static Identifier modId(String path) {
 		return new Identifier(BountifulBaubles.MODID, path);
 	}
