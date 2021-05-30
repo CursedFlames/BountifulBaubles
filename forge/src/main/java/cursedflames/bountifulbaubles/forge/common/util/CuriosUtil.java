@@ -1,15 +1,19 @@
 package cursedflames.bountifulbaubles.forge.common.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.type.capability.ICurio;
@@ -57,5 +61,20 @@ public class CuriosUtil {
 		IDynamicStackHandler stackHandler = getItemStacksForSlotType(entity, identifier, isCosmetic);
 		if (stackHandler == null) return null;
 		return stackHandler.getStackInSlot(index);
+	}
+
+	public static List<Item> getAllItems(LivingEntity entity) {
+		Optional<IItemHandlerModifiable> equippedCurios = CuriosApi.getCuriosHelper().getEquippedCurios(entity).resolve();
+		List<Item> items = new ArrayList<>();
+		if (equippedCurios.isPresent()) {
+			IItemHandlerModifiable itemHandler = equippedCurios.get();
+			for (int i = 0; i < itemHandler.getSlots(); i++) {
+				ItemStack stack = itemHandler.getStackInSlot(i);
+				if (!stack.isEmpty()) {
+					items.add(stack.getItem());
+				}
+			}
+		}
+		return items;
 	}
 }
