@@ -12,7 +12,7 @@ public class ModItemsForge extends ModItems {
 		GROUP = new ItemGroup(BountifulBaubles.MODID) {
 			@Override
 			public ItemStack createIcon() {
-				return new ItemStack(cursedflames.bountifulbaubles.forge.common.item.ModItems.gloves_dexterity);
+				return new ItemStack(cursedflames.bountifulbaubles.forge.common.old.item.ModItems.gloves_dexterity);
 			}
 		};
 		// Discard trinket slot information on forge

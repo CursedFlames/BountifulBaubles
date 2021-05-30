@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import cursedflames.bountifulbaubles.forge.common.BountifulBaublesForge;
-import cursedflames.bountifulbaubles.forge.common.effect.EffectFlight;
-import cursedflames.bountifulbaubles.forge.common.item.ModItems;
-import cursedflames.bountifulbaubles.forge.common.recipe.anvil.AnvilCrafting;
-import cursedflames.bountifulbaubles.forge.common.recipe.anvil.AnvilRecipe;
+import cursedflames.bountifulbaubles.forge.common.old.effect.EffectFlight;
+import cursedflames.bountifulbaubles.forge.common.old.item.ModItems;
+import cursedflames.bountifulbaubles.forge.common.old.recipe.anvil.AnvilCrafting;
+import cursedflames.bountifulbaubles.forge.common.old.recipe.anvil.AnvilRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;

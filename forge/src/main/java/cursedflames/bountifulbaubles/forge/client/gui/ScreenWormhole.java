@@ -1,11 +1,11 @@
 package cursedflames.bountifulbaubles.forge.client.gui;
 
 import cursedflames.bountifulbaubles.forge.common.BountifulBaublesForge;
-import cursedflames.bountifulbaubles.forge.common.network.PacketHandler;
-import cursedflames.bountifulbaubles.forge.common.network.wormhole.CPacketDoWormhole;
-import cursedflames.bountifulbaubles.forge.common.network.wormhole.CPacketWormholePin;
-import cursedflames.bountifulbaubles.forge.common.wormhole.ContainerWormhole;
-import cursedflames.bountifulbaubles.forge.common.wormhole.IWormholeTarget;
+import cursedflames.bountifulbaubles.forge.common.old.network.PacketHandler;
+import cursedflames.bountifulbaubles.forge.common.old.network.wormhole.CPacketDoWormhole;
+import cursedflames.bountifulbaubles.forge.common.old.network.wormhole.CPacketWormholePin;
+import cursedflames.bountifulbaubles.forge.common.old.wormhole.ContainerWormhole;
+import cursedflames.bountifulbaubles.forge.common.old.wormhole.IWormholeTarget;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
 import net.minecraft.client.gui.widget.AbstractButtonWidget;
