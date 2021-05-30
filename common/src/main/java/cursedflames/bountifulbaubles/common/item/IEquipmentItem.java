@@ -7,6 +7,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.function.BiConsumer;
 
 public interface IEquipmentItem {
@@ -20,5 +21,5 @@ public interface IEquipmentItem {
 
     void addModifier(EntityAttribute attribute, AttributeModifierSupplier modifier);
 
-    Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(String slotId, ItemStack stack);
+    Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(String slotId, @Nullable ItemStack stack);
 }

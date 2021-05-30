@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Pair;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -55,7 +56,7 @@ public class BBEquipmentItem extends BBItem implements IEquipmentItem {
 		modifiers.add(new Pair<>(attribute, modifier));
 	}
 
-	public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(String slotId, ItemStack stack) {
+	public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(String slotId, @Nullable ItemStack stack) {
 		HashMultimap<EntityAttribute, EntityAttributeModifier> modifierInstances = HashMultimap.create();
 		for (int i = 0; i < modifiers.size(); i++) {
 			Pair<EntityAttribute, AttributeModifierSupplier> modifier = modifiers.get(i);
