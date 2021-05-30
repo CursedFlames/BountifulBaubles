@@ -168,6 +168,7 @@ public class ModItems {
 				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		FireResist.add(obsidian_skull);
 
+		// TODO shields don't take durability damage? on fabric at least
 		shield_cobalt = add("shield_cobalt",
 				ShieldItem.construct(baseSettingsCurio(), set(CAPE), 100, 336*3, 9, Items.IRON_INGOT));
 		equipment(shield_cobalt).setApplyWhenHeld();

@@ -83,7 +83,9 @@ public abstract class MixinPlayerEntity extends LivingEntity {
     @Inject(method = "applyDamage",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setHealth(F)V"),
             cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-    private void onApplyDamage(DamageSource damageSource, float damageAmount, CallbackInfo ci, float previousHealth) {
+    private void onApplyDamage(DamageSource damageSource, float damageAmount, CallbackInfo ci) {
+        // Capturing this as a local breaks on Forge
+        float previousHealth = this.getHealth();
         float healthAfter = previousHealth - damageAmount;
         if (healthAfter <= 0 && MaxHpUndying.hasMaxHpUndying((PlayerEntity)(Object)this)) {
             ci.cancel();

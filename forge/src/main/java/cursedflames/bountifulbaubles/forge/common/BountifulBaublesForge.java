@@ -5,6 +5,9 @@ import java.util.List;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
 
+import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
+import cursedflames.bountifulbaubles.forge.common.equipment.EquipmentProxyForge;
+import cursedflames.bountifulbaubles.forge.common.item.ModItemsForge;
 import cursedflames.bountifulbaubles.forge.common.old.ModCapabilities;
 import cursedflames.bountifulbaubles.forge.common.old.baubleeffect.EventHandlerEffect;
 import cursedflames.bountifulbaubles.forge.common.old.block.ModBlocks;
@@ -64,16 +67,18 @@ public class BountifulBaublesForge extends BountifulBaubles {
 			() -> () -> new ClientProxy(),
 			() -> () -> new ServerProxy());
 	
-	public static final ItemGroup GROUP = new ItemGroup(MODID) { //TODO sort cre-tab/JEI
+	public static final ItemGroup GROUP = null;/* = new ItemGroup(MODID) { //TODO sort cre-tab/JEI
 		@Override
 		public ItemStack createIcon() {
 			return new ItemStack(ModItems.obsidian_skull);
 		}
-	};
+	};*/
 	
 	public static MinecraftServer server;
 
 	public BountifulBaublesForge() {
+		EquipmentProxy.instance = new EquipmentProxyForge();
+
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
         
@@ -92,23 +97,23 @@ public class BountifulBaublesForge extends BountifulBaubles {
 		
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
-		MinecraftForge.EVENT_BUS.register(EventHandlerEffect.class);
-		MinecraftForge.EVENT_BUS.register(AnvilCrafting.class);
-		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
-		MinecraftForge.EVENT_BUS.register(LootTableInjector.class);
-		
-		// TODO performance test water candle and re-enable it
-//		MinecraftForge.EVENT_BUS.register(WaterCandleHandler.class);
-		
-		MinecraftForge.EVENT_BUS.register(EffectFlight.class);
-		
-		MinecraftForge.EVENT_BUS.register(ItemShieldCobalt.class);
-		MinecraftForge.EVENT_BUS.register(ItemAmuletSinGluttony.class);
-		MinecraftForge.EVENT_BUS.register(ItemAmuletSinWrath.class);
-		MinecraftForge.EVENT_BUS.register(ItemAmuletSinPride.class);
-		MinecraftForge.EVENT_BUS.register(ItemBrokenHeart.class);
-		MinecraftForge.EVENT_BUS.register(ItemGlovesDexterity.class);
-		MinecraftForge.EVENT_BUS.register(ItemGlovesDigging.class);
+//		MinecraftForge.EVENT_BUS.register(EventHandlerEffect.class);
+//		MinecraftForge.EVENT_BUS.register(AnvilCrafting.class);
+//		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
+//		MinecraftForge.EVENT_BUS.register(LootTableInjector.class);
+//
+//		// TODO performance test water candle and re-enable it
+////		MinecraftForge.EVENT_BUS.register(WaterCandleHandler.class);
+//
+//		MinecraftForge.EVENT_BUS.register(EffectFlight.class);
+//
+//		MinecraftForge.EVENT_BUS.register(ItemShieldCobalt.class);
+//		MinecraftForge.EVENT_BUS.register(ItemAmuletSinGluttony.class);
+//		MinecraftForge.EVENT_BUS.register(ItemAmuletSinWrath.class);
+//		MinecraftForge.EVENT_BUS.register(ItemAmuletSinPride.class);
+//		MinecraftForge.EVENT_BUS.register(ItemBrokenHeart.class);
+//		MinecraftForge.EVENT_BUS.register(ItemGlovesDexterity.class);
+//		MinecraftForge.EVENT_BUS.register(ItemGlovesDigging.class);
 		
 		PacketHandler.registerMessages(); // TODO where are we supposed to do this?
 	}
@@ -180,7 +185,8 @@ public class BountifulBaublesForge extends BountifulBaubles {
 		}
 		@SubscribeEvent
 		public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
-			ModItems.registerItems(event);
+//			ModItems.registerItems(event);
+			ModItemsForge.init(event);
 		}
 		
 		@SubscribeEvent

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "cursedflames.bountifulbaubles.forge.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "client.MixinForgeIngameGui"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

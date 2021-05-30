@@ -11,7 +11,8 @@ architectury {
 }
 
 loom {
-     useFabricMixin = true
+    useFabricMixin = true
+    mixinConfigs = ["bountifulbaubles-forge.mixins.json"]
 }
 
 repositories {
