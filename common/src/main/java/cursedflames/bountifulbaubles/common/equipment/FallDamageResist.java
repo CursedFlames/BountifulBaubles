@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-// TODO actually implement
 public class FallDamageResist {
     private static final Set<Item> immunityItems = new HashSet<>();
     private static final Map<Item, Float> items = new HashMap<>();

@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import java.util.HashSet;
 import java.util.Set;
 
-// TODO actually implement
 public class FireResist {
     private static final Set<Item> items = new HashSet<>();
     public static void add(Item item) {
@@ -14,8 +13,8 @@ public class FireResist {
     }
 
     // TODO make these properties configurable per-item?
-    public static float getImmunityThreshold(PlayerEntity player) {
-        return EquipmentProxy.instance.hasAnyEquipped(player, items) ? 1.1f : 0f;
+    public static boolean isImmuneToBurning(PlayerEntity player) {
+        return EquipmentProxy.instance.hasAnyEquipped(player, items);
     }
 
     public static float getDamageMultiplier(PlayerEntity player) {

@@ -1,6 +1,7 @@
 package cursedflames.bountifulbaubles.mixin;
 
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
+import cursedflames.bountifulbaubles.common.equipment.FireResist;
 import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -14,7 +15,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(PlayerEntity.class)
@@ -57,12 +60,30 @@ public abstract class MixinPlayerEntity extends LivingEntity {
         isInTick = false;
     }
 
+    // === Fire resist ===
+    @Inject(method = "isInvulnerableTo", at = @At("RETURN"), cancellable = true)
+    private void onIsInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+        // Negate on fire, in fire, and hot floor - lava damage and fire-based attacks will still apply
+        if (!cir.getReturnValueZ()
+                && (damageSource == DamageSource.ON_FIRE || damageSource == DamageSource.IN_FIRE || damageSource == DamageSource.HOT_FLOOR)
+                && FireResist.isImmuneToBurning((PlayerEntity)(Object)this)) {
+            cir.setReturnValue(true);
+        }
+    }
+
+    @ModifyVariable(method = "applyDamage", at = @At(value = "STORE", ordinal = 0), ordinal = 0)
+    private float onApplyDamageAmount(float amount, DamageSource damageSource) {
+        if (damageSource.isFire()) {
+            return FireResist.getDamageMultiplier((PlayerEntity)(Object)this) * amount;
+        }
+        return amount;
+    }
+
     // === MaxHp undying ===
     @Inject(method = "applyDamage",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setHealth(F)V"),
             cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
     private void onApplyDamage(DamageSource damageSource, float damageAmount, CallbackInfo ci, float previousHealth) {
-        System.out.println("damageSource = " + damageSource + ", damageAmount = " + damageAmount + ", ci = " + ci + ", previousHealth = " + previousHealth);
         float healthAfter = previousHealth - damageAmount;
         if (healthAfter <= 0 && MaxHpUndying.hasMaxHpUndying((PlayerEntity)(Object)this)) {
             ci.cancel();
