@@ -146,7 +146,6 @@ public class ModItems {
 				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		PotionImmunity.add(bezoar, set(POISON));
 
-		// TODO reimplement floatiness
 		ender_dragon_scale = add("ender_dragon_scale",
 				new BBItem(baseSettings()));
 		broken_black_dragon_scale = add("broken_black_dragon_scale",
