@@ -1,12 +1,17 @@
 package cursedflames.bountifulbaubles.mixin;
 
+import cursedflames.bountifulbaubles.common.effect.EffectSin;
+import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
 import cursedflames.bountifulbaubles.common.equipment.FireResist;
 import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
+import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.FoodComponent;
+import net.minecraft.item.ItemStack;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
@@ -99,4 +104,21 @@ public abstract class MixinPlayerEntity extends LivingEntity {
             MaxHpUndying.applyMaxHpDrain((PlayerEntity)(Object)this, healthAfter);
         }
     }
+
+    // === Gluttony pendant ===
+	@Inject(method = "eatFood", at = @At("HEAD"))
+	private void onEatFood(World world, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
+		if (EquipmentProxy.instance.hasEquipped((PlayerEntity)(Object)this, ModItems.amulet_sin_gluttony)) {
+			float level = 0;
+			if (stack.getItem().isFood()) {
+				FoodComponent food = stack.getItem().getFoodComponent();
+				if (food != null) {
+					// TODO is this at all balanced?
+					level = food.getHunger()/4.0f;
+					level += food.getSaturationModifier()/6;
+				}
+			}
+			this.addStatusEffect(EffectSin.effectInstance((int) Math.floor(level), 10 * 20, true));
+		}
+	}
 }

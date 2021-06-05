@@ -1,5 +1,7 @@
 package cursedflames.bountifulbaubles.common.item;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.FallDamageResist;
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
 import cursedflames.bountifulbaubles.common.equipment.FireResist;
@@ -7,6 +9,7 @@ import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
 import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
 import cursedflames.bountifulbaubles.common.util.AttributeModifierSupplier;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
@@ -211,8 +214,24 @@ public class ModItems {
 				new BBItem(baseSettings()));
 		amulet_sin_gluttony = add("amulet_sin_gluttony",
 				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
+		// TODO reach and step assist
 		amulet_sin_pride = add("amulet_sin_pride",
 				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
+		equipment(amulet_sin_pride).attachOnTick((player, stack) -> {
+			boolean hasEffect = player.hasStatusEffect(EffectSin.instance);
+			if (player.getHealth() >= player.getMaxHealth()) {
+				if (!hasEffect) {
+					player.addStatusEffect(EffectSin.effectInstance(0, Integer.MAX_VALUE, false));
+				}
+			} else {
+				if (hasEffect) {
+					player.removeStatusEffect(EffectSin.instance);
+				}
+			}
+		});
+		equipment(amulet_sin_pride).attachOnUnequip((player, stack) -> {
+			player.removeStatusEffect(EffectSin.instance);
+		});
 		amulet_sin_wrath = add("amulet_sin_wrath",
 				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
 

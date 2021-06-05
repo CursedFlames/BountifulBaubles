@@ -1,9 +1,11 @@
 package cursedflames.bountifulbaubles.common.effect;
 
 import cursedflames.bountifulbaubles.common.util.BBUtil;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.util.Identifier;
 
@@ -25,5 +27,10 @@ public class EffectSin extends StatusEffect {
                 EntityAttributeModifier.Operation.ADDITION);
         addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, UUID_ARMOR_TOUGHNESS, 1,
                 EntityAttributeModifier.Operation.ADDITION);
+        instance = this;
     }
+
+    public static StatusEffectInstance effectInstance(int level, int time, boolean particles) {
+		return new StatusEffectInstance(instance, time, level, false, particles);
+	}
 }
