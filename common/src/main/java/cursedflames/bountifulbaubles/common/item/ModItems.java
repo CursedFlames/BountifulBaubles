@@ -5,10 +5,13 @@ import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.FallDamageResist;
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
 import cursedflames.bountifulbaubles.common.equipment.FireResist;
+import cursedflames.bountifulbaubles.common.equipment.JumpBoost;
 import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
 import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
 import cursedflames.bountifulbaubles.common.util.AttributeModifierSupplier;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -201,6 +204,8 @@ public class ModItems {
 
 		balloon = add("balloon",
 				EquipmentItem.apply(baseSettingsCurio(), MISC));
+		FallDamageResist.addResistance(balloon, 4);
+		JumpBoost.addBoost(balloon, 0.2f);
 
 		lucky_horseshoe = add("lucky_horseshoe",
 				EquipmentItem.apply(baseSettingsCurio(), MISC));
@@ -209,6 +214,7 @@ public class ModItems {
 		horseshoe_balloon = add("horseshoe_balloon",
 				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		FallDamageResist.addImmunity(horseshoe_balloon);
+		JumpBoost.addBoost(horseshoe_balloon, 0.2f);
 
 		amulet_sin_empty = add("amulet_sin_empty",
 				new BBItem(baseSettings()));
@@ -232,8 +238,10 @@ public class ModItems {
 		equipment(amulet_sin_pride).attachOnUnequip((player, stack) -> {
 			player.removeStatusEffect(EffectSin.instance);
 		});
+		// TODO damage boost on crit
 		amulet_sin_wrath = add("amulet_sin_wrath",
 				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
+		equipment(amulet_sin_wrath).addModifier(GENERIC_ATTACK_DAMAGE, new AttributeModifierSupplier(2, ADDITION));
 
 		broken_heart = add("broken_heart",
 				EquipmentItem.apply(baseSettingsCurio(), MISC));
@@ -242,13 +250,9 @@ public class ModItems {
 				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		MaxHpUndying.add(phylactery_charm);
 		equipment(phylactery_charm).setApplyWhenHeld();
-//		amulet_cross = add("amulet_cross",
-//			new ItemAmuletCross(baseSettingsCurio()));
 		amulet_cross = add("amulet_cross",
 				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
 
-//		gloves_dexterity = add("gloves_dexterity",
-//			new ItemGlovesDexterity(baseSettingsCurio()));
 		gloves_dexterity = add("gloves_dexterity",
 				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
 		FastToolSwitching.add(gloves_dexterity);

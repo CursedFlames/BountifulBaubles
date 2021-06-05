@@ -2,6 +2,7 @@ package cursedflames.bountifulbaubles.mixin;
 
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.equipment.FallDamageResist;
+import cursedflames.bountifulbaubles.common.equipment.JumpBoost;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
 import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
 import cursedflames.bountifulbaubles.common.item.ModItems;
@@ -72,6 +73,14 @@ public class MixinLivingEntity {
 		PlayerEntity self = (PlayerEntity) (Object) this;
 
 		return f + FallDamageResist.getResistance(self);
+	}
+
+	// === Jump boost ===
+	@ModifyVariable(method = "jump",
+			at = @At(value = "STORE", ordinal = 0), ordinal = 0)
+	private float onJump(float f) {
+		if (!((Object) this instanceof PlayerEntity)) return f;
+		return f + JumpBoost.getBoost((PlayerEntity)(Object)this);
 	}
 
 	// === Gluttony pendant ===
