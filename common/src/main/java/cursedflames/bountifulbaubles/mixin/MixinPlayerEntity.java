@@ -7,6 +7,7 @@ import cursedflames.bountifulbaubles.common.equipment.FireResist;
 import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.util.Teleport;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -124,6 +125,16 @@ public abstract class MixinPlayerEntity extends LivingEntity {
 				}
 			}
 			this.addStatusEffect(EffectSin.effectInstance((int) Math.floor(level), 10 * 20, true));
+		}
+	}
+
+	// === Wrath pendant ===
+	// Target when crit particles are added to determine if there was a crit - slightly cleaner than local capture.
+	@Inject(method = "attack", at = @At(value = "INVOKE",
+			target = "Lnet/minecraft/entity/player/PlayerEntity;addCritParticles(Lnet/minecraft/entity/Entity;)V"))
+	private void onAttack(Entity entity, CallbackInfo ci) {
+		if (EquipmentProxy.instance.hasEquipped((PlayerEntity)(Object)this, ModItems.amulet_sin_wrath)) {
+			this.addStatusEffect(EffectSin.effectInstance(3, 6 * 20, true));
 		}
 	}
 }

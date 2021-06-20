@@ -249,7 +249,7 @@ public class ModItems {
 		equipment(amulet_sin_pride).attachOnUnequip((player, stack) -> {
 			player.removeStatusEffect(EffectSin.instance);
 		});
-		// TODO damage boost on crit
+
 		amulet_sin_wrath = add("amulet_sin_wrath",
 				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
 		equipment(amulet_sin_wrath).addModifier(GENERIC_ATTACK_DAMAGE, new AttributeModifierSupplier(2, ADDITION));
