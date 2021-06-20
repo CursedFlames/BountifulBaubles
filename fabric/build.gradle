@@ -16,6 +16,10 @@ loom {
 
 repositories {
 	maven {
+		name = 'Ladysnake Mods'
+		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+	}
+	maven {
 		name = "TerraformersMC"
 		url = "https://maven.terraformersmc.com/"
 	}
@@ -24,10 +28,6 @@ repositories {
 //		name = "NerdHubMC"
 //		url = "https://maven.abusedmaster.xyz/"
 //	}
-	maven {
-		name = 'Ladysnake Mods'
-		url = 'https://ladysnake.jfrog.io/artifactory/mods'
-	}
 }
 
 dependencies {
@@ -37,12 +37,20 @@ dependencies {
     // modCompile "me.shedaniel:architectury:${rootProject.architectury_version}:fabric"
     compileOnly "com.google.code.findbugs:jsr305:3.+"
 
-	// Need to specify cardinal components dependencies ourself, since the version trinkets wants isn't on the maven
+//	// Replace modImplementation with modApi if you expose components in your own API
+//	modImplementation "io.github.onyxstudios.Cardinal-Components-API:<MODULE>:<VERSION>"
+//	// Includes Cardinal Components API as a Jar-in-Jar dependency (optional but recommended)
+//	include "io.github.onyxstudios.Cardinal-Components-API:<MODULE>:<VERSION>"
+
+	// Need to specify cardinal components dependencies ourself, since the version trinkets wants isn't on the maven, and we want CC for ourself anyway
 	modImplementation("dev.emi:trinkets:${rootProject.trinkets_version}") {
 		transitive = false
 	}
-	modImplementation include("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${rootProject.cardinal_components_version}")
-	modImplementation include("io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${rootProject.cardinal_components_version}")
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${rootProject.cardinal_components_version}"
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${rootProject.cardinal_components_version}"
+
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${rootProject.cardinal_components_version}"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${rootProject.cardinal_components_version}"
 
     modImplementation "com.github.CrimsonDawn45:Fabric-Shield-Lib:${rootProject.fabric_shield_lib_version}-${rootProject.minecraft_version}"
 

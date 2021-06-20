@@ -1,18 +1,21 @@
 package cursedflames.bountifulbaubles.mixin;
 
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
+import cursedflames.bountifulbaubles.common.equipment.ExtendedIFrames;
 import cursedflames.bountifulbaubles.common.equipment.FallDamageResist;
 import cursedflames.bountifulbaubles.common.equipment.JumpBoost;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
 import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.UseAction;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -96,6 +99,18 @@ public class MixinLivingEntity {
 					this.itemUseTimeLeft = 7;
 				}
 			}
+		}
+	}
+
+	// === Extended invincibility frames ===
+	@Inject(method = "damage",
+			at = @At(value = "INVOKE", ordinal = 1, target = "Lnet/minecraft/entity/LivingEntity;applyDamage(Lnet/minecraft/entity/damage/DamageSource;F)V"))
+	private void onDamageIFrames(DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir) {
+		if (!((Object) this instanceof PlayerEntity)) return;
+		PlayerEntity self = (PlayerEntity)(Object)this;
+		int invincibilityTime = ExtendedIFrames.getIFrames(self);
+		if (invincibilityTime > self.timeUntilRegen) {
+			self.timeUntilRegen = invincibilityTime;
 		}
 	}
 }

@@ -1,12 +1,12 @@
-package cursedflames.bountifulbaubles.forge.common.old.capability;
+package cursedflames.bountifulbaubles.forge.common.capability;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cursedflames.bountifulbaubles.common.refactorlater.wormhole.DebugTarget;
+import cursedflames.bountifulbaubles.common.refactorlater.wormhole.IWormholeTarget;
+import cursedflames.bountifulbaubles.common.refactorlater.wormhole.PlayerTarget;
 import cursedflames.bountifulbaubles.forge.common.BountifulBaublesForge;
-import cursedflames.bountifulbaubles.forge.common.old.wormhole.DebugTarget;
-import cursedflames.bountifulbaubles.forge.common.old.wormhole.IWormholeTarget;
-import cursedflames.bountifulbaubles.forge.common.old.wormhole.PlayerTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
@@ -62,8 +62,8 @@ public class CapabilityWormholePins {
 				});
 	}
 
-	public static interface IWormholePins {
-		public List<IWormholeTarget> getPinList();
+	public interface IWormholePins {
+		List<IWormholeTarget> getPinList();
 	}
 
 	public static class Storage implements IStorage<IWormholePins> {

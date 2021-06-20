@@ -1,4 +1,4 @@
-package cursedflames.bountifulbaubles.forge.common.old.proxy;
+package cursedflames.bountifulbaubles.forge.common.proxy;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;

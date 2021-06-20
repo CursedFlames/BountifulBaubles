@@ -1,32 +1,26 @@
-package cursedflames.bountifulbaubles.forge.common.old.wormhole;
+package cursedflames.bountifulbaubles.common.refactorlater.wormhole;
+
+import com.google.common.collect.Lists;
+import cursedflames.bountifulbaubles.common.network.NetworkHandler;
+import cursedflames.bountifulbaubles.common.network.packet.wormhole.S2CPacketUpdateWormholeGui;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerListener;
+import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Lists;
-
-import cursedflames.bountifulbaubles.forge.common.BountifulBaublesForge;
-import cursedflames.bountifulbaubles.forge.common.capability.CapabilityWormholePins;
-import cursedflames.bountifulbaubles.forge.common.capability.CapabilityWormholePins.IWormholePins;
-import cursedflames.bountifulbaubles.forge.common.old.network.PacketHandler;
-import cursedflames.bountifulbaubles.forge.common.old.network.wormhole.SPacketUpdateWormholeGui;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerListener;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.registries.ObjectHolder;
-
 //Containers without any items FTW!
 //(I couldn't be bothered dealing with normal GUI data syncing...)
 public class ContainerWormhole extends ScreenHandler {
-	@ObjectHolder(BountifulBaublesForge.MODID + ":wormhole")
-	public static ScreenHandlerType<ContainerWormhole> CONTAINER_REFORGE;
+//	@ObjectHolder(BountifulBaublesForge.MODID + ":wormhole")
+	public static ScreenHandlerType<ContainerWormhole> CONTAINER_WORMHOLE;
 
 	// TODO actually do things properly instead of lazily making everything public
 	public PlayerEntity player;
@@ -39,31 +33,35 @@ public class ContainerWormhole extends ScreenHandler {
 	// private on Container, so we just reimplement it
 	protected final List<ScreenHandlerListener> listeners = Lists.newArrayList();
 
+	public static ContainerWormhole newFabric(int windowId, PlayerInventory inventory) {
+		return new ContainerWormhole(windowId, inventory.player);
+	}
+
 	public ContainerWormhole(int windowId, PlayerEntity player) {
-		super(CONTAINER_REFORGE, windowId);
+		super(CONTAINER_WORMHOLE, windowId);
 		this.player = player;
 
 //		BountifulBaubles.logger.info("container constructor");
 		if (player.world.isClient)
 			return;
 //		BountifulBaubles.logger.info("not remote");
-		List<IWormholeTarget> pinned = new ArrayList<>();
-		LazyOptional<IWormholePins> cap = player.getCapability(CapabilityWormholePins.PIN_CAP, null);
-		if (cap.isPresent()) {
-//			pinned = cap.orElse(null).getPinList();
+		List<IWormholeTarget> pinned = WormholeDataProxy.instance.getPinList(player);
+		if (pinned == null) {
+			pinned = new ArrayList<>();
 		}
 //		pinned.add(new DebugTarget("debug3"));
 //		pinned.add(new DebugTarget("debug1"));
 //		pinned.add(new DebugTarget("debug-disabled"));
 		Map<Integer, IWormholeTarget> pinnedFound = new HashMap<>();
 
-//		for (int i = 0; i<6; i++) {
-//			targets.add(new DebugTarget("debug"+i));
-//		}
+		for (int i = 0; i<6; i++) {
+			targets.add(new DebugTarget("debug"+i));
+		}
 
 		List<PlayerEntity> players = new ArrayList<>(player.world.getPlayers());
 		// can't teleport to yourself
-		players.remove(player);
+		// FIXME remove debug changes
+//		players.remove(player);
 		boolean survivalOnly = !(player.isCreative() || player.isSpectator());
 		for (PlayerEntity entity : players) {
 			if ((!entity.isSpectator()) && !(survivalOnly && entity.isCreative()))
@@ -112,7 +110,7 @@ public class ContainerWormhole extends ScreenHandler {
 	@Override
 	public void sendContentUpdates() {
 		super.sendContentUpdates();
-
+		
 		if (player.world.isClient || !dirty)
 			return;
 		CompoundTag changes = new CompoundTag();
@@ -127,14 +125,13 @@ public class ContainerWormhole extends ScreenHandler {
 		}
 		changes.put("targets", targetsNBT);
 		changes.putInt("pinCount", pinCount);
-
+		
 		for (int j = 0; j < this.listeners.size(); ++j) {
 			ScreenHandlerListener listener = this.listeners.get(j);
 			if (!(listener instanceof ServerPlayerEntity))
 				continue;
 			ServerPlayerEntity player = (ServerPlayerEntity) listener;
-			PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player),
-					new SPacketUpdateWormholeGui(changes));
+			NetworkHandler.sendTo(new S2CPacketUpdateWormholeGui(changes), player);
 		}
 		dirty = false;
 	}
@@ -144,7 +141,7 @@ public class ContainerWormhole extends ScreenHandler {
 		CompoundTag targetsNBT = tag.getCompound("targets");
 		if (targetsNBT.getSize() > 0) {
 			targets.clear();
-//			CapabilityWormholePins.targetListFromNBT(targets, targetsNBT);
+			WormholeUtil.targetListFromNBT(targets, targetsNBT);
 			guiDirty = true;
 //			BountifulBaubles.logger.info(targets.size());
 		}

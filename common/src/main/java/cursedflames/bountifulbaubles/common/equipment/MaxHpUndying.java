@@ -25,9 +25,18 @@ public class MaxHpUndying {
         items.add(item);
     }
 
+	private static final Set<Item> recallItems = new HashSet<>();
+	public static void addRecall(Item item) {
+		recallItems.add(item);
+	}
+
     public static boolean hasMaxHpUndying(PlayerEntity player) {
         return EquipmentProxy.instance.hasAnyEquipped(player, items);
     }
+
+	public static boolean hasUndyingRecall(PlayerEntity player) {
+		return EquipmentProxy.instance.hasAnyEquipped(player, recallItems);
+	}
 
     public static void applyMaxHpDrain(PlayerEntity player, float delta) {
         if (delta >= 0) return;

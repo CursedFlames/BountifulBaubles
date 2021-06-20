@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.common.item;
 
-import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
+import cursedflames.bountifulbaubles.common.equipment.ExtendedIFrames;
 import cursedflames.bountifulbaubles.common.equipment.FallDamageResist;
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
 import cursedflames.bountifulbaubles.common.equipment.FireResist;
@@ -9,14 +9,21 @@ import cursedflames.bountifulbaubles.common.equipment.JumpBoost;
 import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
 import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
+import cursedflames.bountifulbaubles.common.refactorlater.ItemMagicMirror;
+import cursedflames.bountifulbaubles.common.refactorlater.ItemPotionRecall;
+import cursedflames.bountifulbaubles.common.refactorlater.ItemPotionWormhole;
+import cursedflames.bountifulbaubles.common.refactorlater.ItemWormholeMirror;
 import cursedflames.bountifulbaubles.common.util.AttributeModifierSupplier;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectInstance;
+import cursedflames.bountifulbaubles.common.util.Teleport;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.TypedActionResult;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -60,6 +67,10 @@ public class ModItems {
 	@SuppressWarnings("unchecked")
 	private static <A, B> B cast(A obj) {
 		return (B) obj;
+	}
+
+	private static BBItem bbItem(Item obj) {
+		return cast(obj);
 	}
 
 	private static IEquipmentItem equipment(Item obj) {
@@ -194,13 +205,13 @@ public class ModItems {
 		PotionImmunity.add(shield_ankh, set(BLINDNESS, HUNGER, NAUSEA, WEAKNESS, MINING_FATIGUE, SLOWNESS, LEVITATION, POISON, WITHER));
 
 		magic_mirror = add("magic_mirror",
-				new BBItem(baseSettings().maxCount(1)));
-//		potion_recall = add("potion_recall",
-//			new ItemPotionBase(baseSettings()));
+				new ItemMagicMirror(baseSettings().maxCount(1)));
+		potion_recall = add("potion_recall",
+			new ItemPotionRecall(baseSettings()));
 		wormhole_mirror = add("wormhole_mirror",
-				new BBItem(baseSettings().maxCount(1)));
-//		potion_wormhole = add("potion_wormhole",
-//			new ItemPotionBase(baseSettings()));
+				new ItemWormholeMirror(baseSettings().maxCount(1)));
+		potion_wormhole = add("potion_wormhole",
+			new ItemPotionWormhole(baseSettings()));
 
 		balloon = add("balloon",
 				EquipmentItem.apply(baseSettingsCurio(), MISC));
@@ -248,10 +259,27 @@ public class ModItems {
 		MaxHpUndying.add(broken_heart);
 		phylactery_charm = add("phylactery_charm",
 				EquipmentItem.apply(baseSettingsCurio(), MISC));
+		bbItem(phylactery_charm).attachOnUse((world, player, hand) -> {
+			if (!world.isClient && !Teleport.canDoTeleport(world, player)) {
+				player.sendMessage(new TranslatableText(
+						ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
+				return new TypedActionResult<>(ActionResult.FAIL, player.getStackInHand(hand));
+			}
+			player.setCurrentHand(hand);
+			if (!world.isClient) {
+				Teleport.teleportPlayerToSpawn(world, player);
+				// TODO does damage source matter?
+				player.damage(/*new DamageSourcePhylactery()*/ DamageSource.MAGIC, 7);
+			}
+			return new TypedActionResult<>(ActionResult.SUCCESS, player.getStackInHand(hand));
+		});
 		MaxHpUndying.add(phylactery_charm);
+		MaxHpUndying.addRecall(phylactery_charm);
 		equipment(phylactery_charm).setApplyWhenHeld();
 		amulet_cross = add("amulet_cross",
 				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
+		// TODO configurable i-frames
+		ExtendedIFrames.addIFrames(amulet_cross, 36);
 
 		gloves_dexterity = add("gloves_dexterity",
 				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));

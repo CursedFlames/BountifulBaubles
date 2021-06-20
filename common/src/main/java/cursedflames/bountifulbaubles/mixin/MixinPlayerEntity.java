@@ -6,6 +6,7 @@ import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
 import cursedflames.bountifulbaubles.common.equipment.FireResist;
 import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import cursedflames.bountifulbaubles.common.item.ModItems;
+import cursedflames.bountifulbaubles.common.util.Teleport;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -89,10 +90,11 @@ public abstract class MixinPlayerEntity extends LivingEntity {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setHealth(F)V"),
             cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
     private void onApplyDamage(DamageSource damageSource, float damageAmount, CallbackInfo ci) {
+    	PlayerEntity self = (PlayerEntity)(Object)this;
         // Capturing this as a local breaks on Forge
         float previousHealth = this.getHealth();
         float healthAfter = previousHealth - damageAmount;
-        if (healthAfter <= 0 && MaxHpUndying.hasMaxHpUndying((PlayerEntity)(Object)this)) {
+        if (healthAfter <= 0 && MaxHpUndying.hasMaxHpUndying(self)) {
             ci.cancel();
             // Same as vanilla logic, but we don't go below MIN_VALUE health, to avoid death
             this.setHealth(Float.MIN_VALUE);
@@ -101,7 +103,10 @@ public abstract class MixinPlayerEntity extends LivingEntity {
                 this.increaseStat(Stats.DAMAGE_TAKEN, Math.round(damageAmount * 10.0F));
             }
             // Deal the excess damage to the maxhp instead - this will kill the player if they go below 1 maxhp
-            MaxHpUndying.applyMaxHpDrain((PlayerEntity)(Object)this, healthAfter);
+            MaxHpUndying.applyMaxHpDrain(self, healthAfter);
+            if (MaxHpUndying.hasUndyingRecall(self)) {
+				Teleport.teleportPlayerToSpawn(self.world, self);
+			}
         }
     }
 

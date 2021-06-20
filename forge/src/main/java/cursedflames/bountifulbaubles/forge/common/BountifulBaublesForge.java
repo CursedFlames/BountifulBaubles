@@ -5,40 +5,31 @@ import java.util.List;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
 
+import cursedflames.bountifulbaubles.common.command.CommandWormhole;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
+import cursedflames.bountifulbaubles.common.network.NetworkHandler;
+import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWormhole;
+import cursedflames.bountifulbaubles.common.refactorlater.wormhole.WormholeDataProxy;
+import cursedflames.bountifulbaubles.forge.common.capability.WormholeDataProxyForge;
 import cursedflames.bountifulbaubles.forge.common.equipment.EquipmentProxyForge;
 import cursedflames.bountifulbaubles.forge.common.item.ModItemsForge;
+import cursedflames.bountifulbaubles.forge.common.network.NetworkHandlerForge;
 import cursedflames.bountifulbaubles.forge.common.old.ModCapabilities;
-import cursedflames.bountifulbaubles.forge.common.old.baubleeffect.EventHandlerEffect;
 import cursedflames.bountifulbaubles.forge.common.old.block.ModBlocks;
-import cursedflames.bountifulbaubles.forge.common.old.command.CommandWormhole;
 import cursedflames.bountifulbaubles.forge.common.old.config.Config;
 import cursedflames.bountifulbaubles.forge.common.old.effect.EffectFlight;
 import cursedflames.bountifulbaubles.forge.common.old.effect.EffectSin;
-import cursedflames.bountifulbaubles.forge.common.old.item.ModItems;
-import cursedflames.bountifulbaubles.forge.common.old.item.items.ItemBrokenHeart;
-import cursedflames.bountifulbaubles.forge.common.old.item.items.ItemGlovesDexterity;
-import cursedflames.bountifulbaubles.forge.common.old.item.items.ItemGlovesDigging;
-import cursedflames.bountifulbaubles.forge.common.old.item.items.amuletsin.ItemAmuletSinGluttony;
-import cursedflames.bountifulbaubles.forge.common.old.item.items.amuletsin.ItemAmuletSinPride;
-import cursedflames.bountifulbaubles.forge.common.old.item.items.amuletsin.ItemAmuletSinWrath;
-import cursedflames.bountifulbaubles.forge.common.old.item.items.ankhparts.shields.ItemShieldCobalt;
-import cursedflames.bountifulbaubles.forge.common.old.loot.LootTableInjector;
-import cursedflames.bountifulbaubles.forge.common.old.misc.MiscEventHandler;
 import cursedflames.bountifulbaubles.forge.common.old.network.PacketHandler;
-import cursedflames.bountifulbaubles.forge.common.old.proxy.ClientProxy;
-import cursedflames.bountifulbaubles.forge.common.old.proxy.IProxy;
-import cursedflames.bountifulbaubles.forge.common.old.proxy.ServerProxy;
+import cursedflames.bountifulbaubles.forge.common.proxy.ClientProxy;
+import cursedflames.bountifulbaubles.forge.common.proxy.IProxy;
+import cursedflames.bountifulbaubles.forge.common.proxy.ServerProxy;
 import cursedflames.bountifulbaubles.forge.common.old.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.forge.common.old.recipe.BrewingRecipes;
-import cursedflames.bountifulbaubles.forge.common.old.recipe.anvil.AnvilCrafting;
-import cursedflames.bountifulbaubles.forge.common.old.wormhole.ContainerWormhole;
 import net.minecraft.block.Block;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.MinecraftServer;
@@ -73,10 +64,17 @@ public class BountifulBaublesForge extends BountifulBaubles {
 			return new ItemStack(ModItems.obsidian_skull);
 		}
 	};*/
+
+	static {
+		NetworkHandler.setProxy(new NetworkHandlerForge());
+		WormholeDataProxy.instance = new WormholeDataProxyForge();
+	}
 	
 	public static MinecraftServer server;
 
 	public BountifulBaublesForge() {
+		NetworkHandler.register();
+
 		EquipmentProxy.instance = new EquipmentProxyForge();
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
@@ -119,6 +117,7 @@ public class BountifulBaublesForge extends BountifulBaubles {
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
+		// FIXME register wormhole capability
 		ModCapabilities.registerCapabilities();
 		AnvilRecipes.registerRecipes();
 		BrewingRecipes.registerRecipes();
@@ -191,9 +190,11 @@ public class BountifulBaublesForge extends BountifulBaubles {
 		
 		@SubscribeEvent
 		public static void onContainerRegistry(final RegistryEvent.Register<ScreenHandlerType<?>> event) {
-			event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
-				return new ContainerWormhole(windowId, proxy.getClientPlayer());
-			}).setRegistryName(MODID, "wormhole"));
+			ContainerWormhole.CONTAINER_WORMHOLE = IForgeContainerType.create(
+					(windowId, inv, data) -> new ContainerWormhole(windowId, proxy.getClientPlayer())
+			);
+			ContainerWormhole.CONTAINER_WORMHOLE.setRegistryName(MODID, "wormhole");
+			event.getRegistry().register(ContainerWormhole.CONTAINER_WORMHOLE);
 		}
 		
 		@SubscribeEvent

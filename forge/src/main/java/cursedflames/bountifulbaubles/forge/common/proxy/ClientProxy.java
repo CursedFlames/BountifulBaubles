@@ -1,8 +1,7 @@
-package cursedflames.bountifulbaubles.forge.common.old.proxy;
+package cursedflames.bountifulbaubles.forge.common.proxy;
 
-import cursedflames.bountifulbaubles.forge.client.gui.ScreenWormhole;
-import cursedflames.bountifulbaubles.forge.common.old.item.ModItems;
-import cursedflames.bountifulbaubles.forge.common.old.wormhole.ContainerWormhole;
+import cursedflames.bountifulbaubles.client.refactorlater.ScreenWormhole;
+import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWormhole;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -41,13 +40,13 @@ public class ClientProxy implements IProxy {
 	
 	@Override
 	public void clientSetup(final FMLClientSetupEvent event) {
-		HandledScreens.register(ContainerWormhole.CONTAINER_REFORGE, ScreenWormhole::new);
+		HandledScreens.register(ContainerWormhole.CONTAINER_WORMHOLE, ScreenWormhole::new);
 		
 		// This is janky af lmao
 
-		addProperty(ModItems.magic_mirror, new Identifier("using"));
-		addProperty(ModItems.shield_cobalt, new Identifier("blocking"));
-		addProperty(ModItems.shield_obsidian, new Identifier("blocking"));
-		addProperty(ModItems.shield_ankh, new Identifier("blocking"));
+//		addProperty(ModItems.magic_mirror, new Identifier("using"));
+//		addProperty(ModItems.shield_cobalt, new Identifier("blocking"));
+//		addProperty(ModItems.shield_obsidian, new Identifier("blocking"));
+//		addProperty(ModItems.shield_ankh, new Identifier("blocking"));
 	}
 }

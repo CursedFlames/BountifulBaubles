@@ -18,7 +18,13 @@
   "entrypoints": {
     "main": [
       "cursedflames.bountifulbaubles.fabric.BountifulBaublesFabric"
-    ]
+    ],
+	"client": [
+	  "cursedflames.bountifulbaubles.fabric.client.BountifulBaublesFabricClient"
+	],
+	"cardinal-components": [
+	  "cursedflames.bountifulbaubles.fabric.common.component.ComponentWormholePins"
+	]
   },
   "accessWidener" : "bountifulbaubles.accesswidener",
   "mixins": ["bountifulbaubles.mixins.json"],
@@ -26,5 +32,10 @@
     "fabricloader": ">=0.7.4",
     "fabric": "*",
     "minecraft": ">=1.16.4"
+  },
+  "custom": {
+	"cardinal-components": [
+	  "bountifulbaubles:wormhole_pins"
+	]
   }
 }

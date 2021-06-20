@@ -2,7 +2,7 @@ package cursedflames.bountifulbaubles.forge.common.old.network.wormhole;
 
 import java.util.function.Supplier;
 
-import cursedflames.bountifulbaubles.forge.common.old.capability.CapabilityWormholePins;
+import cursedflames.bountifulbaubles.forge.common.capability.CapabilityWormholePins;
 import cursedflames.bountifulbaubles.forge.common.old.wormhole.IWormholeTarget;
 import cursedflames.bountifulbaubles.forge.common.old.wormhole.PlayerTarget;
 import cursedflames.bountifulbaubles.forge.common.old.wormhole.TeleportRequest;
@@ -27,21 +27,21 @@ public class CPacketDoWormhole {
 	}
 	
 	public void handleMessage(Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
-			IWormholeTarget whTarget = CapabilityWormholePins.targetFromNBT(target);
-			if (target==null)
-				return;
-			PlayerEntity player = ctx.get().getSender();
-			if (whTarget instanceof PlayerTarget) {
-				PlayerEntity playerTarget = ((PlayerTarget) whTarget).getPlayer(player.world);
-				if (playerTarget == null) return;
-				TeleportRequest.makeReq(player.world, player, playerTarget);
-				return;
-			}
-			if (!whTarget.teleportPlayerTo(player))
-				return;
-			WormholeUtil.consumeItem(player);
-		});
-		ctx.get().setPacketHandled(true);
+//		ctx.get().enqueueWork(() -> {
+//			IWormholeTarget whTarget = CapabilityWormholePins.targetFromNBT(target);
+//			if (target==null)
+//				return;
+//			PlayerEntity player = ctx.get().getSender();
+//			if (whTarget instanceof PlayerTarget) {
+//				PlayerEntity playerTarget = ((PlayerTarget) whTarget).getPlayer(player.world);
+//				if (playerTarget == null) return;
+//				TeleportRequest.makeReq(player.world, player, playerTarget);
+//				return;
+//			}
+//			if (!whTarget.teleportPlayerTo(player))
+//				return;
+//			WormholeUtil.consumeItem(player);
+//		});
+//		ctx.get().setPacketHandled(true);
 	}
 }
