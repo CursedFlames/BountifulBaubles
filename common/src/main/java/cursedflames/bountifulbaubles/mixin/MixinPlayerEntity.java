@@ -6,6 +6,7 @@ import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
 import cursedflames.bountifulbaubles.common.equipment.FireResist;
 import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
+import cursedflames.bountifulbaubles.common.equipment.StepAssist;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemGlovesDigging;
 import cursedflames.bountifulbaubles.common.util.Teleport;
@@ -30,6 +31,10 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+
+import static cursedflames.bountifulbaubles.common.equipment.StepAssist.STEP_HEIGHT_INCREASED;
+import static cursedflames.bountifulbaubles.common.equipment.StepAssist.STEP_HEIGHT_SNEAKING;
+import static cursedflames.bountifulbaubles.common.equipment.StepAssist.STEP_HEIGHT_VANILLA;
 
 @Mixin(PlayerEntity.class)
 public abstract class MixinPlayerEntity extends LivingEntity {
@@ -139,6 +144,26 @@ public abstract class MixinPlayerEntity extends LivingEntity {
 	private void onAttack(Entity entity, CallbackInfo ci) {
 		if (EquipmentProxy.instance.hasEquipped((PlayerEntity)(Object)this, ModItems.amulet_sin_wrath)) {
 			this.addStatusEffect(EffectSin.effectInstance(3, 6 * 20, true));
+		}
+	}
+
+	// === Pride necklace step assist ===
+	// TODO this is really janky, is there a better way to do this?
+	@Inject(method = "tick", at = @At("HEAD"))
+	private void onTick(CallbackInfo ci) {
+		PlayerEntity self = (PlayerEntity)(Object)this;
+		if (StepAssist.hasStepAssist(self)) {
+			if (self.isSneaking()) {
+				if (self.stepHeight > STEP_HEIGHT_SNEAKING) {
+					self.stepHeight = STEP_HEIGHT_SNEAKING;
+				}
+			} else {
+				if (self.stepHeight < STEP_HEIGHT_INCREASED) {
+					self.stepHeight = STEP_HEIGHT_INCREASED;
+				}
+			}
+		} else if (self.stepHeight == STEP_HEIGHT_INCREASED || self.stepHeight == STEP_HEIGHT_SNEAKING) {
+			self.stepHeight = STEP_HEIGHT_VANILLA;
 		}
 	}
 

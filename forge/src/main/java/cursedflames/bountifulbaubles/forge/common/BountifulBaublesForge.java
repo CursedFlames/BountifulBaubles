@@ -6,6 +6,7 @@ import java.util.List;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 
 import cursedflames.bountifulbaubles.common.command.CommandWormhole;
+import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.network.NetworkHandler;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWormhole;
@@ -18,7 +19,6 @@ import cursedflames.bountifulbaubles.forge.common.old.ModCapabilities;
 import cursedflames.bountifulbaubles.forge.common.old.block.ModBlocks;
 import cursedflames.bountifulbaubles.forge.common.old.config.Config;
 import cursedflames.bountifulbaubles.forge.common.old.effect.EffectFlight;
-import cursedflames.bountifulbaubles.forge.common.old.effect.EffectSin;
 import cursedflames.bountifulbaubles.forge.common.old.network.PacketHandler;
 import cursedflames.bountifulbaubles.forge.common.proxy.ClientProxy;
 import cursedflames.bountifulbaubles.forge.common.proxy.IProxy;
@@ -51,6 +51,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
+
+import static cursedflames.bountifulbaubles.common.util.BBUtil.modId;
 
 @Mod("bountifulbaubles")
 public class BountifulBaublesForge extends BountifulBaubles {
@@ -199,7 +201,7 @@ public class BountifulBaublesForge extends BountifulBaubles {
 		
 		@SubscribeEvent
 		public static void onEffectsRegistry(final RegistryEvent.Register<StatusEffect> event) {
-			event.getRegistry().register(new EffectSin());
+			event.getRegistry().register(new EffectSin().setRegistryName(modId("sinful")));
 			event.getRegistry().register(new EffectFlight());
 		}
 		

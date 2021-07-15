@@ -10,6 +10,7 @@ import cursedflames.bountifulbaubles.common.equipment.JumpBoost;
 import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
 import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
+import cursedflames.bountifulbaubles.common.equipment.StepAssist;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemGlovesDigging;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemMagicMirror;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemPotionRecall;
@@ -260,6 +261,7 @@ public class ModItems {
 		equipment(amulet_sin_pride).attachOnUnequip((player, stack) -> {
 			player.removeStatusEffect(EffectSin.instance);
 		});
+		StepAssist.add(amulet_sin_pride);
 
 		amulet_sin_wrath = add("amulet_sin_wrath",
 				EquipmentItem.apply(baseSettingsCurio(), set(NECKLACE)));
