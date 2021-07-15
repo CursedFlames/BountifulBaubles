@@ -1,18 +1,22 @@
 package cursedflames.bountifulbaubles.mixin;
 
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
+import cursedflames.bountifulbaubles.common.equipment.DiggingEquipment;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
 import cursedflames.bountifulbaubles.common.equipment.FireResist;
 import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import cursedflames.bountifulbaubles.common.item.ModItems;
+import cursedflames.bountifulbaubles.common.refactorlater.ItemGlovesDigging;
 import cursedflames.bountifulbaubles.common.util.Teleport;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
@@ -135,6 +139,24 @@ public abstract class MixinPlayerEntity extends LivingEntity {
 	private void onAttack(Entity entity, CallbackInfo ci) {
 		if (EquipmentProxy.instance.hasEquipped((PlayerEntity)(Object)this, ModItems.amulet_sin_wrath)) {
 			this.addStatusEffect(EffectSin.effectInstance(3, 6 * 20, true));
+		}
+	}
+
+	// === Digging gloves ===
+	// TODO can we make this mixin more compatible?
+	@Inject(method = "isUsingEffectiveTool", at = @At("RETURN"), cancellable = true)
+	private void onIsUsingEffectiveTool(BlockState blockState, CallbackInfoReturnable<Boolean> cir) {
+    	// Already using an effective tool, so we don't care
+    	if (cir.getReturnValueZ()) return;
+    	// If the player is already holding a tool we don't do anything, and use it instead
+    	if (ItemGlovesDigging.isTool(this.getMainHandStack(), blockState)) {
+    		return;
+		}
+		ItemStack diggingTool = DiggingEquipment.getEquipment((PlayerEntity)(Object)this);
+		if (diggingTool.getItem() instanceof ItemGlovesDigging) {
+			if (((ItemGlovesDigging) diggingTool.getItem()).canHarvest(blockState)) {
+				cir.setReturnValue(true);
+			}
 		}
 	}
 }

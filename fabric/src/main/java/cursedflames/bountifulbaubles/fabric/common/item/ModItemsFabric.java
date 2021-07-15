@@ -2,8 +2,6 @@ package cursedflames.bountifulbaubles.fabric.common.item;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.ModItems;
-import cursedflames.bountifulbaubles.fabric.common.equipment.BBShieldTrinketItem;
-import cursedflames.bountifulbaubles.fabric.common.equipment.BBTrinketItem;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -19,6 +17,7 @@ public class ModItemsFabric extends ModItems {
 
 		EquipmentItem = BBTrinketItem::new;
 		ShieldItem = BBShieldTrinketItem::new;
+		DiggingGlovesItem = (a, b, c) -> new ItemTrinketGlovesDigging(a, c, b);
 	}
 
 	public static void init() {

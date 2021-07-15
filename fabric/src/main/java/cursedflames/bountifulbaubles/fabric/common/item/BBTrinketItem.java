@@ -1,4 +1,4 @@
-package cursedflames.bountifulbaubles.fabric.common.equipment;
+package cursedflames.bountifulbaubles.fabric.common.item;
 
 import com.google.common.collect.Multimap;
 import cursedflames.bountifulbaubles.common.item.BBEquipmentItem;

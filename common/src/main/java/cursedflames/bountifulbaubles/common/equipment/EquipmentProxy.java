@@ -2,6 +2,7 @@ package cursedflames.bountifulbaubles.common.equipment;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,4 +49,21 @@ public abstract class EquipmentProxy {
 		}
 		return false;
 	}
+
+	// Code duplication but for itemstacks, woo
+	public List<ItemStack> getHeldEquipmentStacks(PlayerEntity player) {
+		List<ItemStack> heldEquipment = new ArrayList<>();
+		ItemStack main = player.getMainHandStack();
+		ItemStack off = player.getOffHandStack();
+		if (heldEquipmentItems.contains(main.getItem())) {
+			heldEquipment.add(main);
+		}
+		if (heldEquipmentItems.contains(off.getItem())) {
+			heldEquipment.add(off);
+		}
+		return heldEquipment;
+	}
+
+	// TODO maybe add a forEachEquipped method with early return? not sure how clean that'd be
+	public abstract List<ItemStack> getEquippedStacks(PlayerEntity player);
 }

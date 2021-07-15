@@ -1,7 +1,5 @@
-package cursedflames.bountifulbaubles.forge.common.equipment;
+package cursedflames.bountifulbaubles.forge.common.item;
 
-
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import cursedflames.bountifulbaubles.common.item.BBEquipmentItem;
 import cursedflames.bountifulbaubles.forge.common.util.CuriosUtil;

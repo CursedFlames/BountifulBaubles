@@ -77,4 +77,19 @@ public class CuriosUtil {
 		}
 		return items;
 	}
+
+	public static List<ItemStack> getAllStacks(LivingEntity entity) {
+		Optional<IItemHandlerModifiable> equippedCurios = CuriosApi.getCuriosHelper().getEquippedCurios(entity).resolve();
+		List<ItemStack> items = new ArrayList<>();
+		if (equippedCurios.isPresent()) {
+			IItemHandlerModifiable itemHandler = equippedCurios.get();
+			for (int i = 0; i < itemHandler.getSlots(); i++) {
+				ItemStack stack = itemHandler.getStackInSlot(i);
+				if (!stack.isEmpty()) {
+					items.add(stack);
+				}
+			}
+		}
+		return items;
+	}
 }

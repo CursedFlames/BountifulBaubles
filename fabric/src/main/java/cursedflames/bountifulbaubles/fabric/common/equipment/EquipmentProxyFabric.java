@@ -23,4 +23,18 @@ public class EquipmentProxyFabric extends EquipmentProxy {
 		}
 		return items;
 	}
+
+	@Override
+	public List<ItemStack> getEquippedStacks(PlayerEntity player) {
+		Inventory inventory = TrinketsApi.getTrinketsInventory(player);
+		// Start with held items, then add any equipped trinkets
+		List<ItemStack> items = getHeldEquipmentStacks(player);
+		for (int i = 0; i < inventory.size(); i++) {
+			ItemStack stack = inventory.getStack(i);
+			if (!stack.isEmpty()) {
+				items.add(stack);
+			}
+		}
+		return items;
+	}
 }

@@ -1,6 +1,7 @@
 package cursedflames.bountifulbaubles.common.item;
 
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
+import cursedflames.bountifulbaubles.common.equipment.DiggingEquipment;
 import cursedflames.bountifulbaubles.common.equipment.ExtendedIFrames;
 import cursedflames.bountifulbaubles.common.equipment.FallDamageResist;
 import cursedflames.bountifulbaubles.common.equipment.FastToolSwitching;
@@ -9,17 +10,21 @@ import cursedflames.bountifulbaubles.common.equipment.JumpBoost;
 import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
 import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
+import cursedflames.bountifulbaubles.common.refactorlater.ItemGlovesDigging;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemMagicMirror;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemPotionRecall;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemPotionWormhole;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemWormholeMirror;
 import cursedflames.bountifulbaubles.common.util.AttributeModifierSupplier;
+import cursedflames.bountifulbaubles.common.util.SimpleToolMaterial;
 import cursedflames.bountifulbaubles.common.util.Teleport;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
@@ -45,8 +50,14 @@ public class ModItems {
 		Item construct(Item.Settings settings, Set<String> slots, int cooldownTicks, int durability, int enchantability, Item repairItem);
 	}
 
+	@FunctionalInterface
+	public interface DiggingGlovesItemProvider {
+		Item construct(Item.Settings settings, Set<String> slots, ToolMaterial tier);
+	}
+
 	protected static BiFunction<Item.Settings, Set<String>, BBItem> EquipmentItem;
 	protected static ShieldItemProvider ShieldItem;
+	protected static DiggingGlovesItemProvider DiggingGlovesItem;
 
 	public static ItemGroup GROUP;
 
@@ -285,10 +296,30 @@ public class ModItems {
 				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
 		FastToolSwitching.add(gloves_dexterity);
 		equipment(gloves_dexterity).addModifier(GENERIC_ATTACK_SPEED, new AttributeModifierSupplier(0.6, ADDITION));
-		gloves_digging_iron = add("gloves_digging_iron",
-				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
-		gloves_digging_diamond = add("gloves_digging_diamond",
-				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
+//		gloves_digging_iron = add("gloves_digging_iron",
+//				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
+//		gloves_digging_diamond = add("gloves_digging_diamond",
+//				EquipmentItem.apply(baseSettingsCurio(), set(GLOVES)));
+		ToolMaterial gloveTierIron = new SimpleToolMaterial(
+				ToolMaterials.STONE.getMiningLevel(),
+				ToolMaterials.IRON.getDurability(),
+				ToolMaterials.WOOD.getMiningSpeedMultiplier(),
+				ToolMaterials.STONE.getAttackDamage(),
+				ToolMaterials.IRON.getEnchantability(),
+				ToolMaterials.IRON::getRepairIngredient);
+
+		ToolMaterial gloveTierDiamond = new SimpleToolMaterial(
+				ToolMaterials.IRON.getMiningLevel(),
+				(int) (ToolMaterials.DIAMOND.getDurability()*0.75),
+				ToolMaterials.STONE.getMiningSpeedMultiplier(),
+				ToolMaterials.IRON.getAttackDamage(),
+				ToolMaterials.DIAMOND.getEnchantability(),
+				ToolMaterials.DIAMOND::getRepairIngredient);
+
+		gloves_digging_iron = add("gloves_digging_iron", DiggingGlovesItem.construct(baseSettingsCurio(), set(GLOVES), gloveTierIron));
+		DiggingEquipment.add(gloves_digging_iron);
+		gloves_digging_diamond = add("gloves_digging_diamond", DiggingGlovesItem.construct(baseSettingsCurio(), set(GLOVES), gloveTierDiamond));
+		DiggingEquipment.add(gloves_digging_diamond);
 
 		disintegration_tablet = add("disintegration_tablet",
 				new BBItem(baseSettings().maxCount(1)));
