@@ -3,7 +3,8 @@
   "package": "cursedflames.bountifulbaubles.forge.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-	"MixinPlayerEntity"
+	"MixinPlayerEntity",
+	"MixinForgeHooks"
   ],
   "client": [
     "client.MixinForgeIngameGui"

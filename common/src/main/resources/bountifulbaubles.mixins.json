@@ -8,7 +8,8 @@
     "MixinPlayerEntity",
     "MixinServerWorld",
     "MixinItemEntity",
-	"MixinServerPlayerInteractionManager"
+	"MixinServerPlayerInteractionManager",
+	"ItemAccessor"
   ],
   "client": [
     "client.MixinClientPlayerEntity",

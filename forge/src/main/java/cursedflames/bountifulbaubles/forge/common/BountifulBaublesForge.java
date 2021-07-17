@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.forge.common;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +9,15 @@ import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.command.CommandWormhole;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
+import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
 import cursedflames.bountifulbaubles.common.network.NetworkHandler;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.WormholeDataProxy;
+import cursedflames.bountifulbaubles.common.util.MiscProxy;
 import cursedflames.bountifulbaubles.forge.common.capability.WormholeDataProxyForge;
 import cursedflames.bountifulbaubles.forge.common.equipment.EquipmentProxyForge;
 import cursedflames.bountifulbaubles.forge.common.item.ModItemsForge;
+import cursedflames.bountifulbaubles.forge.common.misc.MiscProxyForge;
 import cursedflames.bountifulbaubles.forge.common.network.NetworkHandlerForge;
 import cursedflames.bountifulbaubles.forge.common.old.ModCapabilities;
 import cursedflames.bountifulbaubles.forge.common.old.block.ModBlocks;
@@ -30,11 +34,15 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
 import net.minecraft.potion.Potion;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.Identifier;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -70,17 +78,19 @@ public class BountifulBaublesForge extends BountifulBaubles {
 	static {
 		NetworkHandler.setProxy(new NetworkHandlerForge());
 		WormholeDataProxy.instance = new WormholeDataProxyForge();
+		MiscProxy.instance = new MiscProxyForge();
+		EquipmentProxy.instance = new EquipmentProxyForge();
 	}
 	
 	public static MinecraftServer server;
 
 	public BountifulBaublesForge() {
+		config = new cursedflames.bountifulbaubles.common.config.ModConfig(FMLPaths.CONFIGDIR.get());
+
 		NetworkHandler.register();
 
-		EquipmentProxy.instance = new EquipmentProxyForge();
-
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+//		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
+//		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
         
 		// Register the setup method for modloading
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -92,8 +102,8 @@ public class BountifulBaublesForge extends BountifulBaubles {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 		
 		
-		Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MODID+"-client.toml"));
-		Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MODID+"-common.toml"));
+//		Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MODID+"-client.toml"));
+//		Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MODID+"-common.toml"));
 		
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
@@ -176,6 +186,24 @@ public class BountifulBaublesForge extends BountifulBaubles {
 	@SubscribeEvent
 	public void onServerStopping(FMLServerStoppingEvent event) {
 		server = null;
+	}
+
+	@SubscribeEvent
+	public void onLootTableLoad(LootTableLoadEvent event) {
+		LootTable table = event.getTable();
+		Identifier loc = event.getName();
+//		if (Config.MOB_LOOT_ENABLED.get()) {
+//			mobLootTableLoad(event, table, loc);
+//		}
+//		if (Config.STRUCTURE_LOOT_ENABLED.get()) {
+//			structureLootTableLoad(event, table, loc);
+//		}
+		List<LootPool> pools = LootTableInjector.getAddedLootTable(loc);
+		if (pools != null) {
+			for (LootPool pool : pools) {
+				table.addPool(pool);
+			}
+		}
 	}
 
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)

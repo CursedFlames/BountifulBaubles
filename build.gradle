@@ -7,6 +7,10 @@ architectury {
     minecraft = rootProject.minecraft_version
 }
 
+repositories {
+	mavenCentral()
+}
+
 subprojects {
     apply plugin: "forgified-fabric-loom"
 
@@ -17,6 +21,7 @@ subprojects {
     dependencies {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
         mappings "net.fabricmc:yarn:${rootProject.yarn_version}"
+		compile "com.electronwill.night-config:toml:${rootProject.nightconfig_version}"
     }
 }
 

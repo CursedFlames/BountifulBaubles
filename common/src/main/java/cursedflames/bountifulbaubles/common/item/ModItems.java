@@ -19,6 +19,7 @@ import cursedflames.bountifulbaubles.common.refactorlater.ItemWormholeMirror;
 import cursedflames.bountifulbaubles.common.util.AttributeModifierSupplier;
 import cursedflames.bountifulbaubles.common.util.SimpleToolMaterial;
 import cursedflames.bountifulbaubles.common.util.Teleport;
+import cursedflames.bountifulbaubles.mixin.ItemAccessor;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -325,6 +326,7 @@ public class ModItems {
 
 		disintegration_tablet = add("disintegration_tablet",
 				new BBItem(baseSettings().maxCount(1)));
+		((ItemAccessor) disintegration_tablet).setRecipeRemainder(disintegration_tablet);
 		spectral_silt = add("spectral_silt",
 				new BBItem(baseSettings()));
 		resplendent_token = add("resplendent_token",
