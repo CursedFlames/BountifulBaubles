@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.mixin;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.DiggingEquipment;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
@@ -115,7 +116,7 @@ public abstract class MixinPlayerEntity extends LivingEntity {
             // Deal the excess damage to the maxhp instead - this will kill the player if they go below 1 maxhp
             MaxHpUndying.applyMaxHpDrain(self, healthAfter);
             if (MaxHpUndying.hasUndyingRecall(self)) {
-				Teleport.teleportPlayerToSpawn(self.world, self);
+				Teleport.teleportPlayerToSpawn(self.world, self, BountifulBaubles.config.MAGIC_MIRROR_INTERDIMENSIONAL);
 			}
         }
     }

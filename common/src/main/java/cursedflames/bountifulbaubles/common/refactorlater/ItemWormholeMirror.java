@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.common.refactorlater;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.WormholeUtil;
@@ -48,11 +49,11 @@ public class ItemWormholeMirror extends BBItem {
 		if (!world.isClient && entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) entity;
 			if (!sneaking) {
-				if (!Teleport.canDoTeleport(world, player)) {
+				if (!Teleport.canDoTeleport(world, player, BountifulBaubles.config.MAGIC_MIRROR_INTERDIMENSIONAL)) {
 					player.sendMessage(new TranslatableText(
 							ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
 				} else {
-					Teleport.teleportPlayerToSpawn(world, player);
+					Teleport.teleportPlayerToSpawn(world, player, BountifulBaubles.config.MAGIC_MIRROR_INTERDIMENSIONAL);
 				}
 			} else {
 				WormholeUtil.doWormhole((ServerPlayerEntity) player);

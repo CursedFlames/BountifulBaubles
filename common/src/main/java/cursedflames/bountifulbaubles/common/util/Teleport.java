@@ -16,19 +16,16 @@ import net.minecraft.world.World;
 import java.util.Optional;
 
 public class Teleport {
-	public static boolean canDoTeleport(World world, PlayerEntity player) {
+	public static boolean canDoTeleport(World world, PlayerEntity player, boolean allowInterdimensional) {
 		// We have no way to check client-side.
 		if (world.isClient) return true;
 		RegistryKey<World> spawnDim = ((ServerPlayerEntity) player).getSpawnPointDimension();
-		if (world.getRegistryKey()!=spawnDim/* && !Config.MAGIC_MIRROR_INTERDIMENSIONAL.get()*/) {
-			return false;
-		}
-		return true;
+		return world.getRegistryKey() == spawnDim || allowInterdimensional;
 	}
 
-	public static void teleportPlayerToSpawn(World currentWorld, PlayerEntity player) {
+	public static void teleportPlayerToSpawn(World currentWorld, PlayerEntity player, boolean allowInterdimensional) {
 		if (currentWorld.isClient) return;
-		if (!canDoTeleport(currentWorld, player)) return;
+		if (!canDoTeleport(currentWorld, player, allowInterdimensional)) return;
 		RegistryKey<World> spawnPointDimension = ((ServerPlayerEntity) player).getSpawnPointDimension();
 		World targetWorld = currentWorld;
 		if (targetWorld.getRegistryKey() != spawnPointDimension) {

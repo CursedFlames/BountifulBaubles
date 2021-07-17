@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.common.item;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.DiggingEquipment;
 import cursedflames.bountifulbaubles.common.equipment.ExtendedIFrames;
@@ -274,14 +275,14 @@ public class ModItems {
 		phylactery_charm = add("phylactery_charm",
 				EquipmentItem.apply(baseSettingsCurio(), MISC));
 		bbItem(phylactery_charm).attachOnUse((world, player, hand) -> {
-			if (!world.isClient && !Teleport.canDoTeleport(world, player)) {
+			if (!world.isClient && !Teleport.canDoTeleport(world, player, BountifulBaubles.config.MAGIC_MIRROR_INTERDIMENSIONAL)) {
 				player.sendMessage(new TranslatableText(
 						ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
 				return new TypedActionResult<>(ActionResult.FAIL, player.getStackInHand(hand));
 			}
 			player.setCurrentHand(hand);
 			if (!world.isClient) {
-				Teleport.teleportPlayerToSpawn(world, player);
+				Teleport.teleportPlayerToSpawn(world, player, BountifulBaubles.config.MAGIC_MIRROR_INTERDIMENSIONAL);
 				// TODO does damage source matter?
 				player.damage(/*new DamageSourcePhylactery()*/ DamageSource.MAGIC, 7);
 			}

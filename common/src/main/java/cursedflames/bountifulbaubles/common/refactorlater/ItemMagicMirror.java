@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.common.refactorlater;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.util.Teleport;
@@ -34,7 +35,7 @@ public class ItemMagicMirror extends BBItem {
 
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-		if (!world.isClient && !Teleport.canDoTeleport(world, player)) {
+		if (!world.isClient && !Teleport.canDoTeleport(world, player, BountifulBaubles.config.MAGIC_MIRROR_INTERDIMENSIONAL)) {
 			player.sendMessage(new TranslatableText(
 					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
 			return TypedActionResult.fail(player.getStackInHand(hand));
@@ -47,7 +48,7 @@ public class ItemMagicMirror extends BBItem {
 	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity entity) {
 		if (!world.isClient && entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) entity;
-			Teleport.teleportPlayerToSpawn(world, player);
+			Teleport.teleportPlayerToSpawn(world, player, BountifulBaubles.config.MAGIC_MIRROR_INTERDIMENSIONAL);
 		}
 		return super.finishUsing(stack, world, entity);
 	}

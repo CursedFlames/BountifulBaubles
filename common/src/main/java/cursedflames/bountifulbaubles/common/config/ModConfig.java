@@ -63,7 +63,7 @@ public class ModConfig {
 						"(recommended false on hardcore mode, true otherwise)");
 				BROKEN_HEART_REGEN_AMOUNT = subCategory.addNumber("regen_amount",
 						4.0, 0.0, Double.MAX_VALUE,
-						"Amount of max HP regained each sleep, in half hearts.\n" +
+						"Amount of max HP regained each morning, in half hearts.\n" +
 						"Does nothing if max HP regeneration is not enabled");
 				itemsCategory.addSubConfig(SUBCAT_BROKEN_HEART, subCategory, "Broken Heart settings");
 			}

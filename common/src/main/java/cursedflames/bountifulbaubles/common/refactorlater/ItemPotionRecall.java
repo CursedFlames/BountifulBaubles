@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.common.refactorlater;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.BBItem;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.util.Teleport;
@@ -37,7 +38,7 @@ public class ItemPotionRecall extends BBItem {
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player,
 			Hand hand) {
-		if (!world.isClient && !Teleport.canDoTeleport(world, player)) {
+		if (!world.isClient && !Teleport.canDoTeleport(world, player, BountifulBaubles.config.MAGIC_MIRROR_INTERDIMENSIONAL)) {
 			player.sendMessage(new TranslatableText(
 					ModItems.magic_mirror.getTranslationKey()+".wrongdim"), true);
 			return new TypedActionResult<>(ActionResult.FAIL, player.getStackInHand(hand));
@@ -55,7 +56,7 @@ public class ItemPotionRecall extends BBItem {
 		}
 
 		if (player!=null) {
-			Teleport.teleportPlayerToSpawn(worldIn, player);
+			Teleport.teleportPlayerToSpawn(worldIn, player, BountifulBaubles.config.MAGIC_MIRROR_INTERDIMENSIONAL);
 		}
 
 		if (player==null||!player.isCreative()) {

@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.common.equipment;
 
+import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -16,9 +17,6 @@ import java.util.UUID;
 
 public class MaxHpUndying {
     public static UUID UUID_MAXHP_DRAIN = UUID.fromString("554f3929-4193-4ae5-a4da-4b528a89ca32");
-
-    // TODO make this a config option
-    public static double HEAL_PER_DAY = 4;
 
     private static final Set<Item> items = new HashSet<>();
     public static void add(Item item) {
@@ -62,6 +60,7 @@ public class MaxHpUndying {
     }
 
     public static void healMaxHp(World world) {
+		if (!BountifulBaubles.config.BROKEN_HEART_REGEN) return;
         for (PlayerEntity player : world.getPlayers()) {
             EntityAttributeInstance maxHealth = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
             if (maxHealth == null) continue;
@@ -71,7 +70,7 @@ public class MaxHpUndying {
             double prevValue = prevMod.getValue();
             maxHealth.removeModifier(prevMod);
 
-            double newValue = prevValue + HEAL_PER_DAY;
+            double newValue = prevValue + BountifulBaubles.config.BROKEN_HEART_REGEN_AMOUNT;
 
             if (newValue < 0) {
                 EntityAttributeModifier modifier = new EntityAttributeModifier(UUID_MAXHP_DRAIN, "MaxHP undying drain",
