@@ -24,6 +24,10 @@ public class AnvilRecipes {
 		return null;
 	}
 
+	public static Set<Recipe> getRecipes() {
+		return recipes;
+	}
+
 	public static class Recipe {
 		// TODO some way to have dynamic result based on inputs?
 		public Ingredient left;

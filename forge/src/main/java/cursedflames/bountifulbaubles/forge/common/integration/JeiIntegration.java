@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import cursedflames.bountifulbaubles.common.effect.EffectFlight;
+import cursedflames.bountifulbaubles.common.item.ModItems;
+import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.forge.common.BountifulBaublesForge;
-import cursedflames.bountifulbaubles.forge.common.old.effect.EffectFlight;
-import cursedflames.bountifulbaubles.forge.common.old.item.ModItems;
-import cursedflames.bountifulbaubles.forge.common.old.recipe.anvil.AnvilCrafting;
-import cursedflames.bountifulbaubles.forge.common.old.recipe.anvil.AnvilRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
@@ -31,7 +30,7 @@ public class JeiIntegration implements IModPlugin {
 	@Override
 	public void registerRecipes(IRecipeRegistration r) {
 		List<Object> anvilRecipes = new ArrayList<>();
-		for (AnvilRecipe recipe : AnvilCrafting.recipes) {
+		for (AnvilRecipes.Recipe recipe : AnvilRecipes.getRecipes()) {
 			// TODO stop using only the first valid left item
 			anvilRecipes.add(r.getVanillaRecipeFactory().createAnvilRecipe(
 					recipe.left.getMatchingStacksClient()[0],
@@ -43,13 +42,13 @@ public class JeiIntegration implements IModPlugin {
 		// TODO add repair recipes?
 		
 		// for some reason some recipes don't show automatically, so we do this instead
-		List<Object> brewingRecipes = new ArrayList<>();
+		/*List<Object> brewingRecipes = new ArrayList<>();
 		ItemStack potion = new ItemStack(Items.POTION);
 		PotionUtil.setPotion(potion, Potions.AWKWARD);
 		ItemStack potion2 = new ItemStack(Items.POTION);
-		PotionUtil.setPotion(potion2, EffectFlight.flightPotion);
+		PotionUtil.setPotion(potion2, EffectFlight.potion);
 		brewingRecipes.add(r.getVanillaRecipeFactory()
 				.createBrewingRecipe(Arrays.asList(new ItemStack(ModItems.shulker_heart)), potion, potion2));
-		r.addRecipes(brewingRecipes, VanillaRecipeCategoryUid.BREWING);
+		r.addRecipes(brewingRecipes, VanillaRecipeCategoryUid.BREWING);*/
 	}
 }
