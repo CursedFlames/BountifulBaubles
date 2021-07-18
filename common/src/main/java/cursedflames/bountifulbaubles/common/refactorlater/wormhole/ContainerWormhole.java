@@ -54,14 +54,13 @@ public class ContainerWormhole extends ScreenHandler {
 //		pinned.add(new DebugTarget("debug-disabled"));
 		Map<Integer, IWormholeTarget> pinnedFound = new HashMap<>();
 
-		for (int i = 0; i<6; i++) {
-			targets.add(new DebugTarget("debug"+i));
-		}
+//		for (int i = 0; i<6; i++) {
+//			targets.add(new DebugTarget("debug"+i));
+//		}
 
 		List<PlayerEntity> players = new ArrayList<>(player.world.getPlayers());
 		// can't teleport to yourself
-		// FIXME remove debug changes
-//		players.remove(player);
+		players.remove(player);
 		boolean survivalOnly = !(player.isCreative() || player.isSpectator());
 		for (PlayerEntity entity : players) {
 			if ((!entity.isSpectator()) && !(survivalOnly && entity.isCreative()))
