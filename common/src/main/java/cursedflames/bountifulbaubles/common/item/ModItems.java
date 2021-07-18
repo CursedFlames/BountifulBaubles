@@ -1,6 +1,7 @@
 package cursedflames.bountifulbaubles.common.item;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.common.block.BBBlock;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.DiggingEquipment;
 import cursedflames.bountifulbaubles.common.equipment.ExtendedIFrames;
@@ -21,7 +22,9 @@ import cursedflames.bountifulbaubles.common.util.AttributeModifierSupplier;
 import cursedflames.bountifulbaubles.common.util.SimpleToolMaterial;
 import cursedflames.bountifulbaubles.common.util.Teleport;
 import cursedflames.bountifulbaubles.mixin.ItemAccessor;
+import net.minecraft.block.Block;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -107,6 +110,11 @@ public class ModItems {
 
 	protected static Item.Settings baseSettingsCurio() {
 		return baseSettings().maxCount(1);
+	}
+
+	// TODO how do we want to handle non-stackable blocks, etc.?
+	public static void itemBlock(Identifier id, Block water_candle) {
+		add(id, new BlockItem(water_candle, baseSettings()));
 	}
 
 	public static Item sunglasses = null;

@@ -13,6 +13,7 @@ import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.WormholeDataProxy;
 import cursedflames.bountifulbaubles.common.util.MiscProxy;
+import cursedflames.bountifulbaubles.fabric.common.block.ModBlocksFabric;
 import cursedflames.bountifulbaubles.fabric.common.component.WormholeDataProxyFabric;
 import cursedflames.bountifulbaubles.fabric.common.equipment.EquipmentProxyFabric;
 import cursedflames.bountifulbaubles.fabric.common.item.ModItemsFabric;
@@ -52,6 +53,8 @@ public class BountifulBaublesFabric extends BountifulBaubles implements ModIniti
 
 		NetworkHandler.register();
 
+		ModItemsFabric.prepare();
+		ModBlocksFabric.init();
 		ModItemsFabric.init();
 
 		Registry.register(Registry.STATUS_EFFECT, modId("sinful"), new EffectSin());

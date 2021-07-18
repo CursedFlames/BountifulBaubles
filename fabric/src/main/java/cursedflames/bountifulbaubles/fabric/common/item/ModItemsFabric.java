@@ -10,7 +10,7 @@ import net.minecraft.util.registry.Registry;
 import static cursedflames.bountifulbaubles.common.util.BBUtil.modId;
 
 public class ModItemsFabric extends ModItems {
-	static {
+	public static void prepare() {
 		GROUP = FabricItemGroupBuilder.build(
 				modId(BountifulBaubles.MODID),
 				()->new ItemStack(ModItems.gloves_dexterity));

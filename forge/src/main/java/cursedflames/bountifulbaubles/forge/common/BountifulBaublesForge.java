@@ -1,31 +1,23 @@
 package cursedflames.bountifulbaubles.forge.common;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import cursedflames.bountifulbaubles.BountifulBaubles;
-
 import cursedflames.bountifulbaubles.common.command.CommandWormhole;
+import cursedflames.bountifulbaubles.common.config.ModConfig;
 import cursedflames.bountifulbaubles.common.effect.EffectFlight;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
-import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
 import cursedflames.bountifulbaubles.common.network.NetworkHandler;
 import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.WormholeDataProxy;
 import cursedflames.bountifulbaubles.common.util.MiscProxy;
+import cursedflames.bountifulbaubles.forge.common.block.ModBlocksForge;
 import cursedflames.bountifulbaubles.forge.common.capability.WormholeDataProxyForge;
 import cursedflames.bountifulbaubles.forge.common.equipment.EquipmentProxyForge;
 import cursedflames.bountifulbaubles.forge.common.item.ModItemsForge;
 import cursedflames.bountifulbaubles.forge.common.misc.MiscProxyForge;
 import cursedflames.bountifulbaubles.forge.common.network.NetworkHandlerForge;
-import cursedflames.bountifulbaubles.forge.common.old.ModCapabilities;
-import cursedflames.bountifulbaubles.forge.common.old.block.ModBlocks;
-import cursedflames.bountifulbaubles.forge.common.old.config.Config;
-import cursedflames.bountifulbaubles.forge.common.old.network.PacketHandler;
 import cursedflames.bountifulbaubles.forge.common.proxy.ClientProxy;
 import cursedflames.bountifulbaubles.forge.common.proxy.IProxy;
 import cursedflames.bountifulbaubles.forge.common.proxy.ServerProxy;
@@ -34,24 +26,17 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
 import net.minecraft.potion.Potion;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.Identifier;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeContainerType;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -61,6 +46,9 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 import top.theillusivec4.curios.api.SlotTypePreset;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static cursedflames.bountifulbaubles.common.util.BBUtil.modId;
 
 @Mod("bountifulbaubles")
@@ -68,13 +56,6 @@ public class BountifulBaublesForge extends BountifulBaubles {
 	public static IProxy proxy = DistExecutor.runForDist(
 			() -> () -> new ClientProxy(),
 			() -> () -> new ServerProxy());
-	
-	public static final ItemGroup GROUP = null;/* = new ItemGroup(MODID) { //TODO sort cre-tab/JEI
-		@Override
-		public ItemStack createIcon() {
-			return new ItemStack(ModItems.obsidian_skull);
-		}
-	};*/
 
 	static {
 		NetworkHandler.setProxy(new NetworkHandlerForge());
@@ -87,13 +68,12 @@ public class BountifulBaublesForge extends BountifulBaubles {
 	public static MinecraftServer server;
 
 	public BountifulBaublesForge() {
-		config = new cursedflames.bountifulbaubles.common.config.ModConfig(FMLPaths.CONFIGDIR.get());
+		config = new ModConfig(FMLPaths.CONFIGDIR.get());
 
 		NetworkHandler.register();
 
-//		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
-//		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
-        
+		ModItemsForge.prepare();
+
 		// Register the setup method for modloading
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		// Register the enqueueIMC method for modloading
@@ -102,11 +82,8 @@ public class BountifulBaublesForge extends BountifulBaubles {
 //		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 		// Register the doClientStuff method for modloading
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-		
-		
-//		Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MODID+"-client.toml"));
-//		Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MODID+"-common.toml"));
-		
+
+
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
 //		MinecraftForge.EVENT_BUS.register(EventHandlerEffect.class);
@@ -126,13 +103,11 @@ public class BountifulBaublesForge extends BountifulBaubles {
 //		MinecraftForge.EVENT_BUS.register(ItemBrokenHeart.class);
 //		MinecraftForge.EVENT_BUS.register(ItemGlovesDexterity.class);
 //		MinecraftForge.EVENT_BUS.register(ItemGlovesDigging.class);
-		
-		PacketHandler.registerMessages(); // TODO where are we supposed to do this?
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
 		// FIXME register wormhole capability
-		ModCapabilities.registerCapabilities();
+//		ModCapabilities.registerCapabilities();
 		AnvilRecipes.registerRecipes();
 		BrewingRecipes.registerRecipes();
 	}
@@ -194,7 +169,7 @@ public class BountifulBaublesForge extends BountifulBaubles {
 	public static class RegistryEvents {
 		@SubscribeEvent
 		public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-			ModBlocks.registerBlocks(event);
+			ModBlocksForge.init(event);
 		}
 		@SubscribeEvent
 		public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {

@@ -12,11 +12,11 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 // TODO switch from old ModItems class to this one
 public class ModItemsForge extends ModItems {
-	static {
+	public static void prepare() {
 		GROUP = new ItemGroup(BountifulBaubles.MODID) {
 			@Override
 			public ItemStack createIcon() {
-				return new ItemStack(cursedflames.bountifulbaubles.forge.common.old.item.ModItems.gloves_dexterity);
+				return new ItemStack(ModItems.gloves_dexterity);
 			}
 		};
 		// Discard trinket slot information on forge
