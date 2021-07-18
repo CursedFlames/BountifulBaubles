@@ -9,6 +9,8 @@
     "MixinServerWorld",
     "MixinItemEntity",
 	"MixinServerPlayerInteractionManager",
+	"MixinEnderDragonEntity",
+	"MixinEndPortalBlock",
 	"ItemAccessor"
   ],
   "client": [
