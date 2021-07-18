@@ -8,6 +8,7 @@ import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
 import cursedflames.bountifulbaubles.common.network.NetworkHandler;
+import cursedflames.bountifulbaubles.common.recipe.AnvilRecipes;
 import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.WormholeDataProxy;
@@ -58,6 +59,7 @@ public class BountifulBaublesFabric extends BountifulBaubles implements ModIniti
 		EffectFlight.potion = new Potion(new StatusEffectInstance(EffectFlight.instance, 3600));
 		Registry.register(Registry.POTION, modId("flight"), EffectFlight.potion);
 
+		AnvilRecipes.registerRecipes();
 		BrewingRecipes.registerRecipes();
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
