@@ -8,6 +8,7 @@ import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
 import cursedflames.bountifulbaubles.common.network.NetworkHandler;
+import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.WormholeDataProxy;
 import cursedflames.bountifulbaubles.common.util.MiscProxy;
@@ -16,6 +17,7 @@ import cursedflames.bountifulbaubles.fabric.common.equipment.EquipmentProxyFabri
 import cursedflames.bountifulbaubles.fabric.common.item.ModItemsFabric;
 import cursedflames.bountifulbaubles.fabric.common.misc.MiscProxyFabric;
 import cursedflames.bountifulbaubles.fabric.common.network.NetworkHandlerFabric;
+import cursedflames.bountifulbaubles.fabric.common.recipe.BrewingRecipesFabric;
 import dev.emi.trinkets.api.SlotGroups;
 import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.TrinketSlots;
@@ -40,6 +42,7 @@ public class BountifulBaublesFabric extends BountifulBaubles implements ModIniti
 		WormholeDataProxy.instance = new WormholeDataProxyFabric();
 		MiscProxy.instance = new MiscProxyFabric();
 		EquipmentProxy.instance = new EquipmentProxyFabric();
+		BrewingRecipes.instance = new BrewingRecipesFabric();
 	}
 
 	@Override
@@ -54,6 +57,8 @@ public class BountifulBaublesFabric extends BountifulBaubles implements ModIniti
 		Registry.register(Registry.STATUS_EFFECT, modId("flight"), new EffectFlight());
 		EffectFlight.potion = new Potion(new StatusEffectInstance(EffectFlight.instance, 3600));
 		Registry.register(Registry.POTION, modId("flight"), EffectFlight.potion);
+
+		BrewingRecipes.registerRecipes();
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
 			CommandWormhole.register(dispatcher);

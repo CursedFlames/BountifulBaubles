@@ -12,6 +12,7 @@ import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
 import cursedflames.bountifulbaubles.common.network.NetworkHandler;
+import cursedflames.bountifulbaubles.common.recipe.BrewingRecipes;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWormhole;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.WormholeDataProxy;
 import cursedflames.bountifulbaubles.common.util.MiscProxy;
@@ -28,7 +29,7 @@ import cursedflames.bountifulbaubles.forge.common.proxy.ClientProxy;
 import cursedflames.bountifulbaubles.forge.common.proxy.IProxy;
 import cursedflames.bountifulbaubles.forge.common.proxy.ServerProxy;
 import cursedflames.bountifulbaubles.forge.common.old.recipe.AnvilRecipes;
-import cursedflames.bountifulbaubles.forge.common.old.recipe.BrewingRecipes;
+import cursedflames.bountifulbaubles.forge.common.recipe.BrewingRecipesForge;
 import net.minecraft.block.Block;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -80,6 +81,7 @@ public class BountifulBaublesForge extends BountifulBaubles {
 		WormholeDataProxy.instance = new WormholeDataProxyForge();
 		MiscProxy.instance = new MiscProxyForge();
 		EquipmentProxy.instance = new EquipmentProxyForge();
+		BrewingRecipes.instance = new BrewingRecipesForge();
 	}
 	
 	public static MinecraftServer server;

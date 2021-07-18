@@ -3,7 +3,8 @@
   "package": "cursedflames.bountifulbaubles.fabric.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-	"MixinPlayerEntity"
+	"MixinPlayerEntity",
+	"BrewingRecipeRegistryAccessor"
   ],
   "client": [
   ],
