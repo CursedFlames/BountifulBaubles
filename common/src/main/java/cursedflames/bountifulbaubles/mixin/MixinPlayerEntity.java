@@ -1,6 +1,7 @@
 package cursedflames.bountifulbaubles.mixin;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.common.effect.EffectFlight;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.DiggingEquipment;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
@@ -148,24 +149,15 @@ public abstract class MixinPlayerEntity extends LivingEntity {
 		}
 	}
 
-	// === Pride necklace step assist ===
+	// === Various things that trigger on tick ===
 	// TODO this is really janky, is there a better way to do this?
 	@Inject(method = "tick", at = @At("HEAD"))
 	private void onTick(CallbackInfo ci) {
 		PlayerEntity self = (PlayerEntity)(Object)this;
-		if (StepAssist.hasStepAssist(self)) {
-			if (self.isSneaking()) {
-				if (self.stepHeight > STEP_HEIGHT_SNEAKING) {
-					self.stepHeight = STEP_HEIGHT_SNEAKING;
-				}
-			} else {
-				if (self.stepHeight < STEP_HEIGHT_INCREASED) {
-					self.stepHeight = STEP_HEIGHT_INCREASED;
-				}
-			}
-		} else if (self.stepHeight == STEP_HEIGHT_INCREASED || self.stepHeight == STEP_HEIGHT_SNEAKING) {
-			self.stepHeight = STEP_HEIGHT_VANILLA;
-		}
+		// === Flight effect ===
+		EffectFlight.updateFlyingStatus(self);
+		// === Pride necklace step assist ===
+		StepAssist.updateStepAssist(self);
 	}
 
 	// === Digging gloves ===

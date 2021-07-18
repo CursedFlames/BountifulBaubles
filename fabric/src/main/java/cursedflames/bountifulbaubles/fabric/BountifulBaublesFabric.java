@@ -3,6 +3,7 @@ package cursedflames.bountifulbaubles.fabric;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.command.CommandWormhole;
 import cursedflames.bountifulbaubles.common.config.ModConfig;
+import cursedflames.bountifulbaubles.common.effect.EffectFlight;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
@@ -23,7 +24,9 @@ import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.loot.LootPool;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -48,6 +51,9 @@ public class BountifulBaublesFabric extends BountifulBaubles implements ModIniti
 		ModItemsFabric.init();
 
 		Registry.register(Registry.STATUS_EFFECT, modId("sinful"), new EffectSin());
+		Registry.register(Registry.STATUS_EFFECT, modId("flight"), new EffectFlight());
+		EffectFlight.potion = new Potion(new StatusEffectInstance(EffectFlight.instance, 3600));
+		Registry.register(Registry.POTION, modId("flight"), EffectFlight.potion);
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
 			CommandWormhole.register(dispatcher);

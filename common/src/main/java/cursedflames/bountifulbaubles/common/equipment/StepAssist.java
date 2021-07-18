@@ -20,4 +20,20 @@ public class StepAssist {
 	public static boolean hasStepAssist(PlayerEntity player) {
 		return EquipmentProxy.instance.hasAnyEquipped(player, items);
 	}
+
+	public static void updateStepAssist(PlayerEntity player) {
+		if (hasStepAssist(player)) {
+			if (player.isSneaking()) {
+				if (player.stepHeight > STEP_HEIGHT_SNEAKING) {
+					player.stepHeight = STEP_HEIGHT_SNEAKING;
+				}
+			} else {
+				if (player.stepHeight < STEP_HEIGHT_INCREASED) {
+					player.stepHeight = STEP_HEIGHT_INCREASED;
+				}
+			}
+		} else if (player.stepHeight == STEP_HEIGHT_INCREASED || player.stepHeight == STEP_HEIGHT_SNEAKING) {
+			player.stepHeight = STEP_HEIGHT_VANILLA;
+		}
+	}
 }

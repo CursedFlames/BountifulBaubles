@@ -7,6 +7,7 @@ import java.util.List;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 
 import cursedflames.bountifulbaubles.common.command.CommandWormhole;
+import cursedflames.bountifulbaubles.common.effect.EffectFlight;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.EquipmentProxy;
 import cursedflames.bountifulbaubles.common.loot.LootTableInjector;
@@ -22,7 +23,6 @@ import cursedflames.bountifulbaubles.forge.common.network.NetworkHandlerForge;
 import cursedflames.bountifulbaubles.forge.common.old.ModCapabilities;
 import cursedflames.bountifulbaubles.forge.common.old.block.ModBlocks;
 import cursedflames.bountifulbaubles.forge.common.old.config.Config;
-import cursedflames.bountifulbaubles.forge.common.old.effect.EffectFlight;
 import cursedflames.bountifulbaubles.forge.common.old.network.PacketHandler;
 import cursedflames.bountifulbaubles.forge.common.proxy.ClientProxy;
 import cursedflames.bountifulbaubles.forge.common.proxy.IProxy;
@@ -188,24 +188,6 @@ public class BountifulBaublesForge extends BountifulBaubles {
 		server = null;
 	}
 
-	@SubscribeEvent
-	public void onLootTableLoad(LootTableLoadEvent event) {
-		LootTable table = event.getTable();
-		Identifier loc = event.getName();
-//		if (Config.MOB_LOOT_ENABLED.get()) {
-//			mobLootTableLoad(event, table, loc);
-//		}
-//		if (Config.STRUCTURE_LOOT_ENABLED.get()) {
-//			structureLootTableLoad(event, table, loc);
-//		}
-		List<LootPool> pools = LootTableInjector.getAddedLootTable(loc);
-		if (pools != null) {
-			for (LootPool pool : pools) {
-				table.addPool(pool);
-			}
-		}
-	}
-
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegistryEvents {
 		@SubscribeEvent
@@ -230,15 +212,15 @@ public class BountifulBaublesForge extends BountifulBaubles {
 		@SubscribeEvent
 		public static void onEffectsRegistry(final RegistryEvent.Register<StatusEffect> event) {
 			event.getRegistry().register(new EffectSin().setRegistryName(modId("sinful")));
-			event.getRegistry().register(new EffectFlight());
+			event.getRegistry().register(new EffectFlight().setRegistryName(modId("flight")));
 		}
 		
 		@SubscribeEvent
 		public static void registerPotionTypes(RegistryEvent.Register<Potion> event) {
-			EffectFlight.flightPotion = new Potion(new StatusEffectInstance(EffectFlight.flightEffect, 3600));
-			EffectFlight.flightPotion.setRegistryName(MODID, "flight");
+			EffectFlight.potion = new Potion(new StatusEffectInstance(EffectFlight.instance, 3600));
+			EffectFlight.potion.setRegistryName(MODID, "flight");
 //			Potion grounding = new Potion(new EffectInstance(EffectFlight.flightEffect, 24000));
-			event.getRegistry().register(EffectFlight.flightPotion);
+			event.getRegistry().register(EffectFlight.potion);
 		}
 	}
 }

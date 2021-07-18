@@ -1,6 +1,6 @@
 package cursedflames.bountifulbaubles.forge.common.old.recipe;
 
-import cursedflames.bountifulbaubles.forge.common.old.effect.EffectFlight;
+import cursedflames.bountifulbaubles.common.effect.EffectFlight;
 import cursedflames.bountifulbaubles.forge.common.old.item.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -11,6 +11,7 @@ import net.minecraft.potion.Potions;
 import net.minecraft.recipe.Ingredient;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.brewing.IBrewingRecipe;
+import org.jetbrains.annotations.NotNull;
 
 public class BrewingRecipes {
 	public static void registerRecipes() {
@@ -51,13 +52,16 @@ public class BrewingRecipes {
 			}
 
 			@Override
-			public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
-				Potion potion = PotionUtil.getPotion(input);
-				if (potion == Potions.AWKWARD
-						&& ingredient.getItem() == ModItems.shulker_heart) {
-					ItemStack output = input.copy();
-					PotionUtil.setPotion(output, EffectFlight.flightPotion);
-					return output;
+			public ItemStack getOutput(@NotNull ItemStack input, ItemStack ingredient) {
+				// TODO is there a good way to prevent splash/lingering potions? is that even necessary?
+				//      if we block it here, regular flight potions can still be brewed into splash/lingering later
+				if (ingredient.getItem() == ModItems.shulker_heart/* && input.getItem() == Items.POTION*/) {
+					Potion potion = PotionUtil.getPotion(input);
+					if (potion == Potions.AWKWARD) {
+						ItemStack output = input.copy();
+						PotionUtil.setPotion(output, EffectFlight.potion);
+						return output;
+					}
 				}
 				return ItemStack.EMPTY;
 			}
