@@ -205,19 +205,20 @@ public class ModItems {
 		FireResist.add(obsidian_skull);
 
 		// TODO shields don't take durability damage? on fabric at least
+		// TODO make sure shields can't be fully broken (just become unusable at zero durability)
 		shield_cobalt = add("shield_cobalt",
-				ShieldItem.construct(baseSettingsCurio(), set(CAPE), 100, 336*3, 9, Items.IRON_INGOT));
+				ShieldItem.construct(baseSettingsCurio(), set(CAPE), 100, 0/*336*3*/, 9, Items.IRON_INGOT));
 		equipment(shield_cobalt).setApplyWhenHeld();
 		equipment(shield_cobalt).addModifier(GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifierSupplier(10, ADDITION));
 
 		shield_obsidian = add("shield_obsidian",
-				ShieldItem.construct(baseSettingsCurio(), set(CAPE), 100, 336*4, 9, Items.OBSIDIAN));
+				ShieldItem.construct(baseSettingsCurio(), set(CAPE), 100, 0/*336*4*/, 9, Items.OBSIDIAN));
 		equipment(shield_obsidian).setApplyWhenHeld();
 		equipment(shield_obsidian).addModifier(GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifierSupplier(10, ADDITION));
 		FireResist.add(shield_obsidian);
 
 		shield_ankh = add("shield_ankh",
-				ShieldItem.construct(baseSettingsCurio(), set(CAPE), 100, 336*5, 9, Items.OBSIDIAN));
+				ShieldItem.construct(baseSettingsCurio(), set(CAPE), 100, 0/*336*5*/, 9, Items.OBSIDIAN));
 		equipment(shield_ankh).setApplyWhenHeld();
 		equipment(shield_ankh).addModifier(GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifierSupplier(10, ADDITION));
 		FireResist.add(shield_ankh);

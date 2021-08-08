@@ -23,7 +23,7 @@ public abstract class MixinInGameHud {
     private int onRenderHearts(int heartCount) {
         if (heartCount == 1) {
             PlayerEntity player = this.getCameraPlayer();
-            if (MaxHpUndying.hasMaxHpUndying(player)) {
+            if (player != null && MaxHpUndying.hasMaxHpUndying(player)) {
                 float trueHp = player.getHealth();
                 if (trueHp <= Float.MIN_VALUE) {
                     return 0;

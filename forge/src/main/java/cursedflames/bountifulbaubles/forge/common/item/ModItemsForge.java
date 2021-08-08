@@ -21,8 +21,7 @@ public class ModItemsForge extends ModItems {
 		};
 		// Discard trinket slot information on forge
 		EquipmentItem = (a, b) -> new BBCurioItem(a);
-		// FIXME
-		ShieldItem = (a, b, c, d, e, f) -> new BBEquipmentItem(a);
+		ShieldItem = (a, b, c, d, e, f) -> new BBShieldCurioItem(a, d, e, f);
 		DiggingGlovesItem = (a, b, c) -> new ItemCurioGlovesDigging(a, c);
 	}
 
