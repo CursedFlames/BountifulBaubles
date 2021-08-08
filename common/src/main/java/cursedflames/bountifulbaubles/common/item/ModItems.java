@@ -1,7 +1,6 @@
 package cursedflames.bountifulbaubles.common.item;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
-import cursedflames.bountifulbaubles.common.block.BBBlock;
 import cursedflames.bountifulbaubles.common.effect.EffectSin;
 import cursedflames.bountifulbaubles.common.equipment.DiggingEquipment;
 import cursedflames.bountifulbaubles.common.equipment.ExtendedIFrames;
@@ -13,7 +12,6 @@ import cursedflames.bountifulbaubles.common.equipment.MaxHpUndying;
 import cursedflames.bountifulbaubles.common.equipment.PotionImmunity;
 import cursedflames.bountifulbaubles.common.equipment.SlowdownImmunity;
 import cursedflames.bountifulbaubles.common.equipment.StepAssist;
-import cursedflames.bountifulbaubles.common.refactorlater.ItemGlovesDigging;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemMagicMirror;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemPotionRecall;
 import cursedflames.bountifulbaubles.common.refactorlater.ItemPotionWormhole;
@@ -27,7 +25,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.ToolMaterials;

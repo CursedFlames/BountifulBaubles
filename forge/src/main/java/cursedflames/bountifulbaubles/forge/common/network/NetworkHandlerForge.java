@@ -19,7 +19,7 @@ import java.util.function.Function;
 
 public class NetworkHandlerForge implements NetworkHandlerProxy {
 	private static final SimpleChannel channel = NetworkRegistry.newSimpleChannel(
-			new Identifier("modifiers", "net"), ()->"", (a)->true, (a)->true
+			new Identifier("bountifulbaubles", "net"), ()->"", (a)->true, (a)->true
 	);
 
 	private static NetworkHandler.PacketContext convertContext(NetworkEvent.Context context) {

@@ -52,7 +52,11 @@ dependencies {
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${rootProject.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${rootProject.cardinal_components_version}"
 
+	include "com.electronwill.night-config:toml:${rootProject.nightconfig_version}"
+	include "com.electronwill.night-config:core:${rootProject.nightconfig_version}"
+
     modImplementation "com.github.CrimsonDawn45:Fabric-Shield-Lib:${rootProject.fabric_shield_lib_version}-${rootProject.minecraft_version}"
+	include "com.github.CrimsonDawn45:Fabric-Shield-Lib:${rootProject.fabric_shield_lib_version}-${rootProject.minecraft_version}"
 
     compileOnly(project(path: ":common")) {
         transitive = false
