@@ -1,17 +1,18 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "5.0.0"
+    id "com.github.johnrengelman.shadow" version "7.0.0"
 }
 
 configurations {
-    shadow
+	shadowCommon
 }
 
 architectury {
     platformSetupLoomIde()
+	fabric()
 }
 
 loom {
-	accessWidener "src/main/resources/bountifulbaubles.accesswidener"
+	accessWidenerPath = file("src/main/resources/bountifulbaubles.accesswidener")
 }
 
 repositories {
@@ -31,8 +32,8 @@ repositories {
 }
 
 dependencies {
-    modCompile "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modCompile "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+	modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
     // Remove the next line if you don't want to depend on the API
     // modCompile "me.shedaniel:architectury:${rootProject.architectury_version}:fabric"
     compileOnly "com.google.code.findbugs:jsr305:3.+"
@@ -55,18 +56,18 @@ dependencies {
 	include "com.electronwill.night-config:toml:${rootProject.nightconfig_version}"
 	include "com.electronwill.night-config:core:${rootProject.nightconfig_version}"
 
-    modImplementation "com.github.CrimsonDawn45:Fabric-Shield-Lib:${rootProject.fabric_shield_lib_version}-${rootProject.minecraft_version}"
-	include "com.github.CrimsonDawn45:Fabric-Shield-Lib:${rootProject.fabric_shield_lib_version}-${rootProject.minecraft_version}"
+    // modImplementation "com.github.CrimsonDawn45:Fabric-Shield-Lib:${rootProject.fabric_shield_lib_version}-${rootProject.minecraft_version}"
+	// include "com.github.CrimsonDawn45:Fabric-Shield-Lib:${rootProject.fabric_shield_lib_version}-${rootProject.minecraft_version}"
 
-    compileOnly(project(path: ":common")) {
-        transitive = false
-    }
-    runtimeOnly(project(path: ":common", configuration: "transformDevelopmentFabric")) {
-        transitive = false
-    }
-    shadow(project(path: ":common", configuration: "transformProductionFabric")) {
-        transitive = false
-    }
+	implementation(project(path: ":common", configuration: "dev")) {
+		transitive = false
+	}
+	developmentFabric(project(path: ":common", configuration: "dev")) {
+		transitive = false
+	}
+	shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) {
+		transitive = false
+	}
 }
 
 processResources {
@@ -78,12 +79,22 @@ processResources {
 }
 
 shadowJar {
-    configurations = [project.configurations.shadow]
-    classifier "shadow"
+	configurations = [project.configurations.shadowCommon]
+	classifier "dev-shadow"
 }
 
 remapJar {
-    dependsOn(shadowJar)
-    input.set(shadowJar.archivePath)
-    classifier "fabric"
+	input.set shadowJar.archiveFile
+	dependsOn shadowJar
+	classifier "fabric"
+}
+
+jar {
+	classifier "dev"
+}
+
+sourcesJar {
+	def commonSources = project(":common").sourcesJar
+	dependsOn commonSources
+	from commonSources.archiveFile.map { zipTree(it) }
 }

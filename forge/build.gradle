@@ -1,22 +1,23 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "5.0.0"
+    id "com.github.johnrengelman.shadow" version "7.0.0"
 }
 
 configurations {
-    shadow
+    shadowCommon
 }
 
 architectury {
     platformSetupLoomIde()
+	forge()
 }
 
-loom {
-    useFabricMixin = true
-    mixinConfigs = [
-			"bountifulbaubles-forge.mixins.json",
-			"bountifulbaubles.mixins.json"
-	]
-}
+//loom {
+//    // useFabricMixin = true
+//    mixinConfigs = [
+//			"bountifulbaubles-forge.mixins.json",
+//			"bountifulbaubles.mixins.json"
+//	]
+//}
 
 repositories {
     maven { url = "https://maven.theillusivec4.top/" }
@@ -40,24 +41,24 @@ dependencies {
 
 //    modImplementation "top.theillusivec4.curios:curios-forge:${rootProject.curios_forge_version}"
 //    modApi "top.theillusivec4.curios:curios-forge:${rootProject.curios_forge_version}:api"
-    modCompile "top.theillusivec4.curios:curios-forge:${rootProject.curios_forge_version}"
+	modImplementation "top.theillusivec4.curios:curios-forge:${rootProject.curios_forge_version}"
 
 //    // compile against the JEI API but do not include it at runtime
 //    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
 //    // at runtime, use the full JEI jar
 //    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
-	modCompile "mezz.jei:jei-${rootProject.jei_forge_version}"
+	modImplementation "mezz.jei:jei-${rootProject.jei_forge_version}"
 
 
-    compileOnly(project(path: ":common")) {
-        transitive = false
-    }
-    runtimeOnly(project(path: ":common", configuration: "transformDevelopmentForge")) {
-        transitive = false
-    }
-    shadow(project(path: ":common", configuration: "transformProductionForge")) {
-        transitive = false
-    }
+	implementation(project(path: ":common", configuration: "dev")) {
+		transitive = false
+	}
+	developmentForge(project(path: ":common", configuration: "dev")) {
+		transitive = false
+	}
+	shadowCommon(project(path: ":common", configuration: "transformProductionForge")) {
+		transitive = false
+	}
 }
 
 processResources {
@@ -71,12 +72,22 @@ processResources {
 shadowJar {
     exclude "fabric.mod.json"
 
-    configurations = [project.configurations.shadow]
-    classifier "shadow"
+    configurations = [project.configurations.shadowCommon]
+    classifier "dev-shadow"
 }
 
 remapJar {
-    dependsOn(shadowJar)
-    input.set(shadowJar.archivePath)
-    classifier "forge"
+	input.set shadowJar.archiveFile
+	dependsOn shadowJar
+	classifier "forge"
+}
+
+jar {
+	classifier "dev"
+}
+
+sourcesJar {
+	def commonSources = project(":common").sourcesJar
+	dependsOn commonSources
+	from commonSources.archiveFile.map { zipTree(it) }
 }

@@ -1,11 +1,10 @@
 pluginManagement {
-    repositories {
-        jcenter()
-        maven { url "https://maven.fabricmc.net/" }
-        maven { url "https://dl.bintray.com/shedaniel/cloth" }
-        maven { url "https://files.minecraftforge.net/maven/" }
-        gradlePluginPortal()
-    }
+	repositories {
+		maven { url "https://maven.fabricmc.net/" }
+		maven { url "https://maven.architectury.dev/" }
+		maven { url "https://maven.minecraftforge.net/" }
+		gradlePluginPortal()
+	}
 }
 
 include("common")
