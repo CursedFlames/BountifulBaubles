@@ -6,21 +6,21 @@ import cursedflames.bountifulbaubles.common.refactorlater.wormhole.PlayerTarget;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.TeleportRequest;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.WormholeUtil;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 
 public class C2SPacketDoWormhole {
-	public CompoundTag target;
-	public C2SPacketDoWormhole(CompoundTag target) {
+	public NbtCompound target;
+	public C2SPacketDoWormhole(NbtCompound target) {
 		this.target = target;
 	}
 	
 	public void encode(PacketByteBuf buffer) {
-		buffer.writeCompoundTag(target);
+		buffer.writeNbt(target);
 	}
 	
 	public static C2SPacketDoWormhole decode(PacketByteBuf buffer) {
-		return new C2SPacketDoWormhole(buffer.readCompoundTag());
+		return new C2SPacketDoWormhole(buffer.readNbt());
 	}
 
 	public static class Handler {

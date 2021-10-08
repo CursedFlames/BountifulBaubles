@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.common.refactorlater.wormhole;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -58,8 +58,8 @@ public class PlayerTarget implements IWormholeTarget {
 	}
 
 	@Override
-	public CompoundTag toNBT() {
-		CompoundTag tag = new CompoundTag();
+	public NbtCompound toNBT() {
+		NbtCompound tag = new NbtCompound();
 		tag.putString("type", "player");
 		tag.putUuid("id", id);
 		tag.putString("name", name);
@@ -67,7 +67,7 @@ public class PlayerTarget implements IWormholeTarget {
 	}
 
 	@Override
-	public void fromNBT(CompoundTag tag) {
+	public void fromNBT(NbtCompound tag) {
 		if (!tag.containsUuid("id"))
 			return;
 		id = tag.getUuid("id");

@@ -8,7 +8,7 @@ import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import nerdhub.cardinal.components.api.ComponentRegistry;
 import nerdhub.cardinal.components.api.component.Component;
 import nerdhub.cardinal.components.api.util.RespawnCopyStrategy;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +21,12 @@ public class ComponentWormholePins implements Component, EntityComponentInitiali
 	private final List<IWormholeTarget> pins = new ArrayList<>();
 
 	@Override
-	public void fromTag(CompoundTag tag) {
+	public void fromTag(NbtCompound tag) {
 		WormholeUtil.targetListFromNBT(pins, tag);
 	}
 
 	@Override
-	public CompoundTag toTag(CompoundTag tag) {
+	public NbtCompound toTag(NbtCompound tag) {
 		// TODO use param tag instead of instantiating a new one?
 		return WormholeUtil.targetListToNBT(pins);
 	}

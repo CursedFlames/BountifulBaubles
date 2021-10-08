@@ -9,7 +9,7 @@ import cursedflames.bountifulbaubles.common.refactorlater.wormhole.PlayerTarget;
 import cursedflames.bountifulbaubles.forge.common.BountifulBaublesForge;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
@@ -35,7 +35,7 @@ public class CapabilityWormholePins {
 		if (!(event.getObject() instanceof PlayerEntity))
 			return;
 		event.addCapability(new Identifier(BountifulBaublesForge.MODID, "IWormholePins"),
-				new ICapabilitySerializable<CompoundTag>() {
+				new ICapabilitySerializable<NbtCompound>() {
 					IWormholePins inst = PIN_CAP.getDefaultInstance();
 
 //					@Override
@@ -51,12 +51,12 @@ public class CapabilityWormholePins {
 					}
 
 					@Override
-					public CompoundTag serializeNBT() {
-						return (CompoundTag) PIN_CAP.getStorage().writeNBT(PIN_CAP, inst, null);
+					public NbtCompound serializeNBT() {
+						return (NbtCompound) PIN_CAP.getStorage().writeNBT(PIN_CAP, inst, null);
 					}
 
 					@Override
-					public void deserializeNBT(CompoundTag nbt) {
+					public void deserializeNBT(NbtCompound nbt) {
 						PIN_CAP.getStorage().readNBT(PIN_CAP, inst, null, nbt);
 					}
 				});
@@ -77,17 +77,17 @@ public class CapabilityWormholePins {
 		@Override
 		public void readNBT(Capability<IWormholePins> capability, IWormholePins instance,
 				Direction side, Tag nbtBase) {
-			if (!(nbtBase instanceof CompoundTag))
+			if (!(nbtBase instanceof NbtCompound))
 				return;
-			targetListFromNBT(instance.getPinList(), (CompoundTag) nbtBase);
+			targetListFromNBT(instance.getPinList(), (NbtCompound) nbtBase);
 		}
 	}
 
-	public static CompoundTag targetListToNBT(List<IWormholeTarget> targets) {
-		CompoundTag tag = new CompoundTag();
+	public static NbtCompound targetListToNBT(List<IWormholeTarget> targets) {
+		NbtCompound tag = new NbtCompound();
 		int i = 0;
 		for (IWormholeTarget target : targets) {
-			CompoundTag targetNBT = target.toNBT();
+			NbtCompound targetNBT = target.toNBT();
 			if (targetNBT==null)
 				continue;
 			tag.put(String.valueOf(i++), targetNBT);
@@ -96,10 +96,10 @@ public class CapabilityWormholePins {
 	}
 
 	public static List<IWormholeTarget> targetListFromNBT(List<IWormholeTarget> targets,
-			CompoundTag tag) {
+			NbtCompound tag) {
 		targets.clear();
 		for (int i = 0; tag.contains(String.valueOf(i)); i++) {
-			CompoundTag entry = tag.getCompound(String.valueOf(i));
+			NbtCompound entry = tag.getCompound(String.valueOf(i));
 			IWormholeTarget target = targetFromNBT(entry);
 			if (target==null)
 				continue;
@@ -108,7 +108,7 @@ public class CapabilityWormholePins {
 		return targets;
 	}
 
-	public static IWormholeTarget targetFromNBT(CompoundTag tag) {
+	public static IWormholeTarget targetFromNBT(NbtCompound tag) {
 		String type = tag.getString("type");
 		IWormholeTarget target = null;
 		if (type.equals("player")) {

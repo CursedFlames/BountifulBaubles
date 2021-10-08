@@ -5,7 +5,7 @@ import cursedflames.bountifulbaubles.common.network.NetworkHandler;
 import cursedflames.bountifulbaubles.common.network.packet.wormhole.S2CPacketUpdateWormholeGui;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerListener;
 import net.minecraft.screen.ScreenHandlerType;
@@ -112,11 +112,11 @@ public class ContainerWormhole extends ScreenHandler {
 		
 		if (player.world.isClient || !dirty)
 			return;
-		CompoundTag changes = new CompoundTag();
-		CompoundTag targetsNBT = new CompoundTag();
+		NbtCompound changes = new NbtCompound();
+		NbtCompound targetsNBT = new NbtCompound();
 		int i = 0;
 		for (IWormholeTarget target : targets) {
-			CompoundTag targetNBT = target.toNBT();
+			NbtCompound targetNBT = target.toNBT();
 			if (targetNBT == null)
 				continue;
 			targetNBT.putBoolean("enabled", target.isEnabled());
@@ -135,9 +135,9 @@ public class ContainerWormhole extends ScreenHandler {
 		dirty = false;
 	}
 
-	public void readChanges(CompoundTag tag) {
+	public void readChanges(NbtCompound tag) {
 //		BountifulBaubles.logger.info(tag);
-		CompoundTag targetsNBT = tag.getCompound("targets");
+		NbtCompound targetsNBT = tag.getCompound("targets");
 		if (targetsNBT.getSize() > 0) {
 			targets.clear();
 			WormholeUtil.targetListFromNBT(targets, targetsNBT);

@@ -3,8 +3,8 @@ package cursedflames.bountifulbaubles.common.block;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
@@ -33,7 +33,7 @@ public class ModBlocks {
 	protected static void init() {
 		water_candle = add("water_candle", true,
 				new BlockWaterCandle(Block.Settings.of(
-						new Material.Builder(MaterialColor.BLUE).build(), MaterialColor.BLUE)
+						new Material.Builder(MapColor.BLUE).build(), MapColor.BLUE)
 						.luminance((BlockState state)->7).strength(1.5f, 3f)
 						/*.harvestLevel(-1).harvestTool(ToolType.PICKAXE)*/.sounds(BlockSoundGroup.METAL)));
 	}

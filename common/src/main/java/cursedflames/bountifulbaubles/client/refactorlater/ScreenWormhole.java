@@ -12,7 +12,7 @@ import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.c2s.play.CloseHandledScreenC2SPacket;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -88,7 +88,7 @@ public class ScreenWormhole extends Screen implements ScreenHandlerProvider<Cont
 			addButton(new ButtonWidget(guiLeft+WIDTH/2, guiTop+j, 80, 20,
 					new LiteralText(""), captureNameButton(i*2+1)));
 		}
-		
+
 		for (int i = 0, j = 3; i<8; i++, j += 24) {
 			addButton(new PinToggleWidget(guiLeft+80, guiTop+j, capturePin(i*2)));
 			addButton(new PinToggleWidget(guiLeft+WIDTH/2+80, guiTop+j, capturePin(i*2+1)));
@@ -171,7 +171,7 @@ public class ScreenWormhole extends Screen implements ScreenHandlerProvider<Cont
 //		CompoundNBT tag = new CompoundNBT();
 		if (index+page*16>=container.targets.size())
 			return;
-		CompoundTag tag = container.targets.get(index+page*16).toNBT();
+		NbtCompound tag = container.targets.get(index+page*16).toNBT();
 		NetworkHandler.sendToServer(new C2SPacketDoWormhole(tag));
 		// TODO not sure if this call was actually important or not
 //		client.player.updateSubmergedInWaterState();

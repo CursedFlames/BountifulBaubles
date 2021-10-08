@@ -8,7 +8,7 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -60,7 +60,7 @@ public class BBCurioItem extends BBEquipmentItem {
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, NbtCompound nbt) {
         ICurio curio = new Curio(stack, this);
         return CuriosUtil.makeSimpleCap(curio);
     }

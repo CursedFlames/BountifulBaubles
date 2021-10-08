@@ -6,7 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -105,11 +105,11 @@ public class WormholeUtil {
 		player.openHandledScreen(containerProvider);
 	}
 
-	public static CompoundTag targetListToNBT(List<IWormholeTarget> targets) {
-		CompoundTag tag = new CompoundTag();
+	public static NbtCompound targetListToNBT(List<IWormholeTarget> targets) {
+		NbtCompound tag = new NbtCompound();
 		int i = 0;
 		for (IWormholeTarget target : targets) {
-			CompoundTag targetNBT = target.toNBT();
+			NbtCompound targetNBT = target.toNBT();
 			if (targetNBT==null)
 				continue;
 			tag.put(String.valueOf(i++), targetNBT);
@@ -117,10 +117,10 @@ public class WormholeUtil {
 		return tag;
 	}
 
-	public static void targetListFromNBT(List<IWormholeTarget> targets, CompoundTag tag) {
+	public static void targetListFromNBT(List<IWormholeTarget> targets, NbtCompound tag) {
 		targets.clear();
 		for (int i = 0; tag.contains(String.valueOf(i)); i++) {
-			CompoundTag entry = tag.getCompound(String.valueOf(i));
+			NbtCompound entry = tag.getCompound(String.valueOf(i));
 			IWormholeTarget target = targetFromNBT(entry);
 			if (target==null)
 				continue;
@@ -128,7 +128,7 @@ public class WormholeUtil {
 		}
 	}
 
-	public static IWormholeTarget targetFromNBT(CompoundTag tag) {
+	public static IWormholeTarget targetFromNBT(NbtCompound tag) {
 		String type = tag.getString("type");
 		IWormholeTarget target = null;
 		if (type.equals("player")) {

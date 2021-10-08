@@ -1,16 +1,16 @@
 package cursedflames.bountifulbaubles.common.refactorlater.wormhole;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 
 public interface IWormholeTarget {
 	String getName();
 
 	boolean teleportPlayerTo(PlayerEntity player);
 
-	CompoundTag toNBT();
+	NbtCompound toNBT();
 
-	void fromNBT(CompoundTag tag);
+	void fromNBT(NbtCompound tag);
 
 	boolean isEqual(IWormholeTarget other);
 

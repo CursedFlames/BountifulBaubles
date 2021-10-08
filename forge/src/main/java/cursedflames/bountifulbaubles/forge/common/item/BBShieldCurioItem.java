@@ -17,7 +17,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Pair;
@@ -161,7 +161,7 @@ public class BBShieldCurioItem extends ShieldItem implements IEquipmentItem {
 	}
 
 	@Override
-	public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt) {
+	public ICapabilityProvider initCapabilities(ItemStack stack, NbtCompound nbt) {
 		ICurio curio = new BBShieldCurioItem.Curio(stack, this);
 		return CuriosUtil.makeSimpleCap(curio);
 	}

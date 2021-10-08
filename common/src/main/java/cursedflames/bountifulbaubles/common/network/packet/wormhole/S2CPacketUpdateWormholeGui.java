@@ -4,21 +4,21 @@ import cursedflames.bountifulbaubles.client.refactorlater.ScreenWormhole;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWormhole;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 
 public class S2CPacketUpdateWormholeGui {
-	public CompoundTag updateData;
-	public S2CPacketUpdateWormholeGui(CompoundTag updateData) {
+	public NbtCompound updateData;
+	public S2CPacketUpdateWormholeGui(NbtCompound updateData) {
 		this.updateData = updateData;
 	}
 	
 	public void encode(PacketByteBuf buffer) {
-		buffer.writeCompoundTag(updateData);
+		buffer.writeNbt(updateData);
 	}
 	
 	public static S2CPacketUpdateWormholeGui decode(PacketByteBuf buffer) {
-		return new S2CPacketUpdateWormholeGui(buffer.readCompoundTag());
+		return new S2CPacketUpdateWormholeGui(buffer.readNbt());
 	}
 
 	public static class Handler {

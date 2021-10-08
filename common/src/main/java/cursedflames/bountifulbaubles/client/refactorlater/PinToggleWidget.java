@@ -54,8 +54,8 @@ public class PinToggleWidget extends ToggleButtonWidget {
 			man.bindTexture(on);
 		}
 
-		GlStateManager.disableDepthTest();
+		GlStateManager._disableDepthTest();
 		PinToggleWidget.drawTexture(matrixStack, this.x, this.y, 0, 0, this.width, this.height, 16, 16);
-		GlStateManager.enableDepthTest();
+		GlStateManager._enableDepthTest();
 	}
 }

@@ -5,18 +5,17 @@ import cursedflames.bountifulbaubles.common.config.ModConfig;
 import cursedflames.bountifulbaubles.common.item.ModItems;
 import cursedflames.bountifulbaubles.common.util.MiscProxy;
 import net.minecraft.entity.EntityType;
-import net.minecraft.loot.ConstantLootTableRange;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
-import net.minecraft.loot.UniformLootTableRange;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.EmptyEntry;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.util.Identifier;
 
 import javax.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +37,7 @@ public class LootTableInjector {
 		if (config.MOB_LOOT_ENABLED) {
 			if (loc.equals(EntityType.HUSK.getLootTableId())) {
 				return Collections.singletonList(namePool(LootPool.builder()
-								.rolls(ConstantLootTableRange.create(1))
+								.rolls(ConstantLootNumberProvider.create(1))
 								.with(ItemEntry.builder(ModItems.apple)
 										.conditionally(KilledByPlayerLootCondition.builder())
 										.conditionally(RandomChanceLootCondition.builder(0.025f))),
@@ -47,7 +46,7 @@ public class LootTableInjector {
 			}
 			if (loc.equals(EntityType.ELDER_GUARDIAN.getLootTableId())) {
 				return Collections.singletonList(namePool(LootPool.builder()
-								.rolls(ConstantLootTableRange.create(1))
+								.rolls(ConstantLootNumberProvider.create(1))
 								.with(ItemEntry.builder(ModItems.vitamins)
 										.conditionally(KilledByPlayerLootCondition.builder())),
 						name("elder_guardian"))
@@ -55,7 +54,7 @@ public class LootTableInjector {
 			}
 			if (loc.equals(EntityType.STRAY.getLootTableId())) {
 				return Collections.singletonList(namePool(LootPool.builder()
-								.rolls(ConstantLootTableRange.create(1))
+								.rolls(ConstantLootNumberProvider.create(1))
 								.with(ItemEntry.builder(ModItems.ring_overclocking)
 										.conditionally(KilledByPlayerLootCondition.builder())
 										.conditionally(RandomChanceLootCondition.builder(0.03f))),
@@ -64,7 +63,7 @@ public class LootTableInjector {
 			}
 			if (loc.equals(EntityType.SHULKER.getLootTableId())) {
 				return Collections.singletonList(namePool(LootPool.builder()
-								.rolls(ConstantLootTableRange.create(1))
+								.rolls(ConstantLootNumberProvider.create(1))
 								.with(ItemEntry.builder(ModItems.shulker_heart)
 										.conditionally(KilledByPlayerLootCondition.builder())
 										.conditionally(RandomChanceLootCondition.builder(0.1f))),
@@ -73,7 +72,7 @@ public class LootTableInjector {
 			}
 			if (loc.equals(EntityType.CAVE_SPIDER.getLootTableId())) {
 				return Collections.singletonList(namePool(LootPool.builder()
-								.rolls(ConstantLootTableRange.create(1))
+								.rolls(ConstantLootNumberProvider.create(1))
 								.with(ItemEntry.builder(ModItems.bezoar)
 										.conditionally(KilledByPlayerLootCondition.builder())
 										.conditionally(RandomChanceLootCondition.builder(0.05f))),
@@ -86,7 +85,7 @@ public class LootTableInjector {
 				List<LootPool> pools = new ArrayList<>();
 				if (config.DUNGEON_ITEM_RATE > 0)
 					pools.add(namePool(LootPool.builder()
-									.rolls(ConstantLootTableRange.create(1))
+									.rolls(ConstantLootNumberProvider.create(1))
 									.conditionally(RandomChanceLootCondition.builder((float) config.DUNGEON_ITEM_RATE))
 									.with(ItemEntry.builder(ModItems.balloon)
 											.weight(10))
@@ -110,9 +109,9 @@ public class LootTableInjector {
 											.weight(3)),
 							name("dungeon_items"))
 							.build());
-				if (config.DUNGEON_POTION_RATE > 0)
+				if (config.DUNGEON_POTION_RATE > 0) {
 					pools.add(namePool(LootPool.builder()
-									.rolls(new UniformLootTableRange(1, 6))
+									.rolls(UniformLootNumberProvider.create(1, 6))
 									.conditionally(RandomChanceLootCondition.builder((float) config.DUNGEON_POTION_RATE))
 									.with(EmptyEntry.Serializer()
 											.weight(25))
@@ -123,12 +122,13 @@ public class LootTableInjector {
 											.weight(25)),
 							name("dungeon_potions"))
 							.build());
+				}
 				return pools;
 			}
 			if (loc.equals(LootTables.NETHER_BRIDGE_CHEST)) {
 				if (config.NETHER_ITEM_RATE > 0)
 					return Collections.singletonList(namePool(LootPool.builder()
-									.rolls(ConstantLootTableRange.create(1))
+									.rolls(ConstantLootNumberProvider.create(1))
 									.conditionally(RandomChanceLootCondition.builder((float) config.NETHER_ITEM_RATE))
 									.with(ItemEntry.builder(ModItems.broken_black_dragon_scale)
 											.weight(15))

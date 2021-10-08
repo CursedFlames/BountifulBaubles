@@ -1,7 +1,7 @@
 package cursedflames.bountifulbaubles.common.refactorlater.wormhole;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 
 public class DebugTarget implements IWormholeTarget {
 	public String name = "";
@@ -33,15 +33,15 @@ public class DebugTarget implements IWormholeTarget {
 	}
 
 	@Override
-	public CompoundTag toNBT() {
-		CompoundTag tag = new CompoundTag();
+	public NbtCompound toNBT() {
+		NbtCompound tag = new NbtCompound();
 		tag.putString("type", "debug");
 		tag.putString("name", name);
 		return tag;
 	}
 
 	@Override
-	public void fromNBT(CompoundTag tag) {
+	public void fromNBT(NbtCompound tag) {
 		name = tag.getString("name");
 	}
 
