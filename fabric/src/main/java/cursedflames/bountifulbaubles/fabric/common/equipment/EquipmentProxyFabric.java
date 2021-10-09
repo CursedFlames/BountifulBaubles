@@ -6,35 +6,32 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EquipmentProxyFabric extends EquipmentProxy {
+	private static List<ItemStack> getEquippedStacksInTrinketSlots(PlayerEntity player) {
+		return TrinketsApi.getTrinketComponent(player).map(c ->
+				c.getAllEquipped().stream().map(Pair::getRight).collect(Collectors.toList())
+		).orElseGet(ArrayList::new);
+	}
+
 	@Override
 	public List<Item> getEquipped(PlayerEntity player) {
-		Inventory inventory = TrinketsApi.getTrinketsInventory(player);
 		// Start with held items, then add any equipped trinkets
 		List<Item> items = getHeldEquipment(player);
-		for (int i = 0; i < inventory.size(); i++) {
-			ItemStack stack = inventory.getStack(i);
-			if (!stack.isEmpty()) {
-				items.add(stack.getItem());
-			}
-		}
+		items.addAll(getEquippedStacksInTrinketSlots(player).stream().map(ItemStack::getItem).collect(Collectors.toList()));
 		return items;
 	}
 
 	@Override
 	public List<ItemStack> getEquippedStacks(PlayerEntity player) {
-		Inventory inventory = TrinketsApi.getTrinketsInventory(player);
 		// Start with held items, then add any equipped trinkets
 		List<ItemStack> items = getHeldEquipmentStacks(player);
-		for (int i = 0; i < inventory.size(); i++) {
-			ItemStack stack = inventory.getStack(i);
-			if (!stack.isEmpty()) {
-				items.add(stack);
-			}
-		}
+		items.addAll(getEquippedStacksInTrinketSlots(player));
 		return items;
 	}
 }
