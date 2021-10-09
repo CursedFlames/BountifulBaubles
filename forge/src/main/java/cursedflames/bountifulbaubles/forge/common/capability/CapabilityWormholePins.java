@@ -1,86 +1,74 @@
 package cursedflames.bountifulbaubles.forge.common.capability;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.DebugTarget;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.IWormholeTarget;
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.PlayerTarget;
-import cursedflames.bountifulbaubles.forge.common.BountifulBaublesForge;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.Tag;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.Capability.IStorage;
-import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
+// FIXME(1.17) reimplement or replace wormhole pins
 public class CapabilityWormholePins {
-	@CapabilityInject(IWormholePins.class)
+//	@CapabilityInject(IWormholePins.class)
 	public static final Capability<IWormholePins> PIN_CAP = null;
 
-	public static void registerCapability() {
-		CapabilityManager.INSTANCE.register(IWormholePins.class, new Storage(), DefaultImpl::new);
-	}
+//	public static void registerCapability() {
+//		CapabilityManager.INSTANCE.register(IWormholePins.class, new Storage(), DefaultImpl::new);
+//	}
 
-	@SubscribeEvent
-	public static void onEntityConstruct(AttachCapabilitiesEvent<Entity> event) {
-		if (!(event.getObject() instanceof PlayerEntity))
-			return;
-		event.addCapability(new Identifier(BountifulBaublesForge.MODID, "IWormholePins"),
-				new ICapabilitySerializable<NbtCompound>() {
-					IWormholePins inst = PIN_CAP.getDefaultInstance();
-
+//	@SubscribeEvent
+//	public static void onEntityConstruct(AttachCapabilitiesEvent<Entity> event) {
+//		if (!(event.getObject() instanceof PlayerEntity))
+//			return;
+//		event.addCapability(new Identifier(BountifulBaublesForge.MODID, "IWormholePins"),
+//				new ICapabilitySerializable<NbtCompound>() {
+//					IWormholePins inst = PIN_CAP.getDefaultInstance();
+//
+////					@Override
+////					public boolean hasCapability(Capability<?> capability, Direction facing) {
+////						return capability==PIN_CAP;
+////					}
+//
 //					@Override
-//					public boolean hasCapability(Capability<?> capability, Direction facing) {
-//						return capability==PIN_CAP;
+//					public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction facing) {
+//						return capability==PIN_CAP
+//								? LazyOptional.of(()->inst).cast()
+//								: null;
 //					}
-
-					@Override
-					public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction facing) {
-						return capability==PIN_CAP
-								? LazyOptional.of(()->inst).cast()
-								: null;
-					}
-
-					@Override
-					public NbtCompound serializeNBT() {
-						return (NbtCompound) PIN_CAP.getStorage().writeNBT(PIN_CAP, inst, null);
-					}
-
-					@Override
-					public void deserializeNBT(NbtCompound nbt) {
-						PIN_CAP.getStorage().readNBT(PIN_CAP, inst, null, nbt);
-					}
-				});
-	}
+//
+//					@Override
+//					public NbtCompound serializeNBT() {
+//						return (NbtCompound) PIN_CAP.getStorage().writeNBT(PIN_CAP, inst, null);
+//					}
+//
+//					@Override
+//					public void deserializeNBT(NbtCompound nbt) {
+//						PIN_CAP.getStorage().readNBT(PIN_CAP, inst, null, nbt);
+//					}
+//				});
+//	}
 
 	public interface IWormholePins {
 		List<IWormholeTarget> getPinList();
 	}
 
-	public static class Storage implements IStorage<IWormholePins> {
-		@Override
-		public Tag writeNBT(Capability<IWormholePins> capability, IWormholePins instance,
-				Direction side) {
-			List<IWormholeTarget> pins = instance.getPinList();
-			return targetListToNBT(pins);
-		}
-
-		@Override
-		public void readNBT(Capability<IWormholePins> capability, IWormholePins instance,
-				Direction side, Tag nbtBase) {
-			if (!(nbtBase instanceof NbtCompound))
-				return;
-			targetListFromNBT(instance.getPinList(), (NbtCompound) nbtBase);
-		}
+	public static class Storage /*implements IStorage<IWormholePins>*/ {
+//		@Override
+//		public Tag writeNBT(Capability<IWormholePins> capability, IWormholePins instance,
+//				Direction side) {
+//			List<IWormholeTarget> pins = instance.getPinList();
+//			return targetListToNBT(pins);
+//		}
+//
+//		@Override
+//		public void readNBT(Capability<IWormholePins> capability, IWormholePins instance,
+//				Direction side, Tag nbtBase) {
+//			if (!(nbtBase instanceof NbtCompound))
+//				return;
+//			targetListFromNBT(instance.getPinList(), (NbtCompound) nbtBase);
+//		}
 	}
 
 	public static NbtCompound targetListToNBT(List<IWormholeTarget> targets) {

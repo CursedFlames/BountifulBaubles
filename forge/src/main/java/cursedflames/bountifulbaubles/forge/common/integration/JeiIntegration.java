@@ -33,8 +33,8 @@ public class JeiIntegration implements IModPlugin {
 		for (AnvilRecipes.Recipe recipe : AnvilRecipes.getRecipes()) {
 			// TODO stop using only the first valid left item
 			anvilRecipes.add(r.getVanillaRecipeFactory().createAnvilRecipe(
-					recipe.left.getMatchingStacksClient()[0],
-					Arrays.asList(recipe.right.getMatchingStacksClient()),
+					recipe.left.getMatchingStacks()[0],
+					Arrays.asList(recipe.right.getMatchingStacks()),
 					Arrays.asList(recipe.result)));
 		}
 		// TODO figure out how to reorder recipes so ours show first?

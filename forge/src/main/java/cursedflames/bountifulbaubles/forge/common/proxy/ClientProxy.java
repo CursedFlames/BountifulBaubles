@@ -32,7 +32,8 @@ public class ClientProxy implements IProxy {
 
 	private static void addProperty(Item item, Identifier loc) {
 		ModelPredicateProviderRegistry.register(item, loc,
-				(ItemStack stack, ClientWorld world, LivingEntity entity) -> {
+				// TODO(1.17) what is the integer param here? didn't exist in 1.16
+				(ItemStack stack, ClientWorld world, LivingEntity entity, int i) -> {
 					return entity != null && entity.isUsingItem() && entity.getActiveItem()==stack ? 1f : 0f;
 				}
 		);

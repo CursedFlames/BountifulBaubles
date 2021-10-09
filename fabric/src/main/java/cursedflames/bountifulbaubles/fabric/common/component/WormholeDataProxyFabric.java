@@ -4,7 +4,6 @@ import cursedflames.bountifulbaubles.common.refactorlater.wormhole.IWormholeTarg
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.WormholeDataProxy;
 import net.minecraft.entity.player.PlayerEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WormholeDataProxyFabric extends WormholeDataProxy {
@@ -12,6 +11,6 @@ public class WormholeDataProxyFabric extends WormholeDataProxy {
 	public List<IWormholeTarget> getPinList(PlayerEntity player) {
 		// FIXME(1.17) reimplement or replace wormhole pins
 //		return ComponentWormholePins.KEY.get(player).getPins();
-		return new ArrayList<>();
+		return null;
 	}
 }

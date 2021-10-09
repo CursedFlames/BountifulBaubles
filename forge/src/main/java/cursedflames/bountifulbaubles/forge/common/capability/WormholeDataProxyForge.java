@@ -10,10 +10,11 @@ import java.util.List;
 public class WormholeDataProxyForge extends WormholeDataProxy {
 	@Override
 	public List<IWormholeTarget> getPinList(PlayerEntity player) {
-		LazyOptional<CapabilityWormholePins.IWormholePins> cap = player.getCapability(CapabilityWormholePins.PIN_CAP, null);
-		if (cap.isPresent()) {
-			return cap.orElse(null).getPinList();
-		}
+		// FIXME(1.17) reimplement or replace wormhole pins
+//		LazyOptional<CapabilityWormholePins.IWormholePins> cap = player.getCapability(CapabilityWormholePins.PIN_CAP, null);
+//		if (cap.isPresent()) {
+//			return cap.orElse(null).getPinList();
+//		}
 		return null;
 	}
 }
