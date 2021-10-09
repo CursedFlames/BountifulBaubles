@@ -62,21 +62,22 @@ public abstract class ItemGlovesDigging extends BBEquipmentItem {
 	public boolean canRepair(ItemStack toRepair, ItemStack repair) {
 		return this.tier.getRepairIngredient().test(repair) || super.canRepair(toRepair, repair);
 	}
-	
-	public boolean canHarvest(BlockState block) {
-//		return this.tier.getMiningLevel() >= block.getBlock().getHarvestLevel();
-		for (Item item : miningLevelTools) {
-			if (item.isEffectiveOn(block)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	@Override
-	public boolean isEffectiveOn(BlockState block) {
-		return this.canHarvest(block);
-	}
+
+	// FIXME(1.17) replace with new logic for block breaking - see how vanilla does it
+//	public boolean canHarvest(BlockState block) {
+////		return this.tier.getMiningLevel() >= block.getBlock().getHarvestLevel();
+//		for (Item item : miningLevelTools) {
+//			if (item.isEffectiveOn(block)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean isEffectiveOn(BlockState block) {
+//		return this.canHarvest(block);
+//	}
 	
 	public static boolean isTool(ItemStack stack, BlockState state) {
 		if (!stack.isEmpty()) {

@@ -1,5 +1,6 @@
 package cursedflames.bountifulbaubles.client.refactorlater;
 
+import com.google.common.collect.Lists;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.common.network.NetworkHandler;
 import cursedflames.bountifulbaubles.common.network.packet.wormhole.C2SPacketDoWormhole;
@@ -8,8 +9,8 @@ import cursedflames.bountifulbaubles.common.refactorlater.wormhole.ContainerWorm
 import cursedflames.bountifulbaubles.common.refactorlater.wormhole.IWormholeTarget;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
-import net.minecraft.client.gui.widget.AbstractButtonWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
@@ -18,6 +19,9 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
+import java.util.List;
+
+// TODO probably just rework this entire GUI, it's kinda janky and broken right now
 public class ScreenWormhole extends Screen implements ScreenHandlerProvider<ContainerWormhole> {
 	private static final int WIDTH = 192;
 	private static final int HEIGHT = 220;
@@ -30,6 +34,13 @@ public class ScreenWormhole extends Screen implements ScreenHandlerProvider<Cont
 
 	public ContainerWormhole getScreenHandler() {
 		return container;
+	}
+
+	private final List<ClickableWidget> buttons = Lists.newArrayList();
+
+	private <T extends ClickableWidget> void addButton(T button) {
+		this.addDrawableChild(button);
+		this.buttons.add(button);
 	}
 
 
@@ -142,8 +153,8 @@ public class ScreenWormhole extends Screen implements ScreenHandlerProvider<Cont
 	private void pageChange(int page) {
 		for (int i = 0; i<16; i++) {
 			int listIndex = page*16+i;
-			AbstractButtonWidget button = buttons.get(i);
-			AbstractButtonWidget pinButton = buttons.get(i+16);
+			ClickableWidget button = buttons.get(i);
+			ClickableWidget pinButton = buttons.get(i+16);
 			if (listIndex<container.targets.size()) {
 				button.visible = true;
 				pinButton.visible = true;
@@ -160,8 +171,8 @@ public class ScreenWormhole extends Screen implements ScreenHandlerProvider<Cont
 				button.setMessage(new LiteralText(""));
 			}
 		}
-		AbstractButtonWidget prev = buttons.get(32);
-		AbstractButtonWidget next = buttons.get(33);
+		ClickableWidget prev = buttons.get(32);
+		ClickableWidget next = buttons.get(33);
 		boolean pageButtons = container.targets.size()>16;
 		prev.visible = pageButtons;
 		next.visible = pageButtons;

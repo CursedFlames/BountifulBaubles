@@ -161,20 +161,20 @@ public abstract class MixinPlayerEntity extends LivingEntity {
 	}
 
 	// === Digging gloves ===
-	// TODO can we make this mixin more compatible?
-	@Inject(method = "isUsingEffectiveTool", at = @At("RETURN"), cancellable = true)
-	private void onIsUsingEffectiveTool(BlockState blockState, CallbackInfoReturnable<Boolean> cir) {
-    	// Already using an effective tool, so we don't care
-    	if (cir.getReturnValueZ()) return;
-    	// If the player is already holding a tool we don't do anything, and use it instead
-    	if (ItemGlovesDigging.isTool(this.getMainHandStack(), blockState)) {
-    		return;
-		}
-		ItemStack diggingTool = DiggingEquipment.getEquipment((PlayerEntity)(Object)this);
-		if (diggingTool.getItem() instanceof ItemGlovesDigging) {
-			if (((ItemGlovesDigging) diggingTool.getItem()).canHarvest(blockState)) {
-				cir.setReturnValue(true);
-			}
-		}
-	}
+	// FIXME(1.17) block breaking is changed in 1.17
+//	@Inject(method = "isUsingEffectiveTool", at = @At("RETURN"), cancellable = true)
+//	private void onIsUsingEffectiveTool(BlockState blockState, CallbackInfoReturnable<Boolean> cir) {
+//    	// Already using an effective tool, so we don't care
+//    	if (cir.getReturnValueZ()) return;
+//    	// If the player is already holding a tool we don't do anything, and use it instead
+//    	if (ItemGlovesDigging.isTool(this.getMainHandStack(), blockState)) {
+//    		return;
+//		}
+//		ItemStack diggingTool = DiggingEquipment.getEquipment((PlayerEntity)(Object)this);
+//		if (diggingTool.getItem() instanceof ItemGlovesDigging) {
+//			if (((ItemGlovesDigging) diggingTool.getItem()).canHarvest(blockState)) {
+//				cir.setReturnValue(true);
+//			}
+//		}
+//	}
 }

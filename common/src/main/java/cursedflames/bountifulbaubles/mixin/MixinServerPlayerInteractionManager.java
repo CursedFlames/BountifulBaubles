@@ -40,9 +40,9 @@ public class MixinServerPlayerInteractionManager {
 		}
 		ItemStack diggingTool = DiggingEquipment.getEquipment(this.player);
 		if (diggingTool.getItem() instanceof ItemGlovesDigging) {
-			if (((ItemGlovesDigging) diggingTool.getItem()).canHarvest(state)) {
-				return diggingTool;
-			}
+//			if (((ItemGlovesDigging) diggingTool.getItem()).canHarvest(state)) {
+//				return diggingTool;
+//			}
 		}
 		return stack;
 	}
