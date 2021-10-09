@@ -27,11 +27,11 @@ public class EffectFlight extends StatusEffect {
 //			boolean grounded = player.isPotionActive(EffectGrounding.groundingEffect);
 			if (player.hasStatusEffect(instance)) {
 				flyingPlayers.add(player.getUuid());
-				player.abilities.allowFlying = true;
+				player.getAbilities().allowFlying = true;
 				player.sendAbilitiesUpdate();
 			} else if (flyingPlayers.contains(player.getUuid())) {
-				player.abilities.allowFlying = false;
-				player.abilities.flying = false;
+				player.getAbilities().allowFlying = false;
+				player.getAbilities().flying = false;
 				player.sendAbilitiesUpdate();
 				flyingPlayers.remove(player.getUuid());
 			}

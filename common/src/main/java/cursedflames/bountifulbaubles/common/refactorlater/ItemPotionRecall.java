@@ -65,7 +65,7 @@ public class ItemPotionRecall extends BBItem {
 			}
 
 			if (player!=null) {
-				player.inventory.insertStack(new ItemStack(Items.GLASS_BOTTLE));
+				player.getInventory().insertStack(new ItemStack(Items.GLASS_BOTTLE));
 			}
 		}
 		return stack;

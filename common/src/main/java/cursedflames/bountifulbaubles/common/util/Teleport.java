@@ -66,12 +66,13 @@ public class Teleport {
 		target.playSound(null, player.getX(), player.getY(), player.getZ(),
 				SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1f, 1f);
 		if (origin != target) {
+			// FIXME(1.17) check that this is still correct? in particular the player.getEntityId() -> player.getId()
 			((ServerChunkManager) target.getChunkManager()).addTicket(
 					ChunkTicketType.POST_TELEPORT,
 					new ChunkPos(new BlockPos(x, y, z)),
-					1, player.getEntityId());
+					1, player.getId());
 			((ServerPlayerEntity) player).teleport(
-					(ServerWorld) target, x, y, z, player.yaw, player.pitch);
+					(ServerWorld) target, x, y, z, player.getYaw(), player.getPitch());
 		} else {
 			player.requestTeleport(x, y, z);
 		}

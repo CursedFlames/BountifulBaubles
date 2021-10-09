@@ -26,7 +26,7 @@ public class WormholeUtil {
 	 * @return whether the player can teleport (if they used a mirror or drank a potion)
 	 */
 	public static boolean consumeItem(PlayerEntity player) {
-		if (player.inventory.contains(new ItemStack(ModItems.wormhole_mirror)))
+		if (player.getInventory().contains(new ItemStack(ModItems.wormhole_mirror)))
 			return true;
 		ItemStack main = player.getStackInHand(Hand.MAIN_HAND);
 		ItemStack off = player.getStackInHand(Hand.OFF_HAND);
@@ -37,8 +37,8 @@ public class WormholeUtil {
 		} else if (off.getItem() == ModItems.potion_wormhole) {
 			potion = off;
 		} else {
-			for (int i = 0; i < player.inventory.size(); i++) {
-				ItemStack stack = player.inventory.getStack(i);
+			for (int i = 0; i < player.getInventory().size(); i++) {
+				ItemStack stack = player.getInventory().getStack(i);
 				if (stack.getItem() == ModItems.potion_wormhole) {
 					potion = stack;
 					break;
@@ -54,7 +54,7 @@ public class WormholeUtil {
 				player.setStackInHand(potion==main ? Hand.MAIN_HAND : Hand.OFF_HAND,
 						new ItemStack(Items.GLASS_BOTTLE));
 			} else {
-				player.inventory.insertStack(new ItemStack(Items.GLASS_BOTTLE));
+				player.getInventory().insertStack(new ItemStack(Items.GLASS_BOTTLE));
 			}
 		}
 		return true;
