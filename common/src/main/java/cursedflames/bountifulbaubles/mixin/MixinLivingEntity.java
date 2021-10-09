@@ -87,20 +87,21 @@ public class MixinLivingEntity {
 	}
 
 	// === Gluttony pendant ===
-	@Inject(method = "tickActiveItemStack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;getItemUseTimeLeft()I"))
-	private void onTickActiveItemStack(CallbackInfo ci) {
-		if (!((Object) this instanceof PlayerEntity)) return;
-		// TODO is 7 ticks balanced? probably not?
-		if (this.itemUseTimeLeft > 7) {
-			Item activeItem = this.activeItemStack.getItem();
-			UseAction useAction = activeItem.getUseAction(this.activeItemStack);
-			if (useAction == UseAction.EAT || useAction == UseAction.DRINK) {
-				if (EquipmentProxy.instance.hasEquipped((PlayerEntity)(Object)this, ModItems.amulet_sin_gluttony)) {
-					this.itemUseTimeLeft = 7;
-				}
-			}
-		}
-	}
+	// FIXME(1.17) reimplement
+//	@Inject(method = "tickActiveItemStack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;getItemUseTimeLeft()I"))
+//	private void onTickActiveItemStack(CallbackInfo ci) {
+//		if (!((Object) this instanceof PlayerEntity)) return;
+//		// TODO is 7 ticks balanced? probably not?
+//		if (this.itemUseTimeLeft > 7) {
+//			Item activeItem = this.activeItemStack.getItem();
+//			UseAction useAction = activeItem.getUseAction(this.activeItemStack);
+//			if (useAction == UseAction.EAT || useAction == UseAction.DRINK) {
+//				if (EquipmentProxy.instance.hasEquipped((PlayerEntity)(Object)this, ModItems.amulet_sin_gluttony)) {
+//					this.itemUseTimeLeft = 7;
+//				}
+//			}
+//		}
+//	}
 
 	// === Extended invincibility frames ===
 	@Inject(method = "damage",

@@ -49,7 +49,7 @@ Adds a variety of baubles and other items inspired by Terraria and other games.
 [[dependencies.bountifulbaubles]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5,1.17)"
+    versionRange="[1.17.1,1.18)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.bountifulbaubles]]

@@ -43,7 +43,9 @@ dependencies {
 //	// Includes Cardinal Components API as a Jar-in-Jar dependency (optional but recommended)
 //	include "io.github.onyxstudios.Cardinal-Components-API:<MODULE>:<VERSION>"
 
-	// Need to specify cardinal components dependencies ourself, since the version trinkets wants isn't on the maven, and we want CC for ourself anyway
+	// Need to specify cardinal components dependencies ourself,
+	// since the version trinkets wants isn't on the maven, ~~and we want CC for ourself anyway~~
+	// this shouldn't be necessary anymore but it breaks if I change it so whatever
 	modImplementation("dev.emi:trinkets:${rootProject.trinkets_version}") {
 		transitive = false
 	}
@@ -52,6 +54,10 @@ dependencies {
 
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${rootProject.cardinal_components_version}"
 	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${rootProject.cardinal_components_version}"
+
+	// TODO(1.17) are these modImpl lines necessary?
+	modImplementation "com.electronwill.night-config:toml:${rootProject.nightconfig_version}"
+	modImplementation "com.electronwill.night-config:core:${rootProject.nightconfig_version}"
 
 	include "com.electronwill.night-config:toml:${rootProject.nightconfig_version}"
 	include "com.electronwill.night-config:core:${rootProject.nightconfig_version}"
