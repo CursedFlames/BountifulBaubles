@@ -11,10 +11,12 @@ import baubles.api.render.IRenderBauble;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.PotionNegation;
 import cursedflames.bountifulbaubles.baubleeffect.PotionNegation.IPotionNegateItem;
+import cursedflames.bountifulbaubles.client.layer.IRenderObject;
 import cursedflames.bountifulbaubles.item.armor.ItemArmorBB;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.botania.api.item.IPhantomInkable;
 
 public class ItemSunglasses extends ItemArmorBB
-		implements IBauble/* , ICustomEnchantColor */, ISpecialArmor, IRenderBauble, IPotionNegateItem {
+		implements IBauble/* , ICustomEnchantColor */, ISpecialArmor, IRenderBauble, IPotionNegateItem, IRenderObject {
 	private static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,
 			"textures/models/armor/sunglasses_layer_1.png");
 
@@ -108,12 +110,41 @@ public class ItemSunglasses extends ItemArmorBB
 	@SideOnly(Side.CLIENT)
 	public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType type,
 			float partialTicks) {
-		if (type!=RenderType.HEAD)
-			return;
+//		if (type!=RenderType.HEAD)
+//			return;
+//		if (stack.getItem() instanceof IPhantomInkable
+//				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
+//			return;
+//
+//		Minecraft.getMinecraft().renderEngine.bindTexture(getRenderTexture());
+//		GlStateManager.pushMatrix();
+//		GlStateManager.enableBlend();
+//
+//		ModelBiped model = BountifulBaubles.proxy.getArmorModel(modelName+"2");
+//		if (player.isSneaking())
+//			GlStateManager.translate(0.25F*MathHelper.sin(player.rotationPitch*(float) Math.PI/180),
+//					0.25F*MathHelper.cos(player.rotationPitch*(float) Math.PI/180), 0F);
+//		float s = 1F/16F;
+//		GlStateManager.scale(s, s, s);
+//		GlStateManager.rotate(-90F, 0F, 1F, 0F);
+//		model.bipedHead.render(1.0F);
+//
+//		GlStateManager.popMatrix();
+	}
+	
+	@Override
+	public void onRenderObject(ItemStack stack, EntityPlayer player, RenderPlayer renderer, boolean isSlim, float partialTicks, float scale) {
 		if (stack.getItem() instanceof IPhantomInkable
 				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
 			return;
-
+		if (player.isSneaking()) {
+			GlStateManager.translate(0, 0.2, 0);
+		}
+		renderer.getMainModel().bipedHead.postRender(scale);
+		if (player.hasItemInSlot(EntityEquipmentSlot.HEAD)) {
+			GlStateManager.translate(0.0F, -0.02F, -0.045F);
+			GlStateManager.scale(1.1F, 1.1F, 1.1F);
+		}
 		Minecraft.getMinecraft().renderEngine.bindTexture(getRenderTexture());
 		GlStateManager.pushMatrix();
 		GlStateManager.enableBlend();
@@ -124,9 +155,8 @@ public class ItemSunglasses extends ItemArmorBB
 					0.25F*MathHelper.cos(player.rotationPitch*(float) Math.PI/180), 0F);
 		float s = 1F/16F;
 		GlStateManager.scale(s, s, s);
-		GlStateManager.rotate(-90F, 0F, 1F, 0F);
+//		GlStateManager.rotate(-90F, 0F, 1F, 0F);
 		model.bipedHead.render(1.0F);
-
 		GlStateManager.popMatrix();
 	}
 

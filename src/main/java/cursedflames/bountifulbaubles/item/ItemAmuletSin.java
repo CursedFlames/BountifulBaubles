@@ -9,7 +9,9 @@ import cursedflames.bountifulbaubles.util.ItemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -50,14 +52,40 @@ public class ItemAmuletSin extends AGenericItemBauble implements IRenderBauble, 
 	@Override
 	public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType type,
 			float partialTicks) {
-		if (type!=RenderType.BODY)
-			return;
+//		if (type!=RenderType.BODY)
+//			return;
+//		if (stack.getItem() instanceof IPhantomInkable
+//				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
+//			return;
+//		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+//
+//		Helper.rotateIfSneaking(player);
+////		GlStateManager.translate(0F, 0.2F, 0F);
+//
+//		float s = 1.14F/16F;
+//		GlStateManager.scale(s, s, s);
+//		if (model==null)
+//			model = new ModelBiped();
+//
+//		model.bipedBody.render(1);
+	}
+	
+	@Override
+	public void onRenderObject(ItemStack stack, EntityPlayer player, RenderPlayer renderer, boolean isSlim, float partialTicks, float scale) {
 		if (stack.getItem() instanceof IPhantomInkable
 				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
 			return;
+		if (player.isSneaking()) {
+			GlStateManager.translate(0, 0.2, 0);
+		}
+		renderer.getMainModel().bipedBody.postRender(scale);
+		if (player.hasItemInSlot(EntityEquipmentSlot.CHEST)) {
+			GlStateManager.translate(0.0F, -0.02F, -0.045F);
+			GlStateManager.scale(1.1F, 1.1F, 1.1F);
+		}
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-		Helper.rotateIfSneaking(player);
+//		Helper.rotateIfSneaking(player);
 //		GlStateManager.translate(0F, 0.2F, 0F);
 
 		float s = 1.14F/16F;

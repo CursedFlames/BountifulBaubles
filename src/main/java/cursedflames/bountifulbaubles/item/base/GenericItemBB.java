@@ -5,9 +5,12 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import cursedflames.bountifulbaubles.BountifulBaubles;
+import cursedflames.bountifulbaubles.client.layer.IRenderObject;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class GenericItemBB extends Item {
+public class GenericItemBB extends Item implements IRenderObject{
 //	public Property creativeOnly;
 	
 	public GenericItemBB(String name) {
@@ -29,7 +32,7 @@ public class GenericItemBB extends Item {
 
 	public GenericItemBB(String name, CreativeTabs tab, boolean configCreativeOnly) {
 		setRegistryName(new ResourceLocation(BountifulBaubles.MODID, name));
-		setUnlocalizedName(BountifulBaubles.MODID+"."+name);
+		setTranslationKey(BountifulBaubles.MODID+"."+name);
 		if (tab!=null) {
 			setCreativeTab(tab);
 		}
@@ -54,7 +57,7 @@ public class GenericItemBB extends Item {
 			ITooltipFlag flagIn) {
 		boolean isShifting = GuiScreen.isShiftKeyDown();
 		// TODO add proxies instead of being lazy and using deprecated I18n
-		String base = getUnlocalizedName()+".tooltip.";
+		String base = getTranslationKey()+".tooltip.";
 		String shift = "";
 		if (I18n.canTranslate(base+"0")) {
 			if (isShifting&&I18n.canTranslate(base+"0s")) {
@@ -67,5 +70,10 @@ public class GenericItemBB extends Item {
 //		if (creativeOnly!=null&&creativeOnly.getBoolean()) {
 //			tooltip.add(BountifulBaubles.proxy.translate(BountifulBaubles.MODID+".creativeonly"));
 //		}
+	}
+
+	@Override
+	public void onRenderObject(ItemStack stack, EntityPlayer player, RenderPlayer renderer, boolean isSlim, float partialTicks, float scale) {
+		
 	}
 }

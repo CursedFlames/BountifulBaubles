@@ -86,7 +86,7 @@ public class ItemFlareGun extends GenericItemBB {
 			ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		if (!BountifulBaubles.isAlbedoLoaded) {
-			tooltip.add(BountifulBaubles.proxy.translate(getUnlocalizedName()+".tooltip.noalbedo"));
+			tooltip.add(BountifulBaubles.proxy.translate(getTranslationKey()+".tooltip.noalbedo"));
 		}
 	}
 }

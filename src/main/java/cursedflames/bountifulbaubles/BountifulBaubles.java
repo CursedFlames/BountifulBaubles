@@ -1,5 +1,8 @@
 package cursedflames.bountifulbaubles;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.apache.logging.log4j.Logger;
 
 import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
@@ -7,6 +10,7 @@ import cursedflames.bountifulbaubles.block.ModBlocks;
 import cursedflames.bountifulbaubles.block.TESRReforger;
 import cursedflames.bountifulbaubles.block.TileReforger;
 import cursedflames.bountifulbaubles.capability.CapabilityWormholePins;
+import cursedflames.bountifulbaubles.client.layer.BountfulRenderLayer;
 import cursedflames.bountifulbaubles.entity.ModEntities;
 import cursedflames.bountifulbaubles.event.EventHandler;
 import cursedflames.bountifulbaubles.item.ItemAmuletSinGluttony;
@@ -25,6 +29,8 @@ import cursedflames.bountifulbaubles.util.Config;
 import cursedflames.bountifulbaubles.util.RegistryHelper;
 import cursedflames.bountifulbaubles.wormhole.CommandWormhole;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -65,18 +71,20 @@ public class BountifulBaubles {
 
 	public static final String ARMOR_TEXTURE_PATH = "textures/models/armor/";
 
-//	static final Comparator<ItemStack> tabSorter;
+	//	static final Comparator<ItemStack> tabSorter;
 	public static final CreativeTabs TAB = new CreativeTabs("bountifulbaubles") {
+
+		@Override
 		@SideOnly(Side.CLIENT)
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(ModItems.trinketObsidianSkull);
 		}
 
-//		@Override
-//        public void displayAllRelevantItems(NonNullList<ItemStack> items) {
-//            super.displayAllRelevantItems(items);
-//            items.sort(tabSorter);
-//        }
+		//		@Override
+		//        public void displayAllRelevantItems(NonNullList<ItemStack> items) {
+		//            super.displayAllRelevantItems(items);
+		//            items.sort(tabSorter);
+		//        }
 	};
 
 	public static boolean isQuarkLoaded = false;
@@ -93,6 +101,7 @@ public class BountifulBaubles {
 		config = new Config("1", logger);
 		config.preInit(event);
 		ModConfig.initConfig();
+
 		// TODO make some of these non-static and move registration to
 		// constructor
 		MinecraftForge.EVENT_BUS.register(EventHandler.class);
@@ -134,11 +143,27 @@ public class BountifulBaubles {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileReforger.class, new TESRReforger());
 	}
 
+	@SideOnly(Side.CLIENT)
+	private static void addRenderLayer() {
+		final Map<String, RenderPlayer> skinMap = Minecraft.getMinecraft().getRenderManager().getSkinMap();
+		RenderPlayer render;
+		for (final Entry<String, RenderPlayer> map : skinMap.entrySet()) {
+			if (map.getKey().contentEquals("slim")) {
+				render = map.getValue();
+				render.addLayer(new BountfulRenderLayer(true, render));
+			} else {
+				render = map.getValue();
+				render.addLayer(new BountfulRenderLayer(false, render));
+			}
+		}
+	}
+
 	@Mod.EventHandler
 	public static void init(FMLInitializationEvent event) {
+		addRenderLayer();
 		ModItems.registerOtherModOreDictionaryEntries();
-//		List<Item> order = Arrays.asList(item1, item2, item3...);
-//		tabSorter = Ordering.explicit(order).onResultOf(ItemStack::getItem);
+		//		List<Item> order = Arrays.asList(item1, item2, item3...);
+		//		tabSorter = Ordering.explicit(order).onResultOf(ItemStack::getItem);
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiProxy());
 		PacketHandler.registerMessages();
 	}
@@ -146,11 +171,11 @@ public class BountifulBaubles {
 	@Mod.EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
 		config.postInit(event);
-//		logger.info(Config.modConfigs.get(MODID)==null);
-//		isQuarkLoaded = Loader.isModLoaded("quark");
-//		isBotaniaLoaded = Loader.isModLoaded("botania");
+		//		logger.info(Config.modConfigs.get(MODID)==null);
+		//		isQuarkLoaded = Loader.isModLoaded("quark");
+		//		isBotaniaLoaded = Loader.isModLoaded("botania");
 	}
-	
+
 	@Mod.EventHandler
 	public static void serverStart(FMLServerStartingEvent event) {
 		// TODO does using `new` screw things up?

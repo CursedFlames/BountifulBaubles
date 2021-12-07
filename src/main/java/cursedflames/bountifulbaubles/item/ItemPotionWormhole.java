@@ -33,7 +33,7 @@ public class ItemPotionWormhole extends GenericItemBB {
 			EnumHand hand) {
 		if (world.playerEntities.size()<2) {
 			player.sendStatusMessage(new TextComponentTranslation(
-					ModItems.potionWormhole.getUnlocalizedName()+".nootherplayers"), true);
+					ModItems.potionWormhole.getTranslationKey()+".nootherplayers"), true);
 			return new ActionResult<ItemStack>(EnumActionResult.FAIL, player.getHeldItem(hand));
 		}
 //		if (world.playerEntities.size()>-1) {
@@ -77,7 +77,7 @@ public class ItemPotionWormhole extends GenericItemBB {
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
 			ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
-		String base = getUnlocalizedName()+".tooltip.";
+		String base = getTranslationKey()+".tooltip.";
 		if (Minecraft.getMinecraft().isSingleplayer()) {
 			tooltip.add(I18n.translateToLocal(base+"sp"));
 		} else {

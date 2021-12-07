@@ -14,11 +14,14 @@ import baubles.api.IBauble;
 import baubles.api.render.IRenderBauble;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
+import cursedflames.bountifulbaubles.client.layer.IRenderObject;
 import cursedflames.bountifulbaubles.item.base.IItemAttributeModifier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -48,7 +51,7 @@ import vazkii.botania.api.item.IPhantomInkable;
 
 @SuppressWarnings("deprecation")
 public class ItemShieldCobalt extends ItemShield
-		implements IBauble, IRenderBauble, IItemAttributeModifier {
+		implements IBauble, IRenderBauble, IItemAttributeModifier, IRenderObject {
 	public static final UUID KNOCKBACK_RESISTANCE_UUID = UUID
 			.fromString("418ed1da-15ae-4c7b-ac5e-4807ca52ffe3");
 	public static final UUID KNOCKBACK_RESISTANCE_BAUBLE_UUID = UUID
@@ -64,7 +67,7 @@ public class ItemShieldCobalt extends ItemShield
 	public ItemShieldCobalt(String name) {
 		super();
 		setRegistryName(name);
-		setUnlocalizedName(BountifulBaubles.MODID+"."+name);
+		setTranslationKey(BountifulBaubles.MODID+"."+name);
 		setCreativeTab(BountifulBaubles.TAB);
 		setMaxDamage(336*3);
 		BountifulBaubles.registryHelper.addItemModel(this);
@@ -163,7 +166,7 @@ public class ItemShieldCobalt extends ItemShield
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		return BountifulBaubles.proxy.translate(getUnlocalizedName()+".name");
+		return BountifulBaubles.proxy.translate(getTranslationKey()+".name");
 	}
 
 	@Override
@@ -180,10 +183,10 @@ public class ItemShieldCobalt extends ItemShield
 		if (stack.getItemDamage()>=stack.getMaxDamage()) {
 			tooltip.add(I18n.translateToLocal(BountifulBaubles.MODID+".broken"));
 		}
-		tooltip.add(I18n.translateToLocal(getUnlocalizedName()+".tooltip.0"));
+		tooltip.add(I18n.translateToLocal(getTranslationKey()+".tooltip.0"));
 		if (GuiScreen.isShiftKeyDown()) {
-			tooltip.add(I18n.translateToLocal(getUnlocalizedName()+".tooltip.1"));
-			tooltip.add(I18n.translateToLocal(getUnlocalizedName()+".tooltip.2"));
+			tooltip.add(I18n.translateToLocal(getTranslationKey()+".tooltip.1"));
+			tooltip.add(I18n.translateToLocal(getTranslationKey()+".tooltip.2"));
 			if (stack.getItem() instanceof IPhantomInkable
 					&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack)) {
 				tooltip.add(BountifulBaubles.proxy
@@ -229,14 +232,32 @@ public class ItemShieldCobalt extends ItemShield
 	@Override
 	public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType type,
 			float partialTicks) {
-		if (type==RenderType.BODY) {
-			Helper.rotateIfSneaking(player);
-			boolean armor = !player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty();
-			GlStateManager.scale(0.6, 0.6, 0.6);
-			GlStateManager.rotate(180, 0, 0, 1);
-			GlStateManager.translate(0.5, -0.25, armor ? 0.75 : 0.7);
-			Minecraft.getMinecraft().getRenderItem().renderItem(stack,
-					ItemCameraTransforms.TransformType.NONE);
+//		if (type==RenderType.BODY) {
+//			Helper.rotateIfSneaking(player);
+//			boolean armor = !player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty();
+//			GlStateManager.scale(0.6, 0.6, 0.6);
+//			GlStateManager.rotate(180, 0, 0, 1);
+//			GlStateManager.translate(0.5, -0.25, armor ? 0.75 : 0.7);
+//			Minecraft.getMinecraft().getRenderItem().renderItem(stack,
+//					ItemCameraTransforms.TransformType.NONE);
+//		}
+	}
+	
+	@Override
+	public void onRenderObject(ItemStack stack, EntityPlayer player, RenderPlayer renderer, boolean isSlim, float partialTicks, float scale) {
+		if (player.isSneaking()) {
+			GlStateManager.translate(0, 0.2, 0);
 		}
+		renderer.getMainModel().bipedBody.postRender(scale);
+//		if (player.hasItemInSlot(EntityEquipmentSlot.CHEST)) {
+//			GlStateManager.translate(0.0F, -0.02F, -0.045F);
+//			GlStateManager.scale(1.1F, 1.1F, 1.1F);
+//		}
+		boolean armor = !player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty();
+		GlStateManager.scale(0.6, 0.6, 0.6);
+		GlStateManager.rotate(180, 0, 0, 1);
+		GlStateManager.translate(0.5, -0.25, armor ? 0.75 : 0.7);
+		Minecraft.getMinecraft().getRenderItem().renderItem(stack,
+				ItemCameraTransforms.TransformType.NONE);
 	}
 }

@@ -41,7 +41,7 @@ public class ItemModifierBook extends GenericItemBB implements ICustomEnchantCol
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		return BountifulBaubles.proxy.translate(getUnlocalizedName()+"."
+		return BountifulBaubles.proxy.translate(getTranslationKey()+"."
 				+(stack.hasTagCompound()&&stack.getTagCompound().hasKey("baubleModifier")
 						? stack.getTagCompound().getString("baubleModifier")
 						: EnumBaubleModifier.NONE.name)
