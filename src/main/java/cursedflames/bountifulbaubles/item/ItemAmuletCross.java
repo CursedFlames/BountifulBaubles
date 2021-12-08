@@ -8,7 +8,6 @@ import cursedflames.bountifulbaubles.util.ItemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -20,8 +19,10 @@ import vazkii.botania.api.item.IPhantomInkable;
 
 public class ItemAmuletCross extends AGenericItemBauble implements IRenderBauble, IPhantomInkable {
 	public static final int RESIST_TIME = 36;
-	public static final ResourceLocation texture = new ResourceLocation(BountifulBaubles.MODID,
-			BountifulBaubles.ARMOR_TEXTURE_PATH+"amulet_cross.png");
+	public static final ResourceLocation texture = new ResourceLocation(
+			BountifulBaubles.MODID,
+			BountifulBaubles.ARMOR_TEXTURE_PATH + "amulet_cross.png"
+	);
 	@SideOnly(Side.CLIENT)
 	private static ModelBiped model;
 
@@ -49,48 +50,51 @@ public class ItemAmuletCross extends AGenericItemBauble implements IRenderBauble
 	@Override
 	public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType type,
 			float partialTicks) {
-//		if (type!=RenderType.BODY)
-//			return;
-//		if (stack.getItem() instanceof IPhantomInkable
-//				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
-//			return;
-//		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-//
-//		Helper.rotateIfSneaking(player);
-////		GlStateManager.translate(0F, 0.2F, 0F);
-//
-//		float s = 1.14F/16F;
-//		GlStateManager.scale(s, s, s);
-//		if (model==null)
-//			model = new ModelBiped();
-//
-//		model.bipedBody.render(1);
+		//		if (type!=RenderType.BODY)
+		//			return;
+		//		if (stack.getItem() instanceof IPhantomInkable
+		//				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
+		//			return;
+		//		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		//
+		//		Helper.rotateIfSneaking(player);
+		////		GlStateManager.translate(0F, 0.2F, 0F);
+		//
+		//		float s = 1.14F/16F;
+		//		GlStateManager.scale(s, s, s);
+		//		if (model==null)
+		//			model = new ModelBiped();
+		//
+		//		model.bipedBody.render(1);
 	}
-	
+
 	@Override
-	public void onRenderObject(ItemStack stack, EntityPlayer player, RenderPlayer renderer, boolean isSlim, float partialTicks, float scale) {
-		if (stack.getItem() instanceof IPhantomInkable
-				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
+	public void onRenderObject(ItemStack stack, EntityPlayer player, boolean isSlim, float partialTicks, float scale) {
+		if ((stack.getItem() instanceof IPhantomInkable)
+				&& ((IPhantomInkable) stack.getItem()).hasPhantomInk(stack)) {
 			return;
-		if (player.isSneaking()) {
-			GlStateManager.translate(0, 0.2, 0);
 		}
-		renderer.getMainModel().bipedBody.postRender(scale);
 		if (player.hasItemInSlot(EntityEquipmentSlot.CHEST)) {
 			GlStateManager.translate(0.0F, -0.02F, -0.045F);
 			GlStateManager.scale(1.1F, 1.1F, 1.1F);
 		}
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-//		Helper.rotateIfSneaking(player);
-//		GlStateManager.translate(0F, 0.2F, 0F);
+		//		Helper.rotateIfSneaking(player);
+		//		GlStateManager.translate(0F, 0.2F, 0F);
 
-		float s = 1.14F/16F;
+		final float s = 1.14F / 16F;
 		GlStateManager.scale(s, s, s);
-		if (model==null)
+		if (model == null) {
 			model = new ModelBiped();
+		}
 
 		model.bipedBody.render(1);
+	}
+
+	@Override
+	public RenderType getRenderType() {
+		return RenderType.BODY;
 	}
 
 	@Override

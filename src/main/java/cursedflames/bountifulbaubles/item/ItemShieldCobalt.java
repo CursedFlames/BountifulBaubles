@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Multimap;
 
 import baubles.api.BaubleType;
@@ -16,12 +14,11 @@ import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
 import cursedflames.bountifulbaubles.client.layer.IRenderObject;
 import cursedflames.bountifulbaubles.item.base.IItemAttributeModifier;
+import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -43,7 +40,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -59,33 +55,37 @@ public class ItemShieldCobalt extends ItemShield
 	private static final Map<IAttribute, AttributeModifier> modMap = new HashMap<>();
 
 	static {
-		modMap.put(SharedMonsterAttributes.KNOCKBACK_RESISTANCE,
-				new AttributeModifier(KNOCKBACK_RESISTANCE_BAUBLE_UUID,
-						"Cobalt Shield (bauble slot) knockback resistance", 10, 0));
+		modMap.put(
+				SharedMonsterAttributes.KNOCKBACK_RESISTANCE,
+				new AttributeModifier(
+						KNOCKBACK_RESISTANCE_BAUBLE_UUID,
+						"Cobalt Shield (bauble slot) knockback resistance", 10, 0
+				)
+		);
 	}
 
 	public ItemShieldCobalt(String name) {
 		super();
-		setRegistryName(name);
-		setTranslationKey(BountifulBaubles.MODID+"."+name);
-		setCreativeTab(BountifulBaubles.TAB);
-		setMaxDamage(336*3);
+		this.setRegistryName(name);
+		this.setTranslationKey(BountifulBaubles.MODID + "." + name);
+		this.setCreativeTab(BountifulBaubles.TAB);
+		this.setMaxDamage(336 * 3);
 		BountifulBaubles.registryHelper.addItemModel(this);
 	}
 
 	public static boolean isUsable(ItemStack stack) {
-		return stack.getItemDamage()<stack.getMaxDamage();
+		return stack.getItemDamage() < stack.getMaxDamage();
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn,
 			EnumHand handIn) {
-		ItemStack itemstack = playerIn.getHeldItem(handIn);
+		final ItemStack itemstack = playerIn.getHeldItem(handIn);
 		if (isUsable(itemstack)) {
 			playerIn.setActiveHand(handIn);
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+			return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 		} else {
-			return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
+			return new ActionResult<>(EnumActionResult.FAIL, itemstack);
 		}
 	}
 
@@ -93,7 +93,7 @@ public class ItemShieldCobalt extends ItemShield
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
 		// TODO oredictionary support, because hardcore ores is stupid and adds
 		// its own iron
-		return repair.getItem()==Items.IRON_INGOT;
+		return repair.getItem() == Items.IRON_INGOT;
 	}
 
 	@SubscribeEvent
@@ -102,29 +102,31 @@ public class ItemShieldCobalt extends ItemShield
 		if (!(event.getEntityLiving() instanceof EntityPlayer)) {
 			return;
 		}
-		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-		if (player.getActiveItemStack()==null) {
+		final EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+		if (player.getActiveItemStack() == null) {
 			return;
 		}
 		// System.out.println("player holding item");
 		ItemStack stack = player.getActiveItemStack();
-		float damage = event.getAmount();
-		if (damage>5.0F&&stack!=null&&stack.getItem() instanceof ItemShieldCobalt) {
+		final float damage = event.getAmount();
+		if ((damage > 5.0F) && (stack != null) && (stack.getItem() instanceof ItemShieldCobalt)) {
 			// System.out.println("damaging shield...");
 			// so it never damages to the point of being destroyed
-			int i = Math.min(1+(int) damage, stack.getMaxDamage()-stack.getItemDamage());
+			final int i = Math.min(1 + (int) damage, stack.getMaxDamage() - stack.getItemDamage());
 
 			stack.damageItem(i, player);
 
 			// shouldn't get destroyed, but just in case, don't want to cause a
 			// crash
-			if (stack.isEmpty()||stack.getItemDamage()>=stack.getMaxDamage()) {
+			if (stack.isEmpty() || (stack.getItemDamage() >= stack.getMaxDamage())) {
 				if (stack.isEmpty()) {
-					EnumHand enumhand = player.getActiveHand();
-					net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, stack,
-							enumhand);
+					final EnumHand enumhand = player.getActiveHand();
+					net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(
+							player, stack,
+							enumhand
+					);
 
-					if (enumhand==EnumHand.MAIN_HAND) {
+					if (enumhand == EnumHand.MAIN_HAND) {
 						player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, (ItemStack) null);
 					} else {
 						player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, (ItemStack) null);
@@ -136,9 +138,11 @@ public class ItemShieldCobalt extends ItemShield
 				// TODO metal sound instead of wood sound?
 				// TODO find a good volume for this
 				// TODO what category should this be?
-				player.world.playSound(null, player.posX,  player.posY,  player.posZ,
+				player.world.playSound(
+						null, player.posX, player.posY, player.posZ,
 						SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS,
-						0.9f, 0.8F+player.world.rand.nextFloat()*0.4F);
+						0.9f, 0.8F + (player.world.rand.nextFloat() * 0.4F)
+				);
 			}
 		}
 	}
@@ -159,14 +163,14 @@ public class ItemShieldCobalt extends ItemShield
 	}
 
 	private static void resetRepairValue(ItemStack stack) {
-		if (!stack.isEmpty()&&stack.getItem() instanceof ItemShieldCobalt&&stack.hasTagCompound()) {
+		if (!stack.isEmpty() && (stack.getItem() instanceof ItemShieldCobalt) && stack.hasTagCompound()) {
 			stack.getTagCompound().removeTag("RepairCost");
 		}
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		return BountifulBaubles.proxy.translate(getTranslationKey()+".name");
+		return BountifulBaubles.proxy.translate(this.getTranslationKey() + ".name");
 	}
 
 	@Override
@@ -180,31 +184,38 @@ public class ItemShieldCobalt extends ItemShield
 			// hides "+10 knockback resist"
 			stack.getTagCompound().setInteger("HideFlags", 2);
 		}
-		if (stack.getItemDamage()>=stack.getMaxDamage()) {
-			tooltip.add(I18n.translateToLocal(BountifulBaubles.MODID+".broken"));
+		if (stack.getItemDamage() >= stack.getMaxDamage()) {
+			tooltip.add(I18n.translateToLocal(BountifulBaubles.MODID + ".broken"));
 		}
-		tooltip.add(I18n.translateToLocal(getTranslationKey()+".tooltip.0"));
+		tooltip.add(I18n.translateToLocal(this.getTranslationKey() + ".tooltip.0"));
 		if (GuiScreen.isShiftKeyDown()) {
-			tooltip.add(I18n.translateToLocal(getTranslationKey()+".tooltip.1"));
-			tooltip.add(I18n.translateToLocal(getTranslationKey()+".tooltip.2"));
-			if (stack.getItem() instanceof IPhantomInkable
-					&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack)) {
-				tooltip.add(BountifulBaubles.proxy
-						.translate(BountifulBaubles.MODID+".misc.hasPhantomInk"));
+			tooltip.add(I18n.translateToLocal(this.getTranslationKey() + ".tooltip.1"));
+			tooltip.add(I18n.translateToLocal(this.getTranslationKey() + ".tooltip.2"));
+			if ((stack.getItem() instanceof IPhantomInkable)
+					&& ((IPhantomInkable) stack.getItem()).hasPhantomInk(stack)) {
+				tooltip.add(
+						BountifulBaubles.proxy
+								.translate(BountifulBaubles.MODID + ".misc.hasPhantomInk")
+				);
 			}
-		} else
-			tooltip.add(I18n.translateToLocal(BountifulBaubles.MODID+".moreinfo"));
+		} else {
+			tooltip.add(I18n.translateToLocal(BountifulBaubles.MODID + ".moreinfo"));
+		}
 
 	}
 
 	@Override
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot,
 			ItemStack stack) {
-		Multimap<String, AttributeModifier> mods = super.getAttributeModifiers(slot, stack);
-		if (slot==EntityEquipmentSlot.MAINHAND||slot==EntityEquipmentSlot.OFFHAND) {
-			String knockback = SharedMonsterAttributes.KNOCKBACK_RESISTANCE.getName();
-			mods.put(knockback, new AttributeModifier(KNOCKBACK_RESISTANCE_UUID,
-					"Cobalt Shield knockback resistance", 10, 0));
+		final Multimap<String, AttributeModifier> mods = super.getAttributeModifiers(slot, stack);
+		if ((slot == EntityEquipmentSlot.MAINHAND) || (slot == EntityEquipmentSlot.OFFHAND)) {
+			final String knockback = SharedMonsterAttributes.KNOCKBACK_RESISTANCE.getName();
+			mods.put(
+					knockback, new AttributeModifier(
+							KNOCKBACK_RESISTANCE_UUID,
+							"Cobalt Shield knockback resistance", 10, 0
+					)
+			);
 		}
 		return mods;
 	}
@@ -232,32 +243,36 @@ public class ItemShieldCobalt extends ItemShield
 	@Override
 	public void onPlayerBaubleRender(ItemStack stack, EntityPlayer player, RenderType type,
 			float partialTicks) {
-//		if (type==RenderType.BODY) {
-//			Helper.rotateIfSneaking(player);
-//			boolean armor = !player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty();
-//			GlStateManager.scale(0.6, 0.6, 0.6);
-//			GlStateManager.rotate(180, 0, 0, 1);
-//			GlStateManager.translate(0.5, -0.25, armor ? 0.75 : 0.7);
-//			Minecraft.getMinecraft().getRenderItem().renderItem(stack,
-//					ItemCameraTransforms.TransformType.NONE);
-//		}
+		//		if (type==RenderType.BODY) {
+		//			Helper.rotateIfSneaking(player);
+		//			boolean armor = !player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty();
+		//			GlStateManager.scale(0.6, 0.6, 0.6);
+		//			GlStateManager.rotate(180, 0, 0, 1);
+		//			GlStateManager.translate(0.5, -0.25, armor ? 0.75 : 0.7);
+		//			Minecraft.getMinecraft().getRenderItem().renderItem(stack,
+		//					ItemCameraTransforms.TransformType.NONE);
+		//		}
 	}
-	
+
 	@Override
-	public void onRenderObject(ItemStack stack, EntityPlayer player, RenderPlayer renderer, boolean isSlim, float partialTicks, float scale) {
-		if (player.isSneaking()) {
-			GlStateManager.translate(0, 0.2, 0);
-		}
-		renderer.getMainModel().bipedBody.postRender(scale);
-//		if (player.hasItemInSlot(EntityEquipmentSlot.CHEST)) {
-//			GlStateManager.translate(0.0F, -0.02F, -0.045F);
-//			GlStateManager.scale(1.1F, 1.1F, 1.1F);
-//		}
-		boolean armor = !player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty();
+	@SideOnly(Side.CLIENT)
+	public void onRenderObject(ItemStack stack, EntityPlayer player, boolean isSlim, float partialTicks, float scale) {
+		//		if (player.hasItemInSlot(EntityEquipmentSlot.CHEST)) {
+		//			GlStateManager.translate(0.0F, -0.02F, -0.045F);
+		//			GlStateManager.scale(1.1F, 1.1F, 1.1F);
+		//		}
+		final boolean armor = !player.getItemStackFromSlot(EntityEquipmentSlot.CHEST).isEmpty();
 		GlStateManager.scale(0.6, 0.6, 0.6);
 		GlStateManager.rotate(180, 0, 0, 1);
 		GlStateManager.translate(0.5, -0.25, armor ? 0.75 : 0.7);
-		Minecraft.getMinecraft().getRenderItem().renderItem(stack,
-				ItemCameraTransforms.TransformType.NONE);
+		Minecraft.getMinecraft().getRenderItem().renderItem(
+				stack,
+				ItemCameraTransforms.TransformType.NONE
+		);
+	}
+
+	@Override
+	public RenderType getRenderType() {
+		return RenderType.BODY;
 	}
 }

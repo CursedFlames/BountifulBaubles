@@ -2,12 +2,11 @@ package cursedflames.bountifulbaubles.item.base;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
-
+import baubles.api.render.IRenderBauble.RenderType;
 import cursedflames.bountifulbaubles.BountifulBaubles;
 import cursedflames.bountifulbaubles.client.layer.IRenderObject;
+import javax.annotation.Nullable;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,9 +18,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class GenericItemBB extends Item implements IRenderObject{
-//	public Property creativeOnly;
-	
+public class GenericItemBB extends Item implements IRenderObject {
+	//	public Property creativeOnly;
+
 	public GenericItemBB(String name) {
 		this(name, null);
 	}
@@ -31,23 +30,23 @@ public class GenericItemBB extends Item implements IRenderObject{
 	}
 
 	public GenericItemBB(String name, CreativeTabs tab, boolean configCreativeOnly) {
-		setRegistryName(new ResourceLocation(BountifulBaubles.MODID, name));
-		setTranslationKey(BountifulBaubles.MODID+"."+name);
-		if (tab!=null) {
-			setCreativeTab(tab);
+		this.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, name));
+		this.setTranslationKey(BountifulBaubles.MODID + "." + name);
+		if (tab != null) {
+			this.setCreativeTab(tab);
 		}
-//		if (configCreativeOnly) {
-//			Property unsynced = BountifulBaubles.config.addPropBoolean(
-//					getRegistryName()+".creativeOnly", "Items",
-//					"Whether or not "+getRegistryName()
-//							+" is creative only. If enabled, recipes and loot tables for this item will not be added, and the item will have a creative only tooltip added.",
-//					false, EnumPropSide.SYNCED);
-//			unsynced.setRequiresMcRestart(true);
-//			creativeOnly = BountifulBaubles.config
-//					.getSyncedProperty(getRegistryName()+".creativeOnly");
-//		} else {
-//			creativeOnly = null;
-//		}
+		//		if (configCreativeOnly) {
+		//			Property unsynced = BountifulBaubles.config.addPropBoolean(
+		//					getRegistryName()+".creativeOnly", "Items",
+		//					"Whether or not "+getRegistryName()
+		//							+" is creative only. If enabled, recipes and loot tables for this item will not be added, and the item will have a creative only tooltip added.",
+		//					false, EnumPropSide.SYNCED);
+		//			unsynced.setRequiresMcRestart(true);
+		//			creativeOnly = BountifulBaubles.config
+		//					.getSyncedProperty(getRegistryName()+".creativeOnly");
+		//		} else {
+		//			creativeOnly = null;
+		//		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -55,25 +54,31 @@ public class GenericItemBB extends Item implements IRenderObject{
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip,
 			ITooltipFlag flagIn) {
-		boolean isShifting = GuiScreen.isShiftKeyDown();
+		final boolean isShifting = GuiScreen.isShiftKeyDown();
 		// TODO add proxies instead of being lazy and using deprecated I18n
-		String base = getTranslationKey()+".tooltip.";
+		final String base = this.getTranslationKey() + ".tooltip.";
 		String shift = "";
-		if (I18n.canTranslate(base+"0")) {
-			if (isShifting&&I18n.canTranslate(base+"0s")) {
+		if (I18n.canTranslate(base + "0")) {
+			if (isShifting && I18n.canTranslate(base + "0s")) {
 				shift = "s";
 			}
-			for (int i = 0; I18n.canTranslate(base+i+shift)&&i<100; i++) {
-				tooltip.add(I18n.translateToLocal(base+i+shift));
+			for (int i = 0; I18n.canTranslate(base + i + shift) && (i < 100); i++) {
+				tooltip.add(I18n.translateToLocal(base + i + shift));
 			}
 		}
-//		if (creativeOnly!=null&&creativeOnly.getBoolean()) {
-//			tooltip.add(BountifulBaubles.proxy.translate(BountifulBaubles.MODID+".creativeonly"));
-//		}
+		//		if (creativeOnly!=null&&creativeOnly.getBoolean()) {
+		//			tooltip.add(BountifulBaubles.proxy.translate(BountifulBaubles.MODID+".creativeonly"));
+		//		}
 	}
 
 	@Override
-	public void onRenderObject(ItemStack stack, EntityPlayer player, RenderPlayer renderer, boolean isSlim, float partialTicks, float scale) {
-		
+	@SideOnly(Side.CLIENT)
+	public void onRenderObject(ItemStack stack, EntityPlayer player, boolean isSlim, float partialTicks, float scale) {
+
+	}
+
+	@Override
+	public RenderType getRenderType() {
+		return null;
 	}
 }

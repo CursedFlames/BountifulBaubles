@@ -133,14 +133,10 @@ public class ItemSunglasses extends ItemArmorBB
 	}
 	
 	@Override
-	public void onRenderObject(ItemStack stack, EntityPlayer player, RenderPlayer renderer, boolean isSlim, float partialTicks, float scale) {
+	public void onRenderObject(ItemStack stack, EntityPlayer player, boolean isSlim, float partialTicks, float scale) {
 		if (stack.getItem() instanceof IPhantomInkable
 				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
 			return;
-		if (player.isSneaking()) {
-			GlStateManager.translate(0, 0.2, 0);
-		}
-		renderer.getMainModel().bipedHead.postRender(scale);
 		if (player.hasItemInSlot(EntityEquipmentSlot.HEAD)) {
 			GlStateManager.translate(0.0F, -0.02F, -0.045F);
 			GlStateManager.scale(1.1F, 1.1F, 1.1F);
@@ -158,6 +154,10 @@ public class ItemSunglasses extends ItemArmorBB
 //		GlStateManager.rotate(-90F, 0F, 1F, 0F);
 		model.bipedHead.render(1.0F);
 		GlStateManager.popMatrix();
+	}
+	@Override
+	public RenderType getRenderType() {
+		return RenderType.HEAD;
 	}
 
 	@Override

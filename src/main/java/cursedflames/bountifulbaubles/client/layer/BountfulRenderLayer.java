@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
+import baubles.api.render.IRenderBauble.RenderType;
 import javax.annotation.Nonnull;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -38,11 +39,26 @@ public class BountfulRenderLayer implements LayerRenderer<EntityPlayer> {
 					GlStateManager.pushMatrix();
 					GL11.glColor3ub((byte) 255, (byte) 255, (byte) 255);
 					GlStateManager.color(1F, 1F, 1F, 1F);
-					renderObj.onRenderObject(stack, player, renderer, isSlim, partialTicks, scale);
+					if (player.isSneaking()) {
+						GlStateManager.translate(0, 0.2, 0);
+					}
+					this.renderType(renderObj.getRenderType(), scale);
+					renderObj.onRenderObject(stack, player, isSlim, partialTicks, scale);
 					GlStateManager.color(1F, 1F, 1F, 1F);
 					GlStateManager.popMatrix();
 				}
 			}
+		}
+	}
+
+	private void renderType(RenderType type, float scale) {
+		switch (type) {
+		case HEAD:
+			renderer.getMainModel().bipedHead.postRender(scale);
+		case BODY:
+			renderer.getMainModel().bipedBody.postRender(scale);
+		default:
+			break;
 		}
 	}
 

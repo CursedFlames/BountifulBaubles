@@ -1,8 +1,5 @@
 package cursedflames.bountifulbaubles;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.apache.logging.log4j.Logger;
 
 import cursedflames.bountifulbaubles.baubleeffect.BaubleAttributeModifierHandler;
@@ -10,7 +7,6 @@ import cursedflames.bountifulbaubles.block.ModBlocks;
 import cursedflames.bountifulbaubles.block.TESRReforger;
 import cursedflames.bountifulbaubles.block.TileReforger;
 import cursedflames.bountifulbaubles.capability.CapabilityWormholePins;
-import cursedflames.bountifulbaubles.client.layer.BountfulRenderLayer;
 import cursedflames.bountifulbaubles.entity.ModEntities;
 import cursedflames.bountifulbaubles.event.EventHandler;
 import cursedflames.bountifulbaubles.item.ItemAmuletSinGluttony;
@@ -29,8 +25,6 @@ import cursedflames.bountifulbaubles.util.Config;
 import cursedflames.bountifulbaubles.util.RegistryHelper;
 import cursedflames.bountifulbaubles.wormhole.CommandWormhole;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -143,24 +137,9 @@ public class BountifulBaubles {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileReforger.class, new TESRReforger());
 	}
 
-	@SideOnly(Side.CLIENT)
-	private static void addRenderLayer() {
-		final Map<String, RenderPlayer> skinMap = Minecraft.getMinecraft().getRenderManager().getSkinMap();
-		RenderPlayer render;
-		for (final Entry<String, RenderPlayer> map : skinMap.entrySet()) {
-			if (map.getKey().contentEquals("slim")) {
-				render = map.getValue();
-				render.addLayer(new BountfulRenderLayer(true, render));
-			} else {
-				render = map.getValue();
-				render.addLayer(new BountfulRenderLayer(false, render));
-			}
-		}
-	}
-
 	@Mod.EventHandler
 	public static void init(FMLInitializationEvent event) {
-		addRenderLayer();
+		proxy.addRenderLayer();
 		ModItems.registerOtherModOreDictionaryEntries();
 		//		List<Item> order = Arrays.asList(item1, item2, item3...);
 		//		tabSorter = Ordering.explicit(order).onResultOf(ItemStack::getItem);

@@ -45,4 +45,8 @@ public interface ISideProxy {
 
 	public default void registerEntityRenderingHandlers() {
 	}
+
+	public default void addRenderLayer() {
+	}
+
 }
