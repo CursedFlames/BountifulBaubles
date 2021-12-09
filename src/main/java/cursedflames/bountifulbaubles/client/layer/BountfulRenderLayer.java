@@ -36,6 +36,9 @@ public class BountfulRenderLayer implements LayerRenderer<EntityPlayer> {
 				final ItemStack stack = baubles.getStackInSlot(i);
 				if (stack.getItem() instanceof IRenderObject) {
 					final IRenderObject renderObj = (IRenderObject) stack.getItem();
+					if (renderObj.getRenderType() == null) {
+						return;
+					}
 					GlStateManager.pushMatrix();
 					GL11.glColor3ub((byte) 255, (byte) 255, (byte) 255);
 					GlStateManager.color(1F, 1F, 1F, 1F);
