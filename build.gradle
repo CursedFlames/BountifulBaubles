@@ -3,7 +3,7 @@ buildscript {
         jcenter()
         maven { url = "http://files.minecraftforge.net/maven" }
 		maven {
-            url = "http://repo.spongepowered.org/maven"
+            url = "https://repo.spongepowered.org/repository/maven-public"
         }
         maven {
 	      	url = "https://plugins.gradle.org/m2/"
@@ -22,7 +22,7 @@ reobf {
 }
 
 
-version = "1.12.2-0.1.6"
+version = "1.12.2-0.1.7"
 group = "cursedflames.bountifulbaubles" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Bountiful Baubles"
 
@@ -53,16 +53,25 @@ repositories {
 	//ones below are taken from CC, not sure which (if any) are necessary
 	mavenLocal()
 	mavenCentral()
+	maven {
+		// seems to be necessary to build now, idk
+		url = "https://repo.maven.apache.org/maven2/"
+	}
 	jcenter()
 	maven {
 		url= "https://oss.sonatype.org/content/repositories/public/"
 	}
 	maven {
-		url = "http://repo.spongepowered.org/maven"
+		url = "https://repo.spongepowered.org/repository/maven-public"
 	}
 	maven {
 		name = "CurseForge"
 		url = "https://minecraft.curseforge.com/api/maven/"
+	}
+	// Albedo doesn't seem to resolve properly with the curseforge maven so we use this one instead
+	maven {
+		name = "cursemaven"
+		url = "https://www.cursemaven.com"
 	}
 	maven {
 		// location of the maven that hosts JEI files
@@ -82,7 +91,8 @@ dependencies {
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
 	compile "baubles:Baubles:1.12:1.5.2"
-	deobfCompile "albedo:albedo:1.12.2:1.1.0"
+//	deobfCompile "albedo:albedo:1.12.2:1.1.0"
+	compile "curse.maven:albedo-275300:2714505"
 	
 	// compile against the JEI API but do not include it at runtime
 	deobfProvided "mezz.jei:jei_1.12.2:4.12.1.217:api"

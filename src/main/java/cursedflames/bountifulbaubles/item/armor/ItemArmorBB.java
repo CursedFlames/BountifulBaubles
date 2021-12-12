@@ -34,7 +34,7 @@ public class ItemArmorBB extends ItemArmor implements IPhantomInkable {
 		super(material, 0, slot);
 		this.modelName = modelName;
 		setCreativeTab(tab);
-		setTranslationKey(BountifulBaubles.MODID+"."+name);
+		setUnlocalizedName(BountifulBaubles.MODID+"."+name);
 		setRegistryName(new ResourceLocation(BountifulBaubles.MODID, name));
 	}
 
@@ -64,7 +64,7 @@ public class ItemArmorBB extends ItemArmor implements IPhantomInkable {
 			ITooltipFlag flagIn) {
 		boolean isShifting = GuiScreen.isShiftKeyDown();
 		// TODO add proxies instead of being lazy and using deprecated I18n
-		String base = getTranslationKey()+".tooltip.";
+		String base = getUnlocalizedName()+".tooltip.";
 		String shift = "";
 		if (I18n.canTranslate(base+"0")) {
 			if (isShifting&&I18n.canTranslate(base+"0s")) {

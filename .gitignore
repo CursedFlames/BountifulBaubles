@@ -10,3 +10,4 @@ build
 .project
 *.launch
 atom-use-libs
+.idea/

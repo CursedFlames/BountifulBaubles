@@ -43,7 +43,7 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 			int dim = player.getSpawnDimension();
 			if (world.provider.getDimension()!=dim&&!interdimensional.getBoolean(false)) {
 				player.sendStatusMessage(new TextComponentTranslation(
-						ModItems.magicMirror.getTranslationKey()+".wrongdim"), true);
+						ModItems.magicMirror.getUnlocalizedName()+".wrongdim"), true);
 			} else {
 				teleportPlayerToSpawn(world, player);
 			}
@@ -53,7 +53,7 @@ public class ItemWormholeMirror extends ItemMagicMirror {
 			if (world.playerEntities.size()<2) {
 				player.sendStatusMessage(
 						new TextComponentTranslation(
-								ModItems.potionWormhole.getTranslationKey()+".nootherplayers"),
+								ModItems.potionWormhole.getUnlocalizedName()+".nootherplayers"),
 						true);
 			} else {
 				player.openGui(BountifulBaubles.instance, ItemPotionWormhole.GUI_ID, world,

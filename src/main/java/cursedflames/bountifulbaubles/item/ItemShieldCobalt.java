@@ -67,7 +67,7 @@ public class ItemShieldCobalt extends ItemShield
 	public ItemShieldCobalt(String name) {
 		super();
 		this.setRegistryName(name);
-		this.setTranslationKey(BountifulBaubles.MODID + "." + name);
+		this.setUnlocalizedName(BountifulBaubles.MODID + "." + name);
 		this.setCreativeTab(BountifulBaubles.TAB);
 		this.setMaxDamage(336 * 3);
 		BountifulBaubles.registryHelper.addItemModel(this);
@@ -170,7 +170,7 @@ public class ItemShieldCobalt extends ItemShield
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		return BountifulBaubles.proxy.translate(this.getTranslationKey() + ".name");
+		return BountifulBaubles.proxy.translate(this.getUnlocalizedName() + ".name");
 	}
 
 	@Override
@@ -187,10 +187,10 @@ public class ItemShieldCobalt extends ItemShield
 		if (stack.getItemDamage() >= stack.getMaxDamage()) {
 			tooltip.add(I18n.translateToLocal(BountifulBaubles.MODID + ".broken"));
 		}
-		tooltip.add(I18n.translateToLocal(this.getTranslationKey() + ".tooltip.0"));
+		tooltip.add(I18n.translateToLocal(this.getUnlocalizedName() + ".tooltip.0"));
 		if (GuiScreen.isShiftKeyDown()) {
-			tooltip.add(I18n.translateToLocal(this.getTranslationKey() + ".tooltip.1"));
-			tooltip.add(I18n.translateToLocal(this.getTranslationKey() + ".tooltip.2"));
+			tooltip.add(I18n.translateToLocal(this.getUnlocalizedName() + ".tooltip.1"));
+			tooltip.add(I18n.translateToLocal(this.getUnlocalizedName() + ".tooltip.2"));
 			if ((stack.getItem() instanceof IPhantomInkable)
 					&& ((IPhantomInkable) stack.getItem()).hasPhantomInk(stack)) {
 				tooltip.add(

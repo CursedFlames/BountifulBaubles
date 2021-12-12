@@ -31,7 +31,7 @@ public class GenericItemBB extends Item implements IRenderObject {
 
 	public GenericItemBB(String name, CreativeTabs tab, boolean configCreativeOnly) {
 		this.setRegistryName(new ResourceLocation(BountifulBaubles.MODID, name));
-		this.setTranslationKey(BountifulBaubles.MODID + "." + name);
+		this.setUnlocalizedName(BountifulBaubles.MODID + "." + name);
 		if (tab != null) {
 			this.setCreativeTab(tab);
 		}
@@ -56,7 +56,7 @@ public class GenericItemBB extends Item implements IRenderObject {
 			ITooltipFlag flagIn) {
 		final boolean isShifting = GuiScreen.isShiftKeyDown();
 		// TODO add proxies instead of being lazy and using deprecated I18n
-		final String base = this.getTranslationKey() + ".tooltip.";
+		final String base = this.getUnlocalizedName() + ".tooltip.";
 		String shift = "";
 		if (I18n.canTranslate(base + "0")) {
 			if (isShifting && I18n.canTranslate(base + "0s")) {

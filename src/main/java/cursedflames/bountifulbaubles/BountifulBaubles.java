@@ -70,7 +70,7 @@ public class BountifulBaubles {
 
 		@Override
 		@SideOnly(Side.CLIENT)
-		public ItemStack createIcon() {
+		public ItemStack getTabIconItem() {
 			return new ItemStack(ModItems.trinketObsidianSkull);
 		}
 

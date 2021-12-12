@@ -27,7 +27,7 @@ public class ItemPotionRecall extends GenericItemBB {
 		if (world.provider.getDimension()!=dim
 				&&!ItemMagicMirror.interdimensional.getBoolean(false)) {
 			player.sendStatusMessage(new TextComponentTranslation(
-					ModItems.magicMirror.getTranslationKey()+".wrongdim"), true);
+					ModItems.magicMirror.getUnlocalizedName()+".wrongdim"), true);
 			return new ActionResult<ItemStack>(EnumActionResult.FAIL, player.getHeldItem(hand));
 		}
 		player.setActiveHand(hand);

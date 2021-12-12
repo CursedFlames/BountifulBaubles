@@ -62,7 +62,7 @@ public class ItemMagicMirror extends GenericItemBB implements ICustomEnchantColo
 		int dim = player.getSpawnDimension();
 		if (world.provider.getDimension()!=dim&&!interdimensional.getBoolean(false)) {
 			player.sendStatusMessage(new TextComponentTranslation(
-					ModItems.magicMirror.getTranslationKey()+".wrongdim"), true);
+					ModItems.magicMirror.getUnlocalizedName()+".wrongdim"), true);
 			return new ActionResult<ItemStack>(EnumActionResult.FAIL, player.getHeldItem(hand));
 		}
 		player.setActiveHand(hand);
