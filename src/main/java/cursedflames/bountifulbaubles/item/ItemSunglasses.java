@@ -137,21 +137,13 @@ public class ItemSunglasses extends ItemArmorBB
 		if (stack.getItem() instanceof IPhantomInkable
 				&&((IPhantomInkable) stack.getItem()).hasPhantomInk(stack))
 			return;
-		if (player.hasItemInSlot(EntityEquipmentSlot.HEAD)) {
-			GlStateManager.translate(0.0F, -0.02F, -0.045F);
-			GlStateManager.scale(1.1F, 1.1F, 1.1F);
-		}
 		Minecraft.getMinecraft().renderEngine.bindTexture(getRenderTexture());
 		GlStateManager.pushMatrix();
 		GlStateManager.enableBlend();
 
 		ModelBiped model = BountifulBaubles.proxy.getArmorModel(modelName+"2");
-		if (player.isSneaking())
-			GlStateManager.translate(0.25F*MathHelper.sin(player.rotationPitch*(float) Math.PI/180),
-					0.25F*MathHelper.cos(player.rotationPitch*(float) Math.PI/180), 0F);
 		float s = 1F/16F;
 		GlStateManager.scale(s, s, s);
-//		GlStateManager.rotate(-90F, 0F, 1F, 0F);
 		model.bipedHead.render(1.0F);
 		GlStateManager.popMatrix();
 	}

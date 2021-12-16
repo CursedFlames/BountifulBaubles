@@ -36,9 +36,6 @@ public class BountfulRenderLayer implements LayerRenderer<EntityPlayer> {
 				final ItemStack stack = baubles.getStackInSlot(i);
 				if (stack.getItem() instanceof IRenderObject) {
 					final IRenderObject renderObj = (IRenderObject) stack.getItem();
-					if (renderObj.getRenderType() == null) {
-						return;
-					}
 					GlStateManager.pushMatrix();
 					GL11.glColor3ub((byte) 255, (byte) 255, (byte) 255);
 					GlStateManager.color(1F, 1F, 1F, 1F);
@@ -55,13 +52,14 @@ public class BountfulRenderLayer implements LayerRenderer<EntityPlayer> {
 	}
 
 	private void renderType(RenderType type, float scale) {
-		switch (type) {
-		case HEAD:
+		if (type == null) {
+			return;
+		}
+		if (type == RenderType.HEAD) {
 			renderer.getMainModel().bipedHead.postRender(scale);
-		case BODY:
+		} else if (type == RenderType.BODY) {
 			renderer.getMainModel().bipedBody.postRender(scale);
-		default:
-			break;
+		} else {
 		}
 	}
 
