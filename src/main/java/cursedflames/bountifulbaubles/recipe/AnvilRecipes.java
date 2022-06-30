@@ -28,64 +28,65 @@ public class AnvilRecipes {
 
 	public static Pair<Integer, ItemStack> getRecipe(Item item1, Item item2) {
 		for (Pair<Item, Item> entry : simpleRecipes.keySet()) {
-			if ((entry.getLeft().equals(item1)&&entry.getRight().equals(item2))
-					||(entry.getLeft().equals(item2)&&entry.getRight().equals(item1))) {
+			if ((entry.getLeft().equals(item1) && entry.getRight().equals(item2))
+					|| (entry.getLeft().equals(item2) && entry.getRight().equals(item1)))
 				return simpleRecipes.get(entry);
-			}
 		}
 		return null;
 	}
 
 	@SubscribeEvent
 	public static void onAnvilUpdate(AnvilUpdateEvent event) {
-		if (!ModConfig.anvilRecipesEnabled.getBoolean(true)) {
+		if (!ModConfig.anvilRecipesEnabled.getBoolean(true))
 			return;
-		}
-//		BountifulBaubles.logger.info("anvilupdate");
-		Pair<Integer, ItemStack> recipe = getRecipe(event.getLeft().getItem(),
-				event.getRight().getItem());
-		if (recipe!=null) {
+		//		BountifulBaubles.logger.info("anvilupdate");
+		final ItemStack left = event.getLeft();
+		final ItemStack right = event.getRight();
+		final ItemStack originalOutput = event.getOutput();
+		final int originalCost = event.getCost();
+
+		Pair<Integer, ItemStack> recipe = getRecipe(left.getItem(), right.getItem());
+		if (recipe != null) {
 			event.setOutput(recipe.getRight().copy());
 			event.setCost(recipe.getLeft());
 			event.setMaterialCost(1);
-		} else if ((event.getLeft().getItem() instanceof ItemShieldCobalt)
-				||(event.getRight().getItem() instanceof ItemShieldCobalt)) {
+		} else if ((left.getItem() instanceof ItemShieldCobalt)
+				|| (right.getItem() instanceof ItemShieldCobalt)) {
 			ItemStack shield;
 			ItemStack other;
 			ItemStack out = null;
-			if (event.getLeft().getItem() instanceof ItemShieldCobalt) {
-				shield = event.getLeft();
-				other = event.getRight();
+			if (left.getItem() instanceof ItemShieldCobalt) {
+				shield = left;
+				other = right;
 			} else {
-				shield = event.getRight();
-				other = event.getLeft();
+				shield = right;
+				other = left;
 			}
-			if (shield.getItem()==ModItems.shieldCobalt
-					&&other.getItem()==ModItems.trinketObsidianSkull) {
+			if ((shield.getItem() == ModItems.shieldCobalt)
+					&& (other.getItem() == ModItems.trinketObsidianSkull)) {
 				out = new ItemStack(ModItems.shieldObsidian);
 				out.deserializeNBT(shield.serializeNBT());
-			} else if (shield.getItem()==ModItems.shieldObsidian
-					&&other.getItem()==ModItems.trinketAnkhCharm) {
+			} else if ((shield.getItem() == ModItems.shieldObsidian)
+					&& (other.getItem() == ModItems.trinketAnkhCharm)) {
 				out = new ItemStack(ModItems.shieldAnkh);
 				out.deserializeNBT(shield.serializeNBT());
 			}
-			if (out!=null) {
+			if (out != null) {
 				event.setOutput(out);
 				event.setCost(10);
 				event.setMaterialCost(1);
 			}
-		} else if ((event.getRight().getItem() instanceof ItemModifierBook
-				&&event.getLeft().hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))
-				||(event.getLeft().getItem() instanceof ItemModifierBook&&event.getRight()
-						.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))) {
+		} else if (((right.getItem() instanceof ItemModifierBook) && left.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))
+				||
+				((left.getItem() instanceof ItemModifierBook) && right.hasCapability(BaublesCapabilities.CAPABILITY_ITEM_BAUBLE, null))) {
 			ItemStack result;
-			if (event.getRight().getItem() instanceof ItemModifierBook) {
-				result = getResultModifierBook(event.getRight(), event.getLeft());
+			if (right.getItem() instanceof ItemModifierBook) {
+				result = getResultModifierBook(right, left);
 			} else {
-				result = getResultModifierBook(event.getLeft(), event.getRight());
+				result = getResultModifierBook(left, right);
 			}
-//			BountifulBaubles.logger
-//					.info("setting result to "+result.getItem().getUnlocalizedName());
+			//			BountifulBaubles.logger
+			//					.info("setting result to "+result.getItem().getUnlocalizedName());
 			event.setOutput(result);
 			event.setCost(ItemModifierBook.XP_LVL_COST);
 			event.setMaterialCost(1);
@@ -94,14 +95,16 @@ public class AnvilRecipes {
 
 	private static ItemStack getResultModifierBook(ItemStack book, ItemStack bauble) {
 		ItemStack result = bauble.copy();
-		if (!bauble.hasTagCompound()) {
-			bauble.setTagCompound(new NBTTagCompound());
+		if (!result.hasTagCompound()) {
+			result.setTagCompound(new NBTTagCompound());
 		}
-		NBTTagCompound tag = bauble.getTagCompound();
-		tag.setString("baubleModifier",
-				book.hasTagCompound()&&book.getTagCompound().hasKey("baubleModifier")
+		NBTTagCompound tag = result.getTagCompound();
+		tag.setString(
+				"baubleModifier",
+				book.hasTagCompound() && book.getTagCompound().hasKey("baubleModifier")
 						? book.getTagCompound().getString("baubleModifier")
-						: EnumBaubleModifier.NONE.name);
+						: EnumBaubleModifier.NONE.name
+		);
 		return result;
 	}
 }
